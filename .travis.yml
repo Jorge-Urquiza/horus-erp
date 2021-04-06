@@ -3,7 +3,8 @@
 dist: bionic
 
 php:
- - 7.4
+
+ - 7.3
 
 services:
 
