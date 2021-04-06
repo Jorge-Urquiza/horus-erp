@@ -34,9 +34,9 @@
                         <span class="micon dw dw-edit2"></span><span class="mtext">Modulo Inventario</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="form-basic.html">Form Basic</a></li>
-                        <li><a href="advanced-components.html">Advanced Components</a></li>
-
+                        <li><a href="{{ route('productos.index') }}">Productos</a></li>
+                        <li><a href="{{ route('categorias.index') }}">Categorias</a></li>
+                        <li><a href="{{ route('marcas.index') }}">Marcas</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

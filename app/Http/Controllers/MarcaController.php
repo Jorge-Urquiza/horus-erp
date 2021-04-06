@@ -3,18 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Marca;
+use App\Repositories\Marca\MarcaRepository;
 use Illuminate\Http\Request;
 
 class MarcaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $marcaRepository;
+
+    public function __construct(MarcaRepository $marcaRepository)
+    {
+        $this->marcaRepository = $marcaRepository;
+    }
+
     public function index()
     {
-        //
+        $marcas = $this->marcaRepository->getAll();
+
+        return view('marcas.index',compact('marcas'));
     }
 
     /**
@@ -24,7 +29,7 @@ class MarcaController extends Controller
      */
     public function create()
     {
-        //
+        return view('marcas.create');
     }
 
     /**
@@ -35,7 +40,11 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $this->marcaRepository->create ($request->post());
+
+        flash()->stored();
+
+        return redirect()->route('marcas.index');
     }
 
     /**
@@ -57,7 +66,7 @@ class MarcaController extends Controller
      */
     public function edit(Marca $marca)
     {
-        //
+        return view('marcas.edit', compact('categoria'));
     }
 
     /**
@@ -69,7 +78,12 @@ class MarcaController extends Controller
      */
     public function update(Request $request, Marca $marca)
     {
-        //
+
+       $this->marcaRepository->update ($marca, $request->post());
+
+        flash()->updated();
+
+        return redirect()->route('marcas.index');
     }
 
     /**
@@ -80,6 +94,10 @@ class MarcaController extends Controller
      */
     public function destroy(Marca $marca)
     {
-        //
+        $marca = $this->marcaRepository->delete($marca);
+
+        flash()->deleted();
+
+        return redirect()->route('marcas.index');
     }
 }

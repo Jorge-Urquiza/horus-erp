@@ -32,6 +32,7 @@ Route::post('usuario-sucursal', AsignarUsuarioSucursalController::class)->name('
 
 Route::resource('usuarios', UserController::class)->names('users');
 Route::resource('roles', RolController::class)->names('roles');
-Route::resource('productos', ProductoController::class)->names('products');
-Route::resource('categorias', CategoriaController::class)->names('categories');
-Route::resource('sucursales', SucursalController::class)->names('categories');
+Route::resource('productos', ProductoController::class)->names('productos');
+Route::resource('marcas', ProductoController::class)->names('marcas');
+Route::resource('categorias', CategoriaController::class)->names('categorias');
+Route::resource('sucursales', SucursalController::class)->names('sucursales');
