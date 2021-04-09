@@ -19,7 +19,7 @@
 
 @section('content')
 
-<div class="pd-20 card-box mb-30">
+
     <div class="clearfix">
         <div class="pull-left">
             <h4 class="text-blue h4">Lista de usuarios</h4>
@@ -56,6 +56,6 @@
           @include('users.tables.encargado')
         </div>
     </div>
-</div>
+
 
 @endsection

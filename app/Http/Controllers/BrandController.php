@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\BrandsTable;
 use App\Models\Marca;
 use App\Repositories\Marca\MarcaRepository;
 use Illuminate\Http\Request;
 
-class MarcaController extends Controller
+class BrandController extends Controller
 {
     private $marcaRepository;
 
@@ -17,9 +18,9 @@ class MarcaController extends Controller
 
     public function index()
     {
-        $marcas = $this->marcaRepository->getAll();
+        $brands = $this->marcaRepository->getAll();
 
-        return view('marcas.index',compact('marcas'));
+        return view('brands.index',compact('brands'));
     }
 
     /**
@@ -29,7 +30,7 @@ class MarcaController extends Controller
      */
     public function create()
     {
-        return view('marcas.create');
+        return view('brands.create');
     }
 
     /**
@@ -44,7 +45,7 @@ class MarcaController extends Controller
 
         flash()->stored();
 
-        return redirect()->route('marcas.index');
+        return redirect()->route('brands.index');
     }
 
     /**
@@ -66,7 +67,7 @@ class MarcaController extends Controller
      */
     public function edit(Marca $marca)
     {
-        return view('marcas.edit', compact('categoria'));
+        return view('brands.edit', compact('categoria'));
     }
 
     /**
@@ -83,7 +84,7 @@ class MarcaController extends Controller
 
         flash()->updated();
 
-        return redirect()->route('marcas.index');
+        return redirect()->route('brands.index');
     }
 
     /**
@@ -98,6 +99,12 @@ class MarcaController extends Controller
 
         flash()->deleted();
 
-        return redirect()->route('marcas.index');
+        return redirect()->route('brands.index');
     }
+
+    public function list()
+    {
+        return BrandsTable::generate();
+    }
+
 }

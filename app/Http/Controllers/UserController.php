@@ -73,9 +73,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function edit(User $usuario)
+    public function edit(User $user)
     {
-        dd($usuario->nombre);
+        dd($user->nombre);
     }
 
     /**
@@ -85,7 +85,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $usuario)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -96,9 +96,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $usuario)
+    public function destroy(User $user)
     {
-        $usuario->delete();
+        $user->delete();
 
         flash()->deleted();
 

@@ -7,6 +7,7 @@ use App\Models\UnidadMedida;
 use App\Models\Marca;
 use App\Models\Proveedor;
 use App\Models\Categoria;
+use App\Models\Category;
 
 class CreateProductosTable extends Migration
 {
@@ -28,7 +29,7 @@ class CreateProductosTable extends Migration
             $table->foreignIdFor(UnidadMedida::class)->constrained();
             $table->foreignIdFor(Marca::class)->constrained();
             $table->foreignIdFor(Proveedor::class)->constrained();
-            $table->foreignIdFor(Categoria::class)->constrained();
+            $table->foreignIdFor(Category::class)->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

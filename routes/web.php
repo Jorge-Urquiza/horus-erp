@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\AsignarUsuarioSucursalController;
-use App\Http\Controllers\CategoriaController;
-use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\BinnacleController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RolController;
-use App\Http\Controllers\SucursalController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,10 +30,13 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 Route::post('usuario-sucursal', AsignarUsuarioSucursalController::class)->name('asignar.usuario.sucursal');
+Route::get('binnacles',[BinnacleController::class, 'list'])->name('binnacles.index');
+Route::get('binnacles/list',[BinnacleController::class, 'list'])->name('binnacles.list');
+Route::get('categories/list',[CategoryController::class, 'list'])->name('categories.list');
 
-Route::resource('usuarios', UserController::class)->names('users');
-Route::resource('roles', RolController::class)->names('roles');
-Route::resource('productos', ProductoController::class)->names('productos');
-Route::resource('marcas', ProductoController::class)->names('marcas');
-Route::resource('categorias', CategoriaController::class)->names('categorias');
-Route::resource('sucursales', SucursalController::class)->names('sucursales');
+Route::resource('users', UserController::class);
+Route::resource('roles', RolController::class);
+Route::resource('products', ProductController::class);
+Route::resource('brands', BrandController::class);
+Route::resource('categories', CategoryController::class);
+

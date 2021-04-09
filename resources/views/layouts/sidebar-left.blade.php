@@ -11,11 +11,10 @@
     <div class="menu-block customscroll">
         <div class="sidebar-menu">
             <ul id="accordion-menu">
-
                 <li>
                     <a href="{{ route('dashboard') }}" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-house-1"></span>
-                        <span class="mtext">Inicio<img src="vendors/images/coming-soon.png" alt="" width="25"></span>
+                        <span class="mtext">Inicio<img src="{{ asset('templates/vendors/images/coming-soon.png') }}" alt="" width="25"></span>
                     </a>
                 </li>
                 @can('users.index')
@@ -31,12 +30,12 @@
                 @endcan
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon dw dw-edit2"></span><span class="mtext">Modulo Inventario</span>
+                        <span class="micon dw dw-edit2"></span><span class="mtext">Modulo inventario</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="{{ route('productos.index') }}">Productos</a></li>
-                        <li><a href="{{ route('categorias.index') }}">Categorias</a></li>
-                        <li><a href="{{ route('marcas.index') }}">Marcas</a></li>
+                        <li><a href="{{ route('products.index') }}">Productos</a></li>
+                        <li><a href="{{ route('categories.index') }}">Categorias</a></li>
+                        <li><a href="{{ route('brands.index') }}">Marcas</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -63,13 +62,13 @@
                     </a>
                     <ul class="submenu">
                         <li><a href="{{ url('/log-viewer') }}" target="_blank" >Log viewer</a></li>
-                        <li><a href="datatable.html">Bitacora</a></li>
+                        <li><a href="{{ route('binnacles.index') }}">Bitacora</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="https://dropways.github.io/deskapp-free-single-page-website-template/" target="_blank" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-paper-plane1"></span>
-                        <span class="mtext">Landing Page <img src="vendors/images/coming-soon.png" alt="" width="25"></span>
+                        <span class="mtext">Landing Page <img src="{{ asset('templates/vendors/images/coming-soon.png') }}" alt="" width="25"></span>
                     </a>
                 </li>
             </ul>

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
+use App\DataTables\ProductsTable;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
-class CategoriaController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,10 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::orderBy('id', 'DESC')->paginate(10);
-        return view('categorias.index',compact('categorias'));
+
+        $products =  Producto::get();
+
+        return view('products.index',compact('products'));
     }
 
     /**
@@ -25,7 +28,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        return view('categorias.create');
+        return view('products.create');
     }
 
     /**
@@ -36,18 +39,18 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        Categoria::create($request->all());
+        Producto::create($request->all());
         flash()->stored();
-        return redirect()->route('categorias.index');
+        return redirect()->route('products.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function show(Categoria $categoria)
+    public function show(Producto $producto)
     {
         //
     }
@@ -55,41 +58,49 @@ class CategoriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categoria $categoria)
+    public function edit(Producto $product)
     {
-        return view('categorias.edit', compact('categoria'));
+        return view('products.edit', compact('categoria'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(Request $request, Producto $product)
     {
-        $categoria->fill($request->all());
-        $categoria->save();
+        $product->fill($request->all());
+
+        $product->save();
+
         flash()->updated();
-        return redirect()->route('categorias.index');
+
+        return redirect()->route('products.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categoria $categoria)
+    public function destroy(Producto $product)
     {
-        $categoria->delete();
+        $product->delete();
 
         flash()->deleted();
 
-        return redirect()->route('categorias.index');
+        return redirect()->route('products.index');
+    }
+
+    public function list()
+    {
+        return ProductsTable::generate();
     }
 }
