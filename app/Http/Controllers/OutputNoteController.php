@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NotaSalida;
+use App\Models\OutputNote;
 use Illuminate\Http\Request;
 
-class NotaSalidaController extends Controller
+class OutputNoteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class NotaSalidaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\NotaSalida  $notaSalida
+     * @param  \App\Models\OutputNote  $outputNote
      * @return \Illuminate\Http\Response
      */
-    public function show(NotaSalida $notaSalida)
+    public function show(OutputNote $outputNote)
     {
         //
     }
@@ -52,10 +52,10 @@ class NotaSalidaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\NotaSalida  $notaSalida
+     * @param  \App\Models\OutputNote  $outputNote
      * @return \Illuminate\Http\Response
      */
-    public function edit(NotaSalida $notaSalida)
+    public function edit(OutputNote $outputNote)
     {
         //
     }
@@ -64,10 +64,10 @@ class NotaSalidaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\NotaSalida  $notaSalida
+     * @param  \App\Models\OutputNote  $outputNote
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NotaSalida $notaSalida)
+    public function update(Request $request, OutputNote $outputNote)
     {
         //
     }
@@ -75,10 +75,10 @@ class NotaSalidaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\NotaSalida  $notaSalida
+     * @param  \App\Models\OutputNote  $outputNote
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NotaSalida $notaSalida)
+    public function destroy(OutputNote $outputNote)
     {
         //
     }

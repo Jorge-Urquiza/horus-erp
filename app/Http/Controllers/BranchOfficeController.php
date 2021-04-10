@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UnidadMedida;
+use App\Models\BranchOffice;
 use Illuminate\Http\Request;
 
-class UnidadMedidaController extends Controller
+class BranchOfficeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class UnidadMedidaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\UnidadMedida  $unidadMedida
+     * @param  \App\Models\BranchOffice  $branchOffice
      * @return \Illuminate\Http\Response
      */
-    public function show(UnidadMedida $unidadMedida)
+    public function show(BranchOffice $branchOffice)
     {
         //
     }
@@ -52,10 +52,10 @@ class UnidadMedidaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\UnidadMedida  $unidadMedida
+     * @param  \App\Models\BranchOffice  $branchOffice
      * @return \Illuminate\Http\Response
      */
-    public function edit(UnidadMedida $unidadMedida)
+    public function edit(BranchOffice $branchOffice)
     {
         //
     }
@@ -64,10 +64,10 @@ class UnidadMedidaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UnidadMedida  $unidadMedida
+     * @param  \App\Models\BranchOffice  $branchOffice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UnidadMedida $unidadMedida)
+    public function update(Request $request, BranchOffice $branchOffice)
     {
         //
     }
@@ -75,10 +75,10 @@ class UnidadMedidaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\UnidadMedida  $unidadMedida
+     * @param  \App\Models\BranchOffice  $branchOffice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UnidadMedida $unidadMedida)
+    public function destroy(BranchOffice $branchOffice)
     {
         //
     }

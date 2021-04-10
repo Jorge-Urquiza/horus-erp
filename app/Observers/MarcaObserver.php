@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Models\Marca;
+use App\Models\Brand;
 
 class MarcaObserver
 {
@@ -12,51 +12,51 @@ class MarcaObserver
      * @param  \App\Models\Marca  $marca
      * @return void
      */
-    public function created(Marca $marca)
+    public function created(Brand $marca)
     {
         //
     }
 
     /**
-     * Handle the Marca "updated" event.
+     * Handle the Brand "updated" event.
      *
-     * @param  \App\Models\Marca  $marca
+     * @param  \App\Models\Brand  $marca
      * @return void
      */
-    public function updated(Marca $marca)
+    public function updated(Brand $marca)
     {
         //
     }
 
     /**
-     * Handle the Marca "deleted" event.
+     * Handle the Brand "deleted" event.
      *
-     * @param  \App\Models\Marca  $marca
+     * @param  \App\Models\Brand  $marca
      * @return void
      */
-    public function deleted(Marca $marca)
+    public function deleted(Brand $marca)
     {
         //
     }
 
     /**
-     * Handle the Marca "restored" event.
+     * Handle the Brand "restored" event.
      *
-     * @param  \App\Models\Marca  $marca
+     * @param  \App\Models\Brand  $marca
      * @return void
      */
-    public function restored(Marca $marca)
+    public function restored(Brand $marca)
     {
         //
     }
 
     /**
-     * Handle the Marca "force deleted" event.
+     * Handle the Brand "force deleted" event.
      *
-     * @param  \App\Models\Marca  $marca
+     * @param  \App\Models\Brand  $marca
      * @return void
      */
-    public function forceDeleted(Marca $marca)
+    public function forceDeleted(Brand $marca)
     {
         //
     }

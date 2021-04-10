@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNotaIngresosTable extends Migration
+class CreateBranchOfficesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateNotaIngresosTable extends Migration
      */
     public function up()
     {
-        Schema::create('nota_ingresos', function (Blueprint $table) {
+        Schema::create('branch_offices', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->text('address');
+            $table->text('city');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -27,6 +30,6 @@ class CreateNotaIngresosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nota_ingresos');
+        Schema::dropIfExists('branch_offices');
     }
 }

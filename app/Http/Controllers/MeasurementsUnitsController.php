@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\ProductsTable;
-use App\Models\Product;
+use App\Models\MeasurementsUnits;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class MeasurementsUnitsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-
-        $products =  Product::get();
-
-        return view('products.index',compact('products'));
+        //
     }
 
     /**
@@ -28,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        //
     }
 
     /**
@@ -39,18 +35,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        Product::create($request->all());
-        flash()->stored();
-        return redirect()->route('products.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $Product
+     * @param  \App\Models\MeasurementsUnits  $measurementsUnits
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $Product)
+    public function show(MeasurementsUnits $measurementsUnits)
     {
         //
     }
@@ -58,49 +52,34 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product  $Product
+     * @param  \App\Models\MeasurementsUnits  $measurementsUnits
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(MeasurementsUnits $measurementsUnits)
     {
-        return view('products.edit', compact('categoria'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $Product
+     * @param  \App\Models\MeasurementsUnits  $measurementsUnits
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, MeasurementsUnits $measurementsUnits)
     {
-        $product->fill($request->all());
-
-        $product->save();
-
-        flash()->updated();
-
-        return redirect()->route('products.index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $Product
+     * @param  \App\Models\MeasurementsUnits  $measurementsUnits
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(MeasurementsUnits $measurementsUnits)
     {
-        $product->delete();
-
-        flash()->deleted();
-
-        return redirect()->route('products.index');
-    }
-
-    public function list()
-    {
-        return ProductsTable::generate();
+        //
     }
 }

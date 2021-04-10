@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Proveedor;
+use App\Models\IncomeNote;
 use Illuminate\Http\Request;
 
-class ProveedorController extends Controller
+class IncomeNoteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ProveedorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Proveedor  $proveedor
+     * @param  \App\Models\IncomeNote  $incomeNote
      * @return \Illuminate\Http\Response
      */
-    public function show(Proveedor $proveedor)
+    public function show(IncomeNote $incomeNote)
     {
         //
     }
@@ -52,10 +52,10 @@ class ProveedorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Proveedor  $proveedor
+     * @param  \App\Models\IncomeNote  $incomeNote
      * @return \Illuminate\Http\Response
      */
-    public function edit(Proveedor $proveedor)
+    public function edit(IncomeNote $incomeNote)
     {
         //
     }
@@ -64,10 +64,10 @@ class ProveedorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Proveedor  $proveedor
+     * @param  \App\Models\IncomeNote  $incomeNote
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Proveedor $proveedor)
+    public function update(Request $request, IncomeNote $incomeNote)
     {
         //
     }
@@ -75,10 +75,10 @@ class ProveedorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Proveedor  $proveedor
+     * @param  \App\Models\IncomeNote  $incomeNote
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Proveedor $proveedor)
+    public function destroy(IncomeNote $incomeNote)
     {
         //
     }

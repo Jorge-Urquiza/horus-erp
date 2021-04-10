@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\users\StoreUserRequest;
-use App\Models\Sucursal;
+use App\Models\BranchOffice;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
@@ -23,7 +23,7 @@ class UserController extends Controller
 
         $encargados =  User::role('Encargado')->paginate();
 
-        $sucursales = Sucursal::all();
+        $sucursales = BranchOffice::all();
 
         return view('users.index', compact('vendedores', 'admins', 'encargados', 'sucursales'));
     }

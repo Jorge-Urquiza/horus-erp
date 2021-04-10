@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Marca;
+use App\Models\Brand;
 use Illuminate\Database\Query\Builder;
 
 class BrandsTable extends DataTable
@@ -14,6 +14,6 @@ class BrandsTable extends DataTable
      */
     public function query()
     {
-        return Marca::query()->select(['id', 'nombre']);
+        return Brand::query()->select(['id', 'name']);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAlmacensTable extends Migration
+class CreateMeasurementsUnitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateAlmacensTable extends Migration
      */
     public function up()
     {
-        Schema::create('almacens', function (Blueprint $table) {
+        Schema::create('measurements_units', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('abreviatura');
+            $table->string('name');
+            $table->string('abbrevation');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class CreateAlmacensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('almacens');
+        Schema::dropIfExists('measurements_units');
     }
 }

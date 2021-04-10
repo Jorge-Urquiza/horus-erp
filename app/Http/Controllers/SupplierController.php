@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NotaIngreso;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
-class NotaIngresoController extends Controller
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class NotaIngresoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\NotaIngreso  $notaIngreso
+     * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function show(NotaIngreso $notaIngreso)
+    public function show(Supplier $supplier)
     {
         //
     }
@@ -52,10 +52,10 @@ class NotaIngresoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\NotaIngreso  $notaIngreso
+     * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function edit(NotaIngreso $notaIngreso)
+    public function edit(Supplier $supplier)
     {
         //
     }
@@ -64,10 +64,10 @@ class NotaIngresoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\NotaIngreso  $notaIngreso
+     * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NotaIngreso $notaIngreso)
+    public function update(Request $request, Supplier $supplier)
     {
         //
     }
@@ -75,10 +75,10 @@ class NotaIngresoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\NotaIngreso  $notaIngreso
+     * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NotaIngreso $notaIngreso)
+    public function destroy(Supplier $supplier)
     {
         //
     }

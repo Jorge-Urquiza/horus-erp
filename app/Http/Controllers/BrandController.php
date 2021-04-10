@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\BrandsTable;
-use App\Models\Marca;
+use App\Models\Brand;
 use App\Repositories\Marca\MarcaRepository;
 use Illuminate\Http\Request;
 
@@ -54,7 +54,7 @@ class BrandController extends Controller
      * @param  \App\Models\Marca  $marca
      * @return \Illuminate\Http\Response
      */
-    public function show(Marca $marca)
+    public function show(Brand $marca)
     {
         //
     }
@@ -65,7 +65,7 @@ class BrandController extends Controller
      * @param  \App\Models\Marca  $marca
      * @return \Illuminate\Http\Response
      */
-    public function edit(Marca $marca)
+    public function edit(Brand $marca)
     {
         return view('brands.edit', compact('categoria'));
     }
@@ -77,7 +77,7 @@ class BrandController extends Controller
      * @param  \App\Models\Marca  $marca
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Marca $marca)
+    public function update(Request $request, Brand $marca)
     {
 
        $this->marcaRepository->update ($marca, $request->post());
@@ -93,7 +93,7 @@ class BrandController extends Controller
      * @param  \App\Models\Marca  $marca
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Marca $marca)
+    public function destroy(Brand $marca)
     {
         $marca = $this->marcaRepository->delete($marca);
 

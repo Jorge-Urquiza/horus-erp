@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Producto;
+use App\Models\Product;
 use Illuminate\Database\Query\Builder;
 
 class ProductsTable extends DataTable
@@ -14,6 +14,6 @@ class ProductsTable extends DataTable
      */
     public function query()
     {
-        return Producto::query()->select(['id', 'nombre' ]);
+        return Product::query()->select(['id', 'name' ]);
     }
 }

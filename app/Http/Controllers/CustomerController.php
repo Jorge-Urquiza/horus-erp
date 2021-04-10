@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Almacen;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
-class AlmacenController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class AlmacenController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Almacen  $almacen
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Almacen $almacen)
+    public function show(Customer $customer)
     {
         //
     }
@@ -52,10 +52,10 @@ class AlmacenController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Almacen  $almacen
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Almacen $almacen)
+    public function edit(Customer $customer)
     {
         //
     }
@@ -64,10 +64,10 @@ class AlmacenController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Almacen  $almacen
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Almacen $almacen)
+    public function update(Request $request, Customer $customer)
     {
         //
     }
@@ -75,10 +75,10 @@ class AlmacenController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Almacen  $almacen
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Almacen $almacen)
+    public function destroy(Customer $customer)
     {
         //
     }

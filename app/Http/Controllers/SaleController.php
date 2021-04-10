@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sucursal;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 
-class SucursalController extends Controller
+class SaleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class SucursalController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Sucursal  $sucursal
+     * @param  \App\Models\Sale  $sale
      * @return \Illuminate\Http\Response
      */
-    public function show(Sucursal $sucursal)
+    public function show(Sale $sale)
     {
         //
     }
@@ -52,10 +52,10 @@ class SucursalController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Sucursal  $sucursal
+     * @param  \App\Models\Sale  $sale
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sucursal $sucursal)
+    public function edit(Sale $sale)
     {
         //
     }
@@ -64,10 +64,10 @@ class SucursalController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sucursal  $sucursal
+     * @param  \App\Models\Sale  $sale
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sucursal $sucursal)
+    public function update(Request $request, Sale $sale)
     {
         //
     }
@@ -75,10 +75,10 @@ class SucursalController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Sucursal  $sucursal
+     * @param  \App\Models\Sale  $sale
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sucursal $sucursal)
+    public function destroy(Sale $sale)
     {
         //
     }
