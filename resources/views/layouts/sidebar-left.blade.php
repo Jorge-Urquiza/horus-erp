@@ -20,7 +20,7 @@
                 @can('users.index')
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle">
-                            <span class="micon dw dw-edit2"></span><span class="mtext">Modulo Administracion</span>
+                            <span class="micon dw dw-user1"></span><span class="mtext">Modulo Administracion</span>
                         </a>
                         <ul class="submenu">
                             <li><a href="{{ route('users.index') }}">Usuarios</a></li>
@@ -30,12 +30,13 @@
                 @endcan
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon dw dw-edit2"></span><span class="mtext">Modulo inventario</span>
+                        <span class="micon dw dw-notepad-1"></span><span class="mtext">Modulo inventario</span>
                     </a>
                     <ul class="submenu">
                         <li><a href="{{ route('products.index') }}">Productos</a></li>
                         <li><a href="{{ route('categories.index') }}">Categorias</a></li>
                         <li><a href="{{ route('brands.index') }}">Marcas</a></li>
+                        <li><a href="{{ route('suppliers.index') }}">Proveedores</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

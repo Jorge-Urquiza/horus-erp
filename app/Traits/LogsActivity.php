@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity as BaseTrait;
+//use Spatie\Activitylog\Models\Activity;
 
 trait LogsActivity
 {
@@ -12,7 +13,8 @@ trait LogsActivity
     protected static $logAttributes = ['*'];
 
     protected static $models = [
-        'Category' => 'Categoria'
+        'Category' => 'Categoria',
+        'Supplier' => 'Proveedor'
     ];
 
     protected static $actions = [
@@ -25,6 +27,7 @@ trait LogsActivity
     {
         $activity->action = $this->getEventDescription($eventName);
         $activity->target = $this->getModelName();
+        //dd($activity->target );
         $activity->user = $this->getCauserDescription();
     }
 

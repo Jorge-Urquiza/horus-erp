@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Supplier;
+use App\DataTables\SuppliersTable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Exception;
+use Yajra\Datatables\Services\DataTable;
+//use Illuminate\Http\JsonResponse;
 
 class SupplierController extends Controller
 {
@@ -14,7 +19,8 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
+        $suppliers = Supplier::all();
+        return view('suppliers.index', compact('suppliers'));
     }
 
     /**
@@ -24,7 +30,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('suppliers.create');
     }
 
     /**
@@ -35,7 +41,21 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        DB::beginTransaction();
+        try {
+            
+            $result = Supplier::create($request->post());
+            
+            flash()->stored();
+
+            return redirect()->route('suppliers.index');
+        
+        } catch (Exception $e) {
+            DB::rollback();
+             dd($e->getMessage());
+            return redirect()->route('suppliers.create')->with('error', 'Datos incorrectos!');
+        }
     }
 
     /**
@@ -81,5 +101,12 @@ class SupplierController extends Controller
     public function destroy(Supplier $supplier)
     {
         //
+    }
+
+    public function list()
+    {
+        //dd(SuppliersTable::generate());
+        return Supplier::all();
+           
     }
 }

@@ -6,6 +6,8 @@ use Spatie\Activitylog\Models\Activity as Model;
 
 class Activity extends Model
 {
+   // protected $fillable = ['log_name','action','target','user','description' ];
+
     public function __construct(array $attributes = [])
     {
         parent::__construct([
