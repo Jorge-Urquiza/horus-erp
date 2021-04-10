@@ -4,6 +4,7 @@ use App\Http\Controllers\AsignarUsuarioSucursalController;
 use App\Http\Controllers\BinnacleController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UserController;
@@ -33,10 +34,11 @@ Route::post('usuario-sucursal', AsignarUsuarioSucursalController::class)->name('
 Route::get('binnacles',[BinnacleController::class, 'list'])->name('binnacles.index');
 Route::get('binnacles/list',[BinnacleController::class, 'list'])->name('binnacles.list');
 Route::get('categories/list',[CategoryController::class, 'list'])->name('categories.list');
+Route::get('customers/list',[CustomerController::class, 'list'])->name('customers.list');
 
 Route::resource('users', UserController::class);
 Route::resource('roles', RolController::class);
 Route::resource('products', ProductController::class);
 Route::resource('brands', BrandController::class);
 Route::resource('categories', CategoryController::class);
-
+Route::resource('customers', CustomerController::class);
