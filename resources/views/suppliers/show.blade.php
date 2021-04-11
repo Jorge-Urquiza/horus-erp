@@ -10,7 +10,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('suppliers.index') }}">Proveedores</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Editar Proveedor</li>
+                <li class="breadcrumb-item active" aria-current="page">Ver Proveedor</li>
             </ol>
         </nav>
     </div>
@@ -22,9 +22,6 @@
 @endsection
 @section('content')
 
-{!! Form::model($supplier, ['route'=> ['suppliers.update', $supplier->id]]) !!}
-        @method('PUT')
-    @include('suppliers.form.create')
-{!! Form::close()!!}
+   @include('suppliers.form.show')
 
 @endsection

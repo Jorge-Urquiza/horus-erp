@@ -3,13 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Traits\LogsActivity;
+
 
 class Supplier extends Model
 {
-    use HasFactory;
-    use LogsActivity;
+  //  use HasFactory;
 
-    protected $fillable = ['name','address','telephone','type','email' ];
+    //protected $fillable = ['name','address','telephone','type','email' ];
 }

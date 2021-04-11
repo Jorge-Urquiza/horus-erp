@@ -2,16 +2,13 @@
 
 namespace App\DataTables;
 
-use App\Models\Activity;
-use Illuminate\Database\Eloquent\Builder;
+use Spatie\Activitylog\Models\Activity;
+
 
 class BinnaclesTable extends Datatable
 {
     public function query()
     {
-        return Activity::query()
-            ->select([
-                'id', 'action', 'target', 'user', 'description', 'created_at'
-            ]);
+        return Activity::all();
     }
 }

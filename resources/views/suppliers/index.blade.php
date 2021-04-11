@@ -27,38 +27,63 @@
             role="button"><i class="fa fa-plus"></i> Nuevo Proveedor</a>
         </div>
     </div>
-    <table class="data-table table stripe hover nowrap mt-3" id="tables">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Telefono</th>
-                <th>Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($suppliers as $s)
-            <tr>
-                <td style="width: 10%">{{$s->id}}</td>
-                <td style="width: 30%">{{$s->name}}</td>
-                <td style="width: 10%">{{$s->email}}</td>
-                <td style="width: 20%">{{$s->telephone}}</td>
-                <td style="width: 20%">{{$s->id}}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-@endsection
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover display no-wrap" id="tables">
+                <thead>
+                    <tr>
+                        <th style="width: 10%">ID</th>
+                        <th style="width: 30%">Nombre</th>
+                        <th style="width: 20%">Email</th>
+                        <th style="width: 20%">Telefono</th>
+                        <th style="width: 20%">Opciones</th>
+                    </tr>
+                </thead>
+                
+            </table>
+        </div>
+    </div>
+@component('elements.modal', ['action' => route('suppliers.destroy', '*')])
+    ¿Está seguro que desea eliminar este proveedor?
+@endcomponent
 @push('scripts')
-<script>
-     $('#tables').DataTable({
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-        },
-        "responsive": true,
+    <script>
+        $('#tables').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            },
+            "ajax": "{{route('suppliers.list')}}",
+            "columns": [
+                { data: 'id' },
+                { data: 'name' },
+                { data: 'email' },
+                { data: 'telephone' },
+            ],
+            "columnDefs": [ {
+                "targets": 4,
+                "sortable": false,
+                "searchable": true,
+                render: function (data, type, row) {
+                    console.log (row, 'dayos');
+                    return `
+                        <div class="dropdown">
+                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                <i class="dw dw-more"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                <a class="dropdown-item" href="{{ url('/suppliers/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver</a>
+                                <a class="dropdown-item" href="{{ url('/suppliers/${row.id}/edit') }}"><i class="dw dw-edit2"></i> Editar</a>
+                                <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
+                                <i class="dw dw-delete-3"></i> Eliminar</a>
+                            </div>
+                        </div>
+                    `;
+                }
+            }]
         });
-    
-    
-</script>
+        
+        
+    </script>
 @endpush
+
+@endsection

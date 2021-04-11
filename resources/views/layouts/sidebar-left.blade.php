@@ -44,7 +44,7 @@
                         <span class="micon dw dw-edit2"></span><span class="mtext">Modulo Ventas</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="basic-table.html">Basic Tables</a></li>
+                        <li><a href="{{ route('customers.index') }}">Clientes</a></li>
                         <li><a href="datatable.html">DataTables</a></li>
                     </ul>
                 </li>

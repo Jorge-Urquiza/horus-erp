@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Supplier;
 use App\DataTables\SuppliersTable;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Exception;
-use Yajra\Datatables\Services\DataTable;
+use App\Http\Requests\suppliers\StoreSupplierRequest;
+
 //use Illuminate\Http\JsonResponse;
 
 class SupplierController extends Controller
@@ -39,23 +38,15 @@ class SupplierController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSupplierRequest $request)
     {
-        
-        DB::beginTransaction();
-        try {
+        //dd($request->post());
+        $result = Supplier::create($request->post());
             
-            $result = Supplier::create($request->post());
-            
-            flash()->stored();
+        flash()->stored();
 
-            return redirect()->route('suppliers.index');
+        return redirect()->route('suppliers.index');
         
-        } catch (Exception $e) {
-            DB::rollback();
-             dd($e->getMessage());
-            return redirect()->route('suppliers.create')->with('error', 'Datos incorrectos!');
-        }
     }
 
     /**
@@ -66,7 +57,8 @@ class SupplierController extends Controller
      */
     public function show(Supplier $supplier)
     {
-        //
+        
+        return view('suppliers.show', compact('supplier'));
     }
 
     /**
@@ -77,7 +69,7 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        //
+        return view('suppliers.edit', compact('supplier'));
     }
 
     /**
@@ -87,9 +79,15 @@ class SupplierController extends Controller
      * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Supplier $supplier)
+    public function update(StoreSupplierRequest $request, Supplier $supplier)
     {
-        //
+        $supplier->fill($request->all());
+
+        $supplier->update();
+
+        flash()->updated();
+
+        return redirect()->route('suppliers.index');
     }
 
     /**
@@ -100,13 +98,17 @@ class SupplierController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
-        //
+        $supplier->delete();
+
+        flash()->deleted();
+
+        return redirect()->route('suppliers.index');
     }
 
     public function list()
     {
-        //dd(SuppliersTable::generate());
-        return Supplier::all();
+        
+        return SuppliersTable::generate();
            
     }
 }

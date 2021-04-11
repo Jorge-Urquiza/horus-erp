@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\CustomerTable;
+use App\Http\Requests\customers\StoreCustomerRequest;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        return view('customers.index');
     }
 
     /**
@@ -24,7 +26,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customers.create');
     }
 
     /**
@@ -33,9 +35,14 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCustomerRequest $request)
     {
-        //
+
+        $add = Customer::create($request->validated());
+
+        flash()->stored();
+
+        return redirect()->route('customers.index');
     }
 
     /**
@@ -57,7 +64,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('customers.edit', compact('customer'));
     }
 
     /**
@@ -69,7 +76,13 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $customer->fill($request->all());
+
+        $customer->save();
+
+        flash()->updated();
+
+        return redirect()->route('customers.index');
     }
 
     /**
@@ -80,6 +93,15 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+
+        flash()->deleted();
+
+        return redirect()->route('customers.index');
+    }
+
+    public function list()
+    {
+        return CustomerTable::generate();
     }
 }
