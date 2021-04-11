@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('categories/list',[CategoryController::class, 'list'])->name('categories.list');
     Route::get('customers/list',[CustomerController::class, 'list'])->name('customers.list');
     Route::get('branch-offices/list',[BranchOfficeController::class, 'list'])->name('branch-offices.list');
+    Route::get('customers/list',[CustomerController::class, 'list'])->name('customers.list');
+    Route::get('suppliers/list',[SupplierController::class, 'list'])->name('suppliers.list');
 
     Route::resource('users', UserController::class);
     Route::resource('roles', RolController::class);
@@ -38,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('brands', BrandController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('customers', CustomerController::class);
+    Route::resource('suppliers', SupplierController::class);
     Route::resource('branch-offices', BranchOfficeController::class)->except(['show']);
 });
 
