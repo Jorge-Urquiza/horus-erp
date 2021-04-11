@@ -2,10 +2,10 @@
 
 namespace App\DataTables;
 
-use App\Models\Customer;
+use App\Models\BranchOffice;
 use Illuminate\Database\Query\Builder;
 
-class CustomerTable extends DataTable
+class BranchOfficesTable extends DataTable
 {
     /**
      * The query builder object
@@ -14,6 +14,6 @@ class CustomerTable extends DataTable
      */
     public function query()
     {
-        return Customer::query()->select(['id', 'name',]);
+        return BranchOffice::query()->select(['id', 'name', 'city', 'address', 'telephone']);
     }
 }

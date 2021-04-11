@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model as Base;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\Activitylog\Traits\LogsActivity;
+
 /**
  * @property-read  int $id
  * @property-read  Carbon $created_at
@@ -14,7 +14,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class Model extends Base
 {
-    use HasFactory, LogsActivity;
+    use HasFactory;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 

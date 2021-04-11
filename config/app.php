@@ -166,7 +166,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-
+        BenSampo\Enum\EnumServiceProvider::class,
         /*
          * Package Service Providers...
          */
