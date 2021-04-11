@@ -34,17 +34,17 @@ return [
         /*
          * Used when a new resource has been stored
          */
-        'stored' => 'Stored successfully',
+        'stored' => 'Guardado exitosamente',
 
         /*
          * Used when an existing resource has been updated
          */
-        'updated' => 'Updated successfully',
+        'updated' => 'Actualizado exitosamente',
 
         /*
          * Used when a resource has been deleted
          */
-        'deleted' => 'Deleted successfully'
+        'deleted' => 'Eliminado exitosamente'
     ],
 
     /*

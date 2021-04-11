@@ -16,10 +16,12 @@
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href="{{ asset('templates/vendors/styles/core.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('templates/vendors/styles/icon-font.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('templates/src/plugins/datatables/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('templates/src/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('templates/vendors/styles/style.css') }}">
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-<link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+<!-- <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css"> -->
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>

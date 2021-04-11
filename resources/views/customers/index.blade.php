@@ -40,7 +40,7 @@
     </table>
 
 @component('elements.modal', ['action' => route('customers.destroy', '*')])
-    ¿Está seguro que desea eliminar este cliente?. Esto podria afectar a los campos relacionados con la categoria!
+    ¿Está seguro que desea eliminar este cliente?. Esto podria afectar a los campos relacionados con el cliente!
 @endcomponent
 
 @push('scripts')
