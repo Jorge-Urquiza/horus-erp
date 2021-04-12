@@ -18,8 +18,6 @@
 
     <div class="main-container">
         <div class="pd-ltr-20">
-
-
             <div class="card-box pd-20 height-100-p mb-30">
                 @yield('title')
 			</div>
@@ -28,7 +26,6 @@
                 @include('flash::message')
                 @yield('content')
             </div>
-
         </div>
 
 	</div>
@@ -51,7 +48,7 @@
 	<script src="{{ asset('templates/src/plugins/datatables/js/vfs_fonts.js') }}"></script>
 
     <script src="{{ asset('templates/vendors/scripts/datatable-setting.js') }}"></script>
-    
+
          <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="ht`tps://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>

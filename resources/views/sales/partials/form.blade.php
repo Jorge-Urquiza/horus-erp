@@ -32,8 +32,9 @@
     <div class="row">
         <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
             <div class="form-group">
-                {{ Form::label('veterinario','Producto:') }}
-
+                {{ Form::label('product','Producto:') }}
+                <input id="pcompra"  type="number" name="precio_sugerido" class="form-control" placeholder=""
+                value="{{old('precio')}}" >
             </div>
         </div>
         <div class="col-lg-2 col-sm-2  col-md-2  col-xs-12">
@@ -88,5 +89,4 @@
         </div>
     </div>
 </div>
-
 <button type="submit" class="btn btn-primary">Guardar</button>

@@ -42,11 +42,11 @@ class SupplierController extends Controller
     {
         //dd($request->post());
         $result = Supplier::create($request->post());
-            
+
         flash()->stored();
 
         return redirect()->route('suppliers.index');
-        
+
     }
 
     /**
@@ -57,7 +57,7 @@ class SupplierController extends Controller
      */
     public function show(Supplier $supplier)
     {
-        
+
         return view('suppliers.show', compact('supplier'));
     }
 
@@ -107,8 +107,8 @@ class SupplierController extends Controller
 
     public function list()
     {
-        
+
         return SuppliersTable::generate();
-           
+
     }
 }
