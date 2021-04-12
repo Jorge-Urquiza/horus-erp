@@ -2,10 +2,10 @@
 
 namespace App\DataTables;
 
-use App\Models\Brand;
+use App\Models\MeasurementsUnits;
 use Illuminate\Database\Query\Builder;
 
-class BrandsTable extends DataTable
+class UnitsTable extends DataTable
 {
     /**
      * The query builder object
@@ -14,6 +14,6 @@ class BrandsTable extends DataTable
      */
     public function query()
     {
-        return Brand::query()->select(['id', 'name','abbreviation']);
+        return MeasurementsUnits::query()->select(['id', 'name','abbreviation']);
     }
 }

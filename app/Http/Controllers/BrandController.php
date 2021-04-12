@@ -6,6 +6,7 @@ use App\DataTables\BrandsTable;
 use App\Models\Brand;
 use App\Repositories\Marca\MarcaRepository;
 use Illuminate\Http\Request;
+use App\Http\Requests\brands\StoreBrandRequest;
 
 class BrandController extends Controller
 {
@@ -18,9 +19,7 @@ class BrandController extends Controller
 
     public function index()
     {
-        $brands = $this->marcaRepository->getAll();
-
-        return view('brands.index',compact('brands'));
+        return view('brands.index');
     }
 
     /**
@@ -39,7 +38,7 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBrandRequest $request)
     {
        $this->marcaRepository->create ($request->post());
 
@@ -77,9 +76,9 @@ class BrandController extends Controller
      * @param  \App\Models\Marca  $marca
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brand $marca)
+    public function update(StoreBrandRequest $request, $id)
     {
-
+        $marca = Brand::find($id);
        $this->marcaRepository->update ($marca, $request->post());
 
         flash()->updated();
@@ -93,8 +92,9 @@ class BrandController extends Controller
      * @param  \App\Models\Marca  $marca
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Brand $marca)
+    public function destroy($id)
     {
+        $marca = Brand::find($id);
         $marca = $this->marcaRepository->delete($marca);
 
         flash()->deleted();

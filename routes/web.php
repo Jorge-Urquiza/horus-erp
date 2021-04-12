@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\MeasurementsUnitsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,8 @@ Route::get('binnacles/list',[BinnacleController::class, 'list'])->name('binnacle
 Route::get('categories/list',[CategoryController::class, 'list'])->name('categories.list');
 Route::get('suppliers/list',[SupplierController::class, 'list'])->name('suppliers.list');
 Route::get('customers/list',[CustomerController::class, 'list'])->name('customers.list');
+Route::get('brands/list',[BrandController::class, 'list'])->name('brands.list');
+Route::get('units/list',[MeasurementsUnitsController::class, 'list'])->name('units.list');
 
 Route::resource('users', UserController::class);
 Route::resource('roles', RolController::class);
@@ -45,3 +48,4 @@ Route::resource('brands', BrandController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('suppliers', SupplierController::class);
 Route::resource('customers', CustomerController::class);
+Route::resource('units', MeasurementsUnitsController::class);

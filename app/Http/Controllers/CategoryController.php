@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use App\DataTables\CategoriesTable;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\categories\StoreCategoriesRequest;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
-
-        return view('categories.index', compact('categories'));
+        
+        return view('categories.index');
     }
 
     public function create()
@@ -20,7 +20,7 @@ class CategoryController extends Controller
         return view('categories.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreCategoriesRequest $request)
     {
         Category::create($request->all());
 
@@ -39,7 +39,7 @@ class CategoryController extends Controller
         return view('categories.edit', compact('categoria'));
     }
 
-   function update(Request $request, Category $category)
+   function update(StoreCategoriesRequest $request, Category $category)
     {
         $category->fill($request->all());
 
@@ -53,7 +53,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-
+        dd($category);
         flash()->deleted();
 
         return redirect()->route('categories.index');
