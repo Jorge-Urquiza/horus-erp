@@ -25,6 +25,8 @@
                         <ul class="submenu">
                             <li><a href="{{ route('users.index') }}">Usuarios</a></li>
                             <li><a href="{{ route('roles.index') }}">Roles y permisos</a></li>
+                            <li><a href="{{ route('branch-offices.index') }}">Sucursales</a></li>
+                            <li><a href="#">Ciudades</a></li>
                         </ul>
                     </li>
                 @endcan
@@ -45,8 +47,8 @@
                         <span class="micon dw dw-edit2"></span><span class="mtext">Modulo Ventas</span>
                     </a>
                     <ul class="submenu">
+                        <li><a href="{{ route('customers.index') }}">Ventas</a></li>
                         <li><a href="{{ route('customers.index') }}">Clientes</a></li>
-                        <li><a href="datatable.html">DataTables</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

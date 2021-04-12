@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\CustomerTable;
+use App\DataTables\CustomersTable;
 use App\Http\Requests\customers\StoreCustomerRequest;
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -38,7 +38,7 @@ class CustomerController extends Controller
     public function store(StoreCustomerRequest $request)
     {
 
-        $add = Customer::create($request->validated());
+        Customer::create($request->validated());
 
         flash()->stored();
 
@@ -102,6 +102,6 @@ class CustomerController extends Controller
 
     public function list()
     {
-        return CustomerTable::generate();
+        return CustomersTable::generate();
     }
 }
