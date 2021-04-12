@@ -64,7 +64,6 @@
                 "sortable": false,
                 "searchable": true,
                 render: function (data, type, row) {
-                    console.log (row, 'dayos');
                     return `
                         <div class="dropdown">
                             <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">

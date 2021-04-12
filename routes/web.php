@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('suppliers/list',[SupplierController::class, 'list'])->name('suppliers.list');
     Route::get('brands/list',[BrandController::class, 'list'])->name('brands.list');
     Route::get('units/list',[MeasurementsUnitsController::class, 'list'])->name('units.list');
+    Route::get('products/list',[ProductController::class, 'list'])->name('products.list');
 
     Route::resource('users', UserController::class);
     Route::resource('roles', RolController::class);

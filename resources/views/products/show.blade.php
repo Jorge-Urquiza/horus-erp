@@ -4,13 +4,13 @@
 <div class="row">
     <div class="col-md-6 col-sm-12">
         <div class="title">
-            <h4>Crear producto</h4>
+            <h4>Ver producto</h4>
         </div>
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Producto</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Crear Producto</li>
+                <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Productos</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Ver Producto</li>
             </ol>
         </nav>
     </div>
@@ -18,13 +18,11 @@
         <a href="{{ route('products.index') }}" class="btn btn-primary btn-sm">
             <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
         </a>
-</div>
+    </div>
 @endsection
-
 @section('content')
-<form role="form" method="post" action="{{route('products.store')}}" enctype="multipart/form-data">
-    @csrf
- @include('products.form.create')
 
-</form>
+    @include('products.form.show')
+
+
 @endsection

@@ -3,7 +3,7 @@
         
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Editar Unidad de Medida</h4>
+                <h4 class="modal-title">{{$title}}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <form id="form-editar" action="{{ $action }}" method="POST" data-action="{{ $action }}">

@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model as Base;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property-read  int $id
  * @property-read  Carbon $created_at
@@ -15,9 +15,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Model extends Base
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
-
+    protected $dates = ['deleted_at'];
     /**
      * Prepare a date for array / JSON serialization.
      *

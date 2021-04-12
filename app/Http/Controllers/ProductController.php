@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\DataTables\ProductsTable;
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Supplier;
+use App\Models\MeasurementsUnits;
+use App\Models\Brand;
 use Illuminate\Http\Request;
+use App\Http\Requests\products\StoreProductRequest;
 
 class ProductController extends Controller
 {
@@ -28,7 +33,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = Category::all();
+        $brands = Brand::all();
+        $units = MeasurementsUnits::all();
+        $suppliers = Supplier::all();
+        return view('products.create', compact('categories','brands','units','suppliers'));
     }
 
     /**
@@ -37,8 +46,11 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
+        
+        $imagenes = empty($request->file('imagen'))?null:Product::getBase64($request->file('imagen'));
+        $request->request->add(['image' => $imagenes]);
         Product::create($request->all());
         flash()->stored();
         return redirect()->route('products.index');
@@ -50,9 +62,10 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $Product)
+    public function show($id)
     {
-        //
+        $product = Product::getProducto($id);
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -63,7 +76,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('products.edit', compact('categoria'));
+        $categories = Category::all();
+        $brands = Brand::all();
+        $units = MeasurementsUnits::all();
+        $suppliers = Supplier::all();
+        return view('products.edit', compact('categories','brands','units','suppliers','product'));
     }
 
     /**
@@ -73,8 +90,13 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(StoreProductRequest $request, Product $product)
     {
+        if(!empty($request->file('imagen')))
+        {   $imagenes = Product::getBase64($request->file('imagen'));
+            $request->request->add(['image' => $imagenes]);
+        }
+
         $product->fill($request->all());
 
         $product->save();

@@ -14,6 +14,8 @@ class ProductsTable extends DataTable
      */
     public function query()
     {
-        return Product::query()->select(['id', 'name' ]);
+        return Product::query()->select(['products.id','products.local_code', 'products.name', 'products.price','categories.name as category'])
+            ->leftJoin('categories','categories.id','=','products.category_id')
+            ->orderBy('products.id', 'desc');
     }
 }
