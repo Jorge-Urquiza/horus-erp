@@ -11,6 +11,7 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\MeasurementsUnitsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -34,6 +35,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('branch-offices/list',[BranchOfficeController::class, 'list'])->name('branch-offices.list');
     Route::get('customers/list',[CustomerController::class, 'list'])->name('customers.list');
     Route::get('suppliers/list',[SupplierController::class, 'list'])->name('suppliers.list');
+    Route::get('brands/list',[BrandController::class, 'list'])->name('brands.list');
+    Route::get('units/list',[MeasurementsUnitsController::class, 'list'])->name('units.list');
+    Route::get('products/list',[ProductController::class, 'list'])->name('products.list');
 
     Route::resource('users', UserController::class);
     Route::resource('roles', RolController::class);
@@ -42,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('customers', CustomerController::class);
     Route::resource('suppliers', SupplierController::class);
+    Route::resource('units', MeasurementsUnitsController::class);
     Route::resource('branch-offices', BranchOfficeController::class)->except(['show']);
     Route::resource('sales', SaleController::class);
 });

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\MeasurementsUnits;
 use Illuminate\Http\Request;
+use App\DataTables\UnitsTable;
+use App\Http\Requests\units\StoreUnitRequest;
+use Illuminate\Support\Facades\DB;
+use Exception;
 
 class MeasurementsUnitsController extends Controller
 {
@@ -14,7 +18,8 @@ class MeasurementsUnitsController extends Controller
      */
     public function index()
     {
-        //
+        
+        return view('units.index');
     }
 
     /**
@@ -33,9 +38,13 @@ class MeasurementsUnitsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUnitRequest $request)
     {
-        //
+        $result = MeasurementsUnits::create($request->post());
+            
+        flash()->stored();
+
+        return redirect()->route('units.index');
     }
 
     /**
@@ -67,10 +76,16 @@ class MeasurementsUnitsController extends Controller
      * @param  \App\Models\MeasurementsUnits  $measurementsUnits
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MeasurementsUnits $measurementsUnits)
+    public function update(StoreUnitRequest $request, $id)
     {
-        //
+        $measurementsUnits = MeasurementsUnits::find($id);
+        $measurementsUnits->fill($request->all());
+        $measurementsUnits->update();
+        flash()->updated();
+        return redirect()->route('units.index');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -78,8 +93,17 @@ class MeasurementsUnitsController extends Controller
      * @param  \App\Models\MeasurementsUnits  $measurementsUnits
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MeasurementsUnits $measurementsUnits)
+    public function destroy($id)
     {
-        //
+        $measurementsUnits = MeasurementsUnits::find($id);
+        $measurementsUnits->delete();
+
+        flash()->deleted();
+        return redirect()->route('units.index');
+    }
+
+    public function list()
+    {
+        return UnitsTable::generate();
     }
 }

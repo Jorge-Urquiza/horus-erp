@@ -16,7 +16,7 @@ class CreateMeasurementsUnitsTable extends Migration
         Schema::create('measurements_units', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('abbrevation');
+            $table->string('abbreviation');
             $table->softDeletes();
             $table->timestamps();
         });

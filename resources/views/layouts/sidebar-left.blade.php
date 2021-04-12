@@ -38,6 +38,7 @@
                         <li><a href="{{ route('products.index') }}">Productos</a></li>
                         <li><a href="{{ route('categories.index') }}">Categorias</a></li>
                         <li><a href="{{ route('brands.index') }}">Marcas</a></li>
+                        <li><a href="{{ route('units.index') }}">Unidades de Medidas</a></li>
                         <li><a href="{{ route('suppliers.index') }}">Proveedores</a></li>
                     </ul>
                 </li>
