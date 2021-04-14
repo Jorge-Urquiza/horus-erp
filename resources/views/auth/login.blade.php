@@ -3,12 +3,12 @@
 <head>
 	<!-- Basic Page Info -->
 	<meta charset="utf-8">
-	<title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+	<title>Horus S.R.L.</title>
 
 	<!-- Site favicon -->
-	<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('templates/vendors/images/apple-touch-icon.png') }}">
-	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('templates/vendors/images/favicon-32x32.png') }}">
-	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('templates/vendors/images/favicon-16x16.png') }}">
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('templates/vendors/images/figu.png') }}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('templates/vendors/images/figu.PNG') }}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('templates/vendors/images/figu.PNG') }}">
 
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -35,12 +35,12 @@
 		<div class="container-fluid d-flex justify-content-between align-items-center">
 			<div class="brand-logo">
 				<a href="login.html">
-					<img src="{{ asset('templates/vendors/images/deskapp-logo.svg') }}" alt="">
+					<img src="{{ asset('templates/vendors/images/logo.PNG') }}" alt="">
 				</a>
 			</div>
 			<div class="login-menu">
 				<ul>
-					<li><a href="{{ url('/') }}">ir a la pagina de inicio</a></li>
+					<li><a href="{{ url('/') }}">Pagina Inicial</a></li>
 				</ul>
 			</div>
 		</div>
@@ -60,7 +60,7 @@
                         @csrf
 							<div class="input-group custom">
 								<input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                    name="email" value="{{ old('email') }}" required autofocus placeholder="Email">
+                                    name="email" value="{{ old('email') }}" required autofocus placeholder="Correo">
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('email') }}</strong>
@@ -72,7 +72,7 @@
 							</div>
 							<div class="input-group custom">
 								<input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                    name="password" required placeholder="Password">
+                                    name="password" required placeholder="Contraseña">
 
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback" role="alert">
@@ -91,7 +91,7 @@
 									</div>
 								</div>
 								<div class="col-6">
-									<div class="forgot-password"><a href="forgot-password.html">Forgot Password</a></div>
+									<div class="forgot-password"><a href="forgot-password.html">Olvido la contraseña</a></div>
 								</div>
 							</div>
 							<div class="row">

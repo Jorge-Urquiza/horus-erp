@@ -64,11 +64,25 @@ class BrandController extends Controller
         return view('brands.edit', compact('categoria'));
     }
 
+<<<<<<< HEAD
     public function update(Request $request, Brand $brand)
     {
         $brand->fill($request->post());
 
         $brand->save();
+=======
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Marca  $marca
+     * @return \Illuminate\Http\Response
+     */
+    public function update(StoreBrandRequest $request,Brand $brand)
+    {
+        //$marca = Brand::find($id);
+       $this->marcaRepository->update ($brand, $request->post());
+>>>>>>> 03b0b3645c90a15d81637cfdac8d0ff308fb8358
 
         flash()->updated();
 
