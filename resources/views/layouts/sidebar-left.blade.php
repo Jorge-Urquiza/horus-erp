@@ -51,15 +51,17 @@
                         <li><a href="{{ route('customers.index') }}">Clientes</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon dw dw-settings2"></span><span class="mtext">Modulo Configuracion</span>
-                    </a>
-                    <ul class="submenu">
-                        <li><a href="{{ url('/log-viewer') }}" target="_blank" >Log viewer</a></li>
-                        <li><a href="{{ route('binnacles.index') }}">Bitacora</a></li>
-                    </ul>
-                </li>
+                @role('Admin')
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle">
+                            <span class="micon dw dw-settings2"></span><span class="mtext">Modulo Configuracion</span>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="{{ url('/log-viewer') }}" target="_blank" >Log viewer</a></li>
+                            <li><a href="{{ route('binnacles.index') }}">Bitacora</a></li>
+                        </ul>
+                    </li>
+                @endrole
                 <li>
                     <a href="#" onclick="$('#form-logout').submit();" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-logout1"></span>

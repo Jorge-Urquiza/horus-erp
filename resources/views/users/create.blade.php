@@ -38,7 +38,8 @@
             </div>
             <div class="col-12 col-lg-3">
                 <label for="last_name" class="weight-500">Apellidos</label>
-                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Ingrese su apellido">
+                <input type="text" class="form-control" id="last_name" name="last_name"
+                 placeholder="Ingrese su apellido">
             </div>
             <div class="col-12 col-lg-3">
                 <label for="ci" class="weight-500">CI</label>
@@ -53,16 +54,17 @@
             <div class="col-12 col-lg-4">
                 <label for="rol" class="weight-500">Rol</label>
                 <select id="rol" data-show-subtext="true" data-live-search="true" class="form-control selectpicker"
-                    name="rol_id" required>
+                    name="rol" required>
                 <option disabled selected>Selecciona un rol</option>
                     @foreach ($roles as $rol)
-                        <option value="{{ $rol->id }}">{{ $rol->name }}</option>
+                        <option value="{{ $rol->name }}">{{ $rol->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-12 col-lg-4">
                 <label for="email" class="weight-500">Email</label>
-                <input class="form-control" placeholder="ingrese su email" id="email" name="email" type="email" required>
+                <input class="form-control" placeholder="ingrese su email" id="email"
+                 name="email" type="email" required>
             </div>
 
             <div class="col-12 col-lg-4">

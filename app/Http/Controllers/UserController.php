@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\users\StoreUserRequest;
+
 use App\Models\BranchOffice;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
@@ -47,12 +47,16 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserRequest $request)
+    public function store(Request $request)
     {
-        $user = User::create($request->post());
 
+        User::create(
+            $request->only('name', 'email', 'last_name', 'ci', 'telephone' ) +
+            [
+                'password'=> bcrypt($request->input('password')),
+            ]
 
-        $user->assignRole($request->rol_id);
+        )->assignRole($request->rol);
 
         flash()->stored();
 
