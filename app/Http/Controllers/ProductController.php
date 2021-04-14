@@ -8,16 +8,10 @@ use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\MeasurementsUnits;
 use App\Models\Brand;
-use Illuminate\Http\Request;
 use App\Http\Requests\products\StoreProductRequest;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('products.index');

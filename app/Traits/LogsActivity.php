@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity as BaseTrait;
 
@@ -43,7 +44,14 @@ trait LogsActivity
 
     private function getCauserDescription()
     {
-        return auth()->user()->getFullName() . ' - ID:' .auth()->user()->id ;
+    //  return auth('web')->user()->name;
+        $user = Auth::user();
+
+        if($user){
+            return $user->name;
+        }
+        return "User unknown";
+        //return auth()->user()->getFullName() . ' - ID:' .auth()->user()->id ;
     }
 
     private function getModelName()

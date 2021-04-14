@@ -24,7 +24,7 @@ class Activity extends Model
 
     protected function userForActivity()
     {
-        return auth()->user()->name. ' - iD:' .auth()->user()->id ;
+        return "User test";
        /*
         $user = auth('web')->user();
 

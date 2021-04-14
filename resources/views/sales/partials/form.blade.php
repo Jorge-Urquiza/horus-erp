@@ -89,4 +89,6 @@
         </div>
     </div>
 </div>
-<button type="submit" class="btn btn-primary">Guardar</button>
+<button type="submit" class="btn btn-primary">
+    <i class="fa fa-save" aria-hidden="true"> Guardar</i>
+</button>
