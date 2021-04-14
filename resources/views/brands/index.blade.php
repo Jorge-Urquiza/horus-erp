@@ -50,7 +50,7 @@
     @include('brands.form.create')
 @endcomponent
 
-@component('brands.modals.edit', ['action' => route('brands.update', '*'), 'title' => 'Editar categoria'])
+@component('brands.modals.edit', ['action' => route('brands.update', '*'), 'title' => 'Editar marca'])
 @method('PUT')
     @include('brands.form.edit')
 @endcomponent

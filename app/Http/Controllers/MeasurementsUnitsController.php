@@ -76,11 +76,11 @@ class MeasurementsUnitsController extends Controller
      * @param  \App\Models\MeasurementsUnits  $measurementsUnits
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUnitRequest $request, $id)
+    public function update(StoreUnitRequest $request,MeasurementsUnits $unit)
     {
-        $measurementsUnits = MeasurementsUnits::find($id);
-        $measurementsUnits->fill($request->all());
-        $measurementsUnits->update();
+        //$measurementsUnits = MeasurementsUnits::find($id);
+        $unit->fill($request->all());
+        $unit->update();
         flash()->updated();
         return redirect()->route('units.index');
     }

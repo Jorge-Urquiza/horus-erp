@@ -76,10 +76,10 @@ class BrandController extends Controller
      * @param  \App\Models\Marca  $marca
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreBrandRequest $request, $id)
+    public function update(StoreBrandRequest $request,Brand $brand)
     {
-        $marca = Brand::find($id);
-       $this->marcaRepository->update ($marca, $request->post());
+        //$marca = Brand::find($id);
+       $this->marcaRepository->update ($brand, $request->post());
 
         flash()->updated();
 

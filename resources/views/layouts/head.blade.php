@@ -1,6 +1,6 @@
 <!-- Basic Page Info -->
 <meta charset="utf-8">
-<title>HORUS SRL.</title>
+<title>HORUS S.R.L.</title>
 
 <!-- Site favicon -->
 <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('templates/vendors/images/apple-touch-icon.png') }}">
