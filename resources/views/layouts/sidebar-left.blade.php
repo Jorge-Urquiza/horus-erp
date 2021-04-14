@@ -44,11 +44,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-<<<<<<< HEAD
                         <span class="micon dw dw-money-1"></span><span class="mtext">Modulo Ventas</span>
-=======
-                        <span class="micon dw ion-social-usd-outline"></span><span class="mtext">Modulo Ventas</span>
->>>>>>> 03b0b3645c90a15d81637cfdac8d0ff308fb8358
                     </a>
                     <ul class="submenu">
                         <li><a href="{{ route('customers.index') }}">Ventas</a></li>
@@ -57,18 +53,6 @@
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-<<<<<<< HEAD
-=======
-                        <span class="micon dw fi-graph-trend"></span><span class="mtext">Reportes Ventas</span>
-                    </a>
-                    <ul class="submenu">
-                        <li><a href="basic-table.html">Basic Tables</a></li>
-                        <li><a href="datatable.html">DataTables</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
->>>>>>> 03b0b3645c90a15d81637cfdac8d0ff308fb8358
                         <span class="micon dw dw-settings2"></span><span class="mtext">Modulo Configuracion</span>
                     </a>
                     <ul class="submenu">
@@ -77,17 +61,14 @@
                     </ul>
                 </li>
                 <li>
-<<<<<<< HEAD
-                    <a href="#" target="_blank" class="dropdown-toggle no-arrow">
+                    <a href="#" onclick="$('#form-logout').submit();" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-logout1"></span>
                         <span class="mtext">Cerrar Sesión</span>
-=======
-                    <a href="#" class="dropdown-toggle no-arrow" onclick="$('#form-logout').submit();">
-                        <span class="micon dw dw-logout"></span>
-                        <span class="mtext">Cerrar Sesion</span>
->>>>>>> 03b0b3645c90a15d81637cfdac8d0ff308fb8358
                     </a>
                 </li>
+                <form id="form-logout" action="{{ route('logout') }}" method="post">
+                    @csrf
+                </form>
             </ul>
         </div>
     </div>
