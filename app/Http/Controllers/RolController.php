@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\RolesTable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
@@ -33,12 +34,6 @@ class RolController extends Controller
         return view('roles.create', compact('permisos'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
        $rol = Role::create($request->post());
@@ -50,12 +45,6 @@ class RolController extends Controller
        return redirect()->route('roles.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Role $role)
     {
         $permisos = $role->permissions;
@@ -65,12 +54,6 @@ class RolController extends Controller
         return view('roles.show', compact('role', 'permisos', 'usuarios'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Role $role)
     {
         $permisos = $role->permissions;
@@ -80,13 +63,6 @@ class RolController extends Controller
         return view('roles.edit', compact('role', 'permisos', ));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Role $role)
     {
         $role->update($request->post());
@@ -98,14 +74,17 @@ class RolController extends Controller
         return redirect()->route('roles.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Role $role)
     {
-        //flash()->deleted();
+        $role->delete();
+
+        flash()->deleted();
+
+        return back();
+    }
+
+    public function list()
+    {
+        return RolesTable::generate();
     }
 }

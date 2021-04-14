@@ -58,43 +58,27 @@ class BrandController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Marca  $marca
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Brand $marca)
     {
         return view('brands.edit', compact('categoria'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Marca  $marca
-     * @return \Illuminate\Http\Response
-     */
-    public function update(StoreBrandRequest $request, $id)
+    public function update(Request $request, Brand $brand)
     {
-        $marca = Brand::find($id);
-       $this->marcaRepository->update ($marca, $request->post());
+        $brand->fill($request->post());
+
+        $brand->save();
 
         flash()->updated();
 
         return redirect()->route('brands.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Marca  $marca
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $marca = Brand::find($id);
+
         $marca = $this->marcaRepository->delete($marca);
 
         flash()->deleted();

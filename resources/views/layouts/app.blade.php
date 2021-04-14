@@ -12,7 +12,7 @@
 
     @include('layouts.header')
 
-    
+
     <div class="mobile-menu-overlay"></div>
 
     <div class="main-container">
@@ -53,7 +53,9 @@
     <script src="ht`tps://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
          -->
 
-
+	<!-- add sweet alert js & css in footer -->
+	<script src="{{ asset('templates/src/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
+	<script src="{{ asset('templates/src/plugins/sweetalert2/sweet-alert.init.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

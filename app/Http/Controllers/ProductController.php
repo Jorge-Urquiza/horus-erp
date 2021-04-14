@@ -20,10 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-
-        $products =  Product::get();
-
-        return view('products.index',compact('products'));
+        return view('products.index');
     }
 
     /**
@@ -48,7 +45,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        
+
         $imagenes = empty($request->file('imagen'))?null:Product::getBase64($request->file('imagen'));
         $request->request->add(['image' => $imagenes]);
         Product::create($request->all());

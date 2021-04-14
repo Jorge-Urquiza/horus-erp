@@ -23,9 +23,10 @@ class UserController extends Controller
 
         $encargados =  User::role('Encargado')->paginate();
 
-        $sucursales = BranchOffice::all();
+        $sucursales = BranchOffice::get(['id', 'name']);
 
-        return view('users.index', compact('vendedores', 'admins', 'encargados', 'sucursales'));
+        return view('users.index',
+            compact('vendedores', 'admins', 'encargados', 'sucursales'));
     }
 
     /**
@@ -46,9 +47,12 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        User::create($request->post());
+        $user = User::create($request->post());
+
+
+        $user->assignRole($request->rol_id);
 
         flash()->stored();
 
@@ -66,36 +70,20 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  User  $cliente
-     * @return \Illuminate\Http\Response
-     */
+
 
     public function edit(User $user)
     {
         dd($user->nombre);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, User $user)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(User $user)
     {
         $user->delete();
@@ -103,6 +91,5 @@ class UserController extends Controller
         flash()->deleted();
 
         return redirect()->route('users.index');
-
     }
 }

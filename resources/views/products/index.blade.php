@@ -18,7 +18,6 @@
 @endsection
 
 @section('content')
-
 <div class="clearfix mb-2">
         <div class="pull-left">
             <h4 class="text-blue h4">Lista de Productos</h4>
@@ -41,13 +40,14 @@
                         <th>Opciones</th>
                     </tr>
                 </thead>
-                
+
             </table>
         </div>
     </div>
 @component('elements.modal', ['action' => route('products.destroy', '*')])
     ¿Está seguro que desea eliminar este producto?
 @endcomponent
+@endsection
 @push('scripts')
     <script>
         $('#tables').DataTable({
@@ -83,8 +83,7 @@
                 }
             }]
         });
-        
-        
+
+
     </script>
 @endpush
-@endsection

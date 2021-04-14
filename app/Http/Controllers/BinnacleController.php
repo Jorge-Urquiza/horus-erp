@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\BinnaclesTable;
+use Spatie\Activitylog\Models\Activity;
 
 class BinnacleController extends Controller
 {
@@ -13,8 +14,8 @@ class BinnacleController extends Controller
 
     public function list()
     {
-        return BinnaclesTable::generate();
-
+        dd(Activity::all());
+       // return BinnaclesTable::generate();
     }
 
 

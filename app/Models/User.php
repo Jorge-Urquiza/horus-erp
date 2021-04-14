@@ -20,11 +20,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'apellidos',
-        'celular',
+        'last_name',
+        'telephone',
         'ci',
-        'email',
         'password',
+        'branch_office_id',
     ];
 
     /**
@@ -48,6 +48,6 @@ class User extends Authenticatable
 
     public function getFullName(): string
     {
-        return $this->name . ' '. $this->apellidos;
+        return $this->name . ' '. $this->last_name;
     }
 }

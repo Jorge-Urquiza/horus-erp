@@ -80,11 +80,11 @@
                 @if(is_null($product->image))
                     <img src="{{ asset('templates/vendors/images/image.png') }}" alt="" width="500px" height="300px" id="img_prev">
                 @else
-                    <img src="{{$product->image}}" alt="" width="500px" height="300px" id="img_prev">
+                    <img src="{{ $product->image }}" alt="" width="500px" height="300px" id="img_prev">
                 @endif
             @else
                 <img src="{{ asset('templates/vendors/images/image.png') }}" alt="" width="500px" height="300px" id="img_prev">
-            @endif    
+            @endif
             </div>
         </div>
     </div>
@@ -158,15 +158,15 @@
     </div>
 @push('scripts')
 <script>
-    
+
     var imagenes_b = false;
 
     $(function(){
         $("#imagen").change(function () {
             var images = $("#imagen").val();
             if(images != null){
-                
-                var files = $('#imagen')[0].files; 
+
+                var files = $('#imagen')[0].files;
                 $('#imagen_prev').empty();
                 for (var i = 0, f; f = files[i]; i++) {
                    // console.log('looop');
@@ -178,7 +178,7 @@
                     reader.readAsDataURL(f);
                 }
                 imagenes_b = true;
-            }           
+            }
         });
     });
 </script>

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AsignarUsuarioSucursalController;
+use App\Http\Controllers\AssignUserBranchController;
 use App\Http\Controllers\BinnacleController;
 use App\Http\Controllers\BranchOfficeController;
 use App\Http\Controllers\BrandController;
@@ -27,7 +27,8 @@ require __DIR__.'/auth.php';
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::post('usuario-sucursal', AsignarUsuarioSucursalController::class)->name('asignar.usuario.sucursal');
+    Route::post('assign-user-branch/{user}', AssignUserBranchController::class)
+    ->name('assign.user.branch');
     Route::get('binnacles',[BinnacleController::class, 'index'])->name('binnacles.index');
     Route::get('binnacles/list',[BinnacleController::class, 'list'])->name('binnacles.list');
     Route::get('categories/list',[CategoryController::class, 'list'])->name('categories.list');
@@ -38,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('brands/list',[BrandController::class, 'list'])->name('brands.list');
     Route::get('units/list',[MeasurementsUnitsController::class, 'list'])->name('units.list');
     Route::get('products/list',[ProductController::class, 'list'])->name('products.list');
+    Route::get('roles/list',[RolController::class, 'list'])->name('roles.list');
 
     Route::resource('users', UserController::class);
     Route::resource('roles', RolController::class);

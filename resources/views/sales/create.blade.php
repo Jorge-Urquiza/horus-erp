@@ -38,7 +38,6 @@
 <script>
     //JQUERY
     $(document).ready(function(){
-
         $('#guardar').hide();
         //Eventos
         $('#producto_id').on('change', function() {

@@ -14,7 +14,7 @@
                 <li>
                     <a href="{{ route('dashboard') }}" class="dropdown-toggle no-arrow">
                         <span class="micon dw dw-house-1"></span>
-                        <span class="mtext">Inicio<img src="{{ asset('templates/vendors/images/coming-soon.png') }}" alt="" width="25"></span>
+                        <span class="mtext">Inicio</span>
                     </a>
                 </li>
                 @can('users.index')
@@ -44,7 +44,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon dw dw-edit2"></span><span class="mtext">Modulo Ventas</span>
+                        <span class="micon dw dw-money-1"></span><span class="mtext">Modulo Ventas</span>
                     </a>
                     <ul class="submenu">
                         <li><a href="{{ route('customers.index') }}">Ventas</a></li>
@@ -53,16 +53,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon dw dw-edit2"></span><span class="mtext">Reportes Ventas</span>
-                    </a>
-                    <ul class="submenu">
-                        <li><a href="basic-table.html">Basic Tables</a></li>
-                        <li><a href="datatable.html">DataTables</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon dw dw-edit2"></span><span class="mtext">Modulo Configuracion</span>
+                        <span class="micon dw dw-settings2"></span><span class="mtext">Modulo Configuracion</span>
                     </a>
                     <ul class="submenu">
                         <li><a href="{{ url('/log-viewer') }}" target="_blank" >Log viewer</a></li>
@@ -70,9 +61,9 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="https://dropways.github.io/deskapp-free-single-page-website-template/" target="_blank" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-paper-plane1"></span>
-                        <span class="mtext">Landing Page <img src="{{ asset('templates/vendors/images/coming-soon.png') }}" alt="" width="25"></span>
+                    <a href="#" target="_blank" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-logout1"></span>
+                        <span class="mtext">Cerrar Sesión</span>
                     </a>
                 </li>
             </ul>

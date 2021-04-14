@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal-confirm" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <form id="form-delete" action="{{ $action }}" method="post" data-action="{{ $action }}">
                 @csrf
