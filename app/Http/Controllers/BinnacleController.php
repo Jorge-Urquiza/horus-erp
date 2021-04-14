@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\BinnaclesTable;
-use Spatie\Activitylog\Models\Activity;
+use App\Models\Activity;
+use Illuminate\Http\Request;
 
 class BinnacleController extends Controller
 {
@@ -17,5 +18,8 @@ class BinnacleController extends Controller
        return BinnaclesTable::generate();
     }
 
-
+    public function show(Activity $activity)
+    {
+        return view('binnacles.show', compact('activity'));
+    }
 }

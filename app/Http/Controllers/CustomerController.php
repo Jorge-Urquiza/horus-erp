@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\CustomersTable;
+use App\Enums\Message;
 use App\Http\Requests\customers\StoreCustomerRequest;
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -40,7 +41,7 @@ class CustomerController extends Controller
 
         Customer::create($request->validated());
 
-        flash()->stored();
+        flash(Message::STORED);
 
         return redirect()->route('customers.index');
     }
@@ -67,13 +68,6 @@ class CustomerController extends Controller
         return view('customers.edit', compact('customer'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Customer $customer)
     {
         $customer->fill($request->all());
@@ -85,12 +79,6 @@ class CustomerController extends Controller
         return redirect()->route('customers.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Customer $customer)
     {
         $customer->delete();

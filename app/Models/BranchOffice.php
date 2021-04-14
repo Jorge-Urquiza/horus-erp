@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Models;
-use Spatie\Activitylog\Traits\LogsActivity;
+
+use App\Traits\LogsActivity;
 
 class BranchOffice extends Model
 {
     use LogsActivity;
 }
+

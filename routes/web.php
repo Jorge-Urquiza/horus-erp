@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('assign-user-branch/{user}', AssignUserBranchController::class)
     ->name('assign.user.branch');
     Route::get('binnacles',[BinnacleController::class, 'index'])->name('binnacles.index');
+    Route::get('binnacles/{activity}/show',[BinnacleController::class, 'show'])->name('binnacles.show');
     Route::get('binnacles/list',[BinnacleController::class, 'list'])->name('binnacles.list');
     Route::get('categories/list',[CategoryController::class, 'list'])->name('categories.list');
     Route::get('customers/list',[CustomerController::class, 'list'])->name('customers.list');

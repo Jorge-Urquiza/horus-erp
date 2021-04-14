@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Sale;
 use Illuminate\Http\Request;
 
+
 class SaleController extends Controller
 {
 

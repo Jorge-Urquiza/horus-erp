@@ -2,9 +2,12 @@
 
 namespace App\Models;
 use Illuminate\Support\Facades\DB;
+use App\Traits\LogsActivity;
 
 class Product extends Model
 {
+    use LogsActivity;
+
     public static function getProducto($id) {
 
         $data = DB::table('products')->select(['products.id','products.local_code', 'products.name', 'products.price',
@@ -17,7 +20,7 @@ class Product extends Model
             ->where('products.id', '=', $id)->get();
         return $data[0];
     }
-    
+
     public static function getBase64($imagen)
     {
         $path = $imagen->getRealPath();

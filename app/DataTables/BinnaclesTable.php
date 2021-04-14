@@ -2,8 +2,7 @@
 
 namespace App\DataTables;
 
-use Spatie\Activitylog\Models\Activity;
-
+use App\Models\Activity;
 
 class BinnaclesTable extends Datatable
 {
