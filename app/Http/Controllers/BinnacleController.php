@@ -14,8 +14,7 @@ class BinnacleController extends Controller
 
     public function list()
     {
-        dd(Activity::all());
-       // return BinnaclesTable::generate();
+       return BinnaclesTable::generate();
     }
 
 
