@@ -1,0 +1,24 @@
+@for $size from 5 to 10 {
+    .font-0-#{$size} {
+      font-size: #{"0."+$size} + rem !important;
+    }
+  }
+
+  @for $numeral from 1 to 4 {
+    .font-#{$numeral} {
+      font-size: #{$numeral}rem !important;
+    }
+
+    @for $decimal from 1 to 10 {
+      .font-#{$numeral}-#{$decimal} {
+        font-size: #{$numeral + "." + $decimal} + rem !important;
+      }
+    }
+  }
+
+  // Fuentes en px
+  @for $size from 5 to 20 {
+    .font-#{$size}px {
+      font-size: #{$size} + px !important;
+    }
+  }

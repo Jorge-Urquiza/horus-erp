@@ -24,43 +24,66 @@
         <div class="pull-left">
             <h4 class="text-blue h4">Lista de los roles</h4>
         </div>
-        <div class="pull-right">
+        <div class="pull-right mb-3">
             <a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm">
                 <i class="fa fa-plus"></i> Crear nuevo rol
             </a>
         </div>
     </div>
-    @if ($roles->isNotEmpty())
-    <table class="table table-bordered mt-3">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Descripcion</th>
-                <th>Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($roles as $roles)
-                <tr>
-                    <td>
-                        <span class="badge badge-info"> {{ $roles->name }}</span>
-                    </td>
-                    <td>{{ $roles->description }}</td>
-                    <td>
-                        <a href="{{ route('roles.show', $roles->id) }}" class="btn btn-success btn-sm">
-                            <i class="fa fa-eye"></i> Ver permisos
-                        </a>
-                        <a href="{{ route('roles.edit', $roles->id) }}" class="btn btn-primary btn-sm">
-                            <i class="fa fa-pencil"></i> Editar
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-    @else
-        <p>Sin registros.</p>
-    @endif
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover" id="table">
+                <thead>
+                    <tr>
+                        <th style="width: 10%">ID</th>
+                        <th style="width: 30%">Nombre</th>
+                        <th style="width: 20%">Descripción</th>
+                        <th style="width: 20%">Opciones</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
 </div>
 
+@component('elements.modal', ['action' => route('roles.destroy', '*')])
+    ¿Está seguro que desea eliminar este rol?
+@endcomponent
 @endsection
+@push('scripts')
+    <script>
+        $('#table').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            },
+            "ajax": "{{route('roles.list')}}",
+            "columns": [
+                { data: 'id' },
+                { data: 'name' },
+                { data: 'description' },
+            ],
+            "columnDefs": [ {
+                "targets": 3,
+                "sortable": false,
+                "searchable": true,
+                render: function (data, type, row) {
+                    return `
+                        <div class="dropdown">
+                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                <i class="dw dw-more"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                <a class="dropdown-item" href="{{ url('/roles/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver</a>
+                                <a class="dropdown-item" href="{{ url('/roles/${row.id}/edit') }}"><i class="dw dw-edit2"></i> Editar</a>
+                                <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
+                                <i class="dw dw-delete-3"></i> Eliminar</a>
+                            </div>
+                        </div>
+                    `;
+                }
+            }]
+        });
+
+
+    </script>
+@endpush

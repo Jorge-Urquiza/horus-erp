@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\users\StoreUserRequest;
-use App\Models\Sucursal;
+
+use App\Models\BranchOffice;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
@@ -23,9 +23,10 @@ class UserController extends Controller
 
         $encargados =  User::role('Encargado')->paginate();
 
-        $sucursales = Sucursal::all();
+        $sucursales = BranchOffice::get(['id', 'name']);
 
-        return view('users.index', compact('vendedores', 'admins', 'encargados', 'sucursales'));
+        return view('users.index',
+            compact('vendedores', 'admins', 'encargados', 'sucursales'));
     }
 
     /**
@@ -48,7 +49,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create($request->post());
+
+        User::create(
+            $request->only('name', 'email', 'last_name', 'ci', 'telephone' ) +
+            [
+                'password'=> bcrypt($request->input('password')),
+            ]
+
+        )->assignRole($request->rol);
 
         flash()->stored();
 
@@ -66,43 +74,26 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  User  $cliente
-     * @return \Illuminate\Http\Response
-     */
 
-    public function edit(User $usuario)
+
+    public function edit(User $user)
     {
-        dd($usuario->nombre);
+        dd($user->nombre);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $usuario)
+
+    public function update(Request $request, User $user)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $usuario)
+
+    public function destroy(User $user)
     {
-        $usuario->delete();
+        $user->delete();
 
         flash()->deleted();
 
         return redirect()->route('users.index');
-
     }
 }

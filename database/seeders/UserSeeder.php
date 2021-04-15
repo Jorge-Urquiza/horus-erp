@@ -16,8 +16,8 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Usuario uno',
-            'apellidos' => 'Guzman',
-            'celular' => '72030436',
+            'last_name' => 'Guzman',
+            'telephone' => '72030436',
             'ci' => '9588215',
             'email' => 'user1@gmail.com',
             'password' => bcrypt(123456)
@@ -25,8 +25,8 @@ class UserSeeder extends Seeder
 
         User::create([
             'name' => 'Usuario dos',
-            'apellidos' => 'Guzman',
-            'celular' => '72030436',
+            'last_name' => 'Guzman',
+            'telephone' => '72030436',
             'ci' => '9588215',
             'email' => 'user2@gmail.com',
             'password' => bcrypt(123456)
@@ -35,8 +35,8 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Usuario vendedor',
             'email' => 'user3@gmail.com',
-            'apellidos' => 'Guzman',
-            'celular' => '72030436',
+            'last_name' => 'Guzman',
+            'telephone' => '72030436',
             'ci' => '9588215',
             'password' => bcrypt(123456)
         ])->assignRole('Vendedor');
@@ -44,8 +44,8 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Juan jose',
             'email' => 'user4@gmail.com',
-            'apellidos' => 'Perez Claros',
-            'celular' => '72030436',
+            'last_name' => 'Perez Claros',
+            'telephone' => '72030436',
             'ci' => '9588215',
             'password' => bcrypt(123456)
         ])->assignRole('Encargado');

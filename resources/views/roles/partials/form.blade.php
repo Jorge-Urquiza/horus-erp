@@ -11,7 +11,7 @@
 <ul>
     @foreach ($permisos as $index => $permiso)
     <li class="card-text">
-        <label>{{ $index+1 . '.- ' .$permiso->name }}</label>
+        <label>{{ $index+1 . '.- ' .$permiso->description }}</label>
         {{ Form::checkbox('permissions[]', $permiso->id, null, null) }}
     </li>
     @endforeach

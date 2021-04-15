@@ -14,9 +14,9 @@
         @foreach ($admins as $admin)
             <tr>
                 <td>{{ $admin->name }}</td>
-                <td>{{ $admin->apellidos }}</td>
+                <td>{{ $admin->last_name }}</td>
                 <td>{{ $admin->ci }}</td>
-                <td>{{ $admin->celular }}</td>
+                <td>{{ $admin->telephone }}</td>
                 <td>{{ $admin->email }}</td>
                 <td>
                     <form onsubmit="return confirmSubmit('¿Está seguro de eliminar a {{ $admin->name }}?')"

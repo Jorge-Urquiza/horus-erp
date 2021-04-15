@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
+use App\Traits\LogsActivity;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
+
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -19,11 +21,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'apellidos',
-        'celular',
-        'ci',
         'email',
+        'last_name',
+        'telephone',
+        'ci',
         'password',
+        'branch_office_id',
     ];
 
     /**
@@ -47,6 +50,6 @@ class User extends Authenticatable
 
     public function getFullName(): string
     {
-        return $this->name . ' '. $this->apellidos;
+        return $this->name . ' '. $this->last_name;
     }
 }

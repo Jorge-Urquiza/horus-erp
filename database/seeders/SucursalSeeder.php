@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Sucursal;
+use App\Models\BranchOffice;
 use Illuminate\Database\Seeder;
 
 class SucursalSeeder extends Seeder
@@ -14,14 +14,16 @@ class SucursalSeeder extends Seeder
      */
     public function run()
     {
-        Sucursal::create([
-            'nombre' => 'Casa Matriz',
-            'direccion' => 'Calle uruguay #10'
+        BranchOffice::create([
+            'name' => 'Casa Matriz',
+            'address' => 'Calle uruguay #10',
+            'city' => 'Santa Cruz'
         ]);
 
-        Sucursal::create([
-            'nombre' => 'Suc 1',
-            'direccion' => 'Calle buenos aires #256'
+        BranchOffice::create([
+            'name' => 'Suc 1',
+            'address' => 'Calle buenos aires #256',
+            'city' => 'Santa Cruz'
         ]);
     }
 }

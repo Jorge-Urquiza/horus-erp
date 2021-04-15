@@ -25,13 +25,13 @@
 <div class="row row-cols-1 row-cols-md-2">
     <div class="col mb-4">
         <div class="card border-info mb-3">
-            <div class="card-header">Permisos del rol {{ $role->name }}</div>
+            <div class="card-header">Permisos del rol {{ $role->description }}</div>
             <div class="card-body text-info">
                 <h5 class="card-title">Permisos: </h5>
                 <ul>
                     @foreach ($permisos as $index => $permiso)
                     <li class="card-text">
-                        <strong></strong>{{ $index+1 . '.- ' .$permiso->name }}
+                        <strong>{{ $index+1 . '.- ' .$permiso->description }}</strong>
                     </li>
                     @endforeach
                 </ul>
@@ -40,13 +40,13 @@
     </div>
     <div class="col mb-4">
         <div class="card border-info mb-3">
-            <div class="card-header">Usuarios con el rol {{ $role->name }}</div>
+            <div class="card-header">Usuarios con el rol {{ $role->description }}</div>
             <div class="card-body text-info">
                 <h5 class="card-title">Usuarios: </h5>
                 <ul>
                     @foreach ($usuarios as $index => $usuario)
                     <li class="card-text">
-                        <strong></strong>{{  $index+1 . '.- ' . $usuario->getFullName()}}
+                        <strong>{{  $index+1 . '.- ' . $usuario->getFullName()}}</strong>
                     </li>
                     @endforeach
                 </ul>

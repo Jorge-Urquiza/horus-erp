@@ -8,7 +8,7 @@
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/dashboard')}}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Usuarios</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Lista</li>
                 </ol>
@@ -19,7 +19,7 @@
 
 @section('content')
 
-<div class="pd-20 card-box mb-30">
+
     <div class="clearfix">
         <div class="pull-left">
             <h4 class="text-blue h4">Lista de usuarios</h4>
@@ -56,6 +56,6 @@
           @include('users.tables.encargado')
         </div>
     </div>
-</div>
+
 
 @endsection

@@ -1,0 +1,25 @@
+/* Just for centering content body */
+body.invoice {
+    margin: 0 auto;
+    max-width: 21.5cm;
+    height: auto;
+    font-size: 14px;
+    background-color: #fff;
+  }
+
+  .invoice-logo {
+    height: auto;
+    max-width: 100%;
+    max-height: 2.5cm;
+  }
+
+  @page {
+    margin: .8cm;
+  }
+
+  @media print {
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
