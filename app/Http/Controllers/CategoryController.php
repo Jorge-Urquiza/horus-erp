@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        
+
         return view('categories.index');
     }
 
@@ -53,6 +53,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
+
         flash()->deleted();
 
         return redirect()->route('categories.index');
