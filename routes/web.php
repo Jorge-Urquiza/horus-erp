@@ -11,6 +11,8 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\IncomeNoteController;
+use App\Http\Controllers\OutputNoteController;
 use App\Http\Controllers\MeasurementsUnitsController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +43,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('units/list',[MeasurementsUnitsController::class, 'list'])->name('units.list');
     Route::get('products/list',[ProductController::class, 'list'])->name('products.list');
     Route::get('roles/list',[RolController::class, 'list'])->name('roles.list');
+    Route::get('incomes/list',[IncomeNoteController::class, 'list'])->name('incomes.list');
+    Route::get('outputs/list',[OutputNoteController::class, 'list'])->name('outputs.list');
 
     Route::resource('users', UserController::class);
     Route::resource('roles', RolController::class);
@@ -52,5 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('units', MeasurementsUnitsController::class);
     Route::resource('branch-offices', BranchOfficeController::class)->except(['show']);
     Route::resource('sales', SaleController::class);
+    Route::resource('incomes', IncomeNoteController::class);
+    Route::resource('outputs', OutputNoteController::class);
 });
 
