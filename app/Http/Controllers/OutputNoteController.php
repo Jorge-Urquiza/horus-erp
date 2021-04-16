@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\OutputNoteTable;
+use App\Models\BranchOffice;
 use App\Models\OutputNote;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OutputNoteController extends Controller
 {
@@ -14,7 +18,7 @@ class OutputNoteController extends Controller
      */
     public function index()
     {
-        //
+        return view('outputs.index');
     }
 
     /**
@@ -24,7 +28,11 @@ class OutputNoteController extends Controller
      */
     public function create()
     {
-        //
+        $mytime = Carbon::now('America/La_paz');
+        $fecha = $mytime->toDateString();
+        $branch_office = BranchOffice::get();
+        $branch_user= Auth::user();
+        return view('outputs.create',compact('branch_office', 'fecha'));
     }
 
     /**
@@ -81,5 +89,10 @@ class OutputNoteController extends Controller
     public function destroy(OutputNote $outputNote)
     {
         //
+    }
+
+    public function list()
+    {
+        return OutputNoteTable::generate();
     }
 }

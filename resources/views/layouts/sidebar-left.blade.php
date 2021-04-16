@@ -1,8 +1,8 @@
 <div class="left-side-bar">
     <div class="brand-logo">
         <a href="{{ route('dashboard') }}">
-            {{--   <img src="{{ asset('templates/vendors/images/logotipo.PNG') }}" alt="" class="dark-logo"> --}}
-            <img src="{{ asset('templates/vendors/images/logo.PNG') }}" alt="" class="light-logo">
+            <img src="{{ asset('templates/vendors/images/logotipo.png') }}" alt="" class="dark-logo">
+            <img src="{{ asset('templates/vendors/images/logo.png') }}" alt="" class="light-logo">
         </a>
         <div class="close-sidebar" data-toggle="left-sidebar-close">
             <i class="ion-close-round"></i>
@@ -40,6 +40,8 @@
                         <li><a href="{{ route('brands.index') }}">Marcas</a></li>
                         <li><a href="{{ route('units.index') }}">Unidades de Medidas</a></li>
                         <li><a href="{{ route('suppliers.index') }}">Proveedores</a></li>
+                        <li><a href="{{ route('incomes.index') }}">Nota Ingreso</a></li>
+                        <li><a href="{{ route('outputs.index') }}">Nota Salida</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
