@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\IncomeNote;
 use Illuminate\Http\Request;
+use App\DataTables\IncomeNoteTable;
+use App\Http\Requests\incomes\StoreIncomeRequest;
+use App\Models\BranchOffice;
+use App\Models\Product;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class IncomeNoteController extends Controller
 {
@@ -14,7 +20,7 @@ class IncomeNoteController extends Controller
      */
     public function index()
     {
-        //
+        return view('incomes.index');
     }
 
     /**
@@ -24,7 +30,11 @@ class IncomeNoteController extends Controller
      */
     public function create()
     {
-        //
+        $mytime = Carbon::now('America/La_paz');
+        $fecha = $mytime->toDateString();
+        $branch_office = BranchOffice::get();
+        $products = Product::all();
+        return view('incomes.create',compact('branch_office', 'fecha','products'));
     }
 
     /**
@@ -33,9 +43,17 @@ class IncomeNoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreIncomeRequest $request)
     {
-        //
+        try {
+            DB::beginTransaction();
+            DB::commit();
+            return ;
+        } catch (\Exception $th) {
+            DB::rollBack();
+            return response()->json([
+               ]);
+        }
     }
 
     /**
@@ -81,5 +99,10 @@ class IncomeNoteController extends Controller
     public function destroy(IncomeNote $incomeNote)
     {
         //
+    }
+
+    public function list()
+    {
+        return IncomeNoteTable::generate();
     }
 }

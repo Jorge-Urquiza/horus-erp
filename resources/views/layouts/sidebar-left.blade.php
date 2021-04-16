@@ -40,6 +40,8 @@
                         <li><a href="{{ route('brands.index') }}">Marcas</a></li>
                         <li><a href="{{ route('units.index') }}">Unidades de Medidas</a></li>
                         <li><a href="{{ route('suppliers.index') }}">Proveedores</a></li>
+                        <li><a href="{{ route('incomes.index') }}">Nota Ingreso</a></li>
+                        <li><a href="{{ route('outputs.index') }}">Nota Salida</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

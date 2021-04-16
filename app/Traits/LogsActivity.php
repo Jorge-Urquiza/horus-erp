@@ -13,10 +13,13 @@ trait LogsActivity
     protected static $logAttributes = ['*'];
 
     protected static $models = [
-        'Category' => 'Categorias',
-        'Product' => 'Productos',
+        'Category' => 'Categoria',
+        'Product' => 'Producto',
         'Supllier' => 'Proveedor',
-        'User' => 'Usuario',
+        'User' => 'Usuario',        
+        'Brand' => 'Marca',
+        'MeasurementsUnits' => 'Unidad Medida',
+        'IncomeNote' => 'Nota Ingreso',
     ];
 
     protected static $actions = [
