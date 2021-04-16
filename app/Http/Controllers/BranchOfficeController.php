@@ -21,7 +21,6 @@ class BranchOfficeController extends Controller
         return view('branch-offices.create');
     }
 
-
     public function store(StoreBranchOfficeRequest $request)
     {
         BranchOffice::create($request->validated());
