@@ -44,7 +44,7 @@
 </div>
 @endsection
 @push('scripts')
-
+@include('layouts.datatable')
 <script>
     $('#table').DataTable({
         "language": {

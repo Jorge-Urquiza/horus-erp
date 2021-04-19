@@ -38,24 +38,29 @@
                         <th>Opciones</th>
                     </tr>
                 </thead>
-                
+
             </table>
         </div>
     </div>
-@component('elements.modal', ['action' => route('units.destroy', '*')])
-    ¿Está seguro que desea eliminar la unidad de medida?
-@endcomponent
+    @component('elements.modal', ['action' => route('units.destroy', '*')])
+        ¿Está seguro que desea eliminar la unidad de medida?
+    @endcomponent
 
-@component('units.modals.create', ['action' => route('units.store'), 'title' => 'Nueva Unidad de Medida'])
-    @include('units.form.create')
-@endcomponent
+    @component('units.modals.create', ['action' => route('units.store'), 'title' => 'Nueva Unidad de Medida'])
+        @include('units.form.create')
+    @endcomponent
 
-@component('units.modals.edit', ['action' => route('units.update', '*')])
-    @method('PUT')
-    @include('units.form.edit')
-@endcomponent
+    @component('units.modals.edit', ['action' => route('units.update', '*')])
+        @method('PUT')
+        @include('units.form.edit')
+    @endcomponent
+
+@endsection
 
 @push('scripts')
+
+    @include('layouts.datatable')
+
     <script>
         var valor = [];
         $('#table_unit').DataTable({
@@ -73,7 +78,7 @@
                 "sortable": false,
                 "searchable": true,
                 render: function (data, type, row) {
-                    
+
                     valor.push(row);
                     return `
                         <div class="dropdown">
@@ -81,7 +86,7 @@
                                 <i class="dw dw-more"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="#modal-editar" data-toggle="modal" 
+                                <a class="dropdown-item" href="#modal-editar" data-toggle="modal"
                                     onclick="updateRoutes(${row.id},valor);">
                                     <i class="dw dw-edit2"></i> Editar</a>
                                 <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
@@ -92,9 +97,6 @@
                 }
             }]
         });
-        
-        
     </script>
 @endpush
 
-@endsection

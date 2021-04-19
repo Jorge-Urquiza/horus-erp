@@ -39,12 +39,15 @@
         </thead>
     </table>
 
-@component('elements.modal', ['action' => route('customers.destroy', '*')])
-    ¿Está seguro que desea eliminar este cliente?. Esto podria afectar a los campos relacionados con el cliente!
-@endcomponent
+    @component('elements.modal', ['action' => route('customers.destroy', '*')])
+        ¿Está seguro que desea eliminar este cliente?. Esto podria afectar a los campos relacionados con el cliente!
+    @endcomponent
+
+@endsection
 
 @push('scripts')
 
+@include('layouts.datatable')
 <script>
     $('#table').DataTable({
         "language": {
@@ -78,5 +81,3 @@
 </script>
 
 @endpush
-
-@endsection

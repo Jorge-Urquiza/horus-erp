@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
 
 
@@ -50,6 +51,17 @@ class User extends Authenticatable
 
     public function getFullName(): string
     {
-        return $this->name . ' '. $this->last_name;
+        if (Auth::check()){
+            return $this->name . ' '. $this->last_name;
+        }
+        return "Sistema";
+    }
+
+    public function branchOffice()
+    {
+        return $this->belongsTo(BranchOffice::class, 'branch_office_id')
+        ->withDefault([
+            'name' => 'Sin sucursal',
+        ]);
     }
 }

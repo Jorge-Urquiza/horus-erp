@@ -44,11 +44,13 @@
             </table>
         </div>
     </div>
-@component('elements.modal', ['action' => route('products.destroy', '*')])
-    ¿Está seguro que desea eliminar este producto?
-@endcomponent
+    @component('elements.modal', ['action' => route('products.destroy', '*')])
+        ¿Está seguro que desea eliminar este producto?
+    @endcomponent
 @endsection
+
 @push('scripts')
+    @include('layouts.datatable')
     <script>
         $('#tables').DataTable({
             "language": {

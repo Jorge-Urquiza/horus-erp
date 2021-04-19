@@ -27,7 +27,7 @@ class StoreCustomerRequest extends FormRequest
            'name' => 'required',
            'last_name' => 'required',
            'telephone' => 'required',
-           'identity_card' => 'required'
+           'ci' => 'required'
         ];
     }
 }

@@ -18,7 +18,7 @@ class CreateCustomersTable extends Migration
             $table->string('name');
             $table->string('last_name');
             $table->integer('telephone')->nullable();
-            $table->integer('identity_card')->nullable();
+            $table->string('ci')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -40,12 +40,14 @@
             </tr>
         </thead>
     </table>
-@component('elements.modal', ['action' => route('branch-offices.destroy', '*')])
-    ¿Está seguro que desea eliminar esta sucursal?. Esto podria afectar a los campos relacionados con este registro!
-@endcomponent
+    @component('elements.modal', ['action' => route('branch-offices.destroy', '*')])
+        ¿Está seguro que desea eliminar esta sucursal?. Esto podria afectar a los campos relacionados con este registro!
+    @endcomponent
+
+@endsection
 
 @push('scripts')
-
+@include('layouts.datatable')
 <script>
     $('#table').DataTable({
         "language": {
@@ -82,4 +84,3 @@
 
 @endpush
 
-@endsection

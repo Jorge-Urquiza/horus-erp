@@ -49,8 +49,10 @@
 @component('elements.modal', ['action' => route('roles.destroy', '*')])
     ¿Está seguro que desea eliminar este rol?
 @endcomponent
+
 @endsection
 @push('scripts')
+    @include('layouts.datatable')
     <script>
         $('#table').DataTable({
             "language": {

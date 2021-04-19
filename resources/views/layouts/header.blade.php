@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     <form id="form-logout" action="{{ route('logout') }}" method="post">

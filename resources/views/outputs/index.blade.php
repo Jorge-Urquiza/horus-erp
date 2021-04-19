@@ -43,11 +43,14 @@
             </table>
         </div>
     </div>
-@component('elements.modal', ['action' => route('outputs.destroy', '*')])
-    ¿Está seguro que desea anular la nota de salida?
-@endcomponent
+    @component('elements.modal', ['action' => route('outputs.destroy', '*')])
+        ¿Está seguro que desea anular la nota de salida?
+    @endcomponent
 @endsection
+
 @push('scripts')
+
+@include('layouts.datatable')
     <script>
         $('#tables').DataTable({
             "language": {

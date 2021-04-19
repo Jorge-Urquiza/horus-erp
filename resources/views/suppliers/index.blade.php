@@ -39,14 +39,18 @@
                         <th style="width: 20%">Opciones</th>
                     </tr>
                 </thead>
-                
+
             </table>
         </div>
     </div>
-@component('elements.modal', ['action' => route('suppliers.destroy', '*')])
+    @component('elements.modal', ['action' => route('suppliers.destroy', '*')])
     ¿Está seguro que desea eliminar este proveedor?
-@endcomponent
+    @endcomponent
+@endsection
+
 @push('scripts')
+
+    @include('layouts.datatable')
     <script>
         $('#tables').DataTable({
             "language": {
@@ -80,9 +84,8 @@
                 }
             }]
         });
-        
-        
+
+
     </script>
 @endpush
 
-@endsection

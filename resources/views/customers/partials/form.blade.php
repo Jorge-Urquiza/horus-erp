@@ -15,9 +15,9 @@
         {!! $errors->first('telephone','<span class="invalid-feedback d-block">:message</span>') !!}
     </div>
     <div class="col-12 col-lg-3">
-        {{ Form::label('identity_card', 'CI:') }}
-        {{ Form::text('identity_card', null, ['class'=> 'form-control'. ( $errors->has('identity_card') ? ' is-invalid' : '' )])}}
-        {!! $errors->first('identity_card','<span class="invalid-feedback d-block">:message</span>') !!}
+        {{ Form::label('ci', 'CI:') }}
+        {{ Form::text('ci', null, ['class'=> 'form-control'. ( $errors->has('ci') ? ' is-invalid' : '' )])}}
+        {!! $errors->first('ci','<span class="invalid-feedback d-block">:message</span>') !!}
     </div>
 </div>
 <button type="submit" class="btn btn-primary">Guardar</button>
