@@ -38,24 +38,28 @@
                         <th>Opciones</th>
                     </tr>
                 </thead>
-                
+
             </table>
         </div>
     </div>
-@component('elements.modal', ['action' => route('brands.destroy', '*')])
-    ¿Está seguro que desea eliminar esta marca?
-@endcomponent
+    @component('elements.modal', ['action' => route('brands.destroy', '*')])
+        ¿Está seguro que desea eliminar esta marca?
+    @endcomponent
 
-@component('brands.modals.create', ['action' => route('brands.store'), 'title' => 'Nueva marca'])
-    @include('brands.form.create')
-@endcomponent
+    @component('brands.modals.create', ['action' => route('brands.store'), 'title' => 'Nueva marca'])
+        @include('brands.form.create')
+    @endcomponent
 
-@component('brands.modals.edit', ['action' => route('brands.update', '*'), 'title' => 'Editar marca'])
-@method('PUT')
-    @include('brands.form.edit')
-@endcomponent
+    @component('brands.modals.edit', ['action' => route('brands.update', '*'), 'title' => 'Editar marca'])
+    @method('PUT')
+        @include('brands.form.edit')
+    @endcomponent
+@endsection
 
 @push('scripts')
+
+    @include('layouts.datatable')
+
     <script>
         var valor = [];
         $('#tables').DataTable({
@@ -89,9 +93,7 @@
                 }
             }]
         });
-        
-        
+
+
     </script>
 @endpush
-
-@endsection

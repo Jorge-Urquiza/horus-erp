@@ -17,14 +17,7 @@
 <div class="pd-20 card-box mb-30">
     <h4 class="h4 text-blue mb-15">How to Change Sidebar Background Color ?</h4>
     <div class="row">
-        <div class="col-md-5">
-            <p>Default sidebar color is dark</p>
-            <p><img src="vendors/images/layout/sidebar-dark.png" class="box-shadow" alt=""></p>
-        </div>
-        <div class="col-md-7">
-            <p>Change sidebar color for white add class in <code>body class="sidebar-light"</code></p>
-            <p><img src="vendors/images/layout/sidebar-white.png" class="box-shadow" alt=""></p>
-        </div>
+
     </div>
 </div>
 @endsection

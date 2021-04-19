@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\SaleController as ApiSaleController;
 use App\Http\Controllers\AssignUserBranchController;
 use App\Http\Controllers\BinnacleController;
 use App\Http\Controllers\BranchOfficeController;
@@ -58,5 +59,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('sales', SaleController::class);
     Route::resource('incomes', IncomeNoteController::class);
     Route::resource('outputs', OutputNoteController::class);
+
+    //api
+    Route::get('api/product/{product}', [ApiSaleController::class, 'getProduct'])->name('api.product');
+    Route::get('api/customer/{user}', [ApiSaleController::class, 'getCustomer'])->name('api.customer');
 });
 

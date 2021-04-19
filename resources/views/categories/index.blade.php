@@ -38,21 +38,23 @@
     </thead>
 </table>
 
-@component('elements.modal', ['action' => route('categories.destroy', '*')])
-    ¿Está seguro que desea eliminar esta categoria?
-@endcomponent
+    @component('elements.modal', ['action' => route('categories.destroy', '*')])
+        ¿Está seguro que desea eliminar esta categoria?
+    @endcomponent
 
-@component('categories.modals.create', ['action' => route('categories.store'), 'title' => 'Nueva categoria'])
-    @include('categories.forms.create')
-@endcomponent
+    @component('categories.modals.create', ['action' => route('categories.store'), 'title' => 'Nueva categoria'])
+        @include('categories.forms.create')
+    @endcomponent
 
-@component('categories.modals.edit', ['action' => route('categories.update', '*'), 'title' => 'Editar categoria'])
-@method('PUT')
-    @include('categories.forms.edit')
-@endcomponent
+    @component('categories.modals.edit', ['action' => route('categories.update', '*'), 'title' => 'Editar categoria'])
+    @method('PUT')
+        @include('categories.forms.edit')
+    @endcomponent
+@endsection
 
 @push('scripts')
 
+@include('layouts.datatable')
 <script>
     var valor = [];
     $('#table').DataTable({
@@ -95,4 +97,4 @@
 
 @endpush
 
-@endsection
+

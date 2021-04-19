@@ -26,22 +26,28 @@
 
 <div class="clearfix">
     <div class="pull-left">
-        <h4 class="text-blue h4">Formulario de ventas</h4>
+        <h3 class="text-blue h4">Crear nueva Venta</h3>
     </div>
 </div>
-    {!! Form::open(['route'=> ['branch-offices.store'], 'method' => 'POST']) !!}
+    {!! Form::open(['route'=> ['sales.store'], 'method' => 'POST']) !!}
+        @csrf
         @include('sales.partials.form')
     {!! Form::close()!!}
 
 @endsection
+
 @push('scripts')
 <script>
     //JQUERY
     $(document).ready(function(){
+
         $('#guardar').hide();
         //Eventos
-        $('#producto_id').on('change', function() {
-            completarPrecio($("#producto_id option:selected").val());
+        $('#product').on('change', function() {
+            completarProducto($("#product option:selected").val());
+        });
+        $('#customer_id').on('change', function() {
+            completarCustomer($("#customer_id option:selected").val());
         });
         $( "#btn_add" ).click(function() {
 
@@ -83,7 +89,7 @@
         }
      }
      function limpiar() {
-        $('#producto_id option').prop('selected', function() {
+        $('#product option').prop('selected', function() {
             return this.defaultSelected;
         });
         $('#pcompra').val("");
@@ -97,20 +103,37 @@
         // para escodner los botones si se borro todo el detalle
         evaluar();
     }
-    function completarPrecio(id) {
-        var url = "#";
+    function completarProducto(id) {
+        var url = "{{ route('api.product',':id') }}";
         url = url.replace(':id', id)
         $.ajax({
             url: url,
             type: "GET",
             success: function(data) {
-                $('#pcompra').val(data.precio);
+                console.log(data.measurements_unit.name);
+                $('#pcompra').val(data.price);
+                $('#stock').val(data.current_stock);
+                $('#unidad').val(data.measurements_unit.name);
             },
             error: function() {
                 alert("Seleccione un producto valido");
             }
         });
     }
-    </script>
 
+    function completarCustomer(id) {
+        var url = "{{ route('api.customer',':id') }}";
+        url = url.replace(':id', id)
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function(data) {
+                $('#ci').val(data.ci);
+            },
+            error: function() {
+                alert("Seleccione un cliente valido");
+            }
+        });
+    }
+    </script>
 @endpush

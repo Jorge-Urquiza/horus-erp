@@ -29,4 +29,9 @@ class Product extends Model
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
         return $base64;
     }
+
+    public function measurementsUnit()
+    {
+        return $this->belongsTo(MeasurementsUnits::class, 'measurements_units_id');
+    }
 }

@@ -6,23 +6,24 @@ use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Sale;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class SaleController extends Controller
 {
 
     public function index()
     {
-        //
+        return view('sales.index');
     }
 
 
     public function create()
     {
-        $products =Product::orderBy('name')->pluck('name','id');
-        $customers =Customer::orderBy('name')->pluck('name','id');
+        $products = Product::orderBy('id', 'DESC')->pluck('name','id');
 
-        return view('sales.create', compact('products','customers'));
+        $user = auth()->user();
+
+        return view('sales.create', compact('products','user'));
     }
     public function store(Request $request)
     {
