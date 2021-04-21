@@ -70,9 +70,6 @@
                         <span class="mtext">Cerrar Sesión</span>
                     </a>
                 </li>
-                <form id="form-logout" action="{{ route('logout') }}" method="post">
-                    @csrf
-                </form>
             </ul>
         </div>
     </div>

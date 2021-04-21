@@ -11,7 +11,7 @@
     </div>
     <div class="col-12 col-lg-3">
         {{ Form::label('telephone', 'Celular:') }}
-        {{ Form::text('telephone', null, ['class'=> ' form-control'. ( $errors->has('telephone') ? ' is-invalid' : '' )]) }}
+        {{ Form::text('telephone', null, ['class'=> ' form-control']) }}
         {!! $errors->first('telephone','<span class="invalid-feedback d-block">:message</span>') !!}
     </div>
     <div class="col-12 col-lg-3">

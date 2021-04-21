@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('title')
 <div class="row">
     <div class="col-md-6 col-sm-12">
@@ -30,11 +29,10 @@
     </div>
 </div>
     {!! Form::open(['route'=> ['sales.store'], 'method' => 'POST']) !!}
-        @csrf
         @include('sales.partials.form')
-    {!! Form::close()!!}
-
+    {!! Form::close() !!}
 @endsection
+
 
 @push('scripts')
 <script>
@@ -50,7 +48,6 @@
             completarCustomer($("#customer_id option:selected").val());
         });
         $( "#btn_add" ).click(function() {
-
             agregar();
         });
 
@@ -59,43 +56,64 @@
     var index= 0;
     var total = 0;
     var subtotal=[];
-      function agregar() {
 
-          product_id = $("#producto_id option:selected").val()
-          producto = $("#producto_id option:selected").text()
-          cantidad = $("#pcantidad").val();
-          compra = $("#pcompra").val();
-          venta = $("#pventa").val();
-          if(producto != "" && cantidad != "" && compra != "" && venta != ""){
+    function agregar() {
+        product_id = $("#product option:selected").val()
+        producto = $("#product option:selected").text()
+        cantidad = $("#cantidad").val();
+        stock = $("#stock").val();
+        compra = $("#pcompra").val();
+        venta = $("#pventa").val();
+        unidad = $("#unidad").val();
 
-            subtotal[index] =  (cantidad*venta);
-            total= total + subtotal[index];
-            var fila='<tr class = "selected" id="fila'+index+'"><td><button type="button" class="btn btn-danger" onClick="eliminar('+index+')">X</button></td><td><input type="hidden" name="productoid[]" value ="'+product_id+'">'+producto+'</td><td><input type="number" name="compra[]" readonly value="'+compra+'"></td><td><input type="number" readonly name="cantidad[]" value ="'+cantidad+'"></td><td><input type="number" readonly name="precio[]" value="'+venta+'"></td><td>'+subtotal[index]+'</td></tr>';
-            $("#detalle").append(fila);
-            $('#total').html(total+ " Bs.");
-            index++;
-            evaluar();
-            limpiar();
-
-          }else{
-              alert("Error al ingresar los detalles de la venta, Revise los datos del producto")
-          }
-      }
-      function evaluar(){
-        if(total >0){
-          $('#guardar').show();
+        if(producto != "" && cantidad != "" && compra != "" && venta != ""){
+            resultado =  stock - cantidad;
+            if(resultado < 0 ){
+                alert("Error al ingresar los detalles de la venta, Stock insuficiente");
+            }else{
+                subtotal[index] =  (cantidad*venta);
+                total= total + subtotal[index];
+                var fila=`<tr class = "selected" id="fila${index}">
+                    <td><button type="button" class="btn btn-danger" onClick="eliminar(${index})">
+                        <i class="fa fa-arrows-alt" aria-hidden="true"></i> Quitar
+                    </button></td>
+                    <td><input type="hidden" class="form-control" name="producto_id[]" value="${product_id}">${producto}</td>
+                    <td>${unidad}</td>
+                    <td><input type="number" class="form-control" readonly name="compra[]" value ="${compra}"></td>
+                    <td><input type="number" class="form-control" readonly name="precio[]" value="${venta}"></td>
+                    <td><input type="number" class="form-control" readonly name="cantidad[]" value ="${cantidad}"></td>
+                    <td>${subtotal[index]}</td>
+                </tr>`;
+                $("#detalle").append(fila);
+                $('#total').html(total+ " Bs.");
+                index++;
+                evaluar();
+                limpiar();
+            }
         }else{
-          $('#guardar').hide();
+            alert("Error al ingresar los detalles de la venta, Revise los datos del producto");
         }
-     }
-     function limpiar() {
+    }
+
+    function evaluar(){
+        if(total > 0){
+            $('#guardar').show();
+        }else{
+            $('#guardar').hide();
+        }
+    }
+
+    function limpiar() {
         $('#product option').prop('selected', function() {
             return this.defaultSelected;
         });
         $('#pcompra').val("");
-        $('#pcantidad').val("");
+        $('#cantidad').val("");
         $('#pventa').val("");
+        $('#unidad').val("");
+        $('#stock').val("");
     }
+
     function eliminar(index) {
         total = total - subtotal[index];
         $("#fila" + index).remove();
@@ -103,6 +121,7 @@
         // para escodner los botones si se borro todo el detalle
         evaluar();
     }
+
     function completarProducto(id) {
         var url = "{{ route('api.product',':id') }}";
         url = url.replace(':id', id)
@@ -110,8 +129,9 @@
             url: url,
             type: "GET",
             success: function(data) {
-                console.log(data.measurements_unit.name);
-                $('#pcompra').val(data.price);
+                let price = parseFloat(data.price).toFixed(2);
+                $('#pcompra').val(price);
+                $('#pventa').val(price);
                 $('#stock').val(data.current_stock);
                 $('#unidad').val(data.measurements_unit.name);
             },
@@ -122,6 +142,7 @@
     }
 
     function completarCustomer(id) {
+
         var url = "{{ route('api.customer',':id') }}";
         url = url.replace(':id', id)
         $.ajax({
@@ -135,5 +156,6 @@
             }
         });
     }
-    </script>
+
+</script>
 @endpush

@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
+use App\Actions\StoreSaleAction;
 use App\Models\Product;
 use App\Models\Sale;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class SaleController extends Controller
 {
 
     public function index()
     {
+        dd(Sale::all());
         return view('sales.index');
     }
 
@@ -27,7 +27,11 @@ class SaleController extends Controller
     }
     public function store(Request $request)
     {
-        //
+        $action = new StoreSaleAction($request->post());
+
+        $action->execute();
+
+        return redirect()->route('sales.index');
     }
 
 

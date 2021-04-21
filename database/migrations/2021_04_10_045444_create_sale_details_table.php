@@ -18,8 +18,8 @@ class CreateSaleDetailsTable extends Migration
         Schema::create('sale_details', function (Blueprint $table) {
             $table->id();
             $table->integer('quantity');
-            $table->decimal('sale_price',12,4);
-            $table->decimal('subtotal',12,4);
+            $table->float('sale_price', 8, 2);
+            $table->float('subtotal',8,4);
             $table->foreignIdFor(Sale::class)->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');

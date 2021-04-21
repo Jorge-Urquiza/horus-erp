@@ -18,9 +18,10 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->decimal('total_amount',12,4)->default(0);
+            $table->float('total_amount', 8, 2)->default(0);
             $table->integer('nit')->nullable();
-            $table->date('fecha');
+            $table->date('date');
+
             $table->foreignIdFor(BranchOffice::class)->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
