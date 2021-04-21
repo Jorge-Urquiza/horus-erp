@@ -49,7 +49,8 @@
                         <span class="micon dw dw-money-1"></span><span class="mtext">Modulo Ventas</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="{{ route('customers.index') }}">Ventas</a></li>
+                        <li><a href="{{ route('sales.index') }}">Listar</a></li>
+                        <li><a href="{{ route('sales.create') }}">Crear</a></li>
                         <li><a href="{{ route('customers.index') }}">Clientes</a></li>
                     </ul>
                 </li>
