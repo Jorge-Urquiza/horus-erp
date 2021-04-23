@@ -40,8 +40,13 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
 
-        $imagenes = empty($request->file('imagen'))?null:Product::getBase64($request->file('imagen'));
-        $request->request->add(['image' => $imagenes]);
+        if($request->hasFile('imagen'))
+        {
+
+            $filename= time().'_'.$request->imagen->getClientOriginalName();  
+            $request->imagen->storeAs('public/upload',$filename);
+            $request->request->add(['image' => $filename]);
+        }
         Product::create($request->all());
         flash()->stored();
         return redirect()->route('products.index');
@@ -83,10 +88,14 @@ class ProductController extends Controller
      */
     public function update(StoreProductRequest $request, Product $product)
     {
-        if(!empty($request->file('imagen')))
-        {   $imagenes = Product::getBase64($request->file('imagen'));
-            $request->request->add(['image' => $imagenes]);
-        }
+        
+        if($request->hasFile('imagen'))
+          {
+
+           $filename= time().'_'.$request->imagen->getClientOriginalName(); 
+           $request->imagen->storeAs('public/upload',$filename);
+           $request->request->add(['image' => $filename]);
+          }
 
         $product->fill($request->all());
 

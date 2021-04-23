@@ -13,7 +13,7 @@ class StoreIncomeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class StoreIncomeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'branch_office_id' => 'required',
+            'producto_id' => 'required',
+         ];
+    }
+
+    public function messages()
+    {
+        return [
+            'branch_office_id.required' => 'El campo sucursal es obligatorio',
+            'producto_id.required' => 'Debe Ingresar Productos',
         ];
     }
 }

@@ -24,7 +24,7 @@ return [
         /*
          * Default error message
          */
-        'error' => 'An error occurred',
+        'error' => 'Ha ocurrido un error',
 
         /*
          * Default warning message

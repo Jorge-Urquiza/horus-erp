@@ -9,13 +9,13 @@
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('suppliers.index') }}">Nota Ingreso</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('incomes.index') }}">Nota Ingreso</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Crear Nota Ingreso</li>
             </ol>
         </nav>
     </div>
     <div class="col text-right">
-        <a href="{{ route('suppliers.index') }}" class="btn btn-primary btn-sm">
+        <a href="{{ route('incomes.index') }}" class="btn btn-primary btn-sm">
             <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
         </a>
     </div>
@@ -27,3 +27,108 @@
 {!! Form::close()!!}
 
 @endsection
+@push('scripts')
+<script>
+    //JQUERY
+    $(document).ready(function(){
+
+        $('#guardar').hide();
+        //Eventos
+        $('#product').on('change', function() {
+            completarProducto($("#product option:selected").val());
+        });
+        $( "#btn_add" ).click(function() {
+            agregar();
+        });
+
+    });
+
+    var index= 0;
+    var total = 0;
+    var totalcantidad=0;
+    var subtotal=[];
+    var cantidad_array=[];
+
+    function agregar() {
+        product_id = $("#product option:selected").val()
+        producto = $("#product option:selected").text()
+        cantidad = $("#pcantidad").val();
+        compra = $("#pcompra").val();
+
+        if(producto != "" && cantidad != "" && compra != ""){
+            //resultado =  stock - cantidad;
+            /*if(resultado < 0 ){
+                alert("Error al ingresar los detalles de la venta, Stock insuficiente");
+            }else{*/
+                subtotal[index] =  (cantidad*compra);
+                total= total + subtotal[index];
+                cantidad_array[index] = (cantidad*1);
+                totalcantidad = totalcantidad + (cantidad * 1);
+                var fila=`<tr class = "selected" id="fila${index}">
+                    <td><button type="button" class="btn btn-danger" onClick="eliminar(${index})">
+                        <i class="fa fa-arrows-alt" aria-hidden="true"></i> Quitar
+                    </button></td>
+                    <td><input type="hidden" class="form-control" name="producto_id[]" value="${product_id}">${producto}</td>
+                    <td><input type="number" class="form-control" readonly name="precio[]" value="${compra}"></td>
+                    <td><input type="number" class="form-control" readonly name="cantidad[]" value ="${cantidad}"></td>
+                    <td>${subtotal[index]}</td>
+                </tr>`;
+                $("#detalle").append(fila);
+                $('#total').html(total+ " Bs.");
+                $("#total_amount").val(total);
+                $("#total_quantity").val(totalcantidad);
+                index++;
+                evaluar();
+                limpiar();
+           // }
+        }else{
+            alert("Error al ingresar los detalles de la venta, Revise los datos del producto");
+        }
+    }
+
+    function evaluar(){
+        if(total > 0){
+            $('#guardar').show();
+        }else{
+            $('#guardar').hide();
+        }
+    }
+
+    function limpiar() {
+        $('#product option').prop('selected', function() {
+            return this.defaultSelected;
+        });
+        $('#pcompra').val("");
+        $('#pcantidad').val("");
+    }
+
+    function eliminar(index) {
+        total = total - subtotal[index];
+        totalcantidad =  totalcantidad - cantidad_array[index];
+        $("#fila" + index).remove();
+        $('#total').html(total+ " Bs.");
+        $("#total_quantity").val(totalcantidad);
+        $("#total_amount").val(total);
+        // para escodner los botones si se borro todo el detalle
+        evaluar();
+    }
+    function completarProducto(id) {
+        
+        var url = "{{ route('api.product',':id') }}";
+        url = url.replace(':id', id);
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function(data) {
+                let price = parseFloat(data.price).toFixed(2);
+                $('#pcompra').val(price);
+            },
+            error: function() {
+                alert("Seleccione un producto valido");
+            }
+        });
+    }
+
+
+</script>
+@endpush

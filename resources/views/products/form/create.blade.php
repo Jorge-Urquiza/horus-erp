@@ -80,7 +80,7 @@
                 @if(is_null($product->image))
                     <img src="{{ asset('templates/vendors/images/image.png') }}" alt="" width="500px" height="300px" id="img_prev">
                 @else
-                    <img src="{{ $product->image }}" alt="" width="500px" height="300px" id="img_prev">
+                    <img src="{{ Storage::Url('upload/'.$product->image) }}" alt=""style="width: 500px; height: 450px" id="img_prev">
                 @endif
             @else
                 <img src="{{ asset('templates/vendors/images/image.png') }}" alt="" width="500px" height="300px" id="img_prev">

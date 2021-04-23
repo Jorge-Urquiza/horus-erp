@@ -2,20 +2,20 @@
     <div class="col-md-6 col-sm-6">
         <div class="form-group">
             <label>Sucursal</label>
-            <select class="custom-select2 form-control" name="brand_id" style="width: 100%; height: 38px;" required>
+            <select class="custom-select2 form-control" name="branch_office_id" style="width: 100%; height: 38px;" required>
                
                 @foreach($branch_office as $b)
                     <option value="{{$b->id}}">{{$b->name}}</option>
                 @endforeach
                 
             </select>
-            {!! $errors->first('brand_id','<span class="invalid-feedback d-block">:message</span>') !!}
+            {!! $errors->first('branch_office_id','<span class="invalid-feedback d-block">:message</span>') !!}
         </div>
     </div>
     <div class="col-md-6 col-sm-6">
         <div class="form-group">
             <label>Fecha</label>
-            <input class="form-control" disabled value="{{ $fecha }}">
+            <input class="form-control" disabled value="{{ $fecha }}" id="fecha" name="fecha">
         </div>
     </div>
 </div>
@@ -37,21 +37,16 @@
     <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
         <div class="form-group">
             {{ Form::label('product','Producto:') }}
-            <select class="custom-select2 form-control{{$errors->has('product_id')? ' is-invalid' : ''}}" name="measurements_units_id" style="width: 100%; height: 38px;">
-               
-                @foreach($products as $u)
-                    <option value="{{$u->id}}">{{$u->local_code}} {{$u->name}}</option>
-                @endforeach
-                
-            </select>
+            {{ Form::select('product', $products, null, ['placeholder' => 'Seleccionar Producto',
+            'class' => 'form-control selectpicker', 'data-live-search' => 'true', 'id'=> 'product']) }}
             {!! $errors->first('product_id','<span class="invalid-feedback d-block">:message</span>') !!}
         </div>
     </div>
     <div class="col-lg-3 col-sm-3  col-md-3  col-xs-12">
         <div class="form-group">
-                <label for="">Precio compra</label>
-                <input id="pcompra"  type="number" name="precio_sugerido" class="form-control" placeholder=""
-                value="{{old('precio')}}" readonly >
+                <label for="">Precio</label>
+                <input id="pcompra"  type="number" name="precio" class="form-control" placeholder=""
+                 readonly >
         </div>
     </div>
     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
@@ -70,10 +65,10 @@
     <div class="row">
         <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
             <table id="detalle" class="table table-striped table-bordered table-condensed table-hover">
-                <thead style="background-color:#36B6CA">
+                <thead style="background-color:#030eaaee">
                     <th style="color:#FFFFFF";>Opciones</th>
                     <th style="color:#FFFFFF";>Producto</th>
-                    <th style="color:#FFFFFF";>Precio compra</th>
+                    <th style="color:#FFFFFF";>Precio</th>
                     <th style="color:#FFFFFF";>Cantidad</th>
                     <th style="color:#FFFFFF";>Subtotal</th>
                 </thead>
@@ -88,6 +83,8 @@
 
                 </tbody>
             </table>
+            <input id="total_quantity"  type="hidden" name="total_quantity" class="form-control">
+            <input id="total_amount"  type="hidden" name="total_amount" class="form-control">
         </div>
     </div>
 
@@ -95,7 +92,7 @@
     <div class="col-md-12  col-sm-12 mt-3">
         <div class="col text-right">
             <button class="btn btn-primary btn-sm"
-                type="submit"><span class="icon-copy ti-save"></span>   Guardar</button>
+                type="submit"><span class="icon-copy ti-save" id="guardar"></span>   Guardar</button>
         <div>
     <div>
 </div>

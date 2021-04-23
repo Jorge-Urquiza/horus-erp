@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 use App\DataTables\IncomeNoteTable;
 use App\Http\Requests\incomes\StoreIncomeRequest;
 use App\Models\BranchOffice;
+use App\Models\BranchsProduct;
+use App\Models\IncomeDetail;
 use App\Models\Product;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class IncomeNoteController extends Controller
@@ -33,7 +36,7 @@ class IncomeNoteController extends Controller
         $mytime = Carbon::now('America/La_paz');
         $fecha = $mytime->toDateString();
         $branch_office = BranchOffice::get();
-        $products = Product::all();
+        $products = Product::orderBy('id', 'DESC')->pluck('name','id');
         return view('incomes.create',compact('branch_office', 'fecha','products'));
     }
 
@@ -47,12 +50,54 @@ class IncomeNoteController extends Controller
     {
         try {
             DB::beginTransaction();
+            
+            $mytime = Carbon::now('America/La_paz');
+            $fecha = $mytime->toDateString();
+            $user = Auth::user();
+            $request->request->add(['date' => $fecha]);
+            $request->request->add(['user_id' => $user->id]);
+            
+            $income = IncomeNote::create($request->post());
+            $sucursal = $request->input('branch_office_id');
+            $productos = $request->input('producto_id');
+            $cantidad = $request->input('cantidad');
+            for( $i=0; $i < count($productos) ;$i++){
+                
+                IncomeDetail::create([
+                    'product_id' => $productos[$i],
+                    'quantity' => $cantidad[$i],
+                    'income_note_id' => $income->id,
+                ]);
+
+                $branch_product = BranchsProduct::where([['product_id', $productos[$i]],['branch_office_id',$sucursal]])
+                                   ->first();
+               
+                if(!is_null($branch_product)){
+                   
+                    $branch_product->current_stock = $branch_product->current_stock + ($cantidad[$i] * 1);
+                    $branch_product->update();
+                } else {
+                    
+                    BranchsProduct::create([
+                        'product_id' => $productos[$i],
+                        'branch_office_id' => $sucursal,
+                        'current_stock' => $cantidad[$i],
+                    ]);
+                }
+
+                $stock_product = Product::find($productos[$i]);
+                $stock_product->current_stock = $stock_product->current_stock + + ($cantidad[$i] * 1);
+                $stock_product->update();
+
+            }
             DB::commit();
-            return ;
+            flash()->stored();
+            return redirect()->route('incomes.index');
+
         } catch (\Exception $th) {
             DB::rollBack();
-            return response()->json([
-               ]);
+            flash()->error();
+            return redirect()->back();
         }
     }
 
@@ -62,9 +107,12 @@ class IncomeNoteController extends Controller
      * @param  \App\Models\IncomeNote  $incomeNote
      * @return \Illuminate\Http\Response
      */
-    public function show(IncomeNote $incomeNote)
+    public function show(IncomeNote $income)
     {
-        //
+        
+        $detalle = IncomeDetail::where('income_note_id','=', $income->id)->get();
+        //dd($detalle);
+        return view('incomes.show', compact('income', 'detalle'));
     }
 
     /**
