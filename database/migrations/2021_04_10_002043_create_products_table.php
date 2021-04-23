@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('local_code');
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->longText('image')->nullable();
             $table->integer('current_stock')->default(0);
             $table->integer('minimum_stock')->default(0);
