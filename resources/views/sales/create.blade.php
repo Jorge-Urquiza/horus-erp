@@ -62,8 +62,8 @@
         producto = $("#product option:selected").text()
         cantidad = $("#cantidad").val();
         stock = $("#stock").val();
-        compra = $("#pcompra").val();
-        venta = $("#pventa").val();
+        compra =parseFloat($("#pcompra").val());
+        venta = parseFloat($("#pventa").val());
         unidad = $("#unidad").val();
 
         if(producto != "" && cantidad != "" && compra != "" && venta != ""){
@@ -71,8 +71,8 @@
             if(resultado < 0 ){
                 alert("Error al ingresar los detalles de la venta, Stock insuficiente");
             }else{
-                subtotal[index] =  (cantidad*venta);
-                total= total + subtotal[index];
+                subtotal[index] =  parseFloat((cantidad*venta));
+                total= parseFloat(total + subtotal[index]);
                 var fila=`<tr class = "selected" id="fila${index}">
                     <td><button type="button" class="btn btn-danger" onClick="eliminar(${index})">
                         <i class="fa fa-arrows-alt" aria-hidden="true"></i> Quitar
@@ -129,9 +129,9 @@
             url: url,
             type: "GET",
             success: function(data) {
-                let price = parseFloat(data.price).toFixed(2);
-                $('#pcompra').val(price);
-                $('#pventa').val(price);
+                console.log(data);
+                $('#pcompra').val(data.price);
+                $('#pventa').val(data.price);
                 $('#stock').val(data.current_stock);
                 $('#unidad').val(data.measurements_unit.name);
             },

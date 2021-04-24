@@ -1,18 +1,18 @@
 <div class="form-group row">
     <div class="col-12 col-lg-3">
         {{ Form::label('name', 'Vendedor:', ['class' => 'weight-500'])}}
-        {{ Form::text('name', $user->getFullName(), ['class'=> ' form-control', 'readonly']) }}
+        {{ Form::text('name', $seller->getFullName(), ['class'=> ' form-control', 'readonly']) }}
 
     </div>
     <div class="col-12 col-lg-3">
         {{ Form::label('sucursal_id','Sucursal:', ['class' => 'weight-500']) }}
-        {{ Form::text('sucursal_id',  $user->branchOffice->name, ['class'=> ' form-control',
+        {{ Form::text('sucursal_id',  $branchOffice->name, ['class'=> ' form-control',
             'readonly' => true, 'id' => 'sucursal_id']) }}
 
     </div>
     <div class="col-12 col-lg-4">
         {{ Form::label('address','Dirección:', ['class' => 'weight-500']) }}
-        {{ Form::text('address',  $user->branchOffice->address, ['class'=> ' form-control', 'readonly']) }}
+        {{ Form::text('address',  $branchOffice->address, ['class'=> ' form-control', 'readonly']) }}
 
     </div>
     <div class="col-12 col-lg-2">
@@ -23,11 +23,9 @@
 </div>
 <div class="form-group row">
     <div class="col-12 col-lg-5">
-        {{ Form::label('customer', 'Cliente:', ['class' => 'weight-500'])}}
-        {{ Form::select('customer_id',
-        App\Models\Customer::select(DB::raw("CONCAT(name, ' ', last_name) AS full"), "id")
-        ->pluck('full', 'id')->toArray(), null, ['placeholder' => 'Seleccionar Cliente',
-        'class' => 'form-control selectpicker', 'data-live-search' => 'true' ,  'id'=> 'customer_id' , 'required' => true]) }}
+        {{ Form::label('customer', 'Cliente:', ['class' => 'weight-500']) }}
+        {{ Form::select('customer_id', $customers, null, ['placeholder' => 'Seleccionar Cliente',
+            'class' => 'form-control selectpicker', 'data-live-search' => 'true',  'id'=> 'customer_id' , 'required' => true]) }}
     </div>
     <div class="col-12 col-lg-3">
         {{ Form::label('ci','CI:', ['class' => 'weight-500']) }}

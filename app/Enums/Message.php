@@ -16,4 +16,6 @@ final class Message extends Enum
     const DELETED = "Registro eliminado!";
     const UPDATED = "Registros actualizados correctamente!";
     const ASSIGN = "Usuario asignado correctamente!";
+
+    const CANCELED = "Venta anulada correctamente!";
 }

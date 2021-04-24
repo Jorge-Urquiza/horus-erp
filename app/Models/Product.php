@@ -8,8 +8,8 @@ class Product extends Model
 {
     use LogsActivity;
 
-    public static function getProducto($id) {
-
+    public static function getProducto($id)
+    {
         $data = DB::table('products')->select(['products.id','products.local_code', 'products.name', 'products.price',
             'products.description', 'products.image',
             'categories.name as categoria', 'brands.name as marca', 'suppliers.name as proveedor','uni.name as unidad'])
@@ -33,5 +33,10 @@ class Product extends Model
     public function measurementsUnit()
     {
         return $this->belongsTo(MeasurementsUnits::class, 'measurements_units_id');
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
     }
 }
