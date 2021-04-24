@@ -59,7 +59,7 @@
             "ajax": "{{route('outputs.list')}}",
             "columns": [
                 { data: 'id' },
-                { data: 'fecha' },
+                { data: 'date' },
                 { data: 'sucursal' },
                 { data: 'personal' },
             ],

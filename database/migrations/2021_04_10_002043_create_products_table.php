@@ -23,9 +23,9 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->Text('description')->nullable();
             $table->Text('image')->nullable();
-            $table->integer('current_stock')->default(0);
-            $table->integer('minimum_stock')->default(0);
-            $table->integer('maximum_stock')->default(0);
+            $table->integer('current_stock')->unsigned()->default(0);
+            $table->integer('minimum_stock')->unsigned()->default(0);
+            $table->integer('maximum_stock')->unsigned()->default(0);
             $table->decimal('price',12,4)->default(0);
             $table->foreignIdFor(MeasurementsUnits::class)->constrained()
             ->onUpdate('cascade')

@@ -17,9 +17,9 @@ class CreateBranchsProductsTable extends Migration
     {
         Schema::create('branchs_products', function (Blueprint $table) {
             $table->id();
-            $table->integer('current_stock')->default(0);
-            $table->integer('minimum_stock')->default(0);
-            $table->integer('maximum_stock')->default(0);
+            $table->integer('current_stock')->unsigned()->default(0);
+            $table->integer('minimum_stock')->unsigned()->default(0);
+            $table->integer('maximum_stock')->unsigned()->default(0);
             $table->foreignIdFor(Product::class)->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');

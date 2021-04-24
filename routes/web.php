@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\SaleController as ApiSaleController;
+use App\Http\Controllers\Api\BranchProductController as ApiBranchProductController;
 use App\Http\Controllers\AssignUserBranchController;
 use App\Http\Controllers\BinnacleController;
 use App\Http\Controllers\BranchOfficeController;
@@ -66,5 +67,8 @@ Route::middleware(['auth'])->group(function () {
     //api
     Route::get('api/product/{product}', [ApiSaleController::class, 'getProduct'])->name('api.product');
     Route::get('api/customer/{user}', [ApiSaleController::class, 'getCustomer'])->name('api.customer');
+
+    Route::get('api/branch-product/{id}', [ApiBranchProductController::class, 'getProductByBranch'])->name('api.branchproduct');
+    Route::get('api/branch-product/product/{idproduct}/{idbranch}', [ApiBranchProductController::class, 'getProduct'])->name('api.branchproduct.product');
 });
 

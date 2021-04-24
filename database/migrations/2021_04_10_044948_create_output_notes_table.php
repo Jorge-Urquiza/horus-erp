@@ -23,7 +23,8 @@ class CreateOutputNotesTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->decimal('total_amount',12,4)->default(0);
-            $table->date('fecha');
+            $table->date('date');
+            $table->integer('total_quantity');
             $table->softDeletes();
             $table->timestamps();
         });

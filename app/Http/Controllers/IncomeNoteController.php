@@ -86,7 +86,7 @@ class IncomeNoteController extends Controller
                 }
 
                 $stock_product = Product::find($productos[$i]);
-                $stock_product->current_stock = $stock_product->current_stock + + ($cantidad[$i] * 1);
+                $stock_product->current_stock = $stock_product->current_stock + ($cantidad[$i] * 1);
                 $stock_product->update();
 
             }
@@ -111,7 +111,6 @@ class IncomeNoteController extends Controller
     {
         
         $detalle = IncomeDetail::where('income_note_id','=', $income->id)->get();
-        //dd($detalle);
         return view('incomes.show', compact('income', 'detalle'));
     }
 
