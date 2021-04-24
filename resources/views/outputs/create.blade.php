@@ -109,11 +109,31 @@
     }
     function cargarSelect(data){
         var select = document.getElementById("product");
+        eliminarOpciones();
         $(data).each(function(key,elem){
-           select.options[key + 1 ] = new Option(elem.product.name, elem.product_id);
-           //select.options[key + 1 ] = new Option(elem.product_id, elem.product_id);
+            select.options[key + 1 ] = new Option(elem.product.name, elem.product_id);
         })
         limpiar();
+    }
+
+    function eliminarOpciones(){
+        var select = document.getElementById("product");
+        for (let i = select.options.length; i >= 1; i--) {
+            select.remove(i);
+        }
+    }
+
+    function pasaStock(product, stock, cantidad){
+        var stockTotal = 0;
+        $("input[name='producto_id[]']").each(function(indice, elemento) {
+            if($(elemento).val() == product.toString()){
+                stockTotal = stockTotal + parseInt(cantidad_array[indice]);
+            }
+        });
+        if((stockTotal + parseInt(cantidad)) > parseInt(stock)){
+            return true;
+        }
+        return false;
     }
 
     function agregar() {
@@ -132,29 +152,42 @@
                     title: 'Error',
                     text: "Stock insuficiente",
                     showConfirmButton: false,
-                    timer: 2000
+                    timer: 1500
                 })
             }else{
-                subtotal[index] =  (cantidad*compra);
-                total= total + subtotal[index];
-                cantidad_array[index] = (cantidad*1);
-                totalcantidad = totalcantidad + (cantidad * 1);
-                var fila=`<tr class = "selected" id="fila${index}">
-                    <td><button type="button" class="btn btn-danger" onClick="eliminar(${index})">
-                        <i class="fa fa-arrows-alt" aria-hidden="true"></i> Quitar
-                    </button></td>
-                    <td><input type="hidden" class="form-control" name="producto_id[]" value="${product_id}">${producto}</td>
-                    <td><input type="number" class="form-control" readonly name="precio[]" value="${compra}"></td>
-                    <td><input type="number" class="form-control" readonly name="cantidad[]" value ="${cantidad}"></td>
-                    <td>${subtotal[index]}</td>
-                </tr>`;
-                $("#detalle").append(fila);
-                $('#total').html(total+ " Bs.");
-                $("#total_amount").val(total);
-                $("#total_quantity").val(totalcantidad);
-                index++;
-                evaluar();
-                limpiar();
+
+                if(!pasaStock(product_id, stock, cantidad))
+                {   
+                    subtotal[index] =  (cantidad*compra);
+                    total= total + subtotal[index];
+                    cantidad_array[index] = (cantidad*1);
+                    totalcantidad = totalcantidad + (cantidad * 1);
+                    var fila=`<tr class = "selected" id="fila${index}">
+                        <td><button type="button" class="btn btn-danger" onClick="eliminar(${index})">
+                            <i class="fa fa-arrows-alt" aria-hidden="true"></i> Quitar
+                        </button></td>
+                        <td><input type="hidden" class="form-control" name="producto_id[]" value="${product_id}">${producto}</td>
+                        <td><input type="number" class="form-control" readonly name="precio[]" value="${compra}"></td>
+                        <td><input type="number" class="form-control" readonly name="cantidad[]" value ="${cantidad}"></td>
+                        <td>${subtotal[index]}</td>
+                    </tr>`;
+                    $("#detalle").append(fila);
+                    $('#total').html(total+ " Bs.");
+                    $("#total_amount").val(total);
+                    $("#total_quantity").val(totalcantidad);
+                    index++;
+                    evaluar();
+                    limpiar();
+                } else {
+                    swal({
+                        position: 'center',
+                        type: 'warning',
+                        title: 'Error',
+                        text: "La cantidad acumulada sobrepasa el Stock del Producto",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
             }
         }else{
             swal({

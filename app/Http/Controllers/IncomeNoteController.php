@@ -84,10 +84,7 @@ class IncomeNoteController extends Controller
                         'current_stock' => $cantidad[$i],
                     ]);
                 }
-
-                $stock_product = Product::find($productos[$i]);
-                $stock_product->current_stock = $stock_product->current_stock + ($cantidad[$i] * 1);
-                $stock_product->update();
+                Product::incrementarStock($productos[$i], $cantidad[$i]);
 
             }
             DB::commit();
@@ -143,9 +140,39 @@ class IncomeNoteController extends Controller
      * @param  \App\Models\IncomeNote  $incomeNote
      * @return \Illuminate\Http\Response
      */
-    public function destroy(IncomeNote $incomeNote)
+    public function destroy(IncomeNote $income)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $detalles = IncomeDetail::where('income_note_id', $income->id)->get();
+            foreach($detalles as $d){
+
+                $branch_product = BranchsProduct::where([['product_id', $d->product_id],['branch_office_id',$income->branch_office_id]])
+                                        ->first();
+                if(($d->quantity * 1 ) > $branch_product->current_stock)                        
+                {
+                    DB::rollBack();
+                    flash()->error('El stock es menor a la cantidad a anular');
+                    return redirect()->back();
+                      
+                }
+                $branch_product->current_stock = $branch_product->current_stock - ($d->quantity * 1);
+                $branch_product->update();
+
+                Product::decrementarStock($d->product_id, $d->quantity);
+                
+            }
+
+            IncomeDetail::remove($income->id);
+            $income->delete();
+            flash()->deleted();
+            DB::commit();
+            return redirect()->route('incomes.index');
+        } catch (\Exception $th) {
+            DB::rollBack();
+            flash()->error();
+            return redirect()->back();
+        }
     }
 
     public function list()

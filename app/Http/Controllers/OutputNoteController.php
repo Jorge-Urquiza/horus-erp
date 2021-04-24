@@ -74,10 +74,7 @@ class OutputNoteController extends Controller
                 $branch_product->current_stock = $branch_product->current_stock - ($cantidad[$i] * 1);
                 $branch_product->update();
                
-
-                $stock_product = Product::find($productos[$i]);
-                $stock_product->current_stock = $stock_product->current_stock - ($cantidad[$i] * 1);
-                $stock_product->update();
+                Product::decrementarStock($productos[$i],$cantidad[$i]);
 
             }
             DB::commit();
@@ -132,9 +129,31 @@ class OutputNoteController extends Controller
      * @param  \App\Models\OutputNote  $outputNote
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OutputNote $outputNote)
+    public function destroy(OutputNote $output)
     {
-        //
+        try {
+                DB::beginTransaction();
+                $detalles = OutputDetail::where('output_note_id', $output->id)->get();
+                foreach($detalles as $d){
+                    $branch_product = BranchsProduct::where([['product_id', $d->product_id],['branch_office_id',$output->branch_office_id]])
+                                        ->first();
+                    $branch_product->current_stock = $branch_product->current_stock + ($d->quantity * 1);
+                    $branch_product->update();
+
+                    Product::incrementarStock($d->product_id, $d->quantity);
+                }
+                OutputDetail::remove($output->id);
+
+                $output->delete();
+                flash()->deleted();
+                DB::commit();
+                return redirect()->route('outputs.index');
+        } catch (\Exception $th) {
+            DB::rollBack();
+            flash()->error();
+            return redirect()->back();
+        }
+        
     }
 
     public function list()

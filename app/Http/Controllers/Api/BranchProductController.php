@@ -17,12 +17,7 @@ class BranchProductController extends Controller
     public function getProductByBranch($id)
     {
         
-        $product = BranchsProduct::where([
-                                            ['branch_office_id','=',$id]
-                                          // , ['current_stock','>', 0]
-                                        ])
-                                    ->with('product')
-                                    ->get();
+        $product = BranchsProduct::where([['branch_office_id','=',$id],['current_stock', '>', 0]])->with('product')->get();
 
         return response()->json($product);
     }

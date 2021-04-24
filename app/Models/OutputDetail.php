@@ -12,4 +12,8 @@ class OutputDetail extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+    public static function remove($output_id){
+        OutputDetail::where('output_note_id', $output_id)->delete();
+    }
 }
