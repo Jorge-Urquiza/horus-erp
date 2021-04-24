@@ -10,6 +10,6 @@ class Customer extends Model
 
     public function getFullNameAttribute(): string
     {
-        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+        return ucfirst($this->name) . ' ' . ucfirst($this->last_name);
     }
 }

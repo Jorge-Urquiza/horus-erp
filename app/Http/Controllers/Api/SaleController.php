@@ -14,9 +14,7 @@ class SaleController extends Controller
     }
     public function getProduct($product)
     {
-        
-        $product = Product::where('id','=',$product)
-                    ->with('measurementsUnit')->first();
+        $product = Product::with('measurementsUnit', 'brand')->findOrFail($product);
 
         return response()->json($product);
     }

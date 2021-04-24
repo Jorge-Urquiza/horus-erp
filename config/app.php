@@ -1,5 +1,7 @@
 <?php
 
+use App\Providers\SaleServiceProvider;
+
 return [
 
     /*
@@ -180,6 +182,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\BladeServiceProvider::class,
+        App\Providers\SaleServiceProvider::class,
 
     ],
 
