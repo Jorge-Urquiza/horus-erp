@@ -8,8 +8,8 @@ class Product extends Model
 {
     use LogsActivity;
 
-    public static function getProducto($id) {
-
+    public static function getProducto($id)
+    {
         $data = DB::table('products')->select(['products.id','products.local_code', 'products.name', 'products.price',
             'products.description', 'products.image',
             'categories.name as categoria', 'brands.name as marca', 'suppliers.name as proveedor','uni.name as unidad'])
@@ -28,6 +28,11 @@ class Product extends Model
         $data = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
         return $base64;
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
     }
 
     public function measurementsUnit()
@@ -50,11 +55,6 @@ class Product extends Model
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');
-    }
-
-    public function brand()
-    {
-        return $this->belongsTo(Brand::class, 'brand_id');
     }
 
     public function category()

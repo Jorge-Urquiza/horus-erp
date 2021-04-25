@@ -20,7 +20,8 @@ class UserSeeder extends Seeder
             'telephone' => '72030436',
             'ci' => '9588215',
             'email' => 'user1@gmail.com',
-            'password' => bcrypt(123456)
+            'password' => bcrypt(123456),
+            'branch_office_id' => 1 //Casa matriz ID
         ])->assignRole('Admin');
 
         User::create([
@@ -29,7 +30,8 @@ class UserSeeder extends Seeder
             'telephone' => '72030436',
             'ci' => '9588215',
             'email' => 'user2@gmail.com',
-            'password' => bcrypt(123456)
+            'password' => bcrypt(123456),
+            'branch_office_id' => 1 //Casa matriz ID
         ])->assignRole('Admin');
 
         User::create([
@@ -38,7 +40,8 @@ class UserSeeder extends Seeder
             'last_name' => 'Guzman',
             'telephone' => '72030436',
             'ci' => '9588215',
-            'password' => bcrypt(123456)
+            'password' => bcrypt(123456),
+            'branch_office_id' => 1 //Casa matriz ID
         ])->assignRole('Vendedor');
 
         User::create([
@@ -47,7 +50,8 @@ class UserSeeder extends Seeder
             'last_name' => 'Perez Claros',
             'telephone' => '72030436',
             'ci' => '9588215',
-            'password' => bcrypt(123456)
+            'password' => bcrypt(123456),
+            'branch_office_id' => 1 //Casa matriz ID
         ])->assignRole('Encargado');
     }
 }

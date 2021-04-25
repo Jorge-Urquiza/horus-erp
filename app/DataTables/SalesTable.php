@@ -3,7 +3,6 @@
 namespace App\DataTables;
 
 use App\Models\Sale;
-use Illuminate\Database\Query\Builder;
 
 class SalesTable extends DataTable
 {

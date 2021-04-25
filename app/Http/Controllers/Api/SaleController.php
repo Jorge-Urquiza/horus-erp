@@ -12,11 +12,10 @@ class SaleController extends Controller
     {
         return response()->json($user);
     }
+
     public function getProduct($product)
     {
-        
-        $product = Product::where('id','=',$product)
-                    ->with('measurementsUnit')->first();
+        $product = Product::with('measurementsUnit', 'brand')->findOrFail($product);
 
         return response()->json($product);
     }

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\Sale;
 use App\Actions\StoreSaleAction;
 use App\DataTables\SalesTable;
+use App\Enums\Message;
 use App\Http\Requests\sales\StoreSaleRequest;
+use App\ViewModels\Sale\SaleCreateViewModel;
+use App\ViewModels\Sale\SaleViewModel;
 use Barryvdh\DomPDF\Facade as PDF;
 
 class SaleController extends Controller
@@ -18,11 +20,7 @@ class SaleController extends Controller
 
     public function create()
     {
-        $products = Product::orderBy('id', 'DESC')->pluck('name','id');
-
-        $user = auth()->user();
-
-        return view('sales.create', compact('products','user'));
+        return view('sales.create', new SaleCreateViewModel);
     }
 
     public function store(StoreSaleRequest $request)
@@ -38,15 +36,14 @@ class SaleController extends Controller
 
     public function show(Sale $sale)
     {
-        dd($sale);
-        return view('sales.show', compact('sale'));
+        return view('sales.show', new SaleViewModel($sale));
     }
 
     public function destroy(Sale $sale)
     {
       $sale->delete();
 
-      flash()->deleted();
+      flash(Message::CANCELED);
 
       return view('sales.index');
     }
@@ -58,11 +55,16 @@ class SaleController extends Controller
 
     public function pdf(Sale $sale)
     {
-        return PDF::loadView('sales.pdf', $sale)->stream('venta - ' . $sale->id . '.pdf');
+        $pdf = PDF::loadView('sales.pdf', new SaleViewModel($sale));
+
+        return $pdf->stream('venta' . $sale->id . '.pdf');
+
     }
 
     public function download(Sale $sale)
     {
-        return PDF::loadView('sales.pdf', $sale)->download('venta - ' . $sale->id . '.pdf');
+        $pdf = PDF::loadView('sales.pdf', new SaleViewModel($sale));
+
+        return $pdf->download('venta' . $sale->id . '.pdf');
     }
 }

@@ -48,7 +48,10 @@ class StoreSaleAction
             DB::commit();
 
         }catch(\Exception $e){
+
             DB::rollback();
+
+            flash()->error('Se ha producido un error, intente de nuevo, presione CTRL + F5 ');
         }
     }
 

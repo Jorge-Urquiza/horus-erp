@@ -24,54 +24,54 @@ class ProductSeeder extends Seeder
     {
         return [
             [
-                'localcode' => '25256mtl',
+                'local_code' => '25256mtl',
                 'name' => '80D31L-VOLTA CARGO',
                 'price' => 170.0,
                 'brand_id' => 1,
                 'measurements_units_id' => 2,
                 'supplier_id' => 1,
                 'category_id' => 1,
-                
+
             ],
             [
-                'localcode' => '2578po',
+                'local_code' => '2578po',
                 'name' => '80D31R-VOLTA CARGADA',
                 'price' => 250.0,
                 'brand_id' => 2,
                 'measurements_units_id' => 1,
                 'supplier_id' => 2,
                 'category_id' => 1,
-                
+
             ],
             [
-                'localcode' => '25256xzt',
+                'local_code' => '25256xzt',
                 'name' => 'BT45-VOLTA CARGADA',
                 'price' => 120,
                 'brand_id' => 1,
                 'measurements_units_id' => 1,
                 'supplier_id' => 2,
                 'category_id' => 1,
-                
+
             ],
             [
-                'localcode' => '25opl',
+                'local_code' => '25opl',
                 'name' => 'Goma NBR CAFE',
                 'price' => 50.22,
                 'brand_id' => 3,
                 'measurements_units_id' => 1,
                 'supplier_id' => 1,
                 'category_id' => 1
-                
+
             ],
             [
-                'localcode' => '25qwe',
+                'local_code' => '25qwe',
                 'name' => 'Goma NBR NEGRO',
                 'price' => 48.65,
                 'brand_id' => 1,
                 'measurements_units_id' => 2,
                 'category_id' => 1,
                 'supplier_id' => 2,
-                
+
             ],
         ];
     }
