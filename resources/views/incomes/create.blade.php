@@ -28,6 +28,7 @@
 
 @endsection
 @push('scripts')
+<script src="{{ asset('templates/src/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
 <script>
     //JQUERY
     $(document).ready(function(){

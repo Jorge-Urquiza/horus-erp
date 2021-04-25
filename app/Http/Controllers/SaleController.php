@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\Sale;
 use App\Actions\StoreSaleAction;
 use App\DataTables\SalesTable;
 use App\Enums\Message;
 use App\Http\Requests\sales\StoreSaleRequest;
-use App\Interfaces\SaleServiceInterface;
-use App\Models\SaleDetail;
-use App\Sale\SaleCreateViewModel;
-use App\Sale\SaleViewModel;
+use App\ViewModels\Sale\SaleCreateViewModel;
+use App\ViewModels\Sale\SaleViewModel;
 use Barryvdh\DomPDF\Facade as PDF;
 
 class SaleController extends Controller

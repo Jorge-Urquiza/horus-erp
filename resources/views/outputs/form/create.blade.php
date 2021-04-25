@@ -45,20 +45,20 @@
             {!! $errors->first('product_id','<span class="invalid-feedback d-block">:message</span>') !!}
         </div>
     </div>
-    <div class="col-lg-3 col-sm-3  col-md-3  col-xs-12">
+    <div class="col-lg-2 col-sm-2  col-md-2  col-xs-12">
         <div class="form-group">
                 <label for="">Precio</label>
                 <input id="pcompra"  type="number" name="precio" class="form-control" placeholder=""
                  readonly >
         </div>
     </div>
-    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
         <div class="form-group">
                 <label for="">Stock</label>
                 <input type="number"  class="form-control" placeholder="" id="pstock" min="0" readonly>
         </div>
     </div>
-    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
         <div class="form-group">
                 <label for="">Cantidad</label>
                 <input type="number"  class="form-control" placeholder="" id="pcantidad" min="0">

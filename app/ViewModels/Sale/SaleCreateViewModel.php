@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Sale;
+namespace App\ViewModels\Sale;
 
 use Spatie\ViewModels\ViewModel;
 use App\Models\BranchOffice;

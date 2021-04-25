@@ -35,8 +35,15 @@ class Product extends Model
         return $this->belongsTo(MeasurementsUnits::class, 'measurements_units_id');
     }
 
-    public function brand()
-    {
-        return $this->belongsTo(Brand::class);
+    public static function incrementarStock($id, $cantidad){
+        $stock_product = Product::find($id);
+        $stock_product->current_stock = $stock_product->current_stock + ($cantidad * 1);
+        $stock_product->update();
+    }
+
+    public static function decrementarStock($id, $cantidad){
+        $stock_product = Product::find($id);
+        $stock_product->current_stock = $stock_product->current_stock - ($cantidad * 1);
+        $stock_product->update();
     }
 }

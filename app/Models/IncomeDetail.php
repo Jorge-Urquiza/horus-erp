@@ -12,4 +12,8 @@ class IncomeDetail extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+    public static function remove($income_id){
+        IncomeDetail::where('income_note_id', $income_id)->delete();
+    }
 }
