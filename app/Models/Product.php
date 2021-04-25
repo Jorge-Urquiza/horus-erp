@@ -30,6 +30,11 @@ class Product extends Model
         return $base64;
     }
 
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
     public function measurementsUnit()
     {
         return $this->belongsTo(MeasurementsUnits::class, 'measurements_units_id');

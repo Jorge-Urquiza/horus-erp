@@ -12,6 +12,7 @@ class SaleController extends Controller
     {
         return response()->json($user);
     }
+
     public function getProduct($product)
     {
         $product = Product::with('measurementsUnit', 'brand')->findOrFail($product);

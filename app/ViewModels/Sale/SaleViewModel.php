@@ -13,13 +13,18 @@ class SaleViewModel extends ViewModel
 
     public function __construct(Sale $sale)
     {
-        $this->sale = $sale->with('seller', 'customer' , 'branchOffice')->first();
+        $this->sale = $sale;
 
+        $this->update();
     }
-
+    //$this->$sale->with('seller', 'customer' , 'branchOffice')->first();
     public function details()
     {
-        return SaleDetail::with('product')
-                ->where('sale_id', $this->sale->id)->get();
+        return SaleDetail::where('sale_id', $this->sale->id)->get();
+    }
+
+    private function update()
+    {
+       return $this->sale->with('seller', 'customer' , 'branchOffice')->first();
     }
 }

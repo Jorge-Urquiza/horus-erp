@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class SaleCreateViewModel extends ViewModel
 {
-
     public $seller;
 
     public function __construct()

@@ -79,7 +79,7 @@
             </thead>
             <tbody>
             {{-- Productos --}}
-            @foreach ($sale->saleDetails()->get() as $detail)
+            @foreach ($details as $detail)
                 <tr>
                     <td class="text-right">{{ $detail->product()->first()->name}}</td>
                     <td class="text-right">{{ $detail->quantity}}</td>
