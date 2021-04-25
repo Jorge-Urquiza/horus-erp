@@ -50,16 +50,12 @@ class OutputNoteController extends Controller
         try {
             DB::beginTransaction();
             
-            $mytime = Carbon::now('America/La_paz');
-            $fecha = $mytime->toDateString();
-            $user = Auth::user();
-            $request->request->add(['date' => $fecha]);
-            $request->request->add(['user_id' => $user->id]);
-            
-            $output = OutputNote::create($request->post());
+            $output = OutputNote::registrar($request);
+
             $sucursal = $request->input('branch_office_id');
             $productos = $request->input('producto_id');
             $cantidad = $request->input('cantidad');
+            
             for( $i=0; $i < count($productos) ;$i++){
                 
                 OutputDetail::create([

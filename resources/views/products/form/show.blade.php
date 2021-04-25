@@ -22,7 +22,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="form-group">
                         <label>Categoria</label>
-                        <input class="form-control" disabled value="{{$product->categoria}}">
+                        <input class="form-control" disabled value="{{$product->category->name}}">
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="form-group">
                         <label>Marca</label>
-                        <input class="form-control" disabled value="{{$product->marca}}">
+                        <input class="form-control" disabled value="{{$product->brand->name}}">
                     </div>
                 </div>
             </div>
@@ -51,13 +51,13 @@
 		<div class="col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Proveedor</label>
-                <input class="form-control" disabled value="{{$product->proveedor}}">
+                <input class="form-control" disabled value="{{$product->supplier->name}}">
             </div>
         </div>
         <div class="col-md-3 col-sm-3">
             <div class="form-group">
                 <label>Unidad de Medida</label>
-                <input class="form-control" disabled value="{{$product->unidad}}">
+                <input class="form-control" disabled value="{{$product->measurementsUnit->name}}">
             </div>
         </div>
         <div class="col-md-3 col-sm-3">

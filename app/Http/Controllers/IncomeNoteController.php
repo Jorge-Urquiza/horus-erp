@@ -10,9 +10,10 @@ use App\Models\BranchOffice;
 use App\Models\BranchsProduct;
 use App\Models\IncomeDetail;
 use App\Models\Product;
-use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class IncomeNoteController extends Controller
 {
@@ -51,16 +52,12 @@ class IncomeNoteController extends Controller
         try {
             DB::beginTransaction();
             
-            $mytime = Carbon::now('America/La_paz');
-            $fecha = $mytime->toDateString();
-            $user = Auth::user();
-            $request->request->add(['date' => $fecha]);
-            $request->request->add(['user_id' => $user->id]);
-            
-            $income = IncomeNote::create($request->post());
+            $income = IncomeNote::registrar($request);
+
             $sucursal = $request->input('branch_office_id');
             $productos = $request->input('producto_id');
             $cantidad = $request->input('cantidad');
+            
             for( $i=0; $i < count($productos) ;$i++){
                 
                 IncomeDetail::create([
@@ -178,5 +175,15 @@ class IncomeNoteController extends Controller
     public function list()
     {
         return IncomeNoteTable::generate();
+    }
+
+    public function pdf(IncomeNote $income)
+    {
+        return PDF::loadView('incomes.pdf', $income)->stream('ingreso - ' . $income->id . '.pdf');
+    }
+
+    public function download(IncomeNote $income)
+    {
+        return PDF::loadView('incomes.pdf', $income)->download('ingreso - ' . $income->id . '.pdf');
     }
 }

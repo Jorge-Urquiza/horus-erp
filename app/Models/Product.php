@@ -46,4 +46,19 @@ class Product extends Model
         $stock_product->current_stock = $stock_product->current_stock - ($cantidad * 1);
         $stock_product->update();
     }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class, 'supplier_id');
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

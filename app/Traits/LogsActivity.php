@@ -20,6 +20,9 @@ trait LogsActivity
         'Brand' => 'Marca',
         'MeasurementsUnits' => 'Unidad Medida',
         'IncomeNote' => 'Nota Ingreso',
+        'OutputNote' => 'Nota Salida',
+        'OutputDetail' => 'Detalle Nota Salida',
+        'IncomeDetail' => 'Detalle Nota Ingreso'
     ];
 
     protected static $actions = [
