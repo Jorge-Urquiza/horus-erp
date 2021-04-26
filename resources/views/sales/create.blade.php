@@ -53,38 +53,51 @@
     });
 
     var index= 0;
-    var total = 0;
-    var subtotal=[];
+    var subtotal= []; // precio de compra * cantidad
+    var total = [] // (precio de compra * cantidad) - decuento
+    var totales = 0;  // Sumatoria de los totales
 
+    function getDescuento()
+    {
+        let descuento = $("#descuento").val();
+        descuento = (descuento === "") ? 0 : Number(descuento);
+        return descuento.toFixed(2);
+    }
     function agregar() {
-        product_id = $("#product option:selected").val()
-        producto = $("#product option:selected").text()
-        cantidad = $("#cantidad").val();
-        stock = $("#stock").val();
-        compra =parseFloat($("#pcompra").val());
-        venta = parseFloat($("#pventa").val());
-        unidad = $("#unidad").val();
+        let product_id = $("#product option:selected").val();
+        let producto = $("#product option:selected").text();
+        let cantidad = $("#cantidad").val();
+        let stock = $("#stock").val();
+        let compra = $("#pcompra").val();
+        let descuento = getDescuento();
+        let unidad = $("#unidad").val();
+        let venta = ((compra * cantidad) - descuento).toFixed(2);
+
 
         if(producto != "" && cantidad != "" && compra != "" && venta != ""){
             resultado =  stock - cantidad;
             if(resultado < 0 ){
                 alert("Error al ingresar los detalles de la venta, Stock insuficiente");
             }else{
-                subtotal[index] =  parseFloat((cantidad*venta));
-                total= parseFloat(total + subtotal[index]);
+                subtotal[index] =  (cantidad*compra).toFixed(2);
+                total[index] =  parseFloat(venta).toFixed(2);
+                totales = parseFloat(totales + subtotal[index]).toFixed(2);
+
+                console.log(total);
                 var fila=`<tr class = "selected" id="fila${index}">
                     <td><button type="button" class="btn btn-danger" onClick="eliminar(${index})">
                         <i class="fa fa-arrows-alt" aria-hidden="true"></i> Quitar
                     </button></td>
                     <td><input type="hidden" class="form-control" name="producto_id[]" value="${product_id}">${producto}</td>
                     <td>${unidad}</td>
-                    <td><input type="number" class="form-control" readonly name="compra[]" value ="${compra}"></td>
-                    <td><input type="number" class="form-control" readonly name="precio[]" value="${venta}"></td>
+                    <td><input type="number" class="form-control" readonly name="pcompra[]" value ="${compra}"></td>
                     <td><input type="number" class="form-control" readonly name="cantidad[]" value ="${cantidad}"></td>
                     <td>${subtotal[index]}</td>
+                    <td><input type="number" class="form-control" readonly name="pdescuento[]" value="${descuento}"></td>
+                    <td><input type="number" class="form-control" readonly name="ptotal[]" value="${total[index]}"></td>
                 </tr>`;
                 $("#detalle").append(fila);
-                $('#total').html(total+ " Bs.");
+                $('#totales').html(totales+ " Bs.");
                 index++;
                 evaluar();
                 limpiar();
@@ -95,7 +108,7 @@
     }
 
     function evaluar(){
-        if(total > 0){
+        if(totales > 0){
             $('#guardar').show();
         }else{
             $('#guardar').hide();
@@ -108,7 +121,6 @@
         });
         $('#pcompra').val("");
         $('#cantidad').val("");
-        $('#pventa').val("");
         $('#unidad').val("");
         $('#stock').val("");
     }

@@ -28,7 +28,6 @@
                 <p class="mb-0"><span class="font-weight-bold">NIT: </span>317672035</p>
                 <p class="mb-0"><span class="font-weight-bold">No.Trans.: </span> {{ sales_number($sale->id) }}</p>
                 <p class="mb-0"><span class="font-weight-bold">No.Factura.: </span> 000000</p>
-                <p class="mb-0"><span class="font-weight-bold">AUTORIZACIÓN: </span> 222222222</p>
             </div>
 
         </section>
@@ -38,19 +37,15 @@
 
                 {{-- Si la sucursal en la que se emitio la factura es casa matriz --}}
 
-                <div class="mb-0">{{ $sale->branchOffice()->first()->name }}</div>
+                <div class="mb-0">{{ $sale->branchOffice->name }}</div>
 
-                <div class="mb-0">{{ $sale->branchOffice()->first()->address }}</div>
+                <div class="mb-0">{{ $sale->branchOffice->address }}</div>
 
-                <div class="mb-0">Teléfonos: {{ $sale->branchOffice()->first()->telephone }}</div>
+                <div class="mb-0">Teléfonos: {{ $sale->branchOffice->telephone }}</div>
 
-                <div class="mb-0">{{ $sale->branchOffice()->first()->city }} - Bolivia</div>
+                <div class="mb-0">{{ $sale->branchoffice->city }} - Bolivia</div>
 
-                <div class="mb-0">Vendedor: {{ $sale->seller()->first()->name }}</div>
-            </div>
-            <div class="d-inline-block text-center align-top" style="width: 49%;">
-                <div class="text-center font-weight-bold w-100">Nota de Venta</div>
-                <p class="mb-0">Actividad de la factura</p>
+                <div class="mb-0">Vendedor: {{ $sale->seller->getFullName() }}</div>
             </div>
         </section>
         <section>
@@ -81,28 +76,31 @@
             {{-- Productos --}}
             @foreach ($details as $detail)
                 <tr>
-                    <td class="text-right">{{ $detail->product()->first()->name}}</td>
-                    <td class="text-right">{{ $detail->quantity}}</td>
-                    <td class="text-right">{{ $detail->sale_price}}</td>
-                    <td class="text-right">{{ $detail->subtotal}}</td>
-                    <td class="text-right">0,00</td>
-                    <td class="text-right">{{ $detail->subtotal}}</td>
+                    <td class="text-right">{{ $detail->product->name}}</td>
+                    <td class="text-right">{{ money($detail->quantity) }}</td>
+                    <td class="text-right">{{ money($detail->sale_price) }}</td>
+                    <td class="text-right">{{ money($detail->subtotal) }}</td>
+                    <td class="text-right">{{ money($detail->discount) }}</td>
+                    <td class="text-right">{{ money($detail->total) }}</td>
                 </tr>
             @endforeach
             </tbody>
             <tfoot>
                 <tr class="font-weight-bold">
-                    <td colspan="3">Totales</td>
-                    <td class="text-right">10</td>
-                    <td class="text-right">0%</td>
-                    <td class="text-right">10</td>
+                    <td colspan="5">Totales</td>
+                    {{--
+                        <td class="text-right">10</td>
+                    <td class="text-right">0 Bs.</td>
+                        --}}
+                    <td class="text-right">{{ money($sale->total_amount) }}</td>
                 </tr>
                 <tr>
                     <td colspan="5">
                         Son: {{ $sale->total_literal }} {{ $sale->suffix }} BOLIVIANOS
                     </td>
                     <td>
-                        <div class="text-right">
+                       {{--
+                         <div class="text-right">
                             <span class="font-weight-bold">Subtotal: </span>
                             <span>10</span>
                         </div>
@@ -110,6 +108,7 @@
                             <span class="font-weight-bold">Descuento: </span>
                             <span>0</span>
                         </div>
+                        --}}
                         <div class="text-right">
                             <span class="font-weight-bold">Total: </span>
                             <span>{{ money($sale->total_amount)}}</span>

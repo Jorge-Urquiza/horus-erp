@@ -16,6 +16,8 @@ class StoreSaleAction
 
     private $products;
 
+    private $discounts;
+
     private $length;
 
     private $sale;
@@ -84,13 +86,17 @@ class StoreSaleAction
 
         $data['product_id'] = $this->products[$index];
 
-        $data['sale_price'] = $this->sale_prices[$index];
+        $data['sale_price'] = round($this->sale_prices[$index], 2);
 
         $data['sale_id'] = $this->sale->id;
 
-        $data['subtotal'] = $data['quantity'] * $data['sale_price'];
+        $data['subtotal'] = round($data['quantity'] * $data['sale_price'], 2);
 
-        $this->total = $this->total + $data['subtotal'];
+        $data['discount'] = round($this->discounts[$index], 2);
+
+        $data['total'] = round($data['subtotal'] -  $data['discount'], 2);
+
+        $this->total += + round($data['total'], 2);
 
         return $data;
     }
@@ -101,12 +107,12 @@ class StoreSaleAction
 
         $this->products = $this->request['producto_id'];
 
-        $this->sale_prices = $this->request['precio'];
+        $this->sale_prices = $this->request['pcompra'];
+
+        $this->discounts = $this->request['pdescuento'];
 
         $this->length = count($this->request['producto_id']);
 
         $this->total = 0;
-
-        $this->subtotal = 0;
     }
 }

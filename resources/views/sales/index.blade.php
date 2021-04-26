@@ -82,18 +82,18 @@
             "searchable": true,
             render: function (data, type, row) {
                 return `
-                <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="{{ url('/sales/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver</a>
-                                <a class="dropdown-item" href="{{ url('/pdf/${row.id}' ) }}"><i class="dw dw-books"></i> pdf</a>
-                                <a class="dropdown-item" href="{{ url('/download/${row.id}' ) }}"><i class="dw dw-download"></i> descargar</a>
-                                <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
-                                <i class="dw dw-delete-3"></i> Anular</a>
-                            </div>
+                    <div class="dropdown">
+                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                            <i class="dw dw-more"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                            <a class="dropdown-item" href="{{ url('/sales/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver</a>
+                            <a class="dropdown-item" href="{{ url('/pdf/${row.id}' ) }}"><i class="dw dw-books"></i> pdf</a>
+                            <a class="dropdown-item" href="{{ url('/download/${row.id}' ) }}"><i class="dw dw-download"></i> descargar</a>
+                            <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
+                            <i class="dw dw-delete-3"></i> Anular</a>
                         </div>
+                    </div>
                 `;
             }
         }]
