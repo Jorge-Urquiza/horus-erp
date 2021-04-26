@@ -20,6 +20,8 @@ class CreateSaleDetailsTable extends Migration
             $table->integer('quantity');
             $table->float('sale_price', 12, 2);
             $table->float('subtotal',12,2);
+            $table->decimal('discount',12,2);
+            $table->decimal('total',12,2);
             $table->foreignIdFor(Sale::class)->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
