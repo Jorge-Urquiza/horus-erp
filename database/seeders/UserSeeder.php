@@ -15,28 +15,28 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'Usuario uno',
-            'last_name' => 'Guzman',
+            'name' => 'Alezander',
+            'last_name' => 'Vargas Salazar',
             'telephone' => '72030436',
             'ci' => '9588215',
-            'email' => 'user1@gmail.com',
+            'email' => 'alex1@gmail.com',
             'password' => bcrypt(123456),
             'branch_office_id' => 1 //Casa matriz ID
         ])->assignRole('Admin');
 
         User::create([
-            'name' => 'Usuario dos',
+            'name' => 'Jessica',
             'last_name' => 'Guzman',
             'telephone' => '72030436',
             'ci' => '9588215',
-            'email' => 'user2@gmail.com',
+            'email' => 'jessica@gmail.com',
             'password' => bcrypt(123456),
-            'branch_office_id' => 1 //Casa matriz ID
+            'branch_office_id' => 2 //Casa matriz ID
         ])->assignRole('Admin');
 
         User::create([
-            'name' => 'Usuario vendedor',
-            'email' => 'user3@gmail.com',
+            'name' => 'Jimmy',
+            'email' => 'jimmy@gmail.com',
             'last_name' => 'Guzman',
             'telephone' => '72030436',
             'ci' => '9588215',
@@ -45,8 +45,8 @@ class UserSeeder extends Seeder
         ])->assignRole('Vendedor');
 
         User::create([
-            'name' => 'Juan jose',
-            'email' => 'user4@gmail.com',
+            'name' => 'Marlina',
+            'email' => 'marlina@gmail.com',
             'last_name' => 'Perez Claros',
             'telephone' => '72030436',
             'ci' => '9588215',

@@ -37,7 +37,6 @@
             const $form = $('#form-editar');
             let action = $form.data('action');
             action = action.replace('*', id);
-            //console.log('entro ai');
             $form.attr('action', action);
         }
 

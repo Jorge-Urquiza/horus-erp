@@ -10,6 +10,7 @@ use App\Models\BranchOffice;
 use App\Models\BranchsProduct;
 use App\Models\IncomeDetail;
 use App\Models\Product;
+use App\ViewModels\IncomeNote\IncomeViewModel;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -179,11 +180,11 @@ class IncomeNoteController extends Controller
 
     public function pdf(IncomeNote $income)
     {
-        return PDF::loadView('incomes.pdf', $income)->stream('ingreso - ' . $income->id . '.pdf');
+        return PDF::loadView('incomes.pdf', new IncomeViewModel($income))->stream('ingreso - ' . $income->id . '.pdf');
     }
 
     public function download(IncomeNote $income)
     {
-        return PDF::loadView('incomes.pdf', $income)->download('ingreso - ' . $income->id . '.pdf');
+        return PDF::loadView('incomes.pdf', new IncomeViewModel($income))->download('ingreso - ' . $income->id . '.pdf');
     }
 }

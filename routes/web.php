@@ -52,6 +52,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('download/{sale}',[SaleController::class, 'download']);
     Route::get('incomes/pdf/{income}',[IncomeNoteController::class, 'pdf']);
     Route::get('incomes/download/{income}',[IncomeNoteController::class, 'download']);
+    Route::get('outputs/pdf/{output}',[OutputNoteController::class, 'pdf']);
+    Route::get('outputs/download/{output}',[OutputNoteController::class, 'download']);
 
     Route::resource('users', UserController::class);
     Route::resource('roles', RolController::class);

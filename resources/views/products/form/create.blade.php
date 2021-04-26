@@ -4,7 +4,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="form-group">
                         <label>Codigo Local</label>
-                        {{ Form::text('local_code', null, ['class'=> ' form-control'. ( $errors->has('local_code') ? ' is-invalid' : '' )]) }}
+                        {{ Form::text('local_code', null, ['class'=> ' form-control'. ( $errors->has('local_code') ? ' is-invalid' : '' ), 'required']) }}
                         {!! $errors->first('local_code','<span class="invalid-feedback d-block">:message</span>') !!}
                     </div>
                 </div>
@@ -13,7 +13,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="form-group">
                         <label>Nombre</label>
-                        {{ Form::text('name', null, ['class'=> ' form-control'. ( $errors->has('name') ? ' is-invalid' : '' )]) }}
+                        {{ Form::text('name', null, ['class'=> ' form-control'. ( $errors->has('name') ? ' is-invalid' : '' ), 'required']) }}
                         {!! $errors->first('name','<span class="invalid-feedback d-block">:message</span>') !!}
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="form-group">
                         <label>Categoria</label>
-                        <select class="custom-select2 form-control" name="category_id" style="width: 100%; height: 38px;">
+                        <select class="custom-select2 form-control" name="category_id" style="width: 100%; height: 38px;" required>
                             @if(isset($product))
                                 @foreach($categories as $c)
                                     @if($product->category_id == $c->id)
@@ -45,7 +45,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="form-group">
                         <label>Marca</label>
-                        <select class="custom-select2 form-control" name="brand_id" style="width: 100%; height: 38px;">
+                        <select class="custom-select2 form-control" name="brand_id" style="width: 100%; height: 38px;" required>
                             @if(isset($product))
                                 @foreach($brands as $b)
                                     @if($product->brand_id == $b->id)
@@ -92,7 +92,7 @@
 		<div class="col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Proveedor</label>
-                <select class="custom-select2 form-control"  name="supplier_id" style="width: 100%; height: 38px;">
+                <select class="custom-select2 form-control"  name="supplier_id" style="width: 100%; height: 38px;" required>
                     @if(isset($product))
                         @foreach($suppliers as $b)
                             @if($product->supplier_id == $b->id)
@@ -113,7 +113,7 @@
         <div class="col-md-3 col-sm-3">
             <div class="form-group">
                 <label>Unidad de Medida</label>
-                <select class="custom-select2 form-control{{$errors->has('measurements_units_id')? ' is-invalid' : ''}}" name="measurements_units_id" style="width: 100%; height: 38px;">
+                <select class="custom-select2 form-control{{$errors->has('measurements_units_id')? ' is-invalid' : ''}}" name="measurements_units_id" style="width: 100%; height: 38px;" required>
                     @if(isset($product))
                         @foreach($units as $u)
                             @if($product->measurements_units_id == $u->id)
@@ -134,7 +134,7 @@
         <div class="col-md-3 col-sm-3">
             <div class="form-group">
                 <label>Precio</label>
-                {{ Form::number('price', null, ['min' => '0','step' => 'any' ,'class'=> ' form-control'. ( $errors->has('price') ? ' is-invalid' : '' )]) }}
+                {{ Form::number('price', null, ['min' => '0','step' => 'any' ,'class'=> ' form-control'. ( $errors->has('price') ? ' is-invalid' : '' ), 'required']) }}
                 {!! $errors->first('price','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>
@@ -169,7 +169,6 @@
                 var files = $('#imagen')[0].files;
                 $('#imagen_prev').empty();
                 for (var i = 0, f; f = files[i]; i++) {
-                   // console.log('looop');
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         var imagen = '<img src="'+e.target.result+'" alt="imagen" style="width: 500px; height: 400px;">'

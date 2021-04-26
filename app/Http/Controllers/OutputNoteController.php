@@ -9,8 +9,10 @@ use App\Models\BranchsProduct;
 use App\Models\OutputDetail;
 use App\Models\OutputNote;
 use App\Models\Product;
+use App\ViewModels\OutputNote\OutputViewModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -155,5 +157,15 @@ class OutputNoteController extends Controller
     public function list()
     {
         return OutputNoteTable::generate();
+    }
+
+    public function pdf(OutputNote $output)
+    {
+        return PDF::loadView('outputs.pdf', new OutputViewModel($output))->stream('salida - ' . $output->id . '.pdf');
+    }
+
+    public function download(OutputNote $output)
+    {
+        return PDF::loadView('outputs.pdf', new OutputViewModel($output))->download('salida - ' . $output->id . '.pdf');
     }
 }

@@ -26,7 +26,7 @@ class CreateProductsTable extends Migration
             $table->integer('current_stock')->unsigned()->default(0);
             $table->integer('minimum_stock')->unsigned()->default(0);
             $table->integer('maximum_stock')->unsigned()->default(0);
-            $table->decimal('price',12,4)->default(0);
+            $table->float('price',12,2)->default(0);
             $table->foreignIdFor(MeasurementsUnits::class)->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Nota Salida</title>
+        <link rel="stylesheet" href="{{ public_path('css/invoice.css') }}">
+    </head>
+    <style>
+        th {
+            background-color: rgb(2, 37, 102);
+            color: #ffffff ;
+        }
+        .pagenum:before {
+                content: counter(page);
+        }
+    </style>
+    <header style="position: fixed; left:0cm; right:0cm">
+        <section class="d-block">
+            {{-- Ese margin 3 es por que dompdf me mueve la imagen --}}
+            <div class="d-inline-block mt-3" style="width: 34%;">
+                <img class="invoice-logo" src="{{ public_path('logos/recorte2.png') }}">
+            </div>
+
+            <div class="d-inline-block text-center align-top" style="width: 49%; padding-top: 50px;">
+                <div class="text-left font-weight-bold w-100"><h2>Nota de Salida</h2></div>
+            </div>
+
+        </section>
+        <section class="d-block my-4">
+            <div class="d-inline-block" style="width: 49%;">
+                <div class="mb-0">Horus S.R.L</div>
+
+                {{-- Si la sucursal en la que se emitio la factura es casa matriz --}}
+
+                <div class="mb-0">{{ $output->branch_office()->first()->name }}</div>
+
+                <div class="mb-0">{{ $output->branch_office()->first()->address }}</div>
+
+                <div class="mb-0">Teléfonos: {{ $output->branch_office()->first()->telephone }}</div>
+
+                <div class="mb-0">{{ $output->branch_office()->first()->city }} - Bolivia</div>
+
+            
+            </div>
+            
+            <div class="w-50 d-inline-block align-middle text-right">
+                <p class="mb-0"><span class="font-weight-bold">Fecha :</span>{{ Carbon\Carbon::now()->format('d/m/Y') }}</p>
+                <p class="mb-0"><span class="font-weight-bold">Hora :</span>{{ Carbon\Carbon::now()->format('H:i:s') }}</p>
+                <p class="mb-0"><span class="font-weight-bold">Pag.: </span><span class="pagenum"></span></p>
+                <p class="mb-0"><span class="font-weight-bold">No.Trans.: </span> {{ sales_number($output->id) }}</p>
+            </div>
+        </section>
+        <section>
+            <p class="mb-0">
+                <span class="font-weight-bold">Lugar y fecha: </span>SCZ, @php $oldDate = strtotime($output->date);
+                                                                            echo date("d / m / Y",$oldDate);
+                                                                            @endphp 
+            </p>
+            <p class="mb-0">
+                <span class="font-weight-bold">Sucursal: </span>{{ $output->branch_office()->first()->name }}
+            </p>
+            <p class="mb-2">
+                <span class="font-weight-bold">Realizado por: </span>{{ $output->user()->first()->name }} {{ $output->user()->first()->last_name }}
+            </p>
+            
+        </section>
+    </header>
+<body class="invoice">
+    <div id="app">
+       
+        <div style="position: relative; left:0cm; right:0cm; top: 34%">
+        <table class="table table-bordered table-sm mb-0">
+            <thead class="font-13">
+                <tr>
+                    <th>Detalle</th>
+                    <th>Cantidad</th>
+                    <th>P. Unitario Bs.</th>
+                    <th>Subtotal Bs.</th>
+                </tr>
+            </thead>
+            <tbody>
+            {{-- Productos --}}
+            @foreach ($details as $detail)
+                <tr>
+                    <td class="text-right">{{ $detail->product()->first()->name}}</td>
+                    <td class="text-right">{{ $detail->quantity}}</td>
+                    <td class="text-right">{{ $detail->product()->first()->price}}</td>
+                    <td class="text-right">{{ $detail->product()->first()->price * $detail->quantity}}</td>
+                </tr>
+            @endforeach
+            </tbody>
+            <tfoot>
+                <tr class="font-weight-bold">
+                    <td colspan="3">Totales</td>
+                    <td class="text-right">{{ money($output->total_amount)}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        Son:  {{ $output->total_literal }} {{ $output->suffix }} BOLIVIANOS
+                    </td>
+                    <td>
+                        <div class="text-right">
+                            <span class="font-weight-bold">Total: </span>
+                            <span>{{ money($output->total_amount)}}</span>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -2,14 +2,14 @@
 		<div class="col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Nombre</label>
-                {{ Form::text('name', null, ['class'=> ' form-control'. ( $errors->has('name') ? ' is-invalid' : '' )]) }}
+                {{ Form::text('name', null, ['class'=> ' form-control'. ( $errors->has('name') ? ' is-invalid' : '' ), 'required', 'id' => 'name']) }}
                 {!! $errors->first('name','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>
         <div class="col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Tipo</label>
-                <select class="custom-select2 form-control" name="type" style="width: 100%; height: 38px;">
+                <select class="custom-select2 form-control" name="type" style="width: 100%; height: 38px;" required>
                     @if(isset($supplier))
                         @if($supplier->type == 'N')
                             <option value="N" selected>Natural</option>
@@ -31,7 +31,7 @@
 		<div class="col-md-6 col-sm-6">
             <div class="form-group">
                 <label>Email</label>
-                {{ Form::text('email', null, ['class'=> ' form-control'. ( $errors->has('email') ? ' is-invalid' : '' )]) }}
+                {{ Form::text('email', null, ['class'=> ' form-control'. ( $errors->has('email') ? ' is-invalid' : '' ), 'required', 'id' => 'email']) }}
                 {!! $errors->first('email','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>
@@ -47,7 +47,7 @@
 		<div class="col-md-12  col-sm-12">
             <div class="form-group">
                 <label>Direccion</label>
-                {{ Form::text('address', null, ['class'=> ' form-control'. ( $errors->has('address') ? ' is-invalid' : '' )]) }}
+                {{ Form::text('address', null, ['class'=> ' form-control'. ( $errors->has('address') ? ' is-invalid' : '' ), 'required', 'id' => 'address']) }}
                 {!! $errors->first('address','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>

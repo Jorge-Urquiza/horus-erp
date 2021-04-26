@@ -33,6 +33,16 @@
             $form.attr('action', action);
         }
 
+        var input = document.getElementById('namecreate');
+        input.addEventListener('input', function(evt) {
+            this.setCustomValidity('');
+        });
+        input.addEventListener('invalid', function(evt) {
+            // Required
+            if (this.validity.valueMissing) {
+                this.setCustomValidity('Por favor complete el nombre!');
+            }
+        });
         
     </script>
 @endpush

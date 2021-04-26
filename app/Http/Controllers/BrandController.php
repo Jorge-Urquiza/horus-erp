@@ -64,9 +64,9 @@ class BrandController extends Controller
         return view('brands.edit', compact('categoria'));
     }
 
-    public function update(Request $request, Brand $brand)
+    public function update(StoreBrandRequest $request, Brand $brand)
     {
-        $brand->fill($request->post());
+       $brand->fill($request->post());
 
         $brand->save();
 
@@ -75,11 +75,10 @@ class BrandController extends Controller
         return redirect()->route('brands.index');
     }
 
-    public function destroy($id)
+    public function destroy(Brand $brand)
     {
-        $marca = Brand::find($id);
-
-        $marca = $this->marcaRepository->delete($marca);
+        
+        $this->marcaRepository->delete($brand);
 
         flash()->deleted();
 

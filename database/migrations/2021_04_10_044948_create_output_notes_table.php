@@ -22,7 +22,7 @@ class CreateOutputNotesTable extends Migration
             $table->foreignIdFor(User::class)->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->decimal('total_amount',12,4)->default(0);
+            $table->float('total_amount',12,2)->default(0);
             $table->date('date');
             $table->integer('total_quantity');
             $table->softDeletes();

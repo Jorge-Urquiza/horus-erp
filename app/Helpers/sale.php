@@ -3,7 +3,7 @@
 if (! function_exists('money')) {
     function money($number = null)
     {
-        return number_format($number ?: 0, 2, ',', '.');
+        return number_format($number ?: 0, 2, '.', ',');
     }
 }
 

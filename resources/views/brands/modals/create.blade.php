@@ -32,6 +32,28 @@
             $form.attr('action', action);
         }
 
+        var input = document.getElementById('namecreate');
+        input.addEventListener('input', function(evt) {
+            this.setCustomValidity('');
+        });
+        input.addEventListener('invalid', function(evt) {
+            // Required
+            if (this.validity.valueMissing) {
+                this.setCustomValidity('Por favor complete el nombre!');
+            }
+        });
+
+        var input2 = document.getElementById('abbreviationcreate');
+        input2.addEventListener('input', function(evt) {
+            this.setCustomValidity('');
+        });
+        input2.addEventListener('invalid', function(evt) {
+            // Required
+            if (this.validity.valueMissing) {
+                this.setCustomValidity('Por favor complete la abreviacion!');
+            }
+        });
+
         
     </script>
 @endpush

@@ -32,22 +32,22 @@
     <form action="{{ route('users.store') }}" method="POST">
         @csrf
         <div class="form-group row">
-            <div class="col-12 col-lg-3">
+            <div class="col-12 col-lg-6">
                 <label for="name" class="weight-500">Nombre</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese su nombre">
             </div>
-            <div class="col-12 col-lg-3">
+            <div class="col-12 col-lg-6">
+                <label for="ci" class="weight-500">CI</label>
+                <input class="form-control" placeholder="Cedula de identidad" id="ci" name="ci" type="text" required>
+            </div>
+            <div class="col-12 col-lg-6">
                 <label for="last_name" class="weight-500">Apellidos</label>
                 <input type="text" class="form-control" id="last_name" name="last_name"
                  placeholder="Ingrese su apellido">
             </div>
-            <div class="col-12 col-lg-3">
-                <label for="ci" class="weight-500">CI</label>
-                <input class="form-control" placeholder="Cedula de identidad" id="ci" name="ci" type="text" required>
-            </div>
-            <div class="col-12 col-lg-3">
-                <label for="telephone" class="weight-500">telephone</label>
-                <input class="form-control" placeholder="Número de telephone" id="telephone" name="telephone" type="text" required>
+            <div class="col-12 col-lg-6">
+                <label for="telephone" class="weight-500">Telefono</label>
+                <input class="form-control" placeholder="Número de telefono" id="telephone" name="telephone" type="text" required>
             </div>
         </div>
         <div class="form-group row">

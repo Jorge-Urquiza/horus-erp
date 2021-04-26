@@ -21,6 +21,11 @@ class OutputNote extends Model
         return $this->belongsTo(BranchOffice::class, 'branch_office_id');
     }
 
+    public function incomeDetails()
+    {
+        return $this->hasMany(OutputDetail::class, 'output_note_id');
+    }
+
     public static function registrar(Request $request)
     {
         $mytime = Carbon::now('America/La_paz');

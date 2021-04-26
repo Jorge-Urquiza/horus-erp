@@ -23,7 +23,7 @@ class CreateIncomeNotesTable extends Migration
             $table->foreignIdFor(User::class)->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->decimal('total_amount',12,4)->default(0);
+            $table->float('total_amount',12,2)->default(0);
             $table->integer('total_quantity');
             $table->date('date');
             $table->softDeletes();
