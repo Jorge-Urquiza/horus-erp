@@ -28,9 +28,10 @@ class StoreSaleRequest extends FormRequest
             'customer_id' => 'required',
             'nit' => 'nullable',
             'cantidad' => 'required',
+            'customer_id' => 'required',
             'producto_id' => 'required|array|min:1',
-            'compra' => 'required|array|min:1',
-            'precio' => 'required|array|min:1',
+            'pcompra' => 'required|array|min:1',
+            'pdescuento' => 'required|array|min:1',
         ];
     }
 }

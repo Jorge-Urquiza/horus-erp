@@ -32,7 +32,7 @@
         {{ Form::text('ci', null, ['class'=> ' form-control', 'id' => 'ci', 'readonly']) }}
     </div>
     <div class="col-12 col-lg-4">
-        {{ Form::label('nit', 'Nit:') }}
+        {{ Form::label('nit', 'Nit (opcional):') }}
         {{ Form::text('nit', null, ['class'=> ' form-control']) }}
     </div>
 </div>
@@ -42,10 +42,7 @@
         {{ Form::select('product', $products, null, ['placeholder' => 'Seleccionar Producto',
         'class' => 'form-control selectpicker', 'data-live-search' => 'true', 'id'=> 'product']) }}
     </div>
-    <div class="col-12 col-lg-2">
-        {{ Form::label('pcompra','Precio base:', ['class' => 'weight-500']) }}
-        {{ Form::number('pcompra', null, ['class'=> ' form-control', 'id' => 'pcompra', 'readonly']) }}
-    </div>
+
     <div class="col-12 col-lg-1">
         {{ Form::label('stock','Stock:', ['class' => 'weight-500']) }}
         {{ Form::number('stock', null, ['class'=> ' form-control', 'id' => 'stock', 'readonly']) }}
@@ -55,13 +52,18 @@
         {{ Form::text('unidad', null, ['class'=> ' form-control', 'id' => 'unidad', 'readonly']) }}
     </div>
     <div class="col-12 col-lg-2">
-        {{ Form::label('pventa','Precio venta (c/u):', ['class' => 'weight-500']) }}
-        {{ Form::number('pventa', null, ['class'=> ' form-control', 'id' => 'pventa']) }}
+        {{ Form::label('pcompra','Precio unitario Bs.:', ['class' => 'weight-500']) }}
+        {{ Form::number('pcompra', null, ['class'=> ' form-control', 'id' => 'pcompra', 'readonly']) }}
     </div>
     <div class="col-12 col-lg-2">
         {{ Form::label('cantidad','Cantidad:', ['class' => 'weight-500']) }}
         {{ Form::number('cantidad', null, ['class'=> ' form-control', 'id' => 'cantidad']) }}
     </div>
+    <div class="col-12 col-lg-2">
+        {{ Form::label('descuento','Descuento Bs.:', ['class' => 'weight-500']) }}
+        {{ Form::number('descuento', null, ['class'=> ' form-control', 'id' => 'descuento', 'placeholder' => 'Opcional']) }}
+    </div>
+
 
 </div>
 <div class="form-group">
@@ -84,19 +86,21 @@
                     <th style="color:#ffffff";>Opciones</th>
                     <th style="color:#FFFFFF";>Producto</th>
                     <th style="color:#FFFFFF";>Unidad de medida</th>
-                    <th style="color:#FFFFFF";>Precio compra</th>
-                    <th style="color:#FFFFFF";>Precio venta</th>
+                    <th style="color:#FFFFFF";>Precio Unitario</th>
                     <th style="color:#FFFFFF";>Cantidad</th>
                     <th style="color:#FFFFFF";>Subtotal</th>
+                    <th style="color:#FFFFFF";>Descuento Bs.</th>
+                    <th style="color:#FFFFFF";>Total</th>
                 </thead>
                 <tfoot>
-                    <th>TOTAL</th>
+                    <th>TOTALES</th>
                     <th></th>
                     <th></th>
                     <th></th>
                     <th></th>
                     <th></th>
-                    <th><h5 id="total">0.00 (Bs.)</h5></th>
+                    <th></th>
+                    <th><h5 id="totales">0.00 (Bs.)</h5></th>
                 </tfoot>
                 <tbody>
                 </tbody>
