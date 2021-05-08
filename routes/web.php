@@ -16,6 +16,7 @@ use App\Http\Controllers\IncomeNoteController;
 use App\Http\Controllers\OutputNoteController;
 use App\Http\Controllers\MeasurementsUnitsController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\TransferNoteController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -48,12 +49,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('incomes/list',[IncomeNoteController::class, 'list'])->name('incomes.list');
     Route::get('outputs/list',[OutputNoteController::class, 'list'])->name('outputs.list');
     Route::get('sales/list',[SaleController::class, 'list'])->name('sales.list');
+    Route::get('transfers/list',[TransferNoteController::class, 'list'])->name('transfers.list');
     Route::get('pdf/{sale}',[SaleController::class, 'pdf']);
     Route::get('download/{sale}',[SaleController::class, 'download']);
     Route::get('incomes/pdf/{income}',[IncomeNoteController::class, 'pdf']);
     Route::get('incomes/download/{income}',[IncomeNoteController::class, 'download']);
     Route::get('outputs/pdf/{output}',[OutputNoteController::class, 'pdf']);
     Route::get('outputs/download/{output}',[OutputNoteController::class, 'download']);
+    Route::get('transfers/pdf/{transfer}',[TransferNoteController::class, 'pdf']);
+    Route::get('transfers/download/{transfer}',[TransferNoteController::class, 'download']);
 
     Route::resource('users', UserController::class);
     Route::resource('roles', RolController::class);
@@ -67,6 +71,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('sales', SaleController::class)->except(['edit', 'update']);
     Route::resource('incomes', IncomeNoteController::class);
     Route::resource('outputs', OutputNoteController::class);
+    Route::resource('transfers', TransferNoteController::class);
 
     //api
     Route::get('api/product/{product}', [ApiSaleController::class, 'getProduct'])->name('api.product');

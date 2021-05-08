@@ -42,7 +42,7 @@
                     <th style="color:#FFFFFF";>Subtotal</th>
                 </thead>
                 <tbody>
-                    @foreach($detalle as $d)
+                    @foreach($output->outputDetails as $d)
                         <tr>
                             <td>{{ $d->product->name }}</td>
                             <td>{{ $d->product->price }}</td>

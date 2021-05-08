@@ -21,7 +21,8 @@ class UserSeeder extends Seeder
             'ci' => '9588215',
             'email' => 'alex1@gmail.com',
             'password' => bcrypt(123456),
-            'branch_office_id' => 1 //Casa matriz ID
+            'branch_office_id' => 1, //Casa matriz ID
+            'is_admin' => true,
         ])->assignRole('Admin');
 
         User::create([
@@ -31,7 +32,8 @@ class UserSeeder extends Seeder
             'ci' => '9588215',
             'email' => 'jessica@gmail.com',
             'password' => bcrypt(123456),
-            'branch_office_id' => 2 //Casa matriz ID
+            'branch_office_id' => 2, //Casa matriz ID
+            'is_admin' => true,
         ])->assignRole('Admin');
 
         User::create([

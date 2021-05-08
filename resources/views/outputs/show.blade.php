@@ -4,13 +4,13 @@
 <div class="row">
     <div class="col-md-6 col-sm-12">
         <div class="title">
-            <h4>Crear Nota Ingreso</h4>
+            <h4>Ver Nota Salida</h4>
         </div>
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('outputs.index') }}">Nota Salida</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Ver Nota Ingreso</li>
+                <li class="breadcrumb-item active" aria-current="page">Ver Nota Salida</li>
             </ol>
         </nav>
     </div>

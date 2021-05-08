@@ -94,8 +94,7 @@ class OutputNoteController extends Controller
      */
     public function show(OutputNote $output)
     {
-        $detalle = OutputDetail::where('output_note_id','=', $output->id)->get();
-        return view('outputs.show', compact('output', 'detalle'));
+        return view('outputs.show', compact('output'));
     }
 
     /**
