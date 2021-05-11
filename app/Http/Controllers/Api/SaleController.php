@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Product;
 
-class SaleController extends Controller
+class SaleController
 {
     public function getCustomer(Customer $user)
     {

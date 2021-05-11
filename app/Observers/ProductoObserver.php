@@ -3,6 +3,8 @@
 namespace App\Observers;
 
 use App\Models\Product;
+use App\Notifications\NewSaleNotification;
+use Illuminate\Support\Facades\Notification;
 
 class ProductoObserver
 {
@@ -12,9 +14,12 @@ class ProductoObserver
      * @param  \App\Models\Producto  $producto
      * @return void
      */
-    public function created(Product $producto)
+    public function created(BranchProduct $producto)
     {
-        //
+        Notification::route('slack', env('SLACK_HOOK'))
+            ->notify(new NewSaleNotification());
+
+    //   \Log::info('asdasdasdasdasd');
     }
 
     /**
@@ -25,12 +30,6 @@ class ProductoObserver
      */
     public function updated(Product $producto)
     {
-        if($producto->image){
-            //delete image// aparte de eliminar el producto en bd, tambien dedbemos borrar en disco la imagen
-            /*
-                Storage::delete($producto->uuid);
-            */
-        }
 
     }
 

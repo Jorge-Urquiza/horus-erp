@@ -43,7 +43,7 @@ class SaleController extends Controller
     {
       $sale->delete();
 
-      flash(Message::CANCELED);
+      flash()->deleted();
 
       return view('sales.index');
     }
@@ -58,7 +58,6 @@ class SaleController extends Controller
         $pdf = PDF::loadView('sales.pdf', new SaleViewModel($sale));
 
         return $pdf->stream('venta' . $sale->id . '.pdf');
-
     }
 
     public function download(Sale $sale)

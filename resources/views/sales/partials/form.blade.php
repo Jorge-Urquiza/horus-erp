@@ -93,18 +93,51 @@
                     <th style="color:#FFFFFF";>Total</th>
                 </thead>
                 <tfoot>
-                    <th>TOTALES</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th><h5 id="totales">0.00 (Bs.)</h5></th>
+                    <tr>
+                        <th>TOTALES</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th><h5 id="totales">0.00 (Bs.)</h5></th>
+                    </tr>
+                    <tr>
+                        <th>TOTALES - VENTA</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th id="fila">
+                            <div class="text-right">
+                                <span class="font-weight-bold">Subtotal: </span>
+                                <span>asd</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-weight-bold">Descuento: </span>
+                                <span>asd</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-weight-bold">Total: </span>
+                                <span>asd</span>
+                            </div>
+                        </th>
+                    </tr>
                 </tfoot>
                 <tbody>
                 </tbody>
+
+
             </table>
+            <div id="link_descuento">
+                <button  class="btn btn-link btn-block text-left"
+                type="button" data-toggle="modal" data-target="#exampleModal">Desea aplicar descuento al total de la venta?</button>
+                @include('sales.partials.modal-discount')
+            </div>
+
         </div>
     </div>
 <button type="submit" class="btn btn-primary" id="guardar">

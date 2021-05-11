@@ -39,6 +39,8 @@
     $(document).ready(function(){
 
         $('#guardar').hide();
+        $('#fila').hide();
+        $('#link_descuento').hide();
         //Eventos
         $('#product').on('change', function() {
             completarProducto($("#product option:selected").val());
@@ -110,8 +112,12 @@
     function evaluar(){
         if(totales > 0){
             $('#guardar').show();
+            $('#fila').show();
+            $('#link_descuento').show();
         }else{
             $('#guardar').hide();
+            $('#fila').hide();
+            $('#link_descuento').hide();
         }
     }
 

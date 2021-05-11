@@ -17,7 +17,7 @@ use App\Http\Controllers\OutputNoteController;
 use App\Http\Controllers\MeasurementsUnitsController;
 use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return view('welcome');
@@ -74,5 +74,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('api/branch-product/{id}', [ApiBranchProductController::class, 'getProductByBranch'])->name('api.branchproduct');
     Route::get('api/branch-product/product/{idproduct}/{idbranch}', [ApiBranchProductController::class, 'getProduct'])->name('api.branchproduct.product');
+
 });
 
