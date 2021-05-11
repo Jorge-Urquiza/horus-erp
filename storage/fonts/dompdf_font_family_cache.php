@@ -80,4 +80,7 @@
   'bree serif' => array(
     'normal' => $fontDir . '/bree_serif_normal_b57dd71626e0c6500bbd5d018afae54d',
   ),
+  'flenja-regular' => array(
+    'normal' => $fontDir . '/flenja_regular_normal_eb7b8751fcf105cce8564963487ba9e2',
+  ),
 ) ?>

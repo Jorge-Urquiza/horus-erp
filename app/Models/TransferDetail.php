@@ -14,6 +14,9 @@ class TransferDetail extends Model
     }
 
     public static function remove($transfer_id){
-        TransferDetail::where('transfer_note_id', $transfer_id)->delete();
+        TransferDetail::where('transfer_note_id', $transfer_id)
+                        ->update([
+                            'is_canceled' => true
+                         ]);
     }
 }

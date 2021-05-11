@@ -4,13 +4,13 @@
 <div class="row">
     <div class="col-md-6 col-sm-12">
         <div class="title">
-            <h4>Crear Nota Ingreso</h4>
+            <h4>Registrar Nota de Ingreso</h4>
         </div>
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('incomes.index') }}">Nota Ingreso</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Crear Nota Ingreso</li>
+                <li class="breadcrumb-item"><a href="{{ route('incomes.index') }}">Nota de Ingreso</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Registrar Nota de Ingreso</li>
             </ol>
         </nav>
     </div>
@@ -19,6 +19,7 @@
             <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
         </a>
     </div>
+</div>
 @endsection
 @section('content')
 
@@ -43,7 +44,6 @@
         });
 
     });
-
     var index= 0;
     var total = 0;
     var totalcantidad=0;
@@ -61,8 +61,8 @@
             /*if(resultado < 0 ){
                 alert("Error al ingresar los detalles de la venta, Stock insuficiente");
             }else{*/
-                subtotal[index] =  (cantidad*compra);
-                total= total + subtotal[index];
+                subtotal[index] =  (cantidad*compra).toFixed(2);
+                total= total + parseFloat(subtotal[index]);
                 cantidad_array[index] = (cantidad*1);
                 totalcantidad = totalcantidad + (cantidad * 1);
                 var fila=`<tr class = "selected" id="fila${index}">
@@ -75,6 +75,7 @@
                     <td>${subtotal[index]}</td>
                 </tr>`;
                 $("#detalle").append(fila);
+                
                 $('#total').html(total+ " Bs.");
                 $("#total_amount").val(total);
                 $("#total_quantity").val(totalcantidad);
@@ -83,7 +84,15 @@
                 limpiar();
            // }
         }else{
-            alert("Error al ingresar los detalles de la venta, Revise los datos del producto");
+            swal({
+                    position: 'center',
+                    type: 'warning',
+                    title: 'Error al agregar el producto',
+                    text: "Revise los datos del producto",
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+           
         }
     }
 
@@ -104,10 +113,10 @@
     }
 
     function eliminar(index) {
-        total = total - subtotal[index];
+        total = total - (subtotal[index]);
         totalcantidad =  totalcantidad - cantidad_array[index];
         $("#fila" + index).remove();
-        $('#total').html(total+ " Bs.");
+        $('#total').html((total).toFixed(2) + " Bs.");
         $("#total_quantity").val(totalcantidad);
         $("#total_amount").val(total);
         // para escodner los botones si se borro todo el detalle

@@ -31,7 +31,8 @@ class ProductSeeder extends Seeder
                 'measurements_units_id' => 2,
                 'supplier_id' => 1,
                 'category_id' => 1,
-
+                'minimum_stock' => 5,
+                'maximum_stock' => 50,
             ],
             [
                 'local_code' => '2578po',
@@ -41,7 +42,8 @@ class ProductSeeder extends Seeder
                 'measurements_units_id' => 1,
                 'supplier_id' => 2,
                 'category_id' => 1,
-
+                'minimum_stock' => 10,
+                'maximum_stock' => 78,
             ],
             [
                 'local_code' => '25256xzt',
@@ -51,6 +53,8 @@ class ProductSeeder extends Seeder
                 'measurements_units_id' => 1,
                 'supplier_id' => 2,
                 'category_id' => 1,
+                'minimum_stock' => 5,
+                'maximum_stock' => 50,
 
             ],
             [
@@ -60,7 +64,9 @@ class ProductSeeder extends Seeder
                 'brand_id' => 3,
                 'measurements_units_id' => 1,
                 'supplier_id' => 1,
-                'category_id' => 1
+                'category_id' => 1,
+                'minimum_stock' => 10,
+                'maximum_stock' => 74,
 
             ],
             [
@@ -71,7 +77,8 @@ class ProductSeeder extends Seeder
                 'measurements_units_id' => 2,
                 'category_id' => 1,
                 'supplier_id' => 2,
-
+                'minimum_stock' => 5,
+                'maximum_stock' => 50,
             ],
         ];
     }

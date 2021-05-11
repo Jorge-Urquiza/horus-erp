@@ -23,27 +23,33 @@
             <h4 class="text-blue h4">Lista de Nota Traspaso</h4>
         </div>
         <div class="pull-right">
+            @can('transfers.create')
             <a href="{{ route('transfers.create') }}" class="btn btn-primary btn-sm"
-            role="button"><i class="fa fa-plus"></i> Nueva Nota Traspaso</a>
+            role="button"><i class="fa fa-plus"></i> Nueva Nota de Traspaso</a>
+            @endcan
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table table-hover display no-wrap" id="tables">
-                <thead>
-                    <tr>
-                        <th>Nro</th>
-                        <th>Fecha</th>
-                        <th>Sucursal Origen</th>
-                        <th>Sucursal Destino</th>
-                        <th>Personal</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-
-            </table>
+    <div class="row"> 
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#activo" role="tab"
+            aria-controls="pills-home" aria-selected="true">Activos</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#anulado" role="tab"
+            aria-controls="pills-profile" aria-selected="false">Anulados</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="activo" role="tabpanel" aria-labelledby="pills-home-tab">
+            @include('transfers.tables.active')
+        </div>
+        <div class="tab-pane fade" id="anulado" role="tabpanel" aria-labelledby="pills-profile-tab">
+            @include('transfers.tables.canceled')
         </div>
     </div>
+    
     @component('elements.modal', ['action' => route('transfers.destroy', '*')])
         ¿Está seguro que desea anular la nota de traspaso?
     @endcomponent
@@ -52,42 +58,7 @@
 @push('scripts')
 
 @include('layouts.datatable')
-    <script>
-        $('#tables').DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            },
-            "ajax": "{{route('transfers.list')}}",
-            "columns": [
-                { data: 'id' },
-                { data: 'date' },
-                { data: 'origen' },
-                { data: 'destino' },
-                { data: 'personal' },
-            ],
-            "columnDefs": [ {
-                "targets": 5,
-                "sortable": false,
-                "searchable": true,
-                render: function (data, type, row) {
-                    return `
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="{{ url('/transfers/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver</a>
-                                <a class="dropdown-item" href="{{ url('/transfers/pdf/${row.id}' ) }}" target="_blank"><i class="dw dw-books"></i>Pdf</a>
-                                <a class="dropdown-item" href="{{ url('/transfers/download/${row.id}' ) }}"><i class="dw dw-download"></i>Descargar</a>
-                                <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
-                                <i class="dw dw-delete-3"></i>Anular</a>
-                            </div>
-                        </div>
-                    `;
-                }
-            }]
-        });
-
-
-    </script>
+@include('transfers.scripts.active')
+@include('transfers.scripts.canceled')  
+        
 @endpush

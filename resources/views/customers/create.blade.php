@@ -25,7 +25,7 @@
 @section('content')
 <div class="clearfix">
     <div class="pull-left">
-        <h4 class="text-blue h4">Formulario de creación</h4>
+        <h4 class="text-blue h4">Registrar Cliente</h4>
     </div>
 </div>
     {!! Form::open(['route'=> ['customers.store'], 'method' => 'POST']) !!}

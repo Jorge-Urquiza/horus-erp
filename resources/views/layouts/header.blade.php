@@ -44,8 +44,8 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                     <a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Perfil</a>
-                    <a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Configuracion</a>
-                    <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Ayuda</a>
+                    {{-- <a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Configuracion</a>
+                    <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Ayuda</a> --}}
                     <a class="dropdown-item" href="#" onclick="$('#form-logout').submit();"><i class="dw dw-logout"></i> Cerrar sesion</a>
                 </div>
             </div>

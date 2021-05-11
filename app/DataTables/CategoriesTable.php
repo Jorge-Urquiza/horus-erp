@@ -14,6 +14,6 @@ class CategoriesTable extends DataTable
      */
     public function query()
     {
-        return Category::query()->select(['id', 'name',]);
+        return Category::query()->select(['id', 'name', 'description']);
     }
 }

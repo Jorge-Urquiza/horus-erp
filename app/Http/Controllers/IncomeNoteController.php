@@ -18,6 +18,14 @@ use Carbon\Carbon;
 
 class IncomeNoteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:incomes.create')->only(['create']);
+        $this->middleware('permission:incomes.index')->only(['index','show']);
+        $this->middleware('permission:incomes.destroy')->only(['destroy']);
+        $this->middleware('permission:incomes.pdf')->only(['pdf','download']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -52,7 +60,6 @@ class IncomeNoteController extends Controller
     {
         try {
             DB::beginTransaction();
-            
             $income = IncomeNote::registrar($request);
 
             $sucursal = $request->input('branch_office_id');
@@ -75,11 +82,13 @@ class IncomeNoteController extends Controller
                     $branch_product->current_stock = $branch_product->current_stock + ($cantidad[$i] * 1);
                     $branch_product->update();
                 } else {
-                    
+                    $product = Product::find($productos[$i]);
                     BranchsProduct::create([
                         'product_id' => $productos[$i],
                         'branch_office_id' => $sucursal,
                         'current_stock' => $cantidad[$i],
+                        'minimum_stock' => $product->minimum_stock,
+                        'maximum_stock' => $product->maximum_stock,
                     ]);
                 }
                 Product::incrementarStock($productos[$i], $cantidad[$i]);

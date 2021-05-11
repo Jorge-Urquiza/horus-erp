@@ -24,6 +24,7 @@ class CreateTransferDetailsTable extends Migration
             $table->foreignIdFor(Product::class)->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
+            $table->boolean('is_canceled')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

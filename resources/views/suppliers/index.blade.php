@@ -23,8 +23,10 @@
             <h4 class="text-blue h4">Lista de Proveedores</h4>
         </div>
         <div class="pull-right">
+            @can('suppliers.create')
             <a href="{{ route('suppliers.create') }}" class="btn btn-primary btn-sm"
             role="button"><i class="fa fa-plus"></i> Nuevo Proveedor</a>
+            @endcan
         </div>
     </div>
     <div class="row">
@@ -75,9 +77,13 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                 <a class="dropdown-item" href="{{ url('/suppliers/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver</a>
+                                @can('suppliers.edit')
                                 <a class="dropdown-item" href="{{ url('/suppliers/${row.id}/edit') }}"><i class="dw dw-edit2"></i> Editar</a>
+                                @endcan
+                                @can('suppliers.destroy')
                                 <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
                                 <i class="dw dw-delete-3"></i> Eliminar</a>
+                                @endcan
                             </div>
                         </div>
                     `;

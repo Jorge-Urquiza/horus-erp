@@ -61,7 +61,7 @@
                             @endif
                         </select>
                         {!! $errors->first('brand_id','<span class="invalid-feedback d-block">:message</span>') !!}
-                    </div>
+                    </div> 
                 </div>
             </div>
             <div class="row">
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-5 col-sm-5">
             <div class="form-group" id="imagen_prev">
             @if(isset($product))
                 @if(is_null($product->image))
@@ -110,26 +110,8 @@
                 {!! $errors->first('supplier_id','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>
-        <div class="col-md-3 col-sm-3">
-            <div class="form-group">
-                <label>Unidad de Medida</label>
-                <select class="custom-select2 form-control{{$errors->has('measurements_units_id')? ' is-invalid' : ''}}" name="measurements_units_id" style="width: 100%; height: 38px;" required>
-                    @if(isset($product))
-                        @foreach($units as $u)
-                            @if($product->measurements_units_id == $u->id)
-                                <option value="{{$u->id}}" selected>{{$u->abbreviation}}</option>
-                            @else
-                                <option value="{{$u->id}}">{{$u->abbreviation}}</option>
-                            @endif
-                        @endforeach
-                    @else
-                        @foreach($units as $u)
-                            <option value="{{$u->id}}">{{$u->abbreviation}}</option>
-                        @endforeach
-                    @endif
-                </select>
-                {!! $errors->first('measurements_units_id','<span class="invalid-feedback d-block">:message</span>') !!}
-            </div>
+        <div class="col-md-2 col-sm-2">
+            
         </div>
         <div class="col-md-3 col-sm-3">
             <div class="form-group">
@@ -140,7 +122,44 @@
         </div>
     </div>
     <div class="row">
-		<div class="col-md-12  col-sm-12">
+		<div class="col-md-6 col-sm-6">
+            <div class="form-group">
+                <label>Unidad de Medida</label>
+                <select class="custom-select2 form-control{{$errors->has('measurements_units_id')? ' is-invalid' : ''}}" name="measurements_units_id" style="width: 100%; height: 38px;" required>
+                    @if(isset($product))
+                        @foreach($units as $u)
+                            @if($product->measurements_units_id == $u->id)
+                                <option value="{{$u->id}}" selected>{{$u->name}}</option>
+                            @else
+                                <option value="{{$u->id}}">{{$u->name}}</option>
+                            @endif
+                        @endforeach
+                    @else
+                        @foreach($units as $u)
+                            <option value="{{$u->id}}">{{$u->name}}</option>
+                        @endforeach
+                    @endif
+                </select>
+                {!! $errors->first('measurements_units_id','<span class="invalid-feedback d-block">:message</span>') !!}
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <div class="form-group">
+                <label>Stock Minimo</label>
+                {{ Form::number('minimum_stock', null, ['min' => '0','step' => '1' ,'class'=> ' form-control'. ( $errors->has('minimum_stock') ? ' is-invalid' : '' ), 'required']) }}
+                {!! $errors->first('minimum_stock','<span class="invalid-feedback d-block">:message</span>') !!}
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3">
+            <div class="form-group">
+                <label>Stock Maximo</label>
+                {{ Form::number('maximum_stock', null, ['min' => '0','step' => '1' ,'class'=> ' form-control'. ( $errors->has('maximum_stock') ? ' is-invalid' : '' ), 'required']) }}
+                {!! $errors->first('maximum_stock','<span class="invalid-feedback d-block">:message</span>') !!}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+		<div class="col-md-11  col-sm-11">
             <div class="form-group">
                 <label>Descripcion</label>
                 <textarea class="form-control" name="description" row="2">@if(isset($product)){{$product->description}}@endif</textarea>
@@ -149,7 +168,7 @@
         </div>
     </div>
     <div class="row">
-		<div class="col-md-12  col-sm-12">
+		<div class="col-md-11  col-sm-11">
             <div class="col text-right">
                 <button class="btn btn-primary btn-sm"
                     type="submit"><span class="icon-copy ti-save"></span>   Guardar</button>

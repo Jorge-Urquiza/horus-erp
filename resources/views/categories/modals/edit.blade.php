@@ -30,6 +30,7 @@
                 let value = valor[i];
                 if(value.id == id){
                     $('#name').val(value.name);
+                    $('#description').val(value.description);
                 }
             }
             

@@ -16,6 +16,13 @@
         .pagenum:before {
                 content: counter(page);
         }
+        /* @font-face{
+            font-family: Flenja-Regular;
+            src: url('templates/vendors/fonts/fontfamily/Flenja-Regular.ttf') format('truetype')
+        }
+        .{
+            font-family: Flenja-Regular, sans-serif;
+        } */
     </style>
     <header style="position: fixed; left:0cm; right:0cm">
         <section class="d-block">
@@ -72,44 +79,55 @@
     <div id="app">
        
         <div style="position: relative; left:0cm; right:0cm; top: 34%">
-        <table class="table table-bordered table-sm mb-0">
-            <thead class="font-13">
-                <tr>
-                    <th>Detalle</th>
-                    <th>Cantidad</th>
-                    <th>P. Unitario Bs.</th>
-                    <th>Subtotal Bs.</th>
-                </tr>
-            </thead>
-            <tbody>
-            {{-- Productos --}}
-            @foreach ($details as $detail)
-                <tr>
-                    <td class="text-right">{{ $detail->product()->first()->name}}</td>
-                    <td class="text-right">{{ $detail->quantity}}</td>
-                    <td class="text-right">{{ $detail->product()->first()->price}}</td>
-                    <td class="text-right">{{ $detail->product()->first()->price * $detail->quantity}}</td>
-                </tr>
-            @endforeach
-            </tbody>
-            <tfoot>
-                <tr class="font-weight-bold">
-                    <td colspan="3">Totales</td>
-                    <td class="text-right">{{ money($income->total_amount)}}</td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        Son:  {{ $income->total_literal }} {{ $income->suffix }} BOLIVIANOS
-                    </td>
-                    <td>
-                        <div class="text-right">
-                            <span class="font-weight-bold">Total: </span>
-                            <span>{{ money($income->total_amount)}}</span>
-                        </div>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+            <table class="table table-bordered table-sm mb-0">
+                <thead class="font-13">
+                    <tr>
+                        <th>Detalle</th>
+                        <th>Cantidad</th>
+                        <th>P. Unitario Bs.</th>
+                        <th>Subtotal Bs.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {{-- Productos --}}
+                @foreach ($details as $detail)
+                    <tr>
+                        <td class="text-right">{{ $detail->product()->first()->name}}</td>
+                        <td class="text-right">{{ $detail->quantity}}</td>
+                        <td class="text-right">{{ $detail->product()->first()->price}}</td>
+                        <td class="text-right">{{ $detail->product()->first()->price * $detail->quantity}}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+                <tfoot>
+                    <tr class="font-weight-bold">
+                        <td colspan="3">Totales</td>
+                        <td class="text-right">{{ money($income->total_amount)}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            Son:  {{ $income->total_literal }} {{ $income->suffix }} BOLIVIANOS
+                        </td>
+                        <td>
+                            <div class="text-right">
+                                <span class="font-weight-bold">Total: </span>
+                                <span>{{ money($income->total_amount)}}</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            
+            <section class="d-block my-4">
+                <div class="d-inline-block" style="width: 49%;">
+                    <hr style="border: 1px black; ">
+                </div>
+                
+                <div class="w-50 d-inline-block align-middle text-right">
+                    <hr style="border: 1px black; ">
+                </div>
+            </section>
+            
         </div>
     </div>
 </body>

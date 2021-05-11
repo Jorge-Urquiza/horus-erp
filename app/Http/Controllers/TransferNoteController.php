@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\TransferNoteCanceledTable;
 use App\DataTables\TransferNoteTable;
 use App\Http\Requests\transfers\StoreTransferRequest;
 use App\Models\BranchOffice;
@@ -17,6 +18,14 @@ use Illuminate\Support\Facades\DB;
 
 class TransferNoteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:transfers.create')->only(['create']);
+        $this->middleware('permission:transfers.index')->only(['index','show']);
+        $this->middleware('permission:transfers.destroy')->only(['destroy']);
+        $this->middleware('permission:transfers.pdf')->only(['pdf','download']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -84,11 +93,13 @@ class TransferNoteController extends Controller
                     $branch_product->current_stock = $branch_product->current_stock + ($cantidad[$i] * 1);
                     $branch_product->update();
                 } else {
-                    
+                    $product = Product::find($productos[$i]);
                     BranchsProduct::create([
                         'product_id' => $productos[$i],
                         'branch_office_id' => $sucursal_destino,
                         'current_stock' => $cantidad[$i],
+                        'minimum_stock' => $product->minimum_stock,
+                        'maximum_stock' => $product->maximum_stock,
                     ]);
                 }
                 Product::incrementarStock($productos[$i], $cantidad[$i]);
@@ -176,9 +187,9 @@ class TransferNoteController extends Controller
 
             }
             TransferDetail::remove($transfer->id);
-
-            $transfer->delete();
-            flash()->deleted();
+            $transfer->is_canceled = true;
+            $transfer->update();
+            flash()->deleted('Nota de Traspaso anulada Exitosamente');
             DB::commit();
             return redirect()->route('transfers.index');
         } catch (\Exception $th) {
@@ -191,6 +202,11 @@ class TransferNoteController extends Controller
     public function list()
     {
         return TransferNoteTable::generate();
+    }
+
+    public function canceled_list()
+    {
+        return TransferNoteCanceledTable::generate();
     }
 
     public function pdf(TransferNote $transfer)

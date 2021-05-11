@@ -23,8 +23,10 @@
             <h4 class="text-blue h4">Lista de Marcas</h4>
         </div>
         <div class="pull-right">
+            @can('brands.create')
             <a href="#modal-crear" data-toggle="modal" onclick="crearRoute();" class="btn btn-primary btn-sm"
             role="button"><i class="fa fa-plus"></i> Nuevo Marca</a>
+            @endcan
         </div>
     </div>
     <div class="row">
@@ -84,9 +86,13 @@
                                 <i class="dw dw-more"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                @can('brands.edit')
                                 <a class="dropdown-item" href="#modal-editar" data-toggle="modal" onclick="updateRoutes(${row.id},valor);" ><i class="dw dw-edit2"></i> Editar</a>
+                                @endcan
+                                @can('brands.destroy')
                                 <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
                                 <i class="dw dw-delete-3"></i> Eliminar</a>
+                                @endcan
                             </div>
                         </div>
                     `;

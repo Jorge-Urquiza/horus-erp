@@ -23,8 +23,10 @@
             <h4 class="text-blue h4">Lista de Nota Ingreso</h4>
         </div>
         <div class="pull-right">
+            @can('incomes.create')
             <a href="{{ route('incomes.create') }}" class="btn btn-primary btn-sm"
-            role="button"><i class="fa fa-plus"></i> Nueva Nota Ingreso</a>
+            role="button"><i class="fa fa-plus"></i> Nueva Nota de Ingreso</a>
+            @endcan
         </div>
     </div>
     <div class="row">
@@ -73,10 +75,14 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                 <a class="dropdown-item" href="{{ url('/incomes/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver</a>
+                                @can('incomes.pdf')
                                 <a class="dropdown-item" href="{{ url('/incomes/pdf/${row.id}' ) }}" target="_blank"><i class="dw dw-books"></i>Pdf</a>
                                 <a class="dropdown-item" href="{{ url('/incomes/download/${row.id}' ) }}"><i class="dw dw-download"></i>Descargar</a>
+                                @endcan
+                                @can('incomes.destroy')
                                 <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
                                 <i class="dw dw-delete-3"></i>Anular</a>
+                                @endcan
                             </div>
                         </div>
                     `;

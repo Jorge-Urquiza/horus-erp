@@ -54,11 +54,8 @@
                 <input class="form-control" disabled value="{{$product->supplier->name}}">
             </div>
         </div>
-        <div class="col-md-3 col-sm-3">
-            <div class="form-group">
-                <label>Unidad de Medida</label>
-                <input class="form-control" disabled value="{{$product->measurementsUnit->name}}">
-            </div>
+        <div class="col-md-2 col-sm-2">
+            
         </div>
         <div class="col-md-3 col-sm-3">
             <div class="form-group">
@@ -69,7 +66,29 @@
         </div>
     </div>
     <div class="row">
-		<div class="col-md-12  col-sm-12">
+        <div class="col-md-6 col-sm-6">
+            <div class="form-group">
+                <label>Unidad de Medida</label>
+                <input class="form-control" disabled value="{{$product->measurementsUnit->name}}">
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <div class="form-group">
+                <label>Stock Minimo</label>
+                {{ Form::number('minimum_stock', $product->minimum_stock, ['min' => '0','disabled' => 'true' ,'class'=> ' form-control'. ( $errors->has('minimum_stock') ? ' is-invalid' : '' ), 'required']) }}
+                {!! $errors->first('minimum_stock','<span class="invalid-feedback d-block">:message</span>') !!}
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3">
+            <div class="form-group">
+                <label>Stock Maximo</label>
+                {{ Form::number('maximum_stock', $product->maximum_stock, ['min' => '0','disabled' => 'true' ,'class'=> ' form-control'. ( $errors->has('maximum_stock') ? ' is-invalid' : '' ), 'required']) }}
+                {!! $errors->first('maximum_stock','<span class="invalid-feedback d-block">:message</span>') !!}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+		<div class="col-md-11  col-sm-11">
             <div class="form-group">
                 <label>Descripcion</label>
                 <textarea class="form-control" disabled name="description" row="2">{{$product->description}}</textarea>

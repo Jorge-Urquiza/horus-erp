@@ -7,5 +7,13 @@
             
         </div>
     </div>
+    <div class="col-md-12 col-sm-12">
+        <div class="form-group">
+            <label>Descripcion</label>
+            {{ Form::textarea('description', null, ['rows' => '2', 'class'=> ' form-control'. ( $errors->has('description') ? ' is-invalid' : '' ), 'id' => 'descriptioncreate']) }}
+            {!! $errors->first('description','<span class="invalid-feedback d-block">:message</span>') !!}
+            
+        </div>
+    </div>
     
 </div>

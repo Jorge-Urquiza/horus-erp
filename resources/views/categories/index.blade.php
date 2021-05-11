@@ -79,13 +79,16 @@
                             <i class="dw dw-more"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-
+                            @can('categorias.edit')
                             <a href="#modal-editar" data-toggle="modal" onclick="updateRoutes(${row.id},valor);" class="dropdown-item">
                                 <i class="dw dw-edit2"></i> Editar
                             </a>
+                            @endcan
+                            @can('categorias.destroy')
                             <a href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="dropdown-item">
                                 <i class="dw dw-delete-3"></i> Eliminar
                             </a>
+                            @endcan
                         </div>
                     </div>
                 `;

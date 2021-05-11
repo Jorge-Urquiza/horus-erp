@@ -12,6 +12,14 @@ use App\Http\Requests\products\StoreProductRequest;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:productos.create')->only(['create']);
+        $this->middleware('permission:productos.index')->only(['index','show']);
+        $this->middleware('permission:productos.destroy')->only(['destroy']);
+        $this->middleware('permission:productos.edit')->only(['edit']);
+    }
+
     public function index()
     {
         return view('products.index');
@@ -98,7 +106,7 @@ class ProductController extends Controller
 
         $product->fill($request->all());
 
-        $product->save();
+        $product->update();
 
         flash()->updated();
 
