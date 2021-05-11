@@ -42,6 +42,7 @@
                         <li><a href="{{ route('suppliers.index') }}">Proveedores</a></li>
                         <li><a href="{{ route('incomes.index') }}">Nota Ingreso</a></li>
                         <li><a href="{{ route('outputs.index') }}">Nota Salida</a></li>
+                        <li><a href="{{ route('transfers.index') }}">Nota Traspaso</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

@@ -13,6 +13,7 @@ class OutputViewModel extends ViewModel
     public function __construct(OutputNote $output)
     {
         $this->output = $output;
+        $this->obtener();
     }
 
     public function details()

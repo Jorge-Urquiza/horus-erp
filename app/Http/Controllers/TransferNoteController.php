@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\IncomeNote;
-use Illuminate\Http\Request;
-use App\DataTables\IncomeNoteTable;
-use App\Http\Requests\incomes\StoreIncomeRequest;
+use App\DataTables\TransferNoteTable;
+use App\Http\Requests\transfers\StoreTransferRequest;
 use App\Models\BranchOffice;
 use App\Models\BranchsProduct;
-use App\Models\IncomeDetail;
 use App\Models\Product;
-use App\ViewModels\IncomeNote\IncomeViewModel;
+use App\Models\TransferDetail;
+use App\Models\TransferNote;
+use App\ViewModels\TransferNote\TransferViewModel;
+use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
-class IncomeNoteController extends Controller
+class TransferNoteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +24,7 @@ class IncomeNoteController extends Controller
      */
     public function index()
     {
-        return view('incomes.index');
+        return view('transfers.index');
     }
 
     /**
@@ -38,8 +37,7 @@ class IncomeNoteController extends Controller
         $mytime = Carbon::now('America/La_paz');
         $fecha = $mytime->toDateString();
         $branch_office = BranchOffice::get();
-        $products = Product::orderBy('id', 'DESC')->pluck('name','id');
-        return view('incomes.create',compact('branch_office', 'fecha','products'));
+        return view('transfers.create',compact('branch_office', 'fecha'));
     }
 
     /**
@@ -48,26 +46,37 @@ class IncomeNoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreIncomeRequest $request)
+    public function store(StoreTransferRequest $request)
     {
         try {
             DB::beginTransaction();
             
-            $income = IncomeNote::registrar($request);
-
-            $sucursal = $request->input('branch_office_id');
+            $transfer = TransferNote::registrar($request);
+            
+            $sucursal_origen = $request->input('branch_office_origin_id');
+            $sucursal_destino = $request->input('branch_office_destiny_id');
             $productos = $request->input('producto_id');
             $cantidad = $request->input('cantidad');
             
             for( $i=0; $i < count($productos) ;$i++){
                 
-                IncomeDetail::create([
+                TransferDetail::create([
                     'product_id' => $productos[$i],
                     'quantity' => $cantidad[$i],
-                    'income_note_id' => $income->id,
+                    'transfer_note_id' => $transfer->id,
                 ]);
-
-                $branch_product = BranchsProduct::where([['product_id', $productos[$i]],['branch_office_id',$sucursal]])
+                // SALIDA DE PRODUCTO
+                
+                $branch_product = BranchsProduct::where([['product_id', $productos[$i]],['branch_office_id',$sucursal_origen]])
+                                   ->first();
+               
+                $branch_product->current_stock = $branch_product->current_stock - ($cantidad[$i] * 1);
+                $branch_product->update();
+               
+                Product::decrementarStock($productos[$i],$cantidad[$i]);
+                
+                // ENTRADA DE PRODUCTO
+                $branch_product = BranchsProduct::where([['product_id', $productos[$i]],['branch_office_id',$sucursal_destino]])
                                    ->first();
                
                 if(!is_null($branch_product)){
@@ -78,16 +87,18 @@ class IncomeNoteController extends Controller
                     
                     BranchsProduct::create([
                         'product_id' => $productos[$i],
-                        'branch_office_id' => $sucursal,
+                        'branch_office_id' => $sucursal_destino,
                         'current_stock' => $cantidad[$i],
                     ]);
                 }
                 Product::incrementarStock($productos[$i], $cantidad[$i]);
 
+
+
             }
             DB::commit();
             flash()->stored();
-            return redirect()->route('incomes.index');
+            return redirect()->route('transfers.index');
 
         } catch (\Exception $th) {
             DB::rollBack();
@@ -99,21 +110,21 @@ class IncomeNoteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\IncomeNote  $incomeNote
+     * @param  \App\Models\TransferNote  $transferNote
      * @return \Illuminate\Http\Response
      */
-    public function show(IncomeNote $income)
+    public function show(TransferNote $transfer)
     {
-        return view('incomes.show', compact('income'));
+        return view('transfers.show', compact('transfer'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\IncomeNote  $incomeNote
+     * @param  \App\Models\TransferNote  $transferNote
      * @return \Illuminate\Http\Response
      */
-    public function edit(IncomeNote $incomeNote)
+    public function edit(TransferNote $transferNote)
     {
         //
     }
@@ -122,10 +133,10 @@ class IncomeNoteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\IncomeNote  $incomeNote
+     * @param  \App\Models\TransferNote  $transferNote
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, IncomeNote $incomeNote)
+    public function update(Request $request, TransferNote $transferNote)
     {
         //
     }
@@ -133,17 +144,23 @@ class IncomeNoteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\IncomeNote  $incomeNote
+     * @param  \App\Models\TransferNote  $transferNote
      * @return \Illuminate\Http\Response
      */
-    public function destroy(IncomeNote $income)
+    public function destroy(TransferNote $transfer)
     {
         try {
             DB::beginTransaction();
-            $detalles = IncomeDetail::where('income_note_id', $income->id)->get();
+            $detalles = TransferDetail::where('transfer_note_id', $transfer->id)->get();
             foreach($detalles as $d){
-
-                $branch_product = BranchsProduct::where([['product_id', $d->product_id],['branch_office_id',$income->branch_office_id]])
+                // RE ENINGRESO DEL PRODUCTO
+                $branch_product = BranchsProduct::where([['product_id', $d->product_id],['branch_office_id',$transfer->branch_office_origin_id]])
+                                    ->first();
+                $branch_product->current_stock = $branch_product->current_stock + ($d->quantity * 1);
+                $branch_product->update();
+                Product::incrementarStock($d->product_id, $d->quantity);
+                //DEVOLUCION DEL PRODUCTO DEL ALMACEN DESTINO
+                $branch_product = BranchsProduct::where([['product_id', $d->product_id],['branch_office_id',$transfer->branch_office_destiny_id]])
                                         ->first();
                 if(($d->quantity * 1 ) > $branch_product->current_stock)                        
                 {
@@ -156,14 +173,14 @@ class IncomeNoteController extends Controller
                 $branch_product->update();
 
                 Product::decrementarStock($d->product_id, $d->quantity);
-                
-            }
 
-            IncomeDetail::remove($income->id);
-            $income->delete();
+            }
+            TransferDetail::remove($transfer->id);
+
+            $transfer->delete();
             flash()->deleted();
             DB::commit();
-            return redirect()->route('incomes.index');
+            return redirect()->route('transfers.index');
         } catch (\Exception $th) {
             DB::rollBack();
             flash()->error();
@@ -173,16 +190,16 @@ class IncomeNoteController extends Controller
 
     public function list()
     {
-        return IncomeNoteTable::generate();
+        return TransferNoteTable::generate();
     }
 
-    public function pdf(IncomeNote $income)
+    public function pdf(TransferNote $transfer)
     {
-        return PDF::loadView('incomes.pdf', new IncomeViewModel($income))->stream('ingreso - ' . $income->id . '.pdf');
+        return PDF::loadView('transfers.pdf', new TransferViewModel($transfer))->stream('traspaso - ' . $transfer->id . '.pdf');
     }
 
-    public function download(IncomeNote $income)
+    public function download(TransferNote $transfer)
     {
-        return PDF::loadView('incomes.pdf', new IncomeViewModel($income))->download('ingreso - ' . $income->id . '.pdf');
+        return PDF::loadView('transfers.pdf', new TransferViewModel($transfer))->download('traspaso - ' . $transfer->id . '.pdf');
     }
 }
