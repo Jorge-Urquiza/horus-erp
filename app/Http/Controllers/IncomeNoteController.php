@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\IncomeNoteCanceledTable;
+use App\DataTables\IncomeNoteEnteredTable;
+use App\DataTables\IncomeNoteProcessedTable;
 use App\Models\IncomeNote;
 use Illuminate\Http\Request;
-use App\DataTables\IncomeNoteTable;
 use App\Http\Requests\incomes\StoreIncomeRequest;
 use App\Models\BranchOffice;
 use App\Models\BranchsProduct;
@@ -180,9 +182,17 @@ class IncomeNoteController extends Controller
         }
     }
 
-    public function list()
+    public function canceled_list()
     {
-        return IncomeNoteTable::generate();
+        return IncomeNoteCanceledTable::generate();
+    }
+    public function processed_list()
+    {
+        return IncomeNoteProcessedTable::generate();
+    }
+    public function entered_list()
+    {
+        return IncomeNoteEnteredTable::generate();
     }
 
     public function pdf(IncomeNote $income)

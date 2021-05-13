@@ -110,8 +110,12 @@
                 {!! $errors->first('supplier_id','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>
-        <div class="col-md-2 col-sm-2">
-            
+        <div class="col-md-3 col-sm-3">
+            <div class="form-group">
+                <label>Costo</label>
+                {{ Form::number('cost', null, ['min' => '0','step' => 'any' ,'class'=> ' form-control'. ( $errors->has('cost') ? ' is-invalid' : '' ), 'required']) }}
+                {!! $errors->first('cost','<span class="invalid-feedback d-block">:message</span>') !!}
+            </div>
         </div>
         <div class="col-md-3 col-sm-3">
             <div class="form-group">
@@ -143,7 +147,7 @@
                 {!! $errors->first('measurements_units_id','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>
-        <div class="col-md-2 col-sm-2">
+        <div class="col-md-3 col-sm-3">
             <div class="form-group">
                 <label>Stock Minimo</label>
                 {{ Form::number('minimum_stock', null, ['min' => '0','step' => '1' ,'class'=> ' form-control'. ( $errors->has('minimum_stock') ? ' is-invalid' : '' ), 'required']) }}
@@ -159,7 +163,7 @@
         </div>
     </div>
     <div class="row">
-		<div class="col-md-11  col-sm-11">
+		<div class="col-md-12  col-sm-12">
             <div class="form-group">
                 <label>Descripcion</label>
                 <textarea class="form-control" name="description" row="2">@if(isset($product)){{$product->description}}@endif</textarea>

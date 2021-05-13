@@ -26,7 +26,7 @@ class CreateOutputNotesTable extends Migration
             $table->date('date');
             $table->integer('total_quantity');
             $table->text('note')->nullable();
-            $table->boolean('is_canceled')->default(false);
+            $table->enum('status',['En proceso','Entregado','Anulado'])->default('En proceso');
             $table->softDeletes();
             $table->timestamps();
         });

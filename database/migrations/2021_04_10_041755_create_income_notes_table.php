@@ -27,7 +27,7 @@ class CreateIncomeNotesTable extends Migration
             $table->integer('total_quantity');
             $table->date('date');
             $table->text('note')->nullable();
-            $table->boolean('is_canceled')->default(false);
+            $table->enum('status',['En proceso','Ingresado','Anulado'])->default('En proceso');
             $table->softDeletes();
             $table->timestamps();
         });

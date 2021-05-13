@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <table class="table table-hover display no-wrap" id="table_c" style="width: 100%">
+        <table class="table table-hover display no-wrap" id="table_p">
             <thead>
                 <tr>
                     <th>Nro</th>

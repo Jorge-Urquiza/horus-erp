@@ -20,7 +20,7 @@
                 @can('users.index')
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle">
-                            <span class="micon dw dw-user1"></span><span class="mtext">Modulo Administracion</span>
+                            <span class="micon dw dw-user1"></span><span class="mtext">Administracion</span>
                         </a>
                         <ul class="submenu">
                             <li><a href="{{ route('users.index') }}">Usuarios</a></li>
@@ -33,7 +33,7 @@
                 @can('inventario.index')
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon dw dw-notepad-1"></span><span class="mtext">Modulo inventario</span>
+                        <span class="micon dw dw-notepad-1"></span><span class="mtext">inventario</span>
                     </a>
                     <ul class="submenu">
                         @can('productos.index')
@@ -69,7 +69,7 @@
                 @can('venta.index')
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon dw dw-money-1"></span><span class="mtext">Modulo Ventas</span>
+                        <span class="micon dw dw-money-1"></span><span class="mtext">Ventas</span>
                     </a>
                     <ul class="submenu">
                         <li><a href="{{ route('sales.index') }}">Listar</a></li>
@@ -83,7 +83,7 @@
                 @role('Admin')
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle">
-                            <span class="micon dw dw-settings2"></span><span class="mtext">Modulo Configuracion</span>
+                            <span class="micon dw dw-settings2"></span><span class="mtext">Configuracion</span>
                         </a>
                         <ul class="submenu">
                             <li><a href="{{ url('/log-viewer') }}" target="_blank" >Log viewer</a></li>

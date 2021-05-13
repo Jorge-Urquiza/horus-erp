@@ -18,13 +18,13 @@ class CreateTransferDetailsTable extends Migration
         Schema::create('transfer_details', function (Blueprint $table) {
             $table->id();
             $table->integer('quantity');
+            $table->float('cost',12,2)->default(0);
             $table->foreignIdFor(TransferNote::class)->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->foreignIdFor(Product::class)->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->boolean('is_canceled')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

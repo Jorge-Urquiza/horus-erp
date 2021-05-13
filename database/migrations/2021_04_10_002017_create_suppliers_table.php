@@ -18,7 +18,7 @@ class CreateSuppliersTable extends Migration
             $table->string('name');
             $table->string('address')->nullable();
             $table->string('email')->nullable();
-            $table->integer('telephone')->nullable();
+            $table->string('telephone')->nullable();
             $table->enum('type',['N','J'])->default('N');
             $table->softDeletes();
             $table->timestamps();

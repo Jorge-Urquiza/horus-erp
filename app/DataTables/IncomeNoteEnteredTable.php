@@ -7,7 +7,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class IncomeNoteCanceledTable extends DataTable
+class IncomeNoteEnteredTable extends DataTable
 {
     /**
      * The query builder object
@@ -22,13 +22,13 @@ class IncomeNoteCanceledTable extends DataTable
             return IncomeNote::query()->select(['income_notes.id','income_notes.date', DB::raw( 'CONCAT (users.name," " ,users.last_name) as personal'),'branch_offices.name as sucursal'])
                 ->leftJoin('branch_offices','branch_offices.id','=','income_notes.branch_office_id')
                 ->leftJoin('users','users.id','=','income_notes.user_id')
-                ->where('status', 'Anulado')
+                ->where('status', 'Ingresado')
                 ->orderBy('income_notes.id', 'desc');
         }
         return IncomeNote::query()->select(['income_notes.id','income_notes.date', DB::raw( 'CONCAT (users.name," " ,users.last_name) as personal'),'branch_offices.name as sucursal'])
                 ->leftJoin('branch_offices','branch_offices.id','=','income_notes.branch_office_id')
                 ->leftJoin('users','users.id','=','income_notes.user_id')
-                ->where([['branch_offices.id', '=',$user->branch_office_id], ['status','=', 'Anulado']])
+                ->where([['branch_offices.id', '=',$user->branch_office_id], ['status','=', 'Ingresado']])
                 ->orderBy('income_notes.id', 'desc')
                 ->onlyTrashed();
     }

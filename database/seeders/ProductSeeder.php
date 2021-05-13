@@ -33,6 +33,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 1,
                 'minimum_stock' => 5,
                 'maximum_stock' => 50,
+                'cost' => 120.0,
             ],
             [
                 'local_code' => '2578po',
@@ -44,6 +45,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 1,
                 'minimum_stock' => 10,
                 'maximum_stock' => 78,
+                'cost' => 210.0,
             ],
             [
                 'local_code' => '25256xzt',
@@ -55,7 +57,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 1,
                 'minimum_stock' => 5,
                 'maximum_stock' => 50,
-
+                'cost' => 100,
             ],
             [
                 'local_code' => '25opl',
@@ -67,7 +69,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 1,
                 'minimum_stock' => 10,
                 'maximum_stock' => 74,
-
+                'cost' => 40
             ],
             [
                 'local_code' => '25qwe',
@@ -79,6 +81,7 @@ class ProductSeeder extends Seeder
                 'supplier_id' => 2,
                 'minimum_stock' => 5,
                 'maximum_stock' => 50,
+                'cost' => 45
             ],
         ];
     }

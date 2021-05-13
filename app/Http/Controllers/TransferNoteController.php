@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\TransferNoteCanceledTable;
-use App\DataTables\TransferNoteTable;
+use App\DataTables\TransferNoteProcessedTable;
 use App\Http\Requests\transfers\StoreTransferRequest;
 use App\Models\BranchOffice;
 use App\Models\BranchsProduct;
@@ -199,9 +199,14 @@ class TransferNoteController extends Controller
         }
     }
 
-    public function list()
+    public function processed_list()
     {
-        return TransferNoteTable::generate();
+        return TransferNoteProcessedTable::generate();
+    }
+
+    public function delivered_list()
+    {
+       
     }
 
     public function canceled_list()
