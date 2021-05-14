@@ -118,6 +118,16 @@
                     </tr>
                 </tfoot>
             </table>
+            @if(!is_null($income->note))
+            <table style="width: 100%">
+                <tr>
+                    <td><b>Nota:</b></tr>
+                </tr>
+                <tr>
+                    <td>{{ $income->note }}</td>
+                </tr>
+            </table>
+            @endif
             @if($income->status == 'Ingresado')
             <section class="d-block my-4" style="padding-top:50px">
                 <div class="d-inline-block align-middle text-center" style="width: 49%;">

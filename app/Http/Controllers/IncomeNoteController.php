@@ -189,7 +189,7 @@ class IncomeNoteController extends Controller
             $income->status = 'Anulado';
             $income->update();
 
-            flash()->deleted();
+            flash()->deleted('Nota de Ingreso Anulada exitosamente');
             DB::commit();
 
             return redirect()->route('incomes.index');

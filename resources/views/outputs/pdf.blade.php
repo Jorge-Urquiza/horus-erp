@@ -51,6 +51,7 @@
                 <p class="mb-0"><span class="font-weight-bold">Hora :</span>{{ Carbon\Carbon::now()->format('H:i:s') }}</p>
                 <p class="mb-0"><span class="font-weight-bold">Pag.: </span><span class="pagenum"></span></p>
                 <p class="mb-0"><span class="font-weight-bold">No.Trans.: </span> {{ sales_number($output->id) }}</p>
+                <p class="mb-0"><span class="font-weight-bold">Estado: </span> {{ $output->status }}</p>
             </div>
         </section>
         <section>
@@ -72,44 +73,67 @@
     <div id="app">
        
         <div style="position: relative; left:0cm; right:0cm; top: 34%">
-        <table class="table table-bordered table-sm mb-0">
-            <thead class="font-13">
+            <table class="table table-bordered table-sm mb-0">
+                <thead class="font-13">
+                    <tr>
+                        <th>Detalle</th>
+                        <th>Cantidad</th>
+                        <th>P. Unitario Bs.</th>
+                        <th>Subtotal Bs.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {{-- Productos --}}
+                @foreach ($details as $detail)
+                    <tr>
+                        <td class="text-right">{{ $detail->product()->first()->name}}</td>
+                        <td class="text-right">{{ $detail->quantity}}</td>
+                        <td class="text-right">{{ $detail->cost}}</td>
+                        <td class="text-right">{{ $detail->cost * $detail->quantity * 1}}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+                <tfoot>
+                    <tr class="font-weight-bold">
+                        <td colspan="3">Totales</td>
+                        <td class="text-right">{{ money($output->total_amount)}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            Son:  {{ $output->total_literal }} {{ $output->suffix }} BOLIVIANOS
+                        </td>
+                        <td>
+                            <div class="text-right">
+                                <span class="font-weight-bold">Total: </span>
+                                <span>{{ money($output->total_amount)}}</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            @if(!is_null($output->note))
+            <table style="width: 100%">
                 <tr>
-                    <th>Detalle</th>
-                    <th>Cantidad</th>
-                    <th>P. Unitario Bs.</th>
-                    <th>Subtotal Bs.</th>
-                </tr>
-            </thead>
-            <tbody>
-            {{-- Productos --}}
-            @foreach ($details as $detail)
-                <tr>
-                    <td class="text-right">{{ $detail->product()->first()->name}}</td>
-                    <td class="text-right">{{ $detail->quantity}}</td>
-                    <td class="text-right">{{ $detail->product()->first()->price}}</td>
-                    <td class="text-right">{{ $detail->product()->first()->price * $detail->quantity}}</td>
-                </tr>
-            @endforeach
-            </tbody>
-            <tfoot>
-                <tr class="font-weight-bold">
-                    <td colspan="3">Totales</td>
-                    <td class="text-right">{{ money($output->total_amount)}}</td>
+                    <td><b>Nota:</b></tr>
                 </tr>
                 <tr>
-                    <td colspan="3">
-                        Son:  {{ $output->total_literal }} {{ $output->suffix }} BOLIVIANOS
-                    </td>
-                    <td>
-                        <div class="text-right">
-                            <span class="font-weight-bold">Total: </span>
-                            <span>{{ money($output->total_amount)}}</span>
-                        </div>
-                    </td>
+                    <td>{{ $output->note }}</td>
                 </tr>
-            </tfoot>
-        </table>
+            </table>
+            @endif
+            @if($output->status == 'Entregado')
+            <section class="d-block my-4" style="padding-top:55px">
+                <div class="d-inline-block align-middle text-center" style="width: 49%;">
+                    <hr style="border: 1px black; width:60%">
+                    <p class="mb-0"><span class="font-weight-bold">RECIBI CONFORME</span></p>
+                </div>
+                
+                <div class="w-50 d-inline-block align-middle text-center">
+                    <hr style="border: 1px black; width:60%">
+                    <p class="mb-0"><span class="font-weight-bold">ENTREGE CONFORME</span></p>
+                </div>
+            </section>
+            @endif
         </div>
     </div>
 </body>

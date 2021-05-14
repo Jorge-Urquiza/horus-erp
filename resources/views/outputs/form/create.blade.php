@@ -52,7 +52,7 @@
     </div>
     <div class="col-lg-2 col-sm-2  col-md-2  col-xs-12">
         <div class="form-group">
-                <label for="">Precio</label>
+                <label for="">Costo Unitario (Bs.)</label>
                 <input id="pcompra"  type="number" name="precio" class="form-control" placeholder=""
                  readonly >
         </div>
@@ -82,7 +82,7 @@
                 <thead style="background-color:#030eaaee">
                     <th style="color:#FFFFFF";>Opciones</th>
                     <th style="color:#FFFFFF";>Producto</th>
-                    <th style="color:#FFFFFF";>Precio</th>
+                    <th style="color:#FFFFFF";>Costo Unitario</th>
                     <th style="color:#FFFFFF";>Cantidad</th>
                     <th style="color:#FFFFFF";>Subtotal</th>
                 </thead>

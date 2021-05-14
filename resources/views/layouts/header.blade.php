@@ -3,18 +3,18 @@
         <div class="menu-icon dw dw-menu"></div>
         <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
         <div class="header-search">
-            <form>
+            {{-- <form>
                 <div class="form-group mb-0">
                     <i class="dw dw-search2 search-icon"></i>
                     <input type="text" class="form-control search-input" placeholder="Buscar">
 
                 </div>
-            </form>
+            </form> --}}
         </div>
     </div>
     <div class="header-right">
         <div class="user-notification">
-            <div class="dropdown">
+            {{-- <div class="dropdown">
                 <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
                     <i class="icon-copy dw dw-notification"></i>
                     <span class="badge notification-active"></span>
@@ -32,7 +32,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="user-info-dropdown">
             <div class="dropdown">

@@ -22,13 +22,13 @@ class OutputNoteCanceledTable extends DataTable
             return OutputNote::query()->select(['output_notes.id','output_notes.date', DB::raw( 'CONCAT (users.name," " ,users.last_name) as personal'),'branch_offices.name as sucursal'])
                 ->leftJoin('branch_offices','branch_offices.id','=','output_notes.branch_office_id')
                 ->leftJoin('users','users.id','=','output_notes.user_id')
-                ->where('is_canceled', false)
+                ->where('status', 'Anulado')
                 ->orderBy('output_notes.id', 'desc');
         }
         return OutputNote::query()->select(['output_notes.id','output_notes.date', DB::raw( 'CONCAT (users.name," " ,users.last_name) as personal'),'branch_offices.name as sucursal'])
             ->leftJoin('branch_offices','branch_offices.id','=','output_notes.branch_office_id')
             ->leftJoin('users','users.id','=','output_notes.user_id')
-            ->where([['branch_offices.id', '=',$user->branch_office_id], ['is_canceled','=', false]])
+            ->where([['branch_offices.id', '=',$user->branch_office_id], ['status','=', 'Anulado']])
             ->orderBy('output_notes.id', 'desc');
     }
 }

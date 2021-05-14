@@ -37,7 +37,7 @@
             <table id="detalle" class="table table-striped table-bordered table-condensed table-hover">
                 <thead style="background-color:#030eaaee">
                     <th style="color:#FFFFFF";>Producto</th>
-                    <th style="color:#FFFFFF";>Precio</th>
+                    <th style="color:#FFFFFF";>Costo Unitario</th>
                     <th style="color:#FFFFFF";>Cantidad</th>
                     <th style="color:#FFFFFF";>Subtotal</th>
                 </thead>
@@ -45,9 +45,9 @@
                     @foreach($output->outputDetails as $d)
                         <tr>
                             <td>{{ $d->product->name }}</td>
-                            <td>{{ $d->product->price }}</td>
+                            <td>{{ $d->cost }}</td>
                             <td>{{ $d->quantity }}</td>
-                            <td>{{ $d->quantity * $d->product->price * 1 }} </td>
+                            <td>{{ $d->quantity * $d->cost * 1 }} </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -55,7 +55,7 @@
                     <th>TOTAL</th>
                     <th></th>
                     <th></th>
-                    <th><h5 id="total">{{ $output->total_amount }}</h5></th>
+                    <th><h5 id="total">{{ money($output->total_amount)}} (Bs.)</h5></th>
                 </tfoot>
                 <tbody>
 

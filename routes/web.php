@@ -51,8 +51,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('incomes/list-canceled',[IncomeNoteController::class, 'canceled_list'])->name('incomes.list-canceled');
     Route::get('incomes/list-entered',[IncomeNoteController::class, 'entered_list'])->name('incomes.list-entered');
     Route::post('incomes/status/{income}',[IncomeNoteController::class, 'entered_store'])->name('incomes.store-entered');
-    Route::get('outputs/list',[OutputNoteController::class, 'list'])->name('outputs.list');
+    Route::get('outputs/list-processed',[OutputNoteController::class, 'processed_list'])->name('outputs.list-processed');
     Route::get('outputs/list-canceled',[OutputNoteController::class, 'canceled_list'])->name('outputs.list-canceled');
+    Route::get('outputs/list-delivered',[OutputNoteController::class, 'delivered_list'])->name('outputs.list-delivered');
+    Route::post('outputs/status/{output}',[OutputNoteController::class, 'delivered_store'])->name('outputs.store-delivered');
     Route::get('sales/list',[SaleController::class, 'list'])->name('sales.list');
     Route::get('transfers/list',[TransferNoteController::class, 'list'])->name('transfers.list');
     Route::get('transfers/list-canceled',[TransferNoteController::class, 'canceled_list'])->name('transfers.list-canceled');

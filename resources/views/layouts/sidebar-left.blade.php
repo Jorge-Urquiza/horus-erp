@@ -33,7 +33,7 @@
                 @can('inventario.index')
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon dw dw-notepad-1"></span><span class="mtext">inventario</span>
+                        <span class="micon dw dw-notepad-1"></span><span class="mtext">Inventario</span>
                     </a>
                     <ul class="submenu">
                         @can('productos.index')

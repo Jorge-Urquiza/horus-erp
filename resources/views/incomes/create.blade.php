@@ -54,12 +54,24 @@
             }
         });
 
+        document.getElementById('pcantidad').addEventListener('keypress', e => {
+            if(String.fromCharCode(e.which || e.keyCode) == '-'){
+                    e.preventDefault();
+                    return;
+            }
+            if(parseFloat(e.srcElement.value)<0){
+                e.preventDefault();
+                return;
+            }
+        });
+
     });
     var index= 0;
     var total = 0;
     var totalcantidad=0;
     var subtotal=[];
     var cantidad_array=[];
+    
     function existeProducto(producto_id){
         var bandera=false;
         var array_producto = document.getElementsByClassName("producto");
