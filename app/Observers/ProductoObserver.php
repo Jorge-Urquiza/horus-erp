@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Product;
+use App\Models\User;
 use App\Notifications\NewSaleNotification;
 use Illuminate\Support\Facades\Notification;
 
@@ -14,11 +15,16 @@ class ProductoObserver
      * @param  \App\Models\Producto  $producto
      * @return void
      */
-    public function created(BranchProduct $producto)
+    public function created(Product $producto)
     {
-        Notification::route('slack', env('SLACK_HOOK'))
-            ->notify(new NewSaleNotification());
 
+      //  Notification::route('slack', env('SLACK_HOOK'))
+        //    ->notify(new NewSaleNotification());
+        //auth()->user()->notify(new NewSaleNotification());
+        //Notification::send(User::first(), new NewSaleNotification());
+
+        Notification::route('slack', env('SLACK_NOTIFICATION_WEBHOOK'))
+            ->notify(new NewSaleNotification);
     //   \Log::info('asdasdasdasdasd');
     }
 

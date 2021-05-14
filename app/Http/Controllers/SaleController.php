@@ -10,6 +10,7 @@ use App\Http\Requests\sales\StoreSaleRequest;
 use App\ViewModels\Sale\SaleCreateViewModel;
 use App\ViewModels\Sale\SaleViewModel;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
@@ -23,11 +24,13 @@ class SaleController extends Controller
         return view('sales.create', new SaleCreateViewModel);
     }
 
-    public function store(StoreSaleRequest $request)
+    public function store(Request $request)
     {
-        $action = new StoreSaleAction($request->validated());
+        dd($request->all());
 
-        $action->execute();
+        //$action = new StoreSaleAction($request->validated());
+
+        //$action->execute();
 
         flash()->stored();
 

@@ -60,8 +60,4 @@ class User extends Authenticatable
         ]);
     }
 
-    public function routeNotificationForSlack($notification)
-    {
-        return env('SLACK_NOTIFICATION_WEBHOOK');
-    }
 }

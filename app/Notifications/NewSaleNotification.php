@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\SlackMessage;
 
-class NewSaleNotification extends Notification
+class NewSaleNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -35,6 +35,8 @@ class NewSaleNotification extends Notification
 
     public function toSlack($notifiable)
     {
-        return (new SlackMessage)->content('New Venta');
+        return (new SlackMessage)
+        ->success()
+        ->content("New Venta");
     }
 }

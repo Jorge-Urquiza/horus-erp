@@ -14,7 +14,7 @@ class SaleController
 
     public function getProduct($product)
     {
-        $product = Product::with('measurementsUnit', 'brand')->findOrFail($product);
+        $product = Product::with('measurementsUnit', 'brand', 'category')->findOrFail($product);
 
         return response()->json($product);
     }
