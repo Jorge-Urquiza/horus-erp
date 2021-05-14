@@ -19,12 +19,20 @@ use App\Http\Controllers\MeasurementsUnitsController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\TransferNoteController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Storage;
+use App\Notifications\NewSaleNotification;
+use Illuminate\Support\Facades\Notification;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('test', function () {
+    Notification::route('slack',
+    'https://hooks.slack.com/services/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')
+    ->notify(new NewSaleNotification());
+    return "sending";
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
@@ -89,5 +97,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('api/branch-product/{id}', [ApiBranchProductController::class, 'getProductByBranch'])->name('api.branchproduct');
     Route::get('api/branch-product/product/{idproduct}/{idbranch}', [ApiBranchProductController::class, 'getProduct'])->name('api.branchproduct.product');
+
 });
 

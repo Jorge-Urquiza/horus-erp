@@ -87,4 +87,9 @@ class Sale extends Model
         return $suffix . '/100';
     }
 
+    public function remove()
+    {
+        $this->update(['status' => 'Anulado']);
+    }
+
 }
