@@ -5,7 +5,7 @@ namespace App\Http\Requests\products;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProductRequest extends FormRequest
+class EditProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,8 +29,7 @@ class StoreProductRequest extends FormRequest
             'local_code' => ['required', Rule::unique('products','local_code')->ignore($this->product)],
            // 'minimum_stock' => 'required',
            // 'maximum_stock' => 'required|greater_than_field:minimum_stock',
-            'price' => 'required|greater_than_field:cost',
-            'cost' => 'required|greater_than:0',
+            'price' => 'required',
             'gain' => 'required|greater_than:0',
             'supplier_id' => 'required',
             'brand_id' => 'required',
@@ -45,12 +44,10 @@ class StoreProductRequest extends FormRequest
             //'minimum_stock.required' => 'El campo stock minimo es obligatorio',
             //'maximum_stock.required' => 'El campo stock maximo es obligatorio',
             //'maximum_stock.greater_than_field' => 'El stock maximo debe ser mayor al stock minimo',
-            'price.greater_than_field' =>  'El precio debe ser mayor al costo',
-            'cost.greater_than' => 'El costo debe ser mayor a cero',
+            //'price.greater_than_field' =>  'El precio debe ser mayor al costo',
             'gain.greater_than' => 'La ganancia debe ser mayor a cero',
             'price.required' => 'El campo precio es obligatorio',
             'gain.required' => 'El campo ganancia es obligatorio',
-            'cost.required' => 'El campo costo es obligatorio',
             'name.required' => 'El campo nombre es obligatorio',
             'local_code.required' => 'El campo codigo local es obligatorio',
             'local_code.unique' => 'El codigo local ya existe',          

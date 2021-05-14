@@ -61,44 +61,78 @@ class IncomeNoteController extends Controller
     public function store(StoreIncomeRequest $request)
     {
         try {
+
             DB::beginTransaction();
             $income = IncomeNote::registrar($request);
-
             $sucursal = $request->input('branch_office_id');
             $productos = $request->input('producto_id');
             $cantidad = $request->input('cantidad');
-            
+            $costo = $request->input('costo');
+
             for( $i=0; $i < count($productos) ;$i++){
                 
                 IncomeDetail::create([
                     'product_id' => $productos[$i],
                     'quantity' => $cantidad[$i],
+                    'cost' => $costo[$i],
                     'income_note_id' => $income->id,
                 ]);
-
-                $branch_product = BranchsProduct::where([['product_id', $productos[$i]],['branch_office_id',$sucursal]])
-                                   ->first();
-               
-                if(!is_null($branch_product)){
-                   
-                    $branch_product->current_stock = $branch_product->current_stock + ($cantidad[$i] * 1);
-                    $branch_product->update();
-                } else {
-                    $product = Product::find($productos[$i]);
-                    BranchsProduct::create([
-                        'product_id' => $productos[$i],
-                        'branch_office_id' => $sucursal,
-                        'current_stock' => $cantidad[$i],
-                        'minimum_stock' => $product->minimum_stock,
-                        'maximum_stock' => $product->maximum_stock,
-                    ]);
-                }
-                Product::incrementarStock($productos[$i], $cantidad[$i]);
-
             }
+
             DB::commit();
             flash()->stored();
             return redirect()->route('incomes.index');
+
+        } catch (\Exception $th) {
+            DB::rollBack();
+            flash()->error();
+            return redirect()->back();
+        }
+    }
+    public function entered_store(IncomeNote $income)
+    {
+        try {
+            DB::beginTransaction();
+            $detalles = IncomeDetail::where('income_note_id', $income->id)->get();
+            $mensaje_advertencia = '';
+            foreach($detalles as $d){
+                $branch_product = BranchsProduct::where([['product_id', $d->product_id],['branch_office_id',$income->branch_office_id]])
+                                        ->first();
+                $product = Product::find($d->product_id);
+                if(!is_null($branch_product)){
+                    $branch_product->current_stock = $branch_product->current_stock + ($d->quantity * 1);
+                    $branch_product->update();
+
+                    $costo_ponderado_numerador = ($product->total_current_stock * $product->cost * 1) + ($d->quantity * $d->cost * 1);
+                    $costo_ponderado = round( $costo_ponderado_numerador / ($product->total_current_stock + $d->quantity *1) ,2);
+                    $product->cost = $costo_ponderado;
+                    $product->price = round(( ($costo_ponderado * $product->gain * 1) / 100 ) + $costo_ponderado, 2);  
+                    $product->total_current_stock = $product->total_current_stock + ($d->quantity * 1);
+                    $product->update();
+
+                } else {
+                    $branch = BranchsProduct::create([
+                        'product_id' => $d->product_id,
+                        'branch_office_id' => $income->branch_office_id,
+                        'current_stock' => $d->quantity,
+                    ]);
+                    $mensaje_advertencia = "Actualizar los stock minimos y maximos de productos en Sucursal Producto, si se requiere";
+                    $costo_ponderado_numerador = ($product->total_current_stock * $product->cost * 1) + ($d->quantity * $d->cost * 1);
+                    $costo_ponderado = round( $costo_ponderado_numerador / ($product->total_current_stock + $d->quantity *1) ,2);
+                    $product->cost = $costo_ponderado;
+                    $product->price = round(( ($costo_ponderado * $product->gain * 1) / 100 ) + $costo_ponderado, 2); 
+                    $product->total_current_stock = $product->total_current_stock + ($d->quantity * 1);
+                    $product->total_minimum_stock = ( $product->total_minimum_stock + 10 * 1);
+                    $product->total_maximum_stock = ( $product->total_maximum_stock + 100 *1);
+                    $product->update();
+                }
+            }
+            $income->status = 'Ingresado';
+            $income->update();
+            
+            DB::commit();
+            flash()->stored("Productos Ingresados Exitosamente");
+            return redirect()->route('incomes.index')->with('advertencia', $mensaje_advertencia);
 
         } catch (\Exception $th) {
             DB::rollBack();
@@ -151,30 +185,15 @@ class IncomeNoteController extends Controller
     {
         try {
             DB::beginTransaction();
-            $detalles = IncomeDetail::where('income_note_id', $income->id)->get();
-            foreach($detalles as $d){
 
-                $branch_product = BranchsProduct::where([['product_id', $d->product_id],['branch_office_id',$income->branch_office_id]])
-                                        ->first();
-                if(($d->quantity * 1 ) > $branch_product->current_stock)                        
-                {
-                    DB::rollBack();
-                    flash()->error('El stock es menor a la cantidad a anular');
-                    return redirect()->back();
-                      
-                }
-                $branch_product->current_stock = $branch_product->current_stock - ($d->quantity * 1);
-                $branch_product->update();
+            $income->status = 'Anulado';
+            $income->update();
 
-                Product::decrementarStock($d->product_id, $d->quantity);
-                
-            }
-
-            IncomeDetail::remove($income->id);
-            $income->delete();
             flash()->deleted();
             DB::commit();
+
             return redirect()->route('incomes.index');
+
         } catch (\Exception $th) {
             DB::rollBack();
             flash()->error();

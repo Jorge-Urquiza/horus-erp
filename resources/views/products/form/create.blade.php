@@ -110,17 +110,29 @@
                 {!! $errors->first('supplier_id','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-2 col-sm-2">
             <div class="form-group">
                 <label>Costo</label>
-                {{ Form::number('cost', null, ['min' => '0','step' => 'any' ,'class'=> ' form-control'. ( $errors->has('cost') ? ' is-invalid' : '' ), 'required']) }}
+                @if(isset($product))
+                    {{ Form::number('cost', $product->cost, ['id' => 'cost','min' => '0','step' => 'any' ,'class'=> ' form-control'. ( $errors->has('cost') ? ' is-invalid' : '' ), 'required', (isset($product)?'disabled': '')]) }}
+                @else
+                    {{ Form::number('cost', null, ['id' => 'cost','min' => '0','step' => 'any' ,'class'=> ' form-control'. ( $errors->has('cost') ? ' is-invalid' : '' ), 'required', (isset($product)?'disabled': '')]) }}
+                @endif
                 {!! $errors->first('cost','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-2 col-sm-2">
+            <div class="form-group">
+                <label>Ganancia(%)</label>
+                {{ Form::number('gain', null, ['id' =>  'gain','min' => '0', 'max' => '100','step' => 'any' ,'class'=> ' form-control'. ( $errors->has('gain') ? ' is-invalid' : '' ), 'required']) }}
+                {!! $errors->first('gain','<span class="invalid-feedback d-block">:message</span>') !!}
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-2">
             <div class="form-group">
                 <label>Precio</label>
-                {{ Form::number('price', null, ['min' => '0','step' => 'any' ,'class'=> ' form-control'. ( $errors->has('price') ? ' is-invalid' : '' ), 'required']) }}
+                <input type="text" id="price" disabled class="form-control{{$errors->has('price')? ' is-invalid' : ''}}" name="prices_dos" value="{{ isset($product)?$product->price:'' }}">
+                <input type="hidden" id="price_dos" name="price" value="{{ isset($product)?$product->price:'' }}">
                 {!! $errors->first('price','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>
@@ -147,20 +159,29 @@
                 {!! $errors->first('measurements_units_id','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>
-        <div class="col-md-3 col-sm-3">
+        @if(isset($product))
+        <div class="col-md-2 col-sm-2">
             <div class="form-group">
-                <label>Stock Minimo</label>
-                {{ Form::number('minimum_stock', null, ['min' => '0','step' => '1' ,'class'=> ' form-control'. ( $errors->has('minimum_stock') ? ' is-invalid' : '' ), 'required']) }}
-                {!! $errors->first('minimum_stock','<span class="invalid-feedback d-block">:message</span>') !!}
+                <label>Total Stock Actual</label>
+                {{ Form::number('total_current_stock', $product->total_current_stock, ['min' => '0','disabled' => 'true' ,'class'=> ' form-control'. ( $errors->has('total_current_stock') ? ' is-invalid' : '' ), 'required']) }}
+                {!! $errors->first('total_current_stock','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-2 col-sm-2">
             <div class="form-group">
-                <label>Stock Maximo</label>
-                {{ Form::number('maximum_stock', null, ['min' => '0','step' => '1' ,'class'=> ' form-control'. ( $errors->has('maximum_stock') ? ' is-invalid' : '' ), 'required']) }}
-                {!! $errors->first('maximum_stock','<span class="invalid-feedback d-block">:message</span>') !!}
+                <label>Total Stock Minimo</label>
+                {{ Form::number('total_minimum_stock', $product->total_minimum_stock, ['min' => '0','disabled' => 'true' ,'class'=> ' form-control'. ( $errors->has('total_minimum_stock') ? ' is-invalid' : '' ), 'required']) }}
+                {!! $errors->first('total_minimum_stock','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>
+        <div class="col-md-2 col-sm-2">
+            <div class="form-group">
+                <label>Total Stock Maximo</label>                
+                {{ Form::number('total_maximum_stock', $product->total_maximum_stock, ['min' => '0','disabled' => 'true' ,'class'=> ' form-control'. ( $errors->has('total_maximum_stock') ? ' is-invalid' : '' ), 'required']) }}
+                {!! $errors->first('total_maximum_stock','<span class="invalid-feedback d-block">:message</span>') !!}
+            </div>
+        </div>
+        @endif
     </div>
     <div class="row">
 		<div class="col-md-12  col-sm-12">
@@ -180,11 +201,13 @@
         <div>
     </div>
 @push('scripts')
+<script src="{{ asset('templates/src/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
 <script>
 
     var imagenes_b = false;
 
     $(function(){
+
         $("#imagen").change(function () {
             var images = $("#imagen").val();
             if(images != null){
@@ -202,6 +225,54 @@
                 imagenes_b = true;
             }
         });
+
+        var valor_ganancia = 0;
+        const gain = document.getElementById('gain');
+        gain.addEventListener('input', updateValueGain);
+
+        const cost = document.getElementById('cost');
+        cost.addEventListener('input', updateValueCost);
+
+        function updateValueGain(e) {
+            var ganancia = parseFloat(e.srcElement.value.length > 0? e.srcElement.value:0);
+
+            if(parseFloat(ganancia)>=0 && parseFloat(ganancia)<=100)
+            {
+                var costo = ($('#cost').val().length >0 )?$('#cost').val():0;
+                var numerador = ganancia * costo;
+                var calculo = parseFloat((numerador /100) + parseFloat(costo)).toFixed(2);
+                $("#price").val(calculo);
+                $("#price_dos").val(calculo);
+                valor_ganancia = ganancia;
+            } else {
+                $('#gain').val(valor_ganancia);
+            }
+        }
+        gain.addEventListener('keypress', e => {
+            if(String.fromCharCode(e.which || e.keyCode) == '-'){
+                    e.preventDefault();
+                    return;
+            }
+            if(parseFloat(e.srcElement.value)<0){
+                e.preventDefault();
+                return;
+            }
+            if(parseFloat(e.srcElement.value)>100){
+                e.preventDefault();
+                return;
+            }
+        });
+        function updateValueCost(e) {
+           
+            var ganancia = ($('#gain').val().length >0 )?$('#gain').val():0;
+            var costo = parseFloat(e.srcElement.value.length > 0? e.srcElement.value:0);
+            var numerador = costo * ganancia;
+            var calculo = parseFloat( (numerador /100) + costo ).toFixed(2);
+            $("#price").val(calculo);
+            $("#price_dos").val(calculo);
+            
+        }
+
     });
 </script>
 @endpush

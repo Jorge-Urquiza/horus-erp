@@ -58,6 +58,7 @@
                 <p class="mb-0"><span class="font-weight-bold">Hora :</span>{{ Carbon\Carbon::now()->format('H:i:s') }}</p>
                 <p class="mb-0"><span class="font-weight-bold">Pag.: </span><span class="pagenum"></span></p>
                 <p class="mb-0"><span class="font-weight-bold">No.Trans.: </span> {{ sales_number($income->id) }}</p>
+                <p class="mb-0"><span class="font-weight-bold">Estado: </span> {{ $income->status }}</p>
             </div>
         </section>
         <section>
@@ -84,7 +85,7 @@
                     <tr>
                         <th>Detalle</th>
                         <th>Cantidad</th>
-                        <th>P. Unitario Bs.</th>
+                        <th>C. Unitario Bs.</th>
                         <th>Subtotal Bs.</th>
                     </tr>
                 </thead>
@@ -94,8 +95,8 @@
                     <tr>
                         <td class="text-right">{{ $detail->product()->first()->name}}</td>
                         <td class="text-right">{{ $detail->quantity}}</td>
-                        <td class="text-right">{{ $detail->product()->first()->price}}</td>
-                        <td class="text-right">{{ $detail->product()->first()->price * $detail->quantity}}</td>
+                        <td class="text-right">{{ $detail->cost}}</td>
+                        <td class="text-right">{{ $detail->cost * $detail->quantity}}</td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -117,17 +118,19 @@
                     </tr>
                 </tfoot>
             </table>
-            
-            <section class="d-block my-4">
-                <div class="d-inline-block" style="width: 49%;">
-                    <hr style="border: 1px black; ">
+            @if($income->status == 'Ingresado')
+            <section class="d-block my-4" style="padding-top:50px">
+                <div class="d-inline-block align-middle text-center" style="width: 49%;">
+                    <hr style="border: 1px black; width:60%">
+                    <p class="mb-0"><span class="font-weight-bold">RECIBI CONFORME</span></p>
                 </div>
                 
-                <div class="w-50 d-inline-block align-middle text-right">
-                    <hr style="border: 1px black; ">
+                <div class="w-50 d-inline-block align-middle text-center">
+                    <hr style="border: 1px black; width:60%">
+                    <p class="mb-0"><span class="font-weight-bold">ENTREGE CONFORME</span></p>
                 </div>
             </section>
-            
+            @endif
         </div>
     </div>
 </body>

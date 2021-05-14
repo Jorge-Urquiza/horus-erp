@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\DataTables\BranchsProductTable;
 use App\Http\Requests\branchproducts\StoreBranchsProductsRequest;
 use App\Models\BranchsProduct;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BranchProductController extends Controller
 {
@@ -76,14 +78,24 @@ class BranchProductController extends Controller
      */
     public function update(StoreBranchsProductsRequest $request, BranchsProduct $branch_product)
     {
-        
-        $branch_product->fill($request->all());
+        try {
+            DB::beginTransaction();            
+            $product = Product::find($branch_product->product_id);
+            
+            $product->total_minimum_stock = ($product->total_minimum_stock - ($branch_product->minimum_stock * 1)) + $request->minimum_stock;
+            $product->total_maximum_stock = ($product->total_maximum_stock - ($branch_product->maximum_stock * 1)) + $request->maximum_stock;
+            $product->update();
+            $branch_product->fill($request->all());
+            $branch_product->update();
+            flash()->updated();
+            DB::commit();
+            return redirect()->route('branch-products.index');
 
-        $branch_product->save();
-
-        flash()->updated();
-
-        return redirect()->route('branch-products.index');
+        } catch (\Exception $th) {
+            DB::rollBack();
+            flash()->error();
+            return redirect()->back();
+        }
     }
 
     /**

@@ -31,7 +31,7 @@ class ProductSeeder extends Seeder
                 'supplier_id' => 1,
                 'category_id' => 1,
                 'cost' => 120.0,
-                'gain' => 1,
+                'gain' => 10,
                 'price' => 132.0,
             ],
             [
@@ -42,7 +42,7 @@ class ProductSeeder extends Seeder
                 'supplier_id' => 2,
                 'category_id' => 1,
                 'cost' => 210.0,
-                'gain' => 1,
+                'gain' => 10,
                 'price' => 231.0,
             ],
             [
@@ -53,7 +53,7 @@ class ProductSeeder extends Seeder
                 'supplier_id' => 2,
                 'category_id' => 1,
                 'cost' => 100,
-                'gain' => 2,
+                'gain' => 20,
                 'price' => 120.0,
             ],
             [
@@ -64,7 +64,7 @@ class ProductSeeder extends Seeder
                 'supplier_id' => 1,
                 'category_id' => 1,
                 'cost' => 40,
-                'gain' => 1,
+                'gain' => 10,
                 'price' => 44.0,
             ],
             [
@@ -75,7 +75,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 1,
                 'supplier_id' => 2,
                 'cost' => 45,
-                'gain' => 2,
+                'gain' => 20,
                 'price' => 54,
             ],
         ];

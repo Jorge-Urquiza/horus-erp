@@ -26,10 +26,6 @@
                             <a class="dropdown-item" href="{{ url('/incomes/pdf/${row.id}' ) }}" target="_blank"><i class="dw dw-books"></i>Pdf</a>
                             <a class="dropdown-item" href="{{ url('/incomes/download/${row.id}' ) }}"><i class="dw dw-download"></i>Descargar</a>
                             @endcan
-                            @can('incomes.destroy')
-                            <a class="dropdown-item" href="#modal-status" data-toggle="modal" onclick="ingresar_anular(${row.id});" class="btn btn-sm btn-danger">
-                            <i class="dw dw-delete-3"></i>Anular</a>
-                            @endcan
                         </div>
                     </div>
                 `;

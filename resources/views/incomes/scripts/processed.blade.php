@@ -28,10 +28,10 @@
                             @endcan
                             @can('incomes.ingresar')
                             <a class="dropdown-item" href="#modal-status" data-toggle="modal" onclick="ingresar(${row.id});" class="btn btn-sm btn-danger">
-                            <i class="dw dw-delete-3"></i>Ingresar</a>
+                            <i class="dw dw-notepad-1"></i>Ingresar</a>
                             @endcan
                             @can('incomes.destroy')
-                            <a class="dropdown-item" href="#modal-status" data-toggle="modal" onclick="proceso_anular(${row.id});" class="btn btn-sm btn-danger">
+                            <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
                             <i class="dw dw-delete-3"></i>Anular</a>
                             @endcan
                         </div>

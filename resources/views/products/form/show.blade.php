@@ -54,14 +54,20 @@
                 <input class="form-control" disabled value="{{$product->supplier->name}}">
             </div>
         </div>
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-2 col-sm-2">
             <div class="form-group">
                 <label>Costo</label>
-                {{ Form::number('price', $product->costo, ['disabled' => 'true', 'min' => '0','step' => 'any' ,'class'=> ' form-control'. ( $errors->has('costo') ? ' is-invalid' : '' )]) }}
+                {{ Form::number('price', $product->cost, ['disabled' => 'true', 'min' => '0','step' => 'any' ,'class'=> ' form-control'. ( $errors->has('costo') ? ' is-invalid' : '' )]) }}
                 
             </div>
         </div>
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-2 col-sm-2">
+            <div class="form-group">
+                <label>Ganancia (%)</label>
+                {{ Form::number('price', $product->gain, ['disabled' => 'true', 'min' => '0','step' => 'any' ,'class'=> ' form-control'. ( $errors->has('costo') ? ' is-invalid' : '' )]) }}
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-2">
             <div class="form-group">
                 <label>Precio</label>
                 {{ Form::number('price', $product->price, ['disabled' => 'true', 'min' => '0','step' => 'any' ,'class'=> ' form-control'. ( $errors->has('price') ? ' is-invalid' : '' )]) }}
@@ -76,18 +82,25 @@
                 <input class="form-control" disabled value="{{$product->measurementsUnit->name}}">
             </div>
         </div>
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-2 col-sm-2">
             <div class="form-group">
-                <label>Stock Minimo</label>
-                {{ Form::number('minimum_stock', $product->minimum_stock, ['min' => '0','disabled' => 'true' ,'class'=> ' form-control'. ( $errors->has('minimum_stock') ? ' is-invalid' : '' ), 'required']) }}
-                {!! $errors->first('minimum_stock','<span class="invalid-feedback d-block">:message</span>') !!}
+                <label>Total Stock Actual</label>
+                {{ Form::number('total_current_stock', $product->total_current_stock, ['min' => '0','disabled' => 'true' ,'class'=> ' form-control'. ( $errors->has('total_current_stock') ? ' is-invalid' : '' ), 'required']) }}
+                {!! $errors->first('total_current_stock','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-2 col-sm-2">
             <div class="form-group">
-                <label>Stock Maximo</label>
-                {{ Form::number('maximum_stock', $product->maximum_stock, ['min' => '0','disabled' => 'true' ,'class'=> ' form-control'. ( $errors->has('maximum_stock') ? ' is-invalid' : '' ), 'required']) }}
-                {!! $errors->first('maximum_stock','<span class="invalid-feedback d-block">:message</span>') !!}
+                <label>Total Stock Minimo</label>
+                {{ Form::number('total_minimum_stock', $product->total_minimum_stock, ['min' => '0','disabled' => 'true' ,'class'=> ' form-control'. ( $errors->has('total_minimum_stock') ? ' is-invalid' : '' ), 'required']) }}
+                {!! $errors->first('total_minimum_stock','<span class="invalid-feedback d-block">:message</span>') !!}
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <div class="form-group">
+                <label>Total Stock Maximo</label>
+                {{ Form::number('total_maximum_stock', $product->total_maximum_stock, ['min' => '0','disabled' => 'true' ,'class'=> ' form-control'. ( $errors->has('total_maximum_stock') ? ' is-invalid' : '' ), 'required']) }}
+                {!! $errors->first('total_maximum_stock','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>
     </div>

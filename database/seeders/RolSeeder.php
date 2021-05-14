@@ -114,6 +114,8 @@ class RolSeeder extends Seeder
         ->syncRoles([$admin, $encargado]);
         Permission::create(['name' => 'incomes.pdf', 'description' =>  'Pdf nota de ingreso'])
         ->syncRoles([$admin, $encargado]);
+        Permission::create(['name' => 'incomes.ingresar', 'description' =>  'Actualizar estado nota de ingreso'])
+        ->syncRoles([$admin, $encargado]);
 
         //Nota Salida
         Permission::create(['name' => 'outputs.index', 'description' => 'Ver lista de nota de salida'])
@@ -124,6 +126,8 @@ class RolSeeder extends Seeder
         ->syncRoles([$admin, $encargado]);
         Permission::create(['name' => 'outputs.pdf', 'description' =>  'Pdf nota de salida'])
         ->syncRoles([$admin, $encargado]);
+        Permission::create(['name' => 'outputs.entregar', 'description' =>  'Actualizar estado nota de salida'])
+        ->syncRoles([$admin, $encargado]);
 
         //Nota Traspaso
         Permission::create(['name' => 'transfers.index', 'description' => 'Ver lista de nota de traspaso'])
@@ -133,6 +137,8 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'transfers.create', 'description' =>  'Crear nota de traspaso'])
         ->syncRoles([$admin, $encargado]);
         Permission::create(['name' => 'transfers.pdf', 'description' =>  'Pdf nota de traspaso'])
+        ->syncRoles([$admin, $encargado]);
+        Permission::create(['name' => 'transfers.entregar', 'description' =>  'Actualizar estado nota de traspaso'])
         ->syncRoles([$admin, $encargado]);
 
         //---VENTA---//

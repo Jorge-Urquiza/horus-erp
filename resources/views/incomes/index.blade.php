@@ -18,6 +18,18 @@
 @endsection
 
 @section('content')
+
+    @if ($message = Session::get('advertencia'))
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="alert alert-warning alert-block" role="alert">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+        </div>
+    </div>
+    @endif
+
 <div class="clearfix mb-2">
         <div class="pull-left">
             <h4 class="text-blue h4">Lista de Nota Ingreso</h4>
@@ -56,10 +68,17 @@
             @include('incomes.tables.canceled')
         </div>
     </div>
-@component('elements.modal', ['action' => route('incomes.destroy', '*')])
-    ¿Está seguro que desea anular la nota de ingreso?
+@component('incomes.modals.processed-canceled', ['action' => route('incomes.destroy', '*')])
+    ¿Está seguro que desea anular la nota de ingreso? 
+    <p>Una vez anulado, no se podrá recuperar la información llenada</p>
 @endcomponent
+@component('incomes.modals.processed-entered', ['action' => route('incomes.store-entered', '*')])
+    ¿Está seguro que desea confirmar el ingreso de los productos? 
+    <p>Una vez ingresado, no se podrá anular la nota de ingreso</p>
+@endcomponent
+
 @endsection
+
 @push('scripts')
     @include('layouts.datatable')
     @include('incomes.scripts.processed')

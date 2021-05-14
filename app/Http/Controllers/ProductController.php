@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ProductsTable;
+use App\Http\Requests\products\EditProductRequest;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Supplier;
@@ -93,7 +94,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreProductRequest $request, Product $product)
+    public function update(EditProductRequest $request, Product $product)
     {
         
         if($request->hasFile('imagen'))
