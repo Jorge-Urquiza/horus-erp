@@ -33,7 +33,11 @@
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item">
             <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#activo" role="tab"
-            aria-controls="pills-home" aria-selected="true">Activos</a>
+            aria-controls="pills-home" aria-selected="true">En proceso</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#finalizado" role="tab"
+            aria-controls="pills-profile" aria-selected="false">Finalizado</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#anulado" role="tab"
@@ -43,22 +47,30 @@
     </div>
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="activo" role="tabpanel" aria-labelledby="pills-home-tab">
-            @include('transfers.tables.active')
+            @include('transfers.tables.processed')
+        </div>
+        <div class="tab-pane fade" id="finalizado" role="tabpanel" aria-labelledby="pills-profile-tab">
+            @include('transfers.tables.finalized')
         </div>
         <div class="tab-pane fade" id="anulado" role="tabpanel" aria-labelledby="pills-profile-tab">
             @include('transfers.tables.canceled')
         </div>
     </div>
     
-    @component('elements.modal', ['action' => route('transfers.destroy', '*')])
+    @component('transfers.modals.processed-canceled', ['action' => route('transfers.destroy', '*')])
         ¿Está seguro que desea anular la nota de traspaso?
+        <p>Una vez anulado, no se podrá recuperar la información llenada</p>
+    @endcomponent
+    @component('transfers.modals.processed-finalized', ['action' => route('transfers.store-finalized', '*')])
+        ¿Está seguro que desea finalizar el traspaso de los productos? 
+        <p>Una vez finalizado, no se podrá anular la nota de traspaso</p>
     @endcomponent
 @endsection
 
 @push('scripts')
 
 @include('layouts.datatable')
-@include('transfers.scripts.active')
+@include('transfers.scripts.processed')
 @include('transfers.scripts.canceled')  
-        
+@include('transfers.scripts.finalized')         
 @endpush

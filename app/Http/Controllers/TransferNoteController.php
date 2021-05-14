@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\TransferNoteCanceledTable;
+use App\DataTables\TransferNoteFinalizedTable;
 use App\DataTables\TransferNoteProcessedTable;
 use App\Http\Requests\transfers\StoreTransferRequest;
 use App\Models\BranchOffice;
@@ -118,6 +119,70 @@ class TransferNoteController extends Controller
         }
     }
 
+
+    public function finalized_store(TransferNote $transfer)
+    {
+        try {
+            DB::beginTransaction();
+            
+            /*$transfer = TransferNote::registrar($request);
+            
+            $sucursal_origen = $request->input('branch_office_origin_id');
+            $sucursal_destino = $request->input('branch_office_destiny_id');
+            $productos = $request->input('producto_id');
+            $cantidad = $request->input('cantidad');
+            
+            for( $i=0; $i < count($productos) ;$i++){
+                
+                TransferDetail::create([
+                    'product_id' => $productos[$i],
+                    'quantity' => $cantidad[$i],
+                    'transfer_note_id' => $transfer->id,
+                ]);
+                // SALIDA DE PRODUCTO
+                
+                $branch_product = BranchsProduct::where([['product_id', $productos[$i]],['branch_office_id',$sucursal_origen]])
+                                   ->first();
+               
+                $branch_product->current_stock = $branch_product->current_stock - ($cantidad[$i] * 1);
+                $branch_product->update();
+               
+                Product::decrementarStock($productos[$i],$cantidad[$i]);
+                
+                // ENTRADA DE PRODUCTO
+                $branch_product = BranchsProduct::where([['product_id', $productos[$i]],['branch_office_id',$sucursal_destino]])
+                                   ->first();
+               
+                if(!is_null($branch_product)){
+                   
+                    $branch_product->current_stock = $branch_product->current_stock + ($cantidad[$i] * 1);
+                    $branch_product->update();
+                } else {
+                    $product = Product::find($productos[$i]);
+                    BranchsProduct::create([
+                        'product_id' => $productos[$i],
+                        'branch_office_id' => $sucursal_destino,
+                        'current_stock' => $cantidad[$i],
+                        'minimum_stock' => $product->minimum_stock,
+                        'maximum_stock' => $product->maximum_stock,
+                    ]);
+                }
+                Product::incrementarStock($productos[$i], $cantidad[$i]);
+
+
+
+            }*/
+            DB::commit();
+            flash()->stored();
+            return redirect()->route('transfers.index');
+
+        } catch (\Exception $th) {
+            DB::rollBack();
+            flash()->error();
+            return redirect()->back();
+        }
+    }
+
     /**
      * Display the specified resource.
      *
@@ -204,9 +269,9 @@ class TransferNoteController extends Controller
         return TransferNoteProcessedTable::generate();
     }
 
-    public function delivered_list()
+    public function finalized_list()
     {
-       
+        return TransferNoteFinalizedTable::generate();
     }
 
     public function canceled_list()

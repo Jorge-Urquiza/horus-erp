@@ -1,9 +1,9 @@
 <script>
-    $('#tables').DataTable({
+    $('#table_p').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
         },
-        "ajax": "{{route('transfers.list')}}",
+        "ajax": "{{route('transfers.list-processed')}}",
         "columns": [
             { data: 'id' },
             { data: 'date' },

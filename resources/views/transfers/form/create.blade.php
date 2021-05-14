@@ -65,18 +65,25 @@
     </div>
     <div class="col-lg-2 col-sm-2  col-md-2  col-xs-12">
         <div class="form-group">
-                <label for="">Precio</label>
+                <label for="">Costo Salida (Bs.)</label>
+                <input id="pcompra_salida"  type="number" name="precio_salida" class="form-control" placeholder=""
+                 readonly >
+        </div>
+    </div>
+    <div class="col-lg-2 col-sm-2  col-md-2  col-xs-12">
+        <div class="form-group">
+                <label for="">Costo Entrada (Bs.)</label>
                 <input id="pcompra"  type="number" name="precio" class="form-control" placeholder=""
                  readonly >
         </div>
     </div>
-    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+    <div class="col-lg-1 col-sm-1 col-md-1 col-xs-12">
         <div class="form-group">
                 <label for="">Stock</label>
                 <input type="number"  class="form-control" placeholder="" id="pstock" min="0" readonly>
         </div>
     </div>
-    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+    <div class="col-lg-1 col-sm-1 col-md-1 col-xs-12">
         <div class="form-group">
                 <label for="">Cantidad</label>
                 <input type="number"  class="form-control" placeholder="" id="pcantidad" min="0">
@@ -95,7 +102,8 @@
                 <thead style="background-color:#030eaaee">
                     <th style="color:#FFFFFF";>Opciones</th>
                     <th style="color:#FFFFFF";>Producto</th>
-                    <th style="color:#FFFFFF";>Precio</th>
+                    <th style="color:#FFFFFF";>Costo Salida</th>
+                    <th style="color:#FFFFFF";>Costo Entrada</th>
                     <th style="color:#FFFFFF";>Cantidad</th>
                     <th style="color:#FFFFFF";>Subtotal</th>
                 </thead>

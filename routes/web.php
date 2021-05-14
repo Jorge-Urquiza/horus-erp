@@ -21,18 +21,14 @@ use App\Http\Controllers\TransferNoteController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Notifications\NewSaleNotification;
+use App\Notifications\StockNotification;
 use Illuminate\Support\Facades\Notification;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test', function () {
-    Notification::route('slack',
-    'https://hooks.slack.com/services/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')
-    ->notify(new NewSaleNotification());
-    return "sending";
-});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
@@ -64,8 +60,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('outputs/list-delivered',[OutputNoteController::class, 'delivered_list'])->name('outputs.list-delivered');
     Route::post('outputs/status/{output}',[OutputNoteController::class, 'delivered_store'])->name('outputs.store-delivered');
     Route::get('sales/list',[SaleController::class, 'list'])->name('sales.list');
-    Route::get('transfers/list',[TransferNoteController::class, 'list'])->name('transfers.list');
+    Route::get('transfers/list-processed',[TransferNoteController::class, 'list_processed'])->name('transfers.list-processed');
     Route::get('transfers/list-canceled',[TransferNoteController::class, 'canceled_list'])->name('transfers.list-canceled');
+    Route::get('transfers/list-finalized',[TransferNoteController::class, 'finalized_list'])->name('transfers.list-finalized');
+    Route::post('transfers/status/{transfer}',[TransferNoteController::class, 'finalized_store'])->name('transfers.store-finalized');
     Route::get('branch-products/list',[BranchProductController::class, 'list'])->name('branch-products.list');
     Route::get('pdf/{sale}',[SaleController::class, 'pdf']);
     Route::get('download/{sale}',[SaleController::class, 'download']);
