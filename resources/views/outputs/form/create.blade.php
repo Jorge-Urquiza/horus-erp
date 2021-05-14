@@ -2,6 +2,7 @@
     <div class="col-md-6 col-sm-6">
         <div class="form-group">
             <label>Sucursal</label>
+            @if(auth()->user()->is_admin)
             <select class="custom-select2 form-control" name="branch_office_id" style="width: 100%; height: 38px;" required
                 onchange="listarProducto();" id="branch_office">
                
@@ -10,6 +11,10 @@
                 @endforeach
                 
             </select>
+            @else            
+            <input class="form-control" disabled value="{{ auth()->user()->branchOffice->name }}">
+            <input class="form-control" type="hidden" value="{{ auth()->user()->branch_office_id }}"  name="branch_office_id" id="branch_office_s">
+            @endif
             {!! $errors->first('branch_office_id','<span class="invalid-feedback d-block">:message</span>') !!}
         </div>
     </div>
@@ -94,6 +99,15 @@
             </table>
             <input id="total_quantity"  type="hidden" name="total_quantity" class="form-control">
             <input id="total_amount"  type="hidden" name="total_amount" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12  col-sm-12">
+            <div class="form-group">
+                <label>Nota</label>
+                <textarea class="form-control" name="note" style="height: 100px">@if(isset($output)){{$output->note}}@endif</textarea>
+                {!! $errors->first('note','<span class="invalid-feedback d-block">:message</span>') !!}
+            </div>
         </div>
     </div>
 

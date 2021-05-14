@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\BranchProductController as ApiBranchProductControll
 use App\Http\Controllers\AssignUserBranchController;
 use App\Http\Controllers\BinnacleController;
 use App\Http\Controllers\BranchOfficeController;
+use App\Http\Controllers\BranchProductController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
@@ -54,10 +55,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('units/list',[MeasurementsUnitsController::class, 'list'])->name('units.list');
     Route::get('products/list',[ProductController::class, 'list'])->name('products.list');
     Route::get('roles/list',[RolController::class, 'list'])->name('roles.list');
-    Route::get('incomes/list',[IncomeNoteController::class, 'list'])->name('incomes.list');
+    Route::get('incomes/list-processed',[IncomeNoteController::class, 'processed_list'])->name('incomes.list-processed');
+    Route::get('incomes/list-canceled',[IncomeNoteController::class, 'canceled_list'])->name('incomes.list-canceled');
+    Route::get('incomes/list-entered',[IncomeNoteController::class, 'entered_list'])->name('incomes.list-entered');
+    Route::post('incomes/status/{income}',[IncomeNoteController::class, 'entered_store'])->name('incomes.store-entered');
     Route::get('outputs/list',[OutputNoteController::class, 'list'])->name('outputs.list');
+    Route::get('outputs/list-canceled',[OutputNoteController::class, 'canceled_list'])->name('outputs.list-canceled');
     Route::get('sales/list',[SaleController::class, 'list'])->name('sales.list');
     Route::get('transfers/list',[TransferNoteController::class, 'list'])->name('transfers.list');
+    Route::get('transfers/list-canceled',[TransferNoteController::class, 'canceled_list'])->name('transfers.list-canceled');
+    Route::get('branch-products/list',[BranchProductController::class, 'list'])->name('branch-products.list');
     Route::get('pdf/{sale}',[SaleController::class, 'pdf']);
     Route::get('download/{sale}',[SaleController::class, 'download']);
     Route::get('incomes/pdf/{income}',[IncomeNoteController::class, 'pdf']);
@@ -80,6 +87,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('incomes', IncomeNoteController::class);
     Route::resource('outputs', OutputNoteController::class);
     Route::resource('transfers', TransferNoteController::class);
+    Route::resource('branch-products', BranchProductController::class);
 
     //api
     Route::get('api/product/{product}', [ApiSaleController::class, 'getProduct'])->name('api.product');

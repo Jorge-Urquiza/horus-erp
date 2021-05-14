@@ -23,8 +23,10 @@
             <h4 class="text-blue h4">Lista de Nota Salida</h4>
         </div>
         <div class="pull-right">
+            @can('outputs.create')
             <a href="{{ route('outputs.create') }}" class="btn btn-primary btn-sm"
-            role="button"><i class="fa fa-plus"></i> Nueva Nota Salida</a>
+            role="button"><i class="fa fa-plus"></i> Nueva Nota de Salida</a>
+            @endcan
         </div>
     </div>
     <div class="row">
@@ -75,10 +77,14 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                 <a class="dropdown-item" href="{{ url('/outputs/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver</a>
+                                @can('outputs.pdf')
                                 <a class="dropdown-item" href="{{ url('/outputs/pdf/${row.id}' ) }}" target="_blank"><i class="dw dw-books"></i>Pdf</a>
                                 <a class="dropdown-item" href="{{ url('/outputs/download/${row.id}' ) }}"><i class="dw dw-download"></i>Descargar</a>
+                                @endcan
+                                @can('outputs.destroy')
                                 <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
                                 <i class="dw dw-delete-3"></i>Anular</a>
+                                @endcan
                             </div>
                         </div>
                     `;

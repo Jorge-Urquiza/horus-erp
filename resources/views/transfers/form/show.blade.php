@@ -69,4 +69,13 @@
             </table>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12  col-sm-12">
+            <div class="form-group">
+                <label>Nota</label>
+                <textarea class="form-control" name="note" style="height: 100px" disabled>@if(isset($transfer)){{$transfer->note}}@endif</textarea>
+                {!! $errors->first('note','<span class="invalid-feedback d-block">:message</span>') !!}
+            </div>
+        </div>
+    </div>
 

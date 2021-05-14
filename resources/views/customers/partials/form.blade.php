@@ -9,9 +9,12 @@
         {{ Form::text('last_name', null, ['class'=> ' form-control'. ( $errors->has('last_name') ? ' is-invalid' : '' )]) }}
         {!! $errors->first('last_name','<span class="invalid-feedback d-block">:message</span>') !!}
     </div>
+<<<<<<< HEAD
 
 </div>
 <div class="form-group row">
+=======
+>>>>>>> ddbc27a4441a8b25a71dbde3c88055c38a16218a
     <div class="col-12 col-lg-6">
         {{ Form::label('telephone', 'Celular:') }}
         {{ Form::text('telephone', null, ['class'=> ' form-control']) }}

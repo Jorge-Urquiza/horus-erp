@@ -9,7 +9,7 @@
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/dashboard')}}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('customers.index') }}">Clientes</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Lista</li>
                 </ol>
@@ -24,8 +24,10 @@
         <h4 class="text-blue h4">Lista de Clientes</h4>
     </div>
     <div class="pull-right mb-3">
+        @can('customers.create')
         <a href="{{ route('customers.create') }}" class="btn btn-primary btn-sm"
         role="button"><i class="fa fa-plus"></i> Nuevo Cliente</a>
+        @endcan
     </div>
 </div>
 
@@ -66,12 +68,16 @@
             render: function (data, type, row) {
                 return `
                     <div class="my-2">
+                        @can('customers.edit')
                         <a href="{{ url('/customers/${row.id}/edit') }}" class="btn btn-primary btn-sm">
                             <i class="fa fa-pencil"></i> Editar
                         </a>
+                        @endcan
+                        @can('customers.destroy')
                         <a href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
                             <i class="fa fa-trash"></i> Eliminar
                         </a>
+                        @endcan
                     </div>
                 `;
             }

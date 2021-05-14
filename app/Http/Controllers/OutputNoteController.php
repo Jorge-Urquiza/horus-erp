@@ -18,6 +18,13 @@ use Illuminate\Support\Facades\DB;
 
 class OutputNoteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:outputs.create')->only(['create']);
+        $this->middleware('permission:outputs.index')->only(['index','show']);
+        $this->middleware('permission:outputs.destroy')->only(['destroy']);
+        $this->middleware('permission:outputs.pdf')->only(['pdf','download']);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -11,6 +11,14 @@ use App\Http\Requests\suppliers\StoreSupplierRequest;
 
 class SupplierController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:suppliers.create')->only(['create']);
+        $this->middleware('permission:suppliers.index')->only(['index','show']);
+        $this->middleware('permission:suppliers.destroy')->only(['destroy']);
+        $this->middleware('permission:suppliers.edit')->only(['edit']);
+    }
+
     /**
      * Display a listing of the resource.
      *

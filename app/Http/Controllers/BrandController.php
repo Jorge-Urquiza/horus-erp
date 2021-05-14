@@ -15,6 +15,10 @@ class BrandController extends Controller
     public function __construct(MarcaRepository $marcaRepository)
     {
         $this->marcaRepository = $marcaRepository;
+        $this->middleware('permission:brands.create')->only(['create']);
+        $this->middleware('permission:brands.index')->only(['index','show']);
+        $this->middleware('permission:brands.destroy')->only(['destroy']);
+        $this->middleware('permission:brands.edit')->only(['edit']);
     }
 
     public function index()

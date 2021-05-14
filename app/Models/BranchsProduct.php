@@ -12,4 +12,9 @@ class BranchsProduct extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+    public function branch_office()
+    {
+        return $this->belongsTo(BranchOffice::class, 'branch_office_id');
+    }
 }

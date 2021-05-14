@@ -37,7 +37,7 @@
             <table id="detalle" class="table table-striped table-bordered table-condensed table-hover">
                 <thead style="background-color:#030eaaee">
                     <th style="color:#FFFFFF";>Producto</th>
-                    <th style="color:#FFFFFF";>Precio</th>
+                    <th style="color:#FFFFFF";>Costo Unitario</th>
                     <th style="color:#FFFFFF";>Cantidad</th>
                     <th style="color:#FFFFFF";>Subtotal</th>
                 </thead>
@@ -45,9 +45,9 @@
                     @foreach($income->incomeDetails as $d)
                         <tr>
                             <td>{{ $d->product->name }}</td>
-                            <td>{{ $d->product->price }}</td>
+                            <td>{{ $d->cost }}</td>
                             <td>{{ $d->quantity }}</td>
-                            <td>round( {{ $d->quantity * $d->product->price * 1 }}, 2) </td>
+                            <td>{{ round($d->quantity * $d->cost * 1, 2) }} </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -55,12 +55,21 @@
                     <th>TOTAL</th>
                     <th></th>
                     <th></th>
-                    <th><h5 id="total">{{ $income->total_amount }}</h5></th>
+                    <th><h5 id="total">{{ money($income->total_amount)}} (Bs.)</h5></th>
                 </tfoot>
                 <tbody>
 
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12  col-sm-12">
+            <div class="form-group">
+                <label>Nota</label>
+                <textarea class="form-control" name="note" style="height: 100px" disabled>@if(isset($income)){{$income->note}}@endif</textarea>
+                {!! $errors->first('note','<span class="invalid-feedback d-block">:message</span>') !!}
+            </div>
         </div>
     </div>
 

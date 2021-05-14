@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ProductsTable;
+use App\Http\Requests\products\EditProductRequest;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Supplier;
@@ -12,6 +13,14 @@ use App\Http\Requests\products\StoreProductRequest;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:productos.create')->only(['create']);
+        $this->middleware('permission:productos.index')->only(['index','show']);
+        $this->middleware('permission:productos.destroy')->only(['destroy']);
+        $this->middleware('permission:productos.edit')->only(['edit']);
+    }
+
     public function index()
     {
         return view('products.index');
@@ -85,7 +94,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreProductRequest $request, Product $product)
+    public function update(EditProductRequest $request, Product $product)
     {
         
         if($request->hasFile('imagen'))
@@ -98,7 +107,7 @@ class ProductController extends Controller
 
         $product->fill($request->all());
 
-        $product->save();
+        $product->update();
 
         flash()->updated();
 

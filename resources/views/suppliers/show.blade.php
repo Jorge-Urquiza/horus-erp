@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-md-6 col-sm-12">
         <div class="title">
-            <h4>Crear nuevo proveedor</h4>
+            <h4>Ver proveedor</h4>
         </div>
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
@@ -19,6 +19,7 @@
             <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
         </a>
     </div>
+</div>
 @endsection
 @section('content')
 

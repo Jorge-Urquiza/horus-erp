@@ -4,13 +4,13 @@
 <div class="row">
     <div class="col-md-6 col-sm-12">
         <div class="title">
-            <h4>Crear Nota Salida</h4>
+            <h4>Registrar Nota de Salida</h4>
         </div>
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('outputs.index') }}">Nota Salida</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Crear Nota Salida</li>
+                <li class="breadcrumb-item"><a href="{{ route('outputs.index') }}">Nota de Salida</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Registrar Nota de Salida</li>
             </ol>
         </nav>
     </div>
@@ -19,6 +19,7 @@
             <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
         </a>
     </div>
+</div>
 @endsection
 @section('content')
 
@@ -41,10 +42,10 @@
         $( "#btn_add" ).click(function() {
             agregar();
         });
-        if($('#branch_office').length > 0) // PARA CUANDO EL USUARIO SEA VENDEDOR
-        {
+        //if($('#branch_office').length > 0) // PARA CUANDO EL USUARIO SEA VENDEDOR
+       // {
             listarProducto();
-        }
+       // }
 
     });
 
@@ -54,9 +55,11 @@
     var subtotal=[];
     var cantidad_array=[];
     var branch_id=null;
-
+    var user = {!! auth()->user()->toJson() !!};
+   
     function listarProducto(){
-        branch_office_id = $("#branch_office option:selected").val();
+        branch_office_id = (user.is_admin)?$("#branch_office option:selected").val():$("#branch_office_s").val();
+       
         if(branch_id == null || branch_id == branch_office_id || subtotal.length == 0)
         { //EN CASO DE Q SEA LA PRIMERA VEZ,  SEAN IGUALES LOS ID, EN CASO DE QUE NO TENGA NADA EN LA TABLA
             branch_id = branch_office_id;
@@ -158,8 +161,8 @@
 
                 if(!pasaStock(product_id, stock, cantidad))
                 {   
-                    subtotal[index] =  (cantidad*compra);
-                    total= total + subtotal[index];
+                    subtotal[index] =  (cantidad*compra).toFixed(2);
+                    total= total + parseFloat(subtotal[index]);
                     cantidad_array[index] = (cantidad*1);
                     totalcantidad = totalcantidad + (cantidad * 1);
                     var fila=`<tr class = "selected" id="fila${index}">
@@ -235,14 +238,14 @@
         total = total - subtotal[index];
         totalcantidad =  totalcantidad - cantidad_array[index];
         $("#fila" + index).remove();
-        $('#total').html(total+ " Bs.");
+        $('#total').html((total).toFixed(2) + " Bs.");
         $("#total_quantity").val(totalcantidad);
         $("#total_amount").val(total);
         // para escodner los botones si se borro todo el detalle
         evaluar();
     }
     function completarProducto(id) {
-        branch_office_id = $("#branch_office option:selected").val();
+        branch_office_id = (user.is_admin)?$("#branch_office option:selected").val():$("#branch_office_s").val();
         var url = "{{ route('api.branchproduct.product',['idproduct'=> ':id', 'idbranch' => ':idbr']) }}";
         url = url.replace(':id', id);
         url = url.replace(':idbr', branch_office_id);

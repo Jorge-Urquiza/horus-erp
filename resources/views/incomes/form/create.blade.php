@@ -2,6 +2,7 @@
     <div class="col-md-6 col-sm-6">
         <div class="form-group">
             <label>Sucursal</label>
+            @if(auth()->user()->is_admin)
             <select class="custom-select2 form-control" name="branch_office_id" style="width: 100%; height: 38px;" required>
                
                 @foreach($branch_office as $b)
@@ -9,6 +10,10 @@
                 @endforeach
                 
             </select>
+            @else            
+            <input class="form-control" disabled value="{{ auth()->user()->branchOffice->name }}">
+            <input class="form-control" type="hidden" value="{{ auth()->user()->branch_office_id }}"  name="branch_office_id">
+            @endif
             {!! $errors->first('branch_office_id','<span class="invalid-feedback d-block">:message</span>') !!}
         </div>
     </div>
@@ -19,6 +24,7 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-12  col-sm-12">
         <div class="card shadow">
@@ -44,9 +50,8 @@
     </div>
     <div class="col-lg-3 col-sm-3  col-md-3  col-xs-12">
         <div class="form-group">
-                <label for="">Precio</label>
-                <input id="pcompra"  type="number" name="precio" class="form-control" placeholder=""
-                 readonly >
+                <label for="">Costo Unitario (Bs.)</label>
+                <input id="pcompra"  type="number" name="precio" class="form-control" placeholder="" step="any" min="0">
         </div>
     </div>
     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
@@ -63,15 +68,18 @@
     </div>
 </div>
     <div class="row">
-        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-            <table id="detalle" class="table table-striped table-bordered table-condensed table-hover">
-                <thead style="background-color:#030eaaee">
-                    <th style="color:#FFFFFF";>Opciones</th>
-                    <th style="color:#FFFFFF";>Producto</th>
-                    <th style="color:#FFFFFF";>Precio</th>
-                    <th style="color:#FFFFFF";>Cantidad</th>
-                    <th style="color:#FFFFFF";>Subtotal</th>
+        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 table-container">
+            <table id="detalle" class="table table-striped table-bordered table-condensed table-hover scroll">
+                <thead style="background-color:#030eaaee;" id="cabeza">
+                    <th style="color:#FFFFFF;">Opciones</th>
+                    <th style="color:#FFFFFF;">Producto</th>
+                    <th style="color:#FFFFFF;">Costo Unitario</th>
+                    <th style="color:#FFFFFF;">Cantidad</th>
+                    <th style="color:#FFFFFF;">Subtotal</th>
                 </thead>
+                <tbody id="body">
+
+                </tbody>
                 <tfoot>
                     <th>TOTAL</th>
                     <th></th>
@@ -79,15 +87,21 @@
                     <th></th>
                     <th><h5 id="total">0.00 (Bs.)</h5></th>
                 </tfoot>
-                <tbody>
-
-                </tbody>
+                
             </table>
             <input id="total_quantity"  type="hidden" name="total_quantity" class="form-control">
             <input id="total_amount"  type="hidden" name="total_amount" class="form-control">
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-12  col-sm-12">
+            <div class="form-group">
+                <label>Nota</label>
+                <textarea class="form-control" name="note" style="height: 100px">@if(isset($income)){{$income->note}}@endif</textarea>
+                {!! $errors->first('note','<span class="invalid-feedback d-block">:message</span>') !!}
+            </div>
+        </div>
+    </div>
 <div class="row">
     <div class="col-md-12  col-sm-12 mt-3">
         <div class="col text-right">

@@ -25,6 +25,8 @@ class CreateOutputNotesTable extends Migration
             $table->float('total_amount',12,2)->default(0);
             $table->date('date');
             $table->integer('total_quantity');
+            $table->text('note')->nullable();
+            $table->enum('status',['En proceso','Entregado','Anulado'])->default('En proceso');
             $table->softDeletes();
             $table->timestamps();
         });
