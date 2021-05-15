@@ -60,7 +60,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('outputs/list-delivered',[OutputNoteController::class, 'delivered_list'])->name('outputs.list-delivered');
     Route::post('outputs/status/{output}',[OutputNoteController::class, 'delivered_store'])->name('outputs.store-delivered');
     Route::get('sales/list',[SaleController::class, 'list'])->name('sales.list');
-    Route::get('transfers/list-processed',[TransferNoteController::class, 'list_processed'])->name('transfers.list-processed');
+    Route::get('transfers/list-processed',[TransferNoteController::class, 'processed_list'])->name('transfers.list-processed');
     Route::get('transfers/list-canceled',[TransferNoteController::class, 'canceled_list'])->name('transfers.list-canceled');
     Route::get('transfers/list-finalized',[TransferNoteController::class, 'finalized_list'])->name('transfers.list-finalized');
     Route::post('transfers/status/{transfer}',[TransferNoteController::class, 'finalized_store'])->name('transfers.store-finalized');

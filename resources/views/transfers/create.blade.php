@@ -15,7 +15,7 @@
         </nav>
     </div>
     <div class="col text-right">
-        <a href="{{ route('transfers.index') }}" class="btn btn-primary btn-sm">
+        <a href="{{ route('transfers.index') }}" class="btn btn-outline-primary btn-sm">
             <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
         </a>
     </div>
@@ -71,6 +71,7 @@
     var total = 0;
     var totalcantidad=0;
     var subtotal=[];
+    var subtotal_entrada=[];
     var cantidad_array=[];
     var branch_id=null;
     var branch_id_destiny = null;
@@ -239,6 +240,7 @@
                 if( !existeProducto(product_id))
                 {   
                     subtotal[index] =  (cantidad*compra).toFixed(2);
+                    subtotal_entrada[index] =  (cantidad*compra).toFixed(2);
                     total= total + parseFloat(subtotal[index]);
                     cantidad_array[index] = (cantidad*1);
                     totalcantidad = totalcantidad + (cantidad * 1);
@@ -248,12 +250,16 @@
                         </button></td>
                         <td><input type="hidden" class="form-control producto" name="producto_id[]" value="${product_id}">${producto}</td>
                         <td><input type="number" class="form-control" readonly name="costo_salida[]" value="${compra}"></td>
+                        <td><input type="number" class="form-control" readonly name="costo_entrada[]" value="${compra}"></td>
                         <td><input type="number" class="form-control" readonly name="cantidad[]" value ="${cantidad}"></td>
                         <td>${subtotal[index]}</td>
+                        <td>${subtotal_entrada[index]}</td>
                     </tr>`;
                     $("#detalle").append(fila);
                     $('#total').html(total+ " Bs.");
-                    $("#total_amount").val(total);
+                    $('#total_entrada').html(total+ " Bs.");
+                    $("#total_income_amount").val(total);
+                    $("#total_output_amount").val(total);
                     $("#total_quantity").val(totalcantidad);
                     index++;
                     evaluar();
@@ -307,6 +313,7 @@
         total = 0;
         totalcantidad=0;
         subtotal=[];
+        subtotal_entrada=[];
         cantidad_array=[];
     }
 
@@ -315,6 +322,7 @@
             return this.defaultSelected;
         });
         $('#pcompra').val("");
+        $('#pcompra_salida').val("");
         $('#pcantidad').val("");
         $('#pstock').val("");
     }
@@ -324,8 +332,10 @@
         totalcantidad =  totalcantidad - cantidad_array[index];
         $("#fila" + index).remove();
         $('#total').html((total).toFixed(2) + " Bs.");
+        $('#total_entrada').html((total).toFixed(2) + " Bs.");
         $("#total_quantity").val(totalcantidad);
-        $("#total_amount").val(total);
+        $("#total_income_amount").val(total);
+        $("#total_output_amount").val(total);
         // para escodner los botones si se borro todo el detalle
         evaluar();
     }
@@ -338,8 +348,9 @@
             url: url,
             type: "GET",
             success: function(data) {
-                let price = parseFloat(data.product.price).toFixed(2);
-                $('#pcompra').val(price);
+                let cost = parseFloat(data.product.cost).toFixed(2);
+                $('#pcompra').val(cost);
+                $('#pcompra_salida').val(cost);
                 $('#pstock').val(data.current_stock);
             },
             error: function() {

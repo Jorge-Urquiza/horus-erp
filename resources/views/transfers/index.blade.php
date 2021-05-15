@@ -18,6 +18,16 @@
 @endsection
 
 @section('content')
+    @if ($message = Session::get('advertencia'))
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="alert alert-warning alert-block" role="alert">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+        </div>
+    </div>
+    @endif
 <div class="clearfix mb-2">
         <div class="pull-left">
             <h4 class="text-blue h4">Lista de Nota Traspaso</h4>

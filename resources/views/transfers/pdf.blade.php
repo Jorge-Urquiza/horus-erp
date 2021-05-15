@@ -51,6 +51,7 @@
                 <p class="mb-0"><span class="font-weight-bold">Hora :</span>{{ Carbon\Carbon::now()->format('H:i:s') }}</p>
                 <p class="mb-0"><span class="font-weight-bold">Pag.: </span><span class="pagenum"></span></p>
                 <p class="mb-0"><span class="font-weight-bold">No.Trans.: </span> {{ sales_number($transfer->id) }}</p>
+                <p class="mb-0"><span class="font-weight-bold">Estado: </span> {{ $transfer->status }}</p>
             </div>
         </section>
         <section>
@@ -79,9 +80,11 @@
             <thead class="font-13">
                 <tr>
                     <th>Detalle</th>
-                    <th>Cantidad</th>
-                    <th>P. Unitario Bs.</th>
-                    <th>Subtotal Bs.</th>
+                    <th>Costo Salida</th>
+                    <th>Costo Entrada</th>
+                    <th>Cantidad</th>                    
+                    <th>Subtotal Salida</th>
+                    <th>Subtotal Entrada</th>
                 </tr>
             </thead>
             <tbody>
@@ -90,29 +93,45 @@
                 <tr>
                     <td class="text-right">{{ $detail->product()->first()->name}}</td>
                     <td class="text-right">{{ $detail->quantity}}</td>
-                    <td class="text-right">{{ $detail->product()->first()->price}}</td>
-                    <td class="text-right">{{ $detail->product()->first()->price * $detail->quantity}}</td>
+                    <td class="text-right">{{ $detail->output_cost}}</td>
+                    <td class="text-right">{{ $detail->income_cost}}</td>
+                    <td class="text-right">{{ $detail->output_cost * $detail->quantity}}</td>
+                    <td class="text-right">{{ $detail->income_cost * $detail->quantity}}</td>
                 </tr>
             @endforeach
             </tbody>
             <tfoot>
                 <tr class="font-weight-bold">
-                    <td colspan="3">Totales</td>
-                    <td class="text-right">{{ money($transfer->total_amount)}}</td>
+                    <td colspan="4">Totales</td>
+                    <td class="text-right">{{ money($transfer->total_output_amount)}}</td>
+                    <td class="text-right">{{ money($transfer->total_income_amount)}}</td>
                 </tr>
-                <tr>
-                    <td colspan="3">
-                        Son:  {{ $transfer->total_literal }} {{ $transfer->suffix }} BOLIVIANOS
-                    </td>
-                    <td>
-                        <div class="text-right">
-                            <span class="font-weight-bold">Total: </span>
-                            <span>{{ money($transfer->total_amount)}}</span>
-                        </div>
-                    </td>
-                </tr>
+                
             </tfoot>
         </table>
+        @if(!is_null($transfer->note))
+            <table style="width: 100%">
+                <tr>
+                    <td><b>Nota:</b></tr>
+                </tr>
+                <tr>
+                    <td>{{ $transfer->note }}</td>
+                </tr>
+            </table>
+            @endif
+            @if($transfer->status == 'Finalizado')
+            <section class="d-block my-4" style="padding-top:55px">
+                <div class="d-inline-block align-middle text-center" style="width: 49%;">
+                    <hr style="border: 1px black; width:60%">
+                    <p class="mb-0"><span class="font-weight-bold">RECIBI CONFORME</span></p>
+                </div>
+                
+                <div class="w-50 d-inline-block align-middle text-center">
+                    <hr style="border: 1px black; width:60%">
+                    <p class="mb-0"><span class="font-weight-bold">ENTREGE CONFORME</span></p>
+                </div>
+            </section>
+            @endif
         </div>
     </div>
 </body>

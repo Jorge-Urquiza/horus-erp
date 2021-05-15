@@ -22,6 +22,7 @@ class IncomeNoteController extends Controller
 {
     public function __construct()
     {
+        //$this->middleware('permission:incomes.ingresar')->only(['entered_store']);
         $this->middleware('permission:incomes.create')->only(['create']);
         $this->middleware('permission:incomes.index')->only(['index','show']);
         $this->middleware('permission:incomes.destroy')->only(['destroy']);

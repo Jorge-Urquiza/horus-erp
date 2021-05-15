@@ -27,6 +27,10 @@
                             <a class="dropdown-item" href="{{ url('/transfers/pdf/${row.id}' ) }}" target="_blank"><i class="dw dw-books"></i>Pdf</a>
                             <a class="dropdown-item" href="{{ url('/transfers/download/${row.id}' ) }}"><i class="dw dw-download"></i>Descargar</a>
                             @endcan
+                            @can('transfers.entregar')
+                            <a class="dropdown-item" href="#modal-status" data-toggle="modal" onclick="finalizar(${row.id});" class="btn btn-sm btn-danger">
+                            <i class="icon-copy dw dw-notepad-2"></i>Finalizado</a>
+                            @endcan
                             @can('transfers.destroy')
                             <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
                             <i class="dw dw-delete-3"></i>Anular</a>

@@ -22,6 +22,7 @@ class OutputNoteController extends Controller
 {
     public function __construct()
     {
+        //$this->middleware('permission:outputs.entregar')->only(['delivered_store']);
         $this->middleware('permission:outputs.create')->only(['create']);
         $this->middleware('permission:outputs.index')->only(['index','show']);
         $this->middleware('permission:outputs.destroy')->only(['destroy']);
