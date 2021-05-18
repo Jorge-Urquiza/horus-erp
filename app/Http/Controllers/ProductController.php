@@ -52,7 +52,7 @@ class ProductController extends Controller
         if($request->hasFile('imagen'))
         {
 
-            $filename= time().'_'.$request->imagen->getClientOriginalName();  
+            $filename= time().'_'.$request->imagen->getClientOriginalName();
             $request->imagen->storeAs('public/upload',$filename);
             $request->request->add(['image' => $filename]);
         }
@@ -96,11 +96,11 @@ class ProductController extends Controller
      */
     public function update(EditProductRequest $request, Product $product)
     {
-        
+
         if($request->hasFile('imagen'))
           {
 
-           $filename= time().'_'.$request->imagen->getClientOriginalName(); 
+           $filename= time().'_'.$request->imagen->getClientOriginalName();
            $request->imagen->storeAs('public/upload',$filename);
            $request->request->add(['image' => $filename]);
           }
@@ -132,5 +132,21 @@ class ProductController extends Controller
     public function list()
     {
         return ProductsTable::generate();
+    }
+
+    ///Visualizar Stock sucursal
+    public function stock()
+    {
+        return view('products.branch-stock.index');
+    }
+
+    public function listStock()
+    {
+       return response()->json(['data'=> Product::all()]);
+    }
+
+    public function productBranches(Product $product)
+    {
+        dd($product);
     }
 }

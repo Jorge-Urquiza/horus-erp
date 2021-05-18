@@ -87,7 +87,7 @@
             Agregar producto
         </button>
     </div>
-  </div>
+</div>
 
 
 <div class="card">

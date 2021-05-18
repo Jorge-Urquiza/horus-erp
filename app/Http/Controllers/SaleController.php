@@ -69,4 +69,10 @@ class SaleController extends Controller
 
         return $pdf->download('venta' . $sale->id . '.pdf');
     }
+
+    public function reportSale()
+    {
+        return view('reports.sale-date');
+    }
+
 }
