@@ -10,12 +10,12 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('incomes.index') }}">Nota de Ingreso</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Registrar Nota de Ingreso</li>
+                <li class="breadcrumb-item active" aria-current="page">Registrar</li>
             </ol>
         </nav>
     </div>
     <div class="col text-right">
-        <a href="{{ route('incomes.index') }}" class="btn btn-primary btn-sm">
+        <a href="{{ route('incomes.index') }}" class="btn btn-outline-primary btn-sm">
             <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
         </a>
     </div>
@@ -161,9 +161,10 @@
     }
 
     function limpiar() {
-        $('#product option').prop('selected', function() {
+        /*$('#product option').prop('selected', function() {
             return this.defaultSelected;
-        });
+        });*/
+        //$("#product option[value="+ null +"]").attr("selected",true);
         $('#pcompra').val("");
         $('#pcantidad').val("");
     }
@@ -199,6 +200,7 @@
                         showConfirmButton: false,
                         timer: 1500
                     })
+                $('#pcompra').val('');
             }
         });
     }

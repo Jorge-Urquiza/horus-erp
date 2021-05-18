@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="title">
-                <h4>Actividad</h4>
+                <h4>Bitacora</h4>
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
@@ -13,6 +13,11 @@
                     <li class="breadcrumb-item active" aria-current="page">Detalle</li>
                 </ol>
             </nav>
+        </div>
+        <div class="col text-right">
+            <a href="{{ route('binnacles.index') }}" class="btn btn-outline-primary btn-sm">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
+            </a>
         </div>
     </div>
 @endsection
@@ -68,8 +73,6 @@
         @endforeach
 
     </ul>
-</div>
-        <a href="{{route('binnacles.index')}}" class="btn btn-primary">Volver</a>
-   </div>
+
 
 @endsection

@@ -26,7 +26,6 @@
                             <li><a href="{{ route('users.index') }}">Usuarios</a></li>
                             <li><a href="{{ route('roles.index') }}">Roles y permisos</a></li>
                             <li><a href="{{ route('branch-offices.index') }}">Sucursales</a></li>
-                            <li><a href="#">Ciudades</a></li>
                         </ul>
                     </li>
                 @endcan

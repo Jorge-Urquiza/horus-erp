@@ -14,6 +14,25 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::factory()->create();
+        //1
+        Category::create([
+            'name' => 'Bateria',
+        ]);
+        //2
+        Category::create([
+            'name' => 'Reten',
+        ]);
+            //3
+        Category::create([
+            'name' => 'Rodamiento',
+        ]);
+            //4
+        Category::create([
+            'name' => 'Empaquetadura',
+        ]);
+            //5
+        Category::create([
+            'name' => 'Cruceta',
+        ]);
     }
 }

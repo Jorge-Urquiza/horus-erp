@@ -2,7 +2,7 @@
 		<div class="col-md-12 col-sm-12">
             <div class="form-group">
                 <label>Nombre</label>
-                {{ Form::text('name', null, ['id' => 'name','class'=> ' form-control'. ( $errors->has('name') ? ' is-invalid' : '' )]) }}
+                {{ Form::text('name', null, ['id' => 'name', 'required' => true,'class'=> ' form-control'. ( $errors->has('name') ? ' is-invalid' : '' ), 'required']) }}
                 {!! $errors->first('name','<span class="invalid-feedback d-block">:message</span>') !!}
                 
             </div>
@@ -12,8 +12,8 @@
     <div class="row">
 		<div class="col-md-12 col-sm-12">
             <div class="form-group">
-                <label>Abreviacion</label>
-                {{ Form::text('abbreviation', null, ['id' => 'abbreviation','class'=> ' form-control'. ( $errors->has('abbreviation') ? ' is-invalid' : '' )]) }}
+                <label>Abreviatura</label>
+                {{ Form::text('abbreviation', null, ['id' => 'abbreviation', 'required' => true,'class'=> ' form-control'. ( $errors->has('abbreviation') ? ' is-invalid' : '' )]) }}
                 {!! $errors->first('abbreviation','<span class="invalid-feedback d-block">:message</span>') !!}
             </div>
         </div>

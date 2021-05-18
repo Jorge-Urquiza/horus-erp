@@ -149,6 +149,7 @@ return [
     'attributes' => [
         'customer_id'          => 'cliente',
         'user_id'           => 'vendedor',
+        'name'           => 'nombre',
     ],
 
 ];

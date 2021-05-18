@@ -26,7 +26,7 @@
         </div>
         <div class="pull-right">
             <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm"
-            role="button"><i class="fa fa-plus"></i> Nuevo usuario</a>
+            role="button"><i class="fa fa-plus"></i> Registrar usuario</a>
         </div>
     </div>
 

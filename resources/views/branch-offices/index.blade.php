@@ -23,17 +23,18 @@
         <h4 class="text-blue h4">Lista de Sucursales</h4>
     </div>
     <div class="pull-right mb-3">
-        <a href="{{ route('branch-offices.create') }}" class="btn btn-primary btn-sm"
-        role="button"><i class="fa fa-plus"></i> Nueva Sucursal</a>
+        @can('branch-offices.create')
+        <a href="{{ route('branch-offices.create') }}" class="btn btn-outline-primary btn-sm"
+        role="button"><i class="fa fa-plus"></i> Registrar Sucursal</a>
+        @endcan
     </div>
 </div>
 
-    <table class="table table-bordered mt-3" id="table">
+    <table class="table table-hover display no-wrap mt-3" id="table" style="width: 100%">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Ciudad</th>
                 <th>Direccion</th>
                 <th>Telefono</th>
                 <th>Opciones</th>
@@ -54,30 +55,39 @@
             "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
         },
         "ajax": "{{route('branch-offices.list')}}",
+        "responsive" : true,
         "columns": [
             { data: 'id' },
             { data: 'name' },
-            { data: 'city' },
             { data: 'address' },
             { data: 'telephone' },
+            { data: 'name' },
         ],
         "columnDefs": [ {
-            "targets": 5,
+            "targets": 4,
             "sortable": false,
             "searchable": true,
             render: function (data, type, row) {
                 return `
-                    <div class="my-2">
-                        <a href="{{ url('/branch-offices/${row.id}/edit') }}" class="btn btn-primary btn-sm">
-                            <i class="fa fa-pencil"></i> Editar
-                        </a>
-                        <a href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
-                            <i class="fa fa-trash"></i> Eliminar
-                        </a>
-                    </div>
+                    @can('branch-offices.edit')
+                    <a href="{{ url('/branch-offices/${row.id}/edit') }}" class="btn btn-outline-warning btn-sm" data-tooltip="tooltip" data-placement="top" title="Editar">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    @endcan
+                    @can('branch-offices.destroy')
+                    <a href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-outline-danger" data-tooltip="tooltip" data-placement="top" title="Eliminar">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                    @endcan
+                    
                 `;
             }
-        }]
+        }],
+        "order": [[ 0, 'desc' ]],
+        drawCallback: function (settings) {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-tooltip="tooltip"]').tooltip();
+        }
     });
 
 </script>

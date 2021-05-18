@@ -4,11 +4,13 @@
             "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
         },
         "ajax": "{{route('outputs.list-processed')}}",
+        "responsive" : true,
         "columns": [
             { data: 'id' },
             { data: 'date' },
             { data: 'sucursal' },
             { data: 'personal' },
+            { data: 'date' },
         ],
         "columnDefs": [ {
             "targets": 4,
@@ -38,7 +40,11 @@
                     </div>
                 `;
             }
-        }]
+        }],
+        "order": [[ 0, 'desc' ]],
+        drawCallback: function (settings) {
+            $('[data-toggle="tooltip"]').tooltip();
+        }
     });
 
 

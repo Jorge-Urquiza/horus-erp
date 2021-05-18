@@ -193,11 +193,10 @@
         </div>
     </div>
     <div class="row">
-		<div class="col-md-11  col-sm-11">
-            <div class="col text-right">
-                <button class="btn btn-primary btn-sm"
-                    type="submit"><span class="icon-copy ti-save"></span>   Guardar</button>
-            <div>
+		<div class="col-md-12  col-sm-12">
+                <button class="btn btn-outline-primary btn-sm"
+                    type="submit">Guardar</button>
+            
         <div>
     </div>
 @push('scripts')

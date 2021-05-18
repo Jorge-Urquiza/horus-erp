@@ -29,7 +29,6 @@ class IncomeNoteCanceledTable extends DataTable
                 ->leftJoin('branch_offices','branch_offices.id','=','income_notes.branch_office_id')
                 ->leftJoin('users','users.id','=','income_notes.user_id')
                 ->where([['branch_offices.id', '=',$user->branch_office_id], ['status','=', 'Anulado']])
-                ->orderBy('income_notes.id', 'desc')
-                ->onlyTrashed();
+                ->orderBy('income_notes.id', 'desc');
     }
 }

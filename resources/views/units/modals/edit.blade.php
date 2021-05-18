@@ -24,6 +24,26 @@
 
 @push('scripts')
     <script>
+        var input = document.getElementById('name');
+        input.addEventListener('input', function(evt) {
+            this.setCustomValidity('');
+        });
+        input.addEventListener('invalid', function(evt) {
+            // Required
+            if (this.validity.valueMissing) {
+                this.setCustomValidity('Por favor complete el nombre!');
+            }
+        });
+        input = document.getElementById('abbreviation');
+        input.addEventListener('input', function(evt) {
+            this.setCustomValidity('');
+        });
+        input.addEventListener('invalid', function(evt) {
+            // Required
+            if (this.validity.valueMissing) {
+                this.setCustomValidity('Por favor complete abreviatura!');
+            }
+        });
         function updateRoutes(id,valor) {
           
             for(var i=0 ; i< valor.length; i++ ){

@@ -45,6 +45,15 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'users.create', 'description' => 'Crear usuarios'])
         ->syncRoles([$admin]);
 
+        Permission::create(['name' => 'branch-offices.index', 'description' => 'Ver lista de sucursales'])
+                ->syncRoles([$admin]);
+        Permission::create(['name' => 'branch-offices.edit', 'description' => 'Editar sucursales'])
+        ->syncRoles([$admin]);
+        Permission::create(['name' => 'branch-offices.destroy', 'description' => 'Eliminar sucursales'])
+        ->syncRoles([$admin]);
+        Permission::create(['name' => 'branch-offices.create', 'description' => 'Crear sucursales'])
+        ->syncRoles([$admin]);
+
         //---INVENTARIO---//
         Permission::create(['name' => 'inventario.index', 'description' => 'Ver Modulo Inventario'])
                 ->syncRoles([$admin, $encargado]);

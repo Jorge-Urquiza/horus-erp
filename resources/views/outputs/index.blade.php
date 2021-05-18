@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="title">
-                <h4>Lista de Notas de Salida</h4>
+                <h4>Notas de Salida</h4>
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
@@ -20,12 +20,12 @@
 @section('content')
 <div class="clearfix mb-2">
         <div class="pull-left">
-            <h4 class="text-blue h4">Lista de Nota Salida</h4>
+            <h4 class="text-blue h4">Lista de Notas Salidas</h4>
         </div>
         <div class="pull-right">
             @can('outputs.create')
-            <a href="{{ route('outputs.create') }}" class="btn btn-primary btn-sm"
-            role="button"><i class="fa fa-plus"></i> Nueva Nota de Salida</a>
+            <a href="{{ route('outputs.create') }}" class="btn btn-outline-primary btn-sm"
+            role="button"><i class="fa fa-plus"></i> Registrar Nota de Salida</a>
             @endcan
         </div>
     </div>

@@ -10,12 +10,12 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('outputs.index') }}">Nota de Salida</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Registrar Nota de Salida</li>
+                <li class="breadcrumb-item active" aria-current="page">Registrar</li>
             </ol>
         </nav>
     </div>
     <div class="col text-right">
-        <a href="{{ route('outputs.index') }}" class="btn btn-primary btn-sm">
+        <a href="{{ route('outputs.index') }}" class="btn btn-outline-primary btn-sm">
             <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
         </a>
     </div>
