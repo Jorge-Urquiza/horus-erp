@@ -24,19 +24,19 @@
         </div>
         <div class="pull-right">
             @can('brands.create')
-            <a href="#modal-crear" data-toggle="modal" onclick="crearRoute();" class="btn btn-primary btn-sm"
-            role="button"><i class="fa fa-plus"></i> Nuevo Marca</a>
+            <a href="#modal-crear" data-toggle="modal" onclick="crearRoute();" class="btn btn-outline-primary btn-sm"
+            role="button"><i class="fa fa-plus"></i> Registrar Marca</a>
             @endcan
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-hover display no-wrap" id="tables">
+            <table class="table table-hover display no-wrap" id="tables" style="width: 100%">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Abreviacion</th>
+                        <th>Abreviatura</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -48,7 +48,7 @@
         ¿Está seguro que desea eliminar esta marca?
     @endcomponent
 
-    @component('brands.modals.create', ['action' => route('brands.store'), 'title' => 'Nueva marca'])
+    @component('brands.modals.create', ['action' => route('brands.store'), 'title' => 'Registrar marca'])
         @include('brands.form.create')
     @endcomponent
 
@@ -63,16 +63,33 @@
     @include('layouts.datatable')
 
     <script>
+        function Mostrar (id){
+            var url = "{{ route('brands.show',':id') }}";
+            $('#name').removeClass("is-invalid");
+            $('#abbreviation').removeClass("is-invalid");
+            url = url.replace(':id', id);
+            $.get(url, function (data){
+                $('#name').val(data.name);
+                $('#abbreviation').val(data.abbreviation);
+                $('#id').val(data.id);
+            })
+            setTimeout(function() {
+                $('#modal-editar').modal("show");
+            }, 700);          
+            
+        };
         var valor = [];
         $('#tables').DataTable({
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             },
             "ajax": "{{route('brands.list')}}",
+            "responsive": true,
             "columns": [
                 { data: 'id' },
                 { data: 'name' },
                 { data: 'abbreviation' },
+                { data: 'name' },
             ],
             "columnDefs": [ {
                 "targets": 3,
@@ -81,23 +98,25 @@
                 render: function (data, type, row) {
                     valor.push(row);
                     return `
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                @can('brands.edit')
-                                <a class="dropdown-item" href="#modal-editar" data-toggle="modal" onclick="updateRoutes(${row.id},valor);" ><i class="dw dw-edit2"></i> Editar</a>
-                                @endcan
-                                @can('brands.destroy')
-                                <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
-                                <i class="dw dw-delete-3"></i> Eliminar</a>
-                                @endcan
-                            </div>
-                        </div>
+                        
+                        @can('brands.edit')
+                        <a class="btn btn-outline-warning btn-sm" href="#modal-editar" data-toggle="modal" onclick="updateRoutes(${row.id},valor);" data-tooltip="tooltip" data-placement="top" title="Editar">
+                            <i class="dw dw-edit2"></i>
+                        </a>
+                        @endcan
+                        @can('brands.destroy')
+                        <a class="btn btn-outline-danger btn-sm" href="#modal-confirm"" data-toggle="modal" onclick="updateRoute(${row.id});" data-tooltip="tooltip" data-placement="top" title="Eliminar">
+                            <i class="dw dw-delete-3"></i>
+                        </a>
+                        @endcan
                     `;
                 }
-            }]
+            }],
+            "order": [[ 0, 'desc' ]],
+            drawCallback: function (settings) {
+                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-tooltip="tooltip"]').tooltip();
+            }
         });
 
 

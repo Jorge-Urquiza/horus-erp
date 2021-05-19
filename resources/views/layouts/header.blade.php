@@ -1,4 +1,4 @@
-<div class="header">
+<div class="header" style="background-image: url('logos/slide.jpg')">
     <div class="header-left">
         <div class="menu-icon dw dw-menu"></div>
         <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>

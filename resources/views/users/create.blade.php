@@ -4,31 +4,26 @@
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="title">
-                <h4>Usuarios</h4>
+                <h4>Registrar Usuario</h4>
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Usuarios</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Crear</li>
+                    <li class="breadcrumb-item active" aria-current="page">Registrar</li>
                 </ol>
             </nav>
+        </div>
+        <div class="col text-right">
+            <a href="{{ route('roles.index') }}" class="btn btn-outline-primary btn-sm">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
+            </a>
         </div>
     </div>
 @endsection
 
 @section('content')
 
-<div class="pd-20 card-box mb-30">
-    <div class="clearfix">
-        <div class="pull-left">
-            <h4 class="text-blue h4">Formulario de creación</h4>
-        </div>
-        <div class="pull-right">
-            <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm"
-            role="button"><i class="fa fa-arrow-left"></i> Atrás</a>
-        </div>
-    </div>
     <form action="{{ route('users.store') }}" method="POST">
         @csrf
         <div class="form-group row">
@@ -72,8 +67,7 @@
                 <input id="password" name="password" class="form-control" placeholder="ingrese su password" type="password" required>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-outline-primary">Guardar</button>
     </form>
-</div>
 
 @endsection

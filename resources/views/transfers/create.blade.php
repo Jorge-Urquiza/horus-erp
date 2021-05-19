@@ -10,7 +10,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('transfers.index') }}">Nota de Traspaso</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Registrar Nota de Traspaso</li>
+                <li class="breadcrumb-item active" aria-current="page">Registrar</li>
             </ol>
         </nav>
     </div>
@@ -49,6 +49,17 @@
             agregar();
         });
 
+        var input = document.getElementById('branch_office_destiny');
+        input.addEventListener('select', function(evt) {
+            this.setCustomValidity('');
+        });
+        input.addEventListener('invalid', function(evt) {
+            // Required
+            if (this.validity.valueMissing) {
+                this.setCustomValidity('Por favor seleccione una sucursal!');
+            }
+        });
+
         document.getElementById('pcantidad').addEventListener('keypress', e => {
             if(String.fromCharCode(e.which || e.keyCode) == '-'){
                     e.preventDefault();
@@ -77,16 +88,8 @@
     var branch_id_destiny = null;
     var user = {!! auth()->user()->toJson() !!};
 
-    var input = document.getElementById('branch_office_destiny');
-    input.addEventListener('select', function(evt) {
-        this.setCustomValidity('');
-    });
-    input.addEventListener('invalid', function(evt) {
-        // Required
-        if (this.validity.valueMissing) {
-            this.setCustomValidity('Por favor seleccione una sucursal!');
-        }
-    });
+    
+    
 
     function completarSucursalDestino(id){
         var valor = $("#branch_office option:selected").val();

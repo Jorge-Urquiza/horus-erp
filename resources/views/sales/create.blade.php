@@ -3,13 +3,13 @@
 <div class="row">
     <div class="col-md-6 col-sm-12">
         <div class="title">
-            <h4>Registrar nueva venta</h4>
+            <h4>Registrar Venta</h4>
         </div>
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('sales.index') }}">Ventas</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Crear Venta</li>
+                <li class="breadcrumb-item active" aria-current="page">Registrar</li>
             </ol>
         </nav>
     </div>
@@ -23,11 +23,6 @@
 
 @section('content')
 
-<div class="clearfix">
-    <div class="pull-left">
-        <h3 class="text-blue h4">Crear nueva Venta</h3>
-    </div>
-</div>
     {!! Form::open(['route'=> ['sales.store'], 'method' => 'POST']) !!}
         @include('sales.partials.form')
     {!! Form::close() !!}

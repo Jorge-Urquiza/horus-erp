@@ -33,12 +33,12 @@ class BrandSeeder extends Seeder
             ],
             
             [
-                'name' => 'RETENES JPK',
-                'abbreviation' => 'RT JPK',
+                'name' => 'COIL SEAL',
+                'abbreviation' => 'JPK',
             ],
             [
-                'name' => 'RETENES ARCA',
-                'abbreviation' => 'RT ARC',
+                'name' => 'ARCA RETENTORES',
+                'abbreviation' => 'ARCA',
             ],
             [
                 'name' => 'RODAMIENTOS MBA',
@@ -51,20 +51,15 @@ class BrandSeeder extends Seeder
                 
             ],
             [
-                'name' => 'RODAMIENTOS PFI',
-                'abbreviation' => 'RD PFI',
+                'name' => 'PEVISA GASKETS',
+                'abbreviation' => 'PEV',
                 
             ],
             [
-                'name' => 'RODAMIENTOS MP-DRL',
-                'abbreviation' => 'RD MP-DRL',
+                'name' => 'CORTECO',
+                'abbreviation' => 'COR',
                 
             ],
-            [
-                'name' => 'EMPAQUETADURAS PEVIS',
-                'abbreviation' => 'PVS',
-                
-            ]
         ];
     }
 }

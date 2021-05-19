@@ -54,9 +54,9 @@
     </div>
     <div class="row">
 		<div class="col-md-12  col-sm-12">
-            <div class="col text-right">
-                <button class="btn btn-primary btn-sm"
-                    type="submit"><span class="icon-copy ti-save"></span>   Guardar</button>
-            <div>
+            
+                <button class="btn btn-outline-primary btn-sm"
+                    type="submit">Guardar</button>
+            
         <div>
     </div>

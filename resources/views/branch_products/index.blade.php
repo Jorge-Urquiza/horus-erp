@@ -99,7 +99,10 @@
 
         ],
       
-        "order": [[ 1, 'asc' ]]
+        "order": [[ 0, 'asc' ]],
+        drawCallback: function (settings) {
+            $('[data-toggle="tooltip"]').tooltip();
+        }
     });
     table.on( 'order.dt search.dt', function () {
         table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {

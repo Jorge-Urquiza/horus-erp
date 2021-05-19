@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card mb-2">
     <div class="card-body">
         <div class="row">
             <div class="col-md-6 col-sm-6">
@@ -45,7 +45,12 @@
 </div>
 <div class="card">
     <div class="card-body">
-        <div class="row mt-3">
+        <div class="clearfix">
+            <div class="pull-left">
+                <h3 class="text-blue h4">Detalle de la Nota de Traspaso</h3>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     {{ Form::label('product','Producto:') }}
@@ -92,15 +97,7 @@
 
             
         </div>
-    </div>
-</div>
-<div class="card">
-    <div class="card-body">
-        <div class="clearfix">
-            <div class="pull-left">
-                <h3 class="text-blue h4">Detalle de la Nota de Traspaso</h3>
-            </div>
-        </div>
+
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                     <table id="detalle" class="table table-striped table-bordered table-condensed table-hover">
@@ -142,10 +139,9 @@
             </div>
         <div class="row">
             <div class="col-md-12  col-sm-12 mt-3">
-                <div class="col text-right">
-                    <button class="btn btn-primary btn-sm"
-                        type="submit" id="guardar"><span class="icon-copy ti-save"></span>   Guardar</button>
-                <div>
+                    <button class="btn btn-outline-primary btn-sm"
+                        type="submit" id="guardar">Guardar</button>
+                
             <div>
         </div>
     </div>

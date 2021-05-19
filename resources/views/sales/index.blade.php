@@ -4,12 +4,12 @@
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="title">
-                <h4>Lista de ventas</h4>
+                <h4>Venta</h4>
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('sales.index') }}">Ventas</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('sales.index') }}">Venta</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Lista</li>
                 </ol>
             </nav>
@@ -23,7 +23,7 @@
         <h4 class="text-blue h4">Lista de ventas</h4>
     </div>
     <div class="pull-right mb-3">
-        <a href="{{ route('sales.create') }}" class="btn btn-primary btn-sm"
+        <a href="{{ route('sales.create') }}" class="btn btn-outline-primary btn-sm"
         role="button"><i class="fa fa-plus"></i> Nueva venta</a>
     </div>
 </div>

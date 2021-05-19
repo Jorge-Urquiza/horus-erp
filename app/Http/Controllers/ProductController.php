@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ProductsTable;
+use App\Enums\Message;
 use App\Http\Requests\products\EditProductRequest;
 use App\Models\Product;
 use App\Models\Category;
@@ -57,7 +58,7 @@ class ProductController extends Controller
             $request->request->add(['image' => $filename]);
         }
         Product::create($request->all());
-        flash()->stored();
+        flash(Message::STORED);
         return redirect()->route('products.index');
     }
 
@@ -109,7 +110,7 @@ class ProductController extends Controller
 
         $product->update();
 
-        flash()->updated();
+        flash(Message::UPDATED);
 
         return redirect()->route('products.index');
     }
@@ -124,7 +125,7 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        flash()->deleted();
+        flash(Message::DELETED);
 
         return redirect()->route('products.index');
     }

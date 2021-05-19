@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="title">
-                <h4>Lista de Notas de Traspaso</h4>
+                <h4>Notas de Traspaso</h4>
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
@@ -30,12 +30,12 @@
     @endif
 <div class="clearfix mb-2">
         <div class="pull-left">
-            <h4 class="text-blue h4">Lista de Nota Traspaso</h4>
+            <h4 class="text-blue h4">Lista de Notas Traspasos</h4>
         </div>
         <div class="pull-right">
             @can('transfers.create')
-            <a href="{{ route('transfers.create') }}" class="btn btn-primary btn-sm"
-            role="button"><i class="fa fa-plus"></i> Nueva Nota de Traspaso</a>
+            <a href="{{ route('transfers.create') }}" class="btn btn-outline-primary btn-sm"
+            role="button"><i class="fa fa-plus"></i> Registrar Nota de Traspaso</a>
             @endcan
         </div>
     </div>

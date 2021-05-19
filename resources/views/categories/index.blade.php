@@ -24,11 +24,11 @@
         <h4 class="text-blue h4">Lista de Categorias</h4>
     </div>
     <div class="pull-right mb-3">
-        <a href="#modal-crear" data-toggle="modal" onclick="crearRoute();" class="btn btn-primary btn-sm"
-        role="button"><i class="fa fa-plus"></i> Nuevo categoria</a>
+        <a href="#modal-crear" data-toggle="modal" onclick="crearRoute();" class="btn btn-outline-primary btn-sm"
+        role="button"><i class="fa fa-plus"></i> Registrar categoria</a>
     </div>
 </div>
-<table class="table table-hover display no-wrap" id="table">
+<table class="table table-hover display no-wrap" id="table" style="width: 100%">
     <thead>
         <tr>
             <th>ID</th>
@@ -42,7 +42,7 @@
         ¿Está seguro que desea eliminar esta categoria?
     @endcomponent
 
-    @component('categories.modals.create', ['action' => route('categories.store'), 'title' => 'Nueva categoria'])
+    @component('categories.modals.create', ['action' => route('categories.store'), 'title' => 'Registrar categoria'])
         @include('categories.forms.create')
     @endcomponent
 
@@ -62,10 +62,11 @@
             "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
         },
         "ajax": "{{route('categories.list')}}",
+        "responsive":true,
         "columns": [
             { data: 'id' },
             { data: 'name' },
-
+            { data: 'name' }
         ],
         "columnDefs": [ {
             "targets": 2,
@@ -74,26 +75,24 @@
             render: function (data, type, row) {
                 valor.push(row);
                 return `
-                    <div class="dropdown">
-                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                            <i class="dw dw-more"></i>
+                        @can('categorias.edit')
+                        <a class="btn btn-outline-warning btn-sm" href="#modal-editar" data-toggle="modal" onclick="updateRoutes(${row.id},valor);" data-tooltip="tooltip" data-placement="top" title="Editar">
+                            <i class="dw dw-edit2"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                            @can('categorias.edit')
-                            <a href="#modal-editar" data-toggle="modal" onclick="updateRoutes(${row.id},valor);" class="dropdown-item">
-                                <i class="dw dw-edit2"></i> Editar
-                            </a>
-                            @endcan
-                            @can('categorias.destroy')
-                            <a href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="dropdown-item">
-                                <i class="dw dw-delete-3"></i> Eliminar
-                            </a>
-                            @endcan
-                        </div>
-                    </div>
+                        @endcan
+                        @can('categorias.destroy')
+                        <a class="btn btn-outline-danger btn-sm" href="#modal-confirm"" data-toggle="modal" onclick="updateRoute(${row.id});" data-tooltip="tooltip" data-placement="top" title="Eliminar">
+                            <i class="dw dw-delete-3"></i>
+                        </a>
+                        @endcan
                 `;
             }
-        }]
+        }],
+        "order": [[ 0, 'desc' ]],
+        drawCallback: function (settings) {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-tooltip="tooltip"]').tooltip();
+        }
     });
 
 </script>

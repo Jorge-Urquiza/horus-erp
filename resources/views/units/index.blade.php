@@ -24,19 +24,19 @@
         </div>
         <div class="pull-right">
             @can('brands.create')
-            <a href="#modal-crear" data-toggle="modal" onclick="crearRoute();" class="btn btn-primary btn-sm"
-            role="button"><i class="fa fa-plus"></i> Nueva Unidad de Medida</a>
+            <a href="#modal-crear" data-toggle="modal" onclick="crearRoute();" class="btn btn-outline-primary btn-sm"
+            role="button"><i class="fa fa-plus"></i> Registrar Unidad de Medida</a>
             @endcan
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-hover display no-wrap" id="table_unit">
+            <table class="table table-hover display no-wrap" id="table_unit" style="width: 100%">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Abreviacion</th>
+                        <th>Abreviatura</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -48,7 +48,7 @@
         ¿Está seguro que desea eliminar la unidad de medida?
     @endcomponent
 
-    @component('units.modals.create', ['action' => route('units.store'), 'title' => 'Nueva Unidad de Medida'])
+    @component('units.modals.create', ['action' => route('units.store'), 'title' => 'Registrar Unidad de Medida'])
         @include('units.form.create')
     @endcomponent
 
@@ -70,10 +70,12 @@
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             },
             "ajax": "{{route('units.list')}}",
+            "responsive" : true,
             "columns": [
                 { data: 'id' },
                 { data: 'name' },
                 { data: 'abbreviation' },
+                { data: 'name' },
             ],
             "columnDefs": [ {
                 "targets": 3,
@@ -83,25 +85,24 @@
 
                     valor.push(row);
                     return `
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                @can('units.edit')
-                                <a class="dropdown-item" href="#modal-editar" data-toggle="modal"
-                                    onclick="updateRoutes(${row.id},valor);">
-                                    <i class="dw dw-edit2"></i> Editar</a>
-                                @endcan
-                                @can('units.destroy')
-                                <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
-                                <i class="dw dw-delete-3"></i> Eliminar</a>
-                                @endcan
-                            </div>
-                        </div>
+                        @can('units.edit')
+                        <a class="btn btn-outline-warning btn-sm" href="#modal-editar" data-toggle="modal" onclick="updateRoutes(${row.id},valor);" data-tooltip="tooltip" data-placement="top" title="Editar">
+                            <i class="dw dw-edit2"></i>
+                        </a>
+                        @endcan
+                        @can('units.destroy')
+                        <a class="btn btn-outline-danger btn-sm" href="#modal-confirm"" data-toggle="modal" onclick="updateRoute(${row.id});" data-tooltip="tooltip" data-placement="top" title="Eliminar">
+                            <i class="dw dw-delete-3"></i>
+                        </a>
+                        @endcan
                     `;
                 }
-            }]
+            }],
+            "order": [[ 0, 'desc' ]],
+            drawCallback: function (settings) {
+                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-tooltip="tooltip"]').tooltip();
+            }
         });
     </script>
 @endpush

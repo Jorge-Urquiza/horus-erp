@@ -4,12 +4,14 @@
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             },
             "ajax": "{{route('transfers.list-canceled')}}",
+            "resonsive": true,
             "columns": [
                 { data: 'id' },
                 { data: 'date' },
                 { data: 'origen' },
                 { data: 'destino' },
                 { data: 'personal' },
+                { data: 'date' },
             ],
             "columnDefs": [ {
                 "targets": 5,
@@ -31,7 +33,11 @@
                         </div>
                     `;
                 }
-            }]
+            }],
+            "order": [[ 0, 'desc' ]],
+            drawCallback: function (settings) {
+                $('[data-toggle="tooltip"]').tooltip();
+            }
         });
 
 

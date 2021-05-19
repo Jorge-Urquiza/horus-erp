@@ -1,5 +1,5 @@
 @if ($admins->isNotEmpty())
-<table class="table table-bordered mt-3">
+<table class="table table-bordered mt-3" style="width:100%">
     <thead>
         <tr>
             <th>Nombre</th>
