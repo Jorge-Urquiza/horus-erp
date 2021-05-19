@@ -15,7 +15,7 @@
                 </ol>
             </nav>
         </div>
-    </div>    
+    </div>
 @endsection
 
 @section('content')
@@ -98,7 +98,7 @@
             }
 
         ],
-      
+
         "order": [[ 1, 'asc' ]]
     });
     table.on( 'order.dt search.dt', function () {
@@ -106,7 +106,7 @@
             cell.innerHTML = i+1;
         } );
     } ).draw();
-    
+
 
 </script>
 

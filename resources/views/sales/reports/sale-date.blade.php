@@ -20,43 +20,44 @@
 
 <div class="card">
     <div class="card-body">
-        <div class="form-group row">
-            <div class="col-12 col-lg-4">
-                {{ Form::label('name', 'Sucursal*', ['class' => 'weight-500'])}}
-                {!! Form::select('sucursal',['Matriz' => 'Matriz'] , null,
-                ['class'=>'form-control','placeholder'=>'Seleecionar Sucursal']) !!}
-
+        <form action="" method="get">
+            <div class="form-group row">
+                <div class="col-12 col-lg-4">
+                    {{ Form::label('branch_office', 'Sucursal', ['class' => 'weight-500'])}}
+                    <select class="form-control" name="branch_office_id" id="branch_office">
+                        <option value="" selected disabled><p>Seleccionar Sucursal</p></option>
+                        @foreach ($branchOffices as $branchOffice)
+                            <option value="{{ $branchOffice->id }}" {{  request('branch_office_id')  ? 'selected' : ''  }}>{{ $branchOffice->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-12 col-lg-4">
+                    {{ Form::label('initial_date','Fecha Inicio', ['class' => 'weight-500']) }}
+                    <input class="form-control" id="initial_date" name="initial_date"
+                    type="date" value="{{ request('initial_date') }}">
+                </div>
+                <div class="col-12 col-lg-4">
+                    {{ Form::label('end_date','Fecha Fin', ['class' => 'weight-500']) }}
+                    <input class="form-control" id="end_date" name="end_date"
+                    type="date" value="{{ request('end_date') }}">
+                </div>
             </div>
-            <div class="col-12 col-lg-4">
-                {{ Form::label('date','Fecha*', ['class' => 'weight-500']) }}
-                {{ Form::date('date', \Carbon\Carbon::now() , ['class'=> 'form-control' ,
-                'data-timepicker' => true, 'data-language' =>'es','required'=>true]) }}
-
-            </div>
-            <div class="col-12 col-lg-4">
-                {{ Form::label('orden','Orden*', ['class' => 'weight-500']) }}
-                {!! Form::select('sucursal',['Ascendente' => 'Ascendente', 'Descendente' => 'Descendente'] , 'Ascendente',
-                ['class'=>'form-control','placeholder'=>'Seleecionar Sucursal']) !!}
-            </div>
-        </div>
-        <button type="button" class="btn btn-outline-primary btn-lg btn-block">Generar</button>
-
+            <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Generar</button>
+        </form>
     </div>
-
-
 </div>
-
 <div class="row mt-3">
     <div class="col-md-12">
-        <table class="table hover multiple-select-row data-table-export nowrap" id= "table">
+        <table class="table table-hover display no-wrap" id= "table">
             <thead>
                 <tr>
-                    <th class="table-plus datatable-nosort">ID</th>
+                    <th>ID</th>
                     <th>Cliente</th>
+                    <th>NIT</th>
                     <th>Vendedor</th>
                     <th>Sucursal</th>
                     <th>Fecha</th>
-                    <th>Monto total</th>
+                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -81,10 +82,10 @@
 <script src="{{ asset('templates/src/plugins/datatables/js/vfs_fonts.js') }}"></script>
 
 <script>
+$( document ).ready(function() {
     $('#table').DataTable({
         "dom": 'Bfrtip',
         "buttons": [
-            'copyHtml5',
             'excelHtml5',
             'csvHtml5',
             'pdfHtml5'
@@ -92,6 +93,20 @@
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
         },
+        "ajax": {
+            "url": "{{route('report.sale.list')}}",
+            "data" : @json($queryParams)
+        },
+        "columns": [
+            { data: 'id' },
+            { data: 'customer.full_name' },
+            { data: 'nit' },
+            { data: 'seller.full_name' },
+            { data: 'branch_office.name' },
+            { data: 'date' },
+            { data: 'total_amount' },
+        ],
     });
+});
 </script>
 @endpush

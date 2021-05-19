@@ -96,6 +96,9 @@ Route::middleware(['auth'])->group(function () {
     //report
     Route::get('report/sale/date',[SaleController::class, 'reportSale'])
     ->name('report.sale.date');
+
+    Route::get('report/list',[SaleController::class, 'listReport'])
+    ->name('report.sale.list');
     //api
     Route::get('api/product/{product}', [ApiSaleController::class, 'getProduct'])->name('api.product');
     Route::get('api/customer/{user}', [ApiSaleController::class, 'getCustomer'])->name('api.customer');
