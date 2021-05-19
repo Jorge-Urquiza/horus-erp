@@ -81,6 +81,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('transfers/pdf/{transfer}',[TransferNoteController::class, 'pdf']);
     Route::get('transfers/download/{transfer}',[TransferNoteController::class, 'download']);
 
+    Route::get('product/stock',[ProductController::class, 'stock'])->name('products.stock');
+    Route::get('products/list/stock',[ProductController::class, 'listStock'])->name('products.list.stock');
+    Route::get('product/branches/{product}',[ProductController::class, 'productBranches'])->name('product.branch');
+
     Route::resource('users', UserController::class);
     Route::resource('roles', RolController::class);
     Route::resource('products', ProductController::class);
@@ -96,6 +100,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('transfers', TransferNoteController::class);
     Route::resource('branch-products', BranchProductController::class);
 
+    //report
+    Route::get('report/sale/date',[SaleController::class, 'reportSale'])
+    ->name('report.sale.date');
+
+    Route::get('report/list',[SaleController::class, 'listReport'])
+    ->name('report.sale.list');
     //api
     Route::get('api/product/{product}', [ApiSaleController::class, 'getProduct'])->name('api.product');
     Route::get('api/customer/{user}', [ApiSaleController::class, 'getCustomer'])->name('api.customer');

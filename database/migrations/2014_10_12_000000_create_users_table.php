@@ -27,9 +27,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('branch_office_id')->nullable();
             $table->foreign('branch_office_id')
             ->references('id')
-            ->on('branch_offices')
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
+            ->on('branch_offices');
 
             $table->rememberToken();
             $table->timestamps();

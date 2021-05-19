@@ -15,7 +15,7 @@
                 </ol>
             </nav>
         </div>
-    </div>    
+    </div>
 @endsection
 
 @section('content')
@@ -101,7 +101,7 @@
             cell.innerHTML = i+1;
         } );
     } ).draw();
-    
+
 
 </script>
 
