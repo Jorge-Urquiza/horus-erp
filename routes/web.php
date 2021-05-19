@@ -28,6 +28,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/testppp', function () {
+    Notification::route('slack',
+    env('SLACK_NOTIFICATION_WEBHOOK'))
+    ->notify(new StockNotification('noti'));
+    return 'hola';
+});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

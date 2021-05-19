@@ -24,7 +24,8 @@
         <div class="col-md-12 col-lg-12">
             <div class="alert alert-warning alert-block" role="alert">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>{{ $message }}</strong>
+                Actualizar los stock minimos y maximos de productos en 
+                Sucursal Producto dar click <a href="{{ route('branch-products.index') }}"><strong> aquí</strong></a>, si se requiere
             </div>
         </div>
     </div>
