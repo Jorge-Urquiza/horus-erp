@@ -15,7 +15,7 @@
                 </ol>
             </nav>
         </div>
-    </div>    
+    </div>
 @endsection
 
 @section('content')
@@ -98,7 +98,7 @@
             }
 
         ],
-      
+
         "order": [[ 0, 'asc' ]],
         drawCallback: function (settings) {
             $('[data-toggle="tooltip"]').tooltip();
@@ -109,7 +109,7 @@
             cell.innerHTML = i+1;
         } );
     } ).draw();
-    
+
 
 </script>
 

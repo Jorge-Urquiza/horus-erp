@@ -64,4 +64,9 @@ class Product extends Model
                 'name' => 'Sin categoria',
             ]);
     }
+    public function BranchsProduct()
+    {
+        return $this->hasMany(Product::class);
+    }
+
 }

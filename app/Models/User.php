@@ -28,6 +28,7 @@ class User extends Authenticatable
         'branch_office_id',
     ];
 
+    protected $appends = ['full_name'];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -46,6 +47,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getFullNameAttribute() // notice that the attribute name is in CamelCase.
+    {
+        return ucfirst($this->name) . ' ' . ucfirst($this->last_name);
+    }
 
     public function getFullName(): string
     {

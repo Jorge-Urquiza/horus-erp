@@ -61,12 +61,12 @@
             { data: 'date' },
             { data: null,
                 render: function ( data, type, row ) {
-                    return row.customer.name + '<br>' + row.customer.last_name;
+                    return row.customer.name + ' ' + row.customer.last_name;
                 }
             },
             { data: null,
                 render: function ( data, type, row ) {
-                    return row.seller.name + '<br>' + row.seller.last_name;
+                    return row.seller.name + ' ' + row.seller.last_name;
                 }
             },
             { data: 'branch_office.name' },

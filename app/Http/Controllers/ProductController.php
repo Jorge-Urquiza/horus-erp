@@ -11,6 +11,7 @@ use App\Models\Supplier;
 use App\Models\MeasurementsUnits;
 use App\Models\Brand;
 use App\Http\Requests\products\StoreProductRequest;
+use App\Models\BranchsProduct;
 
 class ProductController extends Controller
 {
@@ -148,6 +149,8 @@ class ProductController extends Controller
 
     public function productBranches(Product $product)
     {
-        dd($product);
+        $branchProducts = BranchsProduct::where('product_id', $product->id)
+            ->with('branch_office')->get();
+        return view('products.branch-stock.show', compact('branchProducts', 'product'));
     }
 }

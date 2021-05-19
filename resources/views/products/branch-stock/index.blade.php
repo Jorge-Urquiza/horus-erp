@@ -74,7 +74,7 @@
                                 <i class="dw dw-more"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="{{ url('/products/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver Sucursal</a>
+                                <a class="dropdown-item" href="{{ url('/product/branches/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver Sucursal</a>
                             </div>
                         </div>
                     `;

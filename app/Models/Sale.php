@@ -37,17 +37,26 @@ class Sale extends Model
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'customer_id');
+        return $this->belongsTo(Customer::class, 'customer_id')
+        ->withDefault([
+            'name' => 'Empty'
+        ]);;
     }
 
     public function seller()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id')
+        ->withDefault([
+            'name' => 'Empty'
+        ]);;;
     }
 
     public function branchOffice()
     {
-        return $this->belongsTo(BranchOffice::class, 'branch_office_id');
+        return $this->belongsTo(BranchOffice::class, 'branch_office_id')
+        ->withDefault([
+            'name' => 'Empty'
+        ]);;;
     }
 
    /**
