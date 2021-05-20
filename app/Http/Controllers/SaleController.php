@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Sale;
 use App\Actions\StoreSaleAction;
+use App\DataTables\ReportTable;
 use App\DataTables\SalesTable;
 use App\Enums\Message;
 use App\Http\Requests\sales\StoreSaleRequest;
+use App\Models\BranchOffice;
 use App\ViewModels\Sale\SaleCreateViewModel;
 use App\ViewModels\Sale\SaleViewModel;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
@@ -23,11 +26,13 @@ class SaleController extends Controller
         return view('sales.create', new SaleCreateViewModel);
     }
 
-    public function store(StoreSaleRequest $request)
+    public function store(Request $request)
     {
-        $action = new StoreSaleAction($request->validated());
+        dd($request->all());
 
-        $action->execute();
+        //$action = new StoreSaleAction($request->validated());
+
+        //$action->execute();
 
         flash()->stored();
 
@@ -43,9 +48,9 @@ class SaleController extends Controller
     {
       $sale->delete();
 
-      flash(Message::CANCELED);
+      flash()->deleted();
 
-      return view('sales.index');
+      return redirect()->route('sales.index');
     }
 
     public function list()
@@ -58,7 +63,6 @@ class SaleController extends Controller
         $pdf = PDF::loadView('sales.pdf', new SaleViewModel($sale));
 
         return $pdf->stream('venta' . $sale->id . '.pdf');
-
     }
 
     public function download(Sale $sale)
@@ -67,4 +71,19 @@ class SaleController extends Controller
 
         return $pdf->download('venta' . $sale->id . '.pdf');
     }
+
+    public function reportSale(Request $request)
+    {
+        $queryParams = $request->query()?? [];
+
+        $branchOffices = BranchOffice::all();
+
+        return view('sales.reports.sale-date', compact('queryParams', 'branchOffices'));
+    }
+
+    public function listReport()
+    {
+        return ReportTable::generate();
+    }
+
 }

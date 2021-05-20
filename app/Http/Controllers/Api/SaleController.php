@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Product;
 
-class SaleController extends Controller
+class SaleController
 {
     public function getCustomer(Customer $user)
     {
@@ -15,7 +14,7 @@ class SaleController extends Controller
 
     public function getProduct($product)
     {
-        $product = Product::with('measurementsUnit', 'brand')->findOrFail($product);
+        $product = Product::with('measurementsUnit', 'brand', 'category')->findOrFail($product);
 
         return response()->json($product);
     }

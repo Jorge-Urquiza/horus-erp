@@ -49,7 +49,7 @@
         input2.addEventListener('invalid', function(evt) {
             // Required
             if (this.validity.valueMissing) {
-                this.setCustomValidity('Por favor complete la abreviacion!');
+                this.setCustomValidity('Por favor complete la abreviatura!');
             }
         });
     </script>

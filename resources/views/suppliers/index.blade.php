@@ -23,13 +23,15 @@
             <h4 class="text-blue h4">Lista de Proveedores</h4>
         </div>
         <div class="pull-right">
-            <a href="{{ route('suppliers.create') }}" class="btn btn-primary btn-sm"
-            role="button"><i class="fa fa-plus"></i> Nuevo Proveedor</a>
+            @can('suppliers.create')
+            <a href="{{ route('suppliers.create') }}" class="btn btn-outline-primary btn-sm"
+            role="button"><i class="fa fa-plus"></i> Registrar Proveedor</a>
+            @endcan
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-hover display no-wrap" id="tables">
+            <table class="table table-hover display no-wrap" id="tables" style="width: 100%">
                 <thead>
                     <tr>
                         <th style="width: 10%">ID</th>
@@ -57,11 +59,13 @@
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             },
             "ajax": "{{route('suppliers.list')}}",
+            "responsive" : true,
             "columns": [
                 { data: 'id' },
                 { data: 'name' },
                 { data: 'email' },
                 { data: 'telephone' },
+                { data: 'name' },
             ],
             "columnDefs": [ {
                 "targets": 4,
@@ -69,20 +73,27 @@
                 "searchable": true,
                 render: function (data, type, row) {
                     return `
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="{{ url('/suppliers/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver</a>
-                                <a class="dropdown-item" href="{{ url('/suppliers/${row.id}/edit') }}"><i class="dw dw-edit2"></i> Editar</a>
-                                <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
-                                <i class="dw dw-delete-3"></i> Eliminar</a>
-                            </div>
-                        </div>
+                        <a class="btn btn-outline-info btn-sm" href="{{ url('/suppliers/${row.id}' ) }}" data-toggle="tooltip" data-placement="top" title="Ver">
+                            <i class="dw dw-eye"></i> 
+                        </a>
+                        @can('suppliers.edit')
+                        <a class="btn btn-outline-warning btn-sm" href="{{ url('/suppliers/${row.id}/edit') }}" data-toggle="tooltip" data-placement="top" title="Editar">
+                            <i class="dw dw-edit2"></i>
+                        </a>
+                        @endcan
+                        @can('suppliers.destroy')
+                        <a class="btn btn-outline-danger btn-sm" href="#modal-confirm"" data-toggle="modal" onclick="updateRoute(${row.id});" data-tooltip="tooltip" data-placement="top" title="Eliminar">
+                            <i class="dw dw-delete-3"></i>
+                        </a>
+                        @endcan
                     `;
                 }
-            }]
+            }],
+            "order": [[ 0, 'desc' ]],
+            drawCallback: function (settings) {
+                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-tooltip="tooltip"]').tooltip();
+            }
         });
 
 

@@ -4,21 +4,22 @@
 <div class="row">
     <div class="col-md-6 col-sm-12">
         <div class="title">
-            <h4>Crear Nota Salida</h4>
+            <h4>Registrar Nota de Salida</h4>
         </div>
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('outputs.index') }}">Nota Salida</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Crear Nota Salida</li>
+                <li class="breadcrumb-item"><a href="{{ route('outputs.index') }}">Nota de Salida</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Registrar</li>
             </ol>
         </nav>
     </div>
     <div class="col text-right">
-        <a href="{{ route('outputs.index') }}" class="btn btn-primary btn-sm">
+        <a href="{{ route('outputs.index') }}" class="btn btn-outline-primary btn-sm">
             <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
         </a>
     </div>
+</div>
 @endsection
 @section('content')
 
@@ -41,10 +42,21 @@
         $( "#btn_add" ).click(function() {
             agregar();
         });
-        if($('#branch_office').length > 0) // PARA CUANDO EL USUARIO SEA VENDEDOR
-        {
+
+        document.getElementById('pcantidad').addEventListener('keypress', e => {
+            if(String.fromCharCode(e.which || e.keyCode) == '-'){
+                    e.preventDefault();
+                    return;
+            }
+            if(parseFloat(e.srcElement.value)<0){
+                e.preventDefault();
+                return;
+            }
+        });
+        //if($('#branch_office').length > 0) // PARA CUANDO EL USUARIO SEA VENDEDOR
+       // {
             listarProducto();
-        }
+       // }
 
     });
 
@@ -54,9 +66,11 @@
     var subtotal=[];
     var cantidad_array=[];
     var branch_id=null;
-
+    var user = {!! auth()->user()->toJson() !!};
+   
     function listarProducto(){
-        branch_office_id = $("#branch_office option:selected").val();
+        branch_office_id = (user.is_admin)?$("#branch_office option:selected").val():$("#branch_office_s").val();
+       
         if(branch_id == null || branch_id == branch_office_id || subtotal.length == 0)
         { //EN CASO DE Q SEA LA PRIMERA VEZ,  SEAN IGUALES LOS ID, EN CASO DE QUE NO TENGA NADA EN LA TABLA
             branch_id = branch_office_id;
@@ -103,7 +117,15 @@
                     cargarSelect(data);
                 },
                 error: function() {
-                    alert("Seleccione un producto valido");
+                    //alert("Seleccione un producto valido");
+                    swal({
+                        position: 'center',
+                        type: 'warning',
+                        title: 'Seleccione un producto valido',
+                        text: "",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }
             });
     }
@@ -149,25 +171,26 @@
                 swal({
                     position: 'center',
                     type: 'warning',
-                    title: 'Error',
-                    text: "Stock insuficiente",
+                    title: 'Stock insuficiente',
+                    text: "",
                     showConfirmButton: false,
                     timer: 1500
                 })
-            }else{
+            }   else    {
 
-                if(!pasaStock(product_id, stock, cantidad))
+                //if(!pasaStock(product_id, stock, cantidad))
+                 if(!existeProducto(product_id))
                 {   
-                    subtotal[index] =  (cantidad*compra);
-                    total= total + subtotal[index];
+                    subtotal[index] =  (cantidad*compra).toFixed(2);
+                    total= total + parseFloat(subtotal[index]);
                     cantidad_array[index] = (cantidad*1);
                     totalcantidad = totalcantidad + (cantidad * 1);
                     var fila=`<tr class = "selected" id="fila${index}">
                         <td><button type="button" class="btn btn-danger" onClick="eliminar(${index})">
                             <i class="fa fa-arrows-alt" aria-hidden="true"></i> Quitar
                         </button></td>
-                        <td><input type="hidden" class="form-control" name="producto_id[]" value="${product_id}">${producto}</td>
-                        <td><input type="number" class="form-control" readonly name="precio[]" value="${compra}"></td>
+                        <td><input type="hidden" class="form-control producto" name="producto_id[]" value="${product_id}">${producto}</td>
+                        <td><input type="number" class="form-control" readonly name="costo[]" value="${compra}"></td>
                         <td><input type="number" class="form-control" readonly name="cantidad[]" value ="${cantidad}"></td>
                         <td>${subtotal[index]}</td>
                     </tr>`;
@@ -179,11 +202,20 @@
                     evaluar();
                     limpiar();
                 } else {
-                    swal({
+                    /*swal({
                         position: 'center',
                         type: 'warning',
                         title: 'Error',
                         text: "La cantidad acumulada sobrepasa el Stock del Producto",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })*/
+
+                    swal({
+                        position: 'center',
+                        type: 'warning',
+                        title: 'El producto ya existe en el detalle',
+                        text: "",
                         showConfirmButton: false,
                         timer: 1500
                     })
@@ -235,14 +267,26 @@
         total = total - subtotal[index];
         totalcantidad =  totalcantidad - cantidad_array[index];
         $("#fila" + index).remove();
-        $('#total').html(total+ " Bs.");
+        $('#total').html((total).toFixed(2) + " Bs.");
         $("#total_quantity").val(totalcantidad);
         $("#total_amount").val(total);
         // para escodner los botones si se borro todo el detalle
         evaluar();
     }
+
+    function existeProducto(producto_id){
+        var bandera=false;
+        var array_producto = document.getElementsByClassName("producto");
+        names = [].map.call( array_producto, function(data){
+            if(data.value == producto_id){
+                bandera = true;
+            }
+        })
+        return bandera;      
+    }
+
     function completarProducto(id) {
-        branch_office_id = $("#branch_office option:selected").val();
+        branch_office_id = (user.is_admin)?$("#branch_office option:selected").val():$("#branch_office_s").val();
         var url = "{{ route('api.branchproduct.product',['idproduct'=> ':id', 'idbranch' => ':idbr']) }}";
         url = url.replace(':id', id);
         url = url.replace(':idbr', branch_office_id);
@@ -250,12 +294,20 @@
             url: url,
             type: "GET",
             success: function(data) {
-                let price = parseFloat(data.product.price).toFixed(2);
-                $('#pcompra').val(price);
+                let cost = parseFloat(data.product.cost).toFixed(2);
+                $('#pcompra').val(cost);
                 $('#pstock').val(data.current_stock);
             },
             error: function() {
-                alert("Seleccione un producto valido");
+                //alert("Seleccione un producto valido");
+                swal({
+                    position: 'center',
+                    type: 'warning',
+                    title: 'Seleccione una sucursal valida',
+                    text: "",
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             }
         });
     }

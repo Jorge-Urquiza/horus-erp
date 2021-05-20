@@ -19,20 +19,19 @@
 
 @section('content')
 
-<div class="pd-20 card-box mb-30">
     <div class="clearfix">
         <div class="pull-left">
             <h4 class="text-blue h4">Lista de los roles</h4>
         </div>
         <div class="pull-right mb-3">
-            <a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm">
-                <i class="fa fa-plus"></i> Crear nuevo rol
-            </a>
+            <a href="{{ route('roles.create') }}" class="btn btn-outline-primary btn-sm">
+                <i class="fa fa-plus"></i> Registrar rol
+            </a>            
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-hover" id="table">
+            <table class="table table-hover" id="table" style="width:100%">
                 <thead>
                     <tr>
                         <th style="width: 10%">ID</th>
@@ -44,7 +43,7 @@
             </table>
         </div>
     </div>
-</div>
+
 
 @component('elements.modal', ['action' => route('roles.destroy', '*')])
     ¿Está seguro que desea eliminar este rol?
@@ -57,11 +56,13 @@
         $('#table').DataTable({
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            },
+            },            
+            "responsive" : true,
             "ajax": "{{route('roles.list')}}",
             "columns": [
                 { data: 'id' },
                 { data: 'name' },
+                { data: 'description' },
                 { data: 'description' },
             ],
             "columnDefs": [ {
@@ -70,20 +71,23 @@
                 "searchable": true,
                 render: function (data, type, row) {
                     return `
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="{{ url('/roles/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver</a>
-                                <a class="dropdown-item" href="{{ url('/roles/${row.id}/edit') }}"><i class="dw dw-edit2"></i> Editar</a>
-                                <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
-                                <i class="dw dw-delete-3"></i> Eliminar</a>
-                            </div>
-                        </div>
+                        <a class="btn btn-outline-info btn-sm" href="{{ url('/roles/${row.id}' ) }}" data-toggle="tooltip" data-placement="top" title="Ver">
+                            <i class="dw dw-eye"></i>
+                        </a>
+                        <a class="btn btn-outline-warning btn-sm" href="{{ url('/roles/${row.id}/edit') }}" data-toggle="tooltip" data-placement="top" title="Editar">
+                            <i class="dw dw-edit2"></i>
+                        </a>
+                        <a class="btn btn-outline-danger btn-sm" href="#modal-confirm"" data-toggle="modal" onclick="updateRoute(${row.id});" data-tooltip="tooltip" data-placement="top" title="Eliminar">
+                            <i class="dw dw-delete-3"></i>
+                        </a>
                     `;
                 }
-            }]
+            }],
+            "order": [[ 0, 'desc' ]],
+            drawCallback: function (settings) {
+                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-tooltip="tooltip"]').tooltip();
+            }
         });
 
 

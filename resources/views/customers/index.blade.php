@@ -4,13 +4,13 @@
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="title">
-                <h4>Lista de Clientes</h4>
+                <h4>Cliente</h4>
 
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('customers.index') }}">Clientes</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/dashboard')}}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('customers.index') }}">Cliente</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Lista</li>
                 </ol>
             </nav>
@@ -24,12 +24,14 @@
         <h4 class="text-blue h4">Lista de Clientes</h4>
     </div>
     <div class="pull-right mb-3">
-        <a href="{{ route('customers.create') }}" class="btn btn-primary btn-sm"
-        role="button"><i class="fa fa-plus"></i> Nuevo Cliente</a>
+        @can('customers.create')
+        <a href="{{ route('customers.create') }}" class="btn btn-outline-primary btn-sm"
+        role="button"><i class="fa fa-plus"></i> Registrar Cliente</a>
+        @endcan
     </div>
 </div>
 
-    <table class="table table-bordered mt-3" id="table">
+    <table class="table table-bordered mt-3" id="table" style="width: 100%">
         <thead>
             <tr>
                 <th>ID</th>
@@ -54,8 +56,10 @@
             "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
         },
         "ajax": "{{route('customers.list')}}",
+        "responsive": true,
         "columns": [
             { data: 'id' },
+            { data: 'name' },
             { data: 'name' },
 
         ],
@@ -65,17 +69,23 @@
             "searchable": true,
             render: function (data, type, row) {
                 return `
-                    <div class="my-2">
-                        <a href="{{ url('/customers/${row.id}/edit') }}" class="btn btn-primary btn-sm">
-                            <i class="fa fa-pencil"></i> Editar
+                        @can('customers.edit')
+                        <a href="{{ url('/customers/${row.id}/edit') }}" class="btn btn-outline-warning btn-sm" data-tooltip="tooltip" data-placement="top" title="Editar">
+                            <i class="fa fa-pencil"></i>
                         </a>
-                        <a href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
-                            <i class="fa fa-trash"></i> Eliminar
+                        @endcan
+                        @can('customers.destroy')
+                        <a href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-outline-danger" data-tooltip="tooltip" data-placement="top" title="Eliminar">
+                            <i class="fa fa-trash"></i>
                         </a>
-                    </div>
+                        @endcan
                 `;
             }
-        }]
+        }],
+        "order": [[ 0, 'desc' ]],
+        drawCallback: function (settings) {
+            $('[data-tooltip="tooltip"]').tooltip();
+        }
     });
 
 </script>

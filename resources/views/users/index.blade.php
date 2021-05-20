@@ -19,43 +19,25 @@
 
 @section('content')
 
-
     <div class="clearfix">
         <div class="pull-left">
-            <h4 class="text-blue h4">Lista de usuarios</h4>
+            <h4 class="text-blue h4">Roles - usuarios</h4>
         </div>
         <div class="pull-right">
-            <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm"
-            role="button"><i class="fa fa-plus"></i> Nuevo usuario</a>
+            <a href="{{ route('users.create') }}" class="btn btn-outline-primary"
+            role="button"><i class="fa fa-plus"></i> Registrar usuario</a>
         </div>
     </div>
 
-    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#rol-admin" role="tab"
-          aria-controls="pills-home" aria-selected="true">Administradores</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#rol-vendedor" role="tab"
-          aria-controls="pills-profile" aria-selected="false">Vendedores</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#rol-encargado" role="tab"
-            aria-controls="pills-profile" aria-selected="false">Encargados</a>
-        </li>
-    </ul>
-
-    <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="rol-admin" role="tabpanel" aria-labelledby="pills-home-tab">
-          @include('users.tables.admin')
-        </div>
-        <div class="tab-pane fade" id="rol-vendedor" role="tabpanel" aria-labelledby="pills-profile-tab">
-          @include('users.tables.vendedor')
-        </div>
-        <div class="tab-pane fade" id="rol-encargado" role="tabpanel" aria-labelledby="pills-profile-tab">
-          @include('users.tables.encargado')
-        </div>
-    </div>
-
-
+    <div class="list-group list-group-flush mt-3">
+        @foreach ($roles as $rol)
+        <a href="{{ route('users.rol.index', $rol->id) }}" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">Ver lista de usuarios tipo: {{ $rol->name }}</h5>
+            </div>
+            <p class="mb-1">{{ $rol->description }}</p>
+            <small>Creado en: {{ $rol->created_at }}</small>
+          </a>
+        @endforeach
+      </div>
 @endsection

@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="title">
-                <h4>Lista de Notas de Salida</h4>
+                <h4>Notas de Salida</h4>
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
@@ -20,72 +20,57 @@
 @section('content')
 <div class="clearfix mb-2">
         <div class="pull-left">
-            <h4 class="text-blue h4">Lista de Nota Salida</h4>
+            <h4 class="text-blue h4">Lista de Notas Salidas</h4>
         </div>
         <div class="pull-right">
-            <a href="{{ route('outputs.create') }}" class="btn btn-primary btn-sm"
-            role="button"><i class="fa fa-plus"></i> Nueva Nota Salida</a>
+            @can('outputs.create')
+            <a href="{{ route('outputs.create') }}" class="btn btn-outline-primary btn-sm"
+            role="button"><i class="fa fa-plus"></i> Registrar Nota de Salida</a>
+            @endcan
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table table-hover display no-wrap" id="tables">
-                <thead>
-                    <tr>
-                        <th>Nro</th>
-                        <th>Fecha</th>
-                        <th>Sucursal</th>
-                        <th>Personal</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-
-            </table>
+    <div class="row"> 
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#proceso" role="tab"
+            aria-controls="pills-home" aria-selected="true">En proceso</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#entregado" role="tab"
+            aria-controls="pills-profile" aria-selected="false">Entregado</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" id="pills-profil-tab" data-toggle="pill" href="#anulado" role="tab"
+            aria-controls="pills-profile" aria-selected="false">Anulado</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="proceso" role="tabpanel" aria-labelledby="pills-home-tab">
+            @include('outputs.tables.processed')
+        </div>
+        <div class="tab-pane fade" id="entregado" role="tabpanel" aria-labelledby="pills-profile-tab">
+            @include('outputs.tables.delivered')
+        </div>
+        <div class="tab-pane fade" id="anulado" role="tabpanel" aria-labelledby="pills-profile-tab">
+            @include('outputs.tables.canceled')
         </div>
     </div>
-    @component('elements.modal', ['action' => route('outputs.destroy', '*')])
-        ¿Está seguro que desea anular la nota de salida?
+    
+    @component('outputs.modals.processed-canceled', ['action' => route('outputs.destroy', '*')])
+        ¿Está seguro que desea anular la nota de salida? 
+    <p>Una vez anulado, no se podrá recuperar la información llenada</p>
+    @endcomponent
+    @component('outputs.modals.processed-delivered', ['action' => route('outputs.store-delivered', '*')])
+        ¿Está seguro que desea confirmar la entrega de los productos? 
+        <p>Una vez entregado, no se podrá anular la nota de salida</p>
     @endcomponent
 @endsection
 
 @push('scripts')
 
 @include('layouts.datatable')
-    <script>
-        $('#tables').DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            },
-            "ajax": "{{route('outputs.list')}}",
-            "columns": [
-                { data: 'id' },
-                { data: 'date' },
-                { data: 'sucursal' },
-                { data: 'personal' },
-            ],
-            "columnDefs": [ {
-                "targets": 4,
-                "sortable": false,
-                "searchable": true,
-                render: function (data, type, row) {
-                    return `
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="{{ url('/outputs/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver</a>
-                                <a class="dropdown-item" href="{{ url('/outputs/pdf/${row.id}' ) }}" target="_blank"><i class="dw dw-books"></i>Pdf</a>
-                                <a class="dropdown-item" href="{{ url('/outputs/download/${row.id}' ) }}"><i class="dw dw-download"></i>Descargar</a>
-                                <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
-                                <i class="dw dw-delete-3"></i>Anular</a>
-                            </div>
-                        </div>
-                    `;
-                }
-            }]
-        });
-
-
-    </script>
+        @include('outputs.scripts.processed')
+        @include('outputs.scripts.delivered')
+        @include('outputs.scripts.canceled')
 @endpush

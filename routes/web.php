@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\BranchProductController as ApiBranchProductControll
 use App\Http\Controllers\AssignUserBranchController;
 use App\Http\Controllers\BinnacleController;
 use App\Http\Controllers\BranchOfficeController;
+use App\Http\Controllers\BranchProductController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
@@ -18,17 +19,36 @@ use App\Http\Controllers\MeasurementsUnitsController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\TransferNoteController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Storage;
+use App\Notifications\NewSaleNotification;
+use App\Notifications\StockNotification;
+use Illuminate\Support\Facades\Notification;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/testppp', function () {
+    Notification::route('slack',
+    env('SLACK_NOTIFICATION_WEBHOOK'))
+    ->notify(new StockNotification('noti'));
+    return 'hola';
+});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::get('test', function(){
+    Notification::route('slack',
+    'https://hooks.slack.com/services/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')
+    ->notify(new StockNotification('adasd'));
+
+    return "send";
+});
 
 Route::middleware(['auth'])->group(function () {
 
@@ -46,10 +66,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('units/list',[MeasurementsUnitsController::class, 'list'])->name('units.list');
     Route::get('products/list',[ProductController::class, 'list'])->name('products.list');
     Route::get('roles/list',[RolController::class, 'list'])->name('roles.list');
-    Route::get('incomes/list',[IncomeNoteController::class, 'list'])->name('incomes.list');
-    Route::get('outputs/list',[OutputNoteController::class, 'list'])->name('outputs.list');
+    Route::get('incomes/list-processed',[IncomeNoteController::class, 'processed_list'])->name('incomes.list-processed');
+    Route::get('incomes/list-canceled',[IncomeNoteController::class, 'canceled_list'])->name('incomes.list-canceled');
+    Route::get('incomes/list-entered',[IncomeNoteController::class, 'entered_list'])->name('incomes.list-entered');
+    Route::post('incomes/status/{income}',[IncomeNoteController::class, 'entered_store'])->name('incomes.store-entered');
+    Route::get('outputs/list-processed',[OutputNoteController::class, 'processed_list'])->name('outputs.list-processed');
+    Route::get('outputs/list-canceled',[OutputNoteController::class, 'canceled_list'])->name('outputs.list-canceled');
+    Route::get('outputs/list-delivered',[OutputNoteController::class, 'delivered_list'])->name('outputs.list-delivered');
+    Route::post('outputs/status/{output}',[OutputNoteController::class, 'delivered_store'])->name('outputs.store-delivered');
     Route::get('sales/list',[SaleController::class, 'list'])->name('sales.list');
-    Route::get('transfers/list',[TransferNoteController::class, 'list'])->name('transfers.list');
+    Route::get('transfers/list-processed',[TransferNoteController::class, 'processed_list'])->name('transfers.list-processed');
+    Route::get('transfers/list-canceled',[TransferNoteController::class, 'canceled_list'])->name('transfers.list-canceled');
+    Route::get('transfers/list-finalized',[TransferNoteController::class, 'finalized_list'])->name('transfers.list-finalized');
+    Route::post('transfers/status/{transfer}',[TransferNoteController::class, 'finalized_store'])->name('transfers.store-finalized');
+    Route::get('branch-products/list',[BranchProductController::class, 'list'])->name('branch-products.list');
     Route::get('pdf/{sale}',[SaleController::class, 'pdf']);
     Route::get('download/{sale}',[SaleController::class, 'download']);
     Route::get('incomes/pdf/{income}',[IncomeNoteController::class, 'pdf']);
@@ -58,6 +88,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('outputs/download/{output}',[OutputNoteController::class, 'download']);
     Route::get('transfers/pdf/{transfer}',[TransferNoteController::class, 'pdf']);
     Route::get('transfers/download/{transfer}',[TransferNoteController::class, 'download']);
+
+    Route::get('product/stock',[ProductController::class, 'stock'])->name('products.stock');
+    Route::get('products/list/stock',[ProductController::class, 'listStock'])->name('products.list.stock');
+    Route::get('product/branches/{product}',[ProductController::class, 'productBranches'])->name('product.branch');
+
+    Route::get('users/rol/{rol}',[UserController::class, 'indexUserRol'])->name('users.rol.index');
+    Route::get('users/list',[UserController::class, 'list'])->name('users.list');
 
     Route::resource('users', UserController::class);
     Route::resource('roles', RolController::class);
@@ -72,12 +109,20 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('incomes', IncomeNoteController::class);
     Route::resource('outputs', OutputNoteController::class);
     Route::resource('transfers', TransferNoteController::class);
+    Route::resource('branch-products', BranchProductController::class);
 
+    //report
+    Route::get('report/sale/date',[SaleController::class, 'reportSale'])
+    ->name('report.sale.date');
+
+    Route::get('report/list',[SaleController::class, 'listReport'])
+    ->name('report.sale.list');
     //api
     Route::get('api/product/{product}', [ApiSaleController::class, 'getProduct'])->name('api.product');
     Route::get('api/customer/{user}', [ApiSaleController::class, 'getCustomer'])->name('api.customer');
 
     Route::get('api/branch-product/{id}', [ApiBranchProductController::class, 'getProductByBranch'])->name('api.branchproduct');
     Route::get('api/branch-product/product/{idproduct}/{idbranch}', [ApiBranchProductController::class, 'getProduct'])->name('api.branchproduct.product');
+
 });
 

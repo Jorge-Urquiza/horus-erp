@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="title">
-                <h4>Lista de actividades</h4>
+                <h4>Bitacora</h4>
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
@@ -14,26 +14,26 @@
                 </ol>
             </nav>
         </div>
+        
     </div>
 @endsection
 
 @section('content')
 <div class="clearfix">
     <div class="pull-left">
-        <h4 class="text-blue h4">Bitacora</h4>
+        <h4 class="text-blue h4">Lista de actividades</h4>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <table class="table table-hover display no-wrap" id="table">
+        <table class="table table-hover display no-wrap" id="table" style="width: 100%">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Fecha</th>
-                    <th>Modulo</th>
+                    <th>Tabla</th>
                     <th>Acción</th>
                     <th>Usuario</th>
-                    <th>Detalle</th>
                     <th>Opciones</th>
                 </tr>
                 </tr>
@@ -50,6 +50,7 @@
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
         },
+        "responsive": true,
         "lengthMenu": [
                     [10, 25, 50, 100, 200, -1],
                     ['10', '25', '50', '100', '200', 'Todo']
@@ -68,18 +69,21 @@
         ],
         "columnDefs": [
                     {
-                        targets: 6,
+                        targets: 5,
                         render: function (data, type, row) {
                             return `
-                                <div class="my-2">
-                                    <a href="{{ url('/binnacles/${row.id}/show') }}" class="btn btn-primary btn-sm">
-                                        <i class="fa fa-eye"></i> Ver detalles
-                                    </a>
-                                </div>
+                                <a class="btn btn-outline-info btn-sm" href="{{ url('/binnacles/${row.id}/show') }}" data-toggle="tooltip" data-placement="top" title="Ver Detalle">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                
                             `;
                         }
                     }
                 ],
+        drawCallback: function (settings) {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-tooltip="tooltip"]').tooltip();
+        }
     });
 
 </script>

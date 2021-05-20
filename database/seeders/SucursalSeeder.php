@@ -16,13 +16,19 @@ class SucursalSeeder extends Seeder
     {
         BranchOffice::create([
             'name' => 'Casa Matriz',
-            'address' => 'Calle uruguay #10',
+            'address' => '2do anillo Av. Trompillo',
             'city' => 'Santa Cruz'
         ]);
 
         BranchOffice::create([
-            'name' => 'Suc 1',
+            'name' => 'Sucursal 1',
             'address' => 'Calle buenos aires #256',
+            'city' => 'Santa Cruz'
+        ]);
+
+        BranchOffice::create([
+            'name' => 'Sucursal 2',
+            'address' => 'Calle uruguay #10',
             'city' => 'Santa Cruz'
         ]);
     }

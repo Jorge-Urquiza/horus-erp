@@ -7,11 +7,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
@@ -27,9 +22,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('branch_office_id')->nullable();
             $table->foreign('branch_office_id')
             ->references('id')
-            ->on('branch_offices')
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
+            ->on('branch_offices');
 
             $table->rememberToken();
             $table->timestamps();

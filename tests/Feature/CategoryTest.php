@@ -7,11 +7,40 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class CategoryTest extends TestCase
 {
     use RefreshDatabase;
 
+    private function generateCategoryPermission($array)
+    {
+        Permission::create(['name' => 'categorias.index', 'description' => 'Ver lista de categorias'])
+        ->syncRoles($array);
+        Permission::create(['name' => 'categorias.edit', 'description' => 'Editar categorias'])
+        ->syncRoles($array);
+        Permission::create(['name' => 'categorias.destroy', 'description' => 'Eliminar categorias'])
+        ->syncRoles($array);
+        Permission::create(['name' => 'categorias.create', 'description' =>  'Crear categorias'])
+        ->syncRoles($array);
+
+    }
+    private function generateRolAdmin()
+    {
+        return Role::create([
+            'name' => 'Admin',
+            'description' => 'Administrador de la empresa'
+        ]);
+    }
+    private function assignAdminPermisionCategory()
+    {
+        $admin = $this->generateRolAdmin();
+
+        $array = array($admin);
+
+        $this->generateCategoryPermission($array);
+    }
     /** @test */
     public function an_unauthorized_user_cannot_create_categories(){
 
@@ -67,11 +96,15 @@ class CategoryTest extends TestCase
         ]);
     }
     /** @test */
-    public function an_authenticated_user_can_screen_categories(){
+    public function an_authenticated_user_with_rol_admin_can_screen_categories(){
 
         $this->withoutExceptionHandling();
 
         $user = User::factory()->create();
+
+        $this->assignAdminPermisionCategory();
+
+        $user->assignRole('Admin');
 
         $this->actingAs($user);
 
@@ -81,9 +114,13 @@ class CategoryTest extends TestCase
 
     }
    /** @test */
-    public function an_authenticated_user_can_delete_categories()
+    public function an_authenticated_user_with_rol_admin_can_delete_categories()
     {
         $user = User::factory()->create();
+
+        $this->assignAdminPermisionCategory();
+
+        $user->assignRole('Admin');
 
         $this->actingAs($user);
 

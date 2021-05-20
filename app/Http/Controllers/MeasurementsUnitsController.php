@@ -11,6 +11,13 @@ use Exception;
 
 class MeasurementsUnitsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:units.create')->only(['create']);
+        $this->middleware('permission:units.index')->only(['index', 'show']);
+        $this->middleware('permission:units.destroy')->only(['destroy']);
+        $this->middleware('permission:units.edit')->only(['edit']);
+    }
     /**
      * Display a listing of the resource.
      *

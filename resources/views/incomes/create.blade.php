@@ -4,21 +4,22 @@
 <div class="row">
     <div class="col-md-6 col-sm-12">
         <div class="title">
-            <h4>Crear Nota Ingreso</h4>
+            <h4>Registrar Nota de Ingreso</h4>
         </div>
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('incomes.index') }}">Nota Ingreso</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Crear Nota Ingreso</li>
+                <li class="breadcrumb-item"><a href="{{ route('incomes.index') }}">Nota de Ingreso</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Registrar</li>
             </ol>
         </nav>
     </div>
     <div class="col text-right">
-        <a href="{{ route('incomes.index') }}" class="btn btn-primary btn-sm">
+        <a href="{{ route('incomes.index') }}" class="btn btn-outline-primary btn-sm">
             <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
         </a>
     </div>
+</div>
 @endsection
 @section('content')
 
@@ -42,13 +43,45 @@
             agregar();
         });
 
-    });
+        document.getElementById('pcompra').addEventListener('keypress', e => {
+            if(String.fromCharCode(e.which || e.keyCode) == '-'){
+                    e.preventDefault();
+                    return;
+            }
+            if(parseFloat(e.srcElement.value)<0){
+                e.preventDefault();
+                return;
+            }
+        });
 
+        document.getElementById('pcantidad').addEventListener('keypress', e => {
+            if(String.fromCharCode(e.which || e.keyCode) == '-'){
+                    e.preventDefault();
+                    return;
+            }
+            if(parseFloat(e.srcElement.value)<0){
+                e.preventDefault();
+                return;
+            }
+        });
+
+    });
     var index= 0;
     var total = 0;
     var totalcantidad=0;
     var subtotal=[];
     var cantidad_array=[];
+    
+    function existeProducto(producto_id){
+        var bandera=false;
+        var array_producto = document.getElementsByClassName("producto");
+        names = [].map.call( array_producto, function(data){
+            if(data.value == producto_id){
+                bandera = true;
+            }
+        })
+        return bandera;      
+    }
 
     function agregar() {
         product_id = $("#product option:selected").val()
@@ -61,29 +94,61 @@
             /*if(resultado < 0 ){
                 alert("Error al ingresar los detalles de la venta, Stock insuficiente");
             }else{*/
-                subtotal[index] =  (cantidad*compra);
-                total= total + subtotal[index];
-                cantidad_array[index] = (cantidad*1);
-                totalcantidad = totalcantidad + (cantidad * 1);
-                var fila=`<tr class = "selected" id="fila${index}">
-                    <td><button type="button" class="btn btn-danger" onClick="eliminar(${index})">
-                        <i class="fa fa-arrows-alt" aria-hidden="true"></i> Quitar
-                    </button></td>
-                    <td><input type="hidden" class="form-control" name="producto_id[]" value="${product_id}">${producto}</td>
-                    <td><input type="number" class="form-control" readonly name="precio[]" value="${compra}"></td>
-                    <td><input type="number" class="form-control" readonly name="cantidad[]" value ="${cantidad}"></td>
-                    <td>${subtotal[index]}</td>
-                </tr>`;
-                $("#detalle").append(fila);
-                $('#total').html(total+ " Bs.");
-                $("#total_amount").val(total);
-                $("#total_quantity").val(totalcantidad);
-                index++;
-                evaluar();
-                limpiar();
+                if(existeProducto(product_id)){
+                    swal({
+                        position: 'center',
+                        type: 'warning',
+                        title: 'El producto ya existe en el detalle',
+                        text: "",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    return;
+                }
+
+                if(parseFloat(compra) >0)
+                {
+                    subtotal[index] =  (cantidad*compra).toFixed(2);
+                    total= total + parseFloat(subtotal[index]);
+                    cantidad_array[index] = (cantidad*1);
+                    totalcantidad = totalcantidad + (cantidad * 1);
+                    var fila=`<tr class = "selected" id="fila${index}">
+                        <td><button type="button" class="btn btn-danger" onClick="eliminar(${index})">
+                            <i class="fa fa-arrows-alt" aria-hidden="true"></i> Quitar
+                        </button></td>
+                        <td><input type="hidden" class="form-control producto" name="producto_id[]" value="${product_id}">${producto}</td>
+                        <td><input type="number" class="form-control" readonly name="costo[]" value="${compra}"></td>
+                        <td><input type="number" class="form-control" readonly name="cantidad[]" value ="${cantidad}"></td>
+                        <td>${subtotal[index]}</td>
+                    </tr>`;
+                    $("#detalle").append(fila);
+                    $('#total').html(total+ " Bs.");
+                    $("#total_amount").val(total);
+                    $("#total_quantity").val(totalcantidad);
+                    index++;
+                    evaluar();
+                    limpiar();
+                } else {
+                    swal({
+                        position: 'center',
+                        type: 'warning',
+                        title: 'Error al agregar el producto',
+                        text: "El costo debe ser mayor a cero",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
            // }
         }else{
-            alert("Error al ingresar los detalles de la venta, Revise los datos del producto");
+            swal({
+                    position: 'center',
+                    type: 'warning',
+                    title: 'Error al agregar el producto',
+                    text: "Revise los datos del producto",
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+           
         }
     }
 
@@ -96,18 +161,19 @@
     }
 
     function limpiar() {
-        $('#product option').prop('selected', function() {
+        /*$('#product option').prop('selected', function() {
             return this.defaultSelected;
-        });
+        });*/
+        //$("#product option[value="+ null +"]").attr("selected",true);
         $('#pcompra').val("");
         $('#pcantidad').val("");
     }
 
     function eliminar(index) {
-        total = total - subtotal[index];
+        total = total - (subtotal[index]);
         totalcantidad =  totalcantidad - cantidad_array[index];
         $("#fila" + index).remove();
-        $('#total').html(total+ " Bs.");
+        $('#total').html((total).toFixed(2) + " Bs.");
         $("#total_quantity").val(totalcantidad);
         $("#total_amount").val(total);
         // para escodner los botones si se borro todo el detalle
@@ -121,11 +187,20 @@
             url: url,
             type: "GET",
             success: function(data) {
-                let price = parseFloat(data.price).toFixed(2);
-                $('#pcompra').val(price);
+                let cost = parseFloat(data.cost).toFixed(2);
+                $('#pcompra').val(cost);
             },
             error: function() {
-                alert("Seleccione un producto valido");
+                //alert("Seleccione un producto valido");
+                swal({
+                        position: 'center',
+                        type: 'warning',
+                        title: 'Seleccione un producto valido',
+                        text: "",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                $('#pcompra').val('');
             }
         });
     }

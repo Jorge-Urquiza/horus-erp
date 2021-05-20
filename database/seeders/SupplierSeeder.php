@@ -27,14 +27,14 @@ class SupplierSeeder extends Seeder
                 'name' => 'Jose Coimbra',
                 'address' => 'Calle coimbra',
                 'type' => 'N',
-                'telephone' => 75998787,
+                'telephone' => '75998787',
                 'email' => 'jose@gmail.com',
                 
             ],
             [
                 'name' => 'Manuel Suarez',
                 'address' => 'Calle coimbra Suarez esquina sanchez',
-                'telephone' => 7667656,
+                'telephone' => '7667656',
                 'type' => 'N',
                 'email' => 'manuel@gmail.com',
                 

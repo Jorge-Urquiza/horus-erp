@@ -3,15 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ProductsTable;
+use App\Enums\Message;
+use App\Http\Requests\products\EditProductRequest;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\MeasurementsUnits;
 use App\Models\Brand;
 use App\Http\Requests\products\StoreProductRequest;
+use App\Models\BranchsProduct;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:productos.create')->only(['create']);
+        $this->middleware('permission:productos.index')->only(['index','show']);
+        $this->middleware('permission:productos.destroy')->only(['destroy']);
+        $this->middleware('permission:productos.edit')->only(['edit']);
+    }
+
     public function index()
     {
         return view('products.index');
@@ -43,12 +54,12 @@ class ProductController extends Controller
         if($request->hasFile('imagen'))
         {
 
-            $filename= time().'_'.$request->imagen->getClientOriginalName();  
+            $filename= time().'_'.$request->imagen->getClientOriginalName();
             $request->imagen->storeAs('public/upload',$filename);
             $request->request->add(['image' => $filename]);
         }
         Product::create($request->all());
-        flash()->stored();
+        flash(Message::STORED);
         return redirect()->route('products.index');
     }
 
@@ -85,22 +96,22 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreProductRequest $request, Product $product)
+    public function update(EditProductRequest $request, Product $product)
     {
-        
+
         if($request->hasFile('imagen'))
           {
 
-           $filename= time().'_'.$request->imagen->getClientOriginalName(); 
+           $filename= time().'_'.$request->imagen->getClientOriginalName();
            $request->imagen->storeAs('public/upload',$filename);
            $request->request->add(['image' => $filename]);
           }
 
         $product->fill($request->all());
 
-        $product->save();
+        $product->update();
 
-        flash()->updated();
+        flash(Message::UPDATED);
 
         return redirect()->route('products.index');
     }
@@ -115,7 +126,7 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        flash()->deleted();
+        flash(Message::DELETED);
 
         return redirect()->route('products.index');
     }
@@ -123,5 +134,24 @@ class ProductController extends Controller
     public function list()
     {
         return ProductsTable::generate();
+    }
+
+    ///Visualizar Stock sucursal
+    public function stock()
+    {
+        return view('products.branch-stock.index');
+    }
+
+    public function listStock()
+    {
+       return response()->json(['data'=> Product::all()]);
+    }
+
+    public function productBranches(Product $product)
+    {
+        $branchProducts = BranchsProduct::where('product_id', $product->id)
+            ->with('branch_office')->get();
+
+        return view('products.branch-stock.show', compact('branchProducts', 'product'));
     }
 }

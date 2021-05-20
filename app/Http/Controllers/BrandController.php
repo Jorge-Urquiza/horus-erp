@@ -15,6 +15,10 @@ class BrandController extends Controller
     public function __construct(MarcaRepository $marcaRepository)
     {
         $this->marcaRepository = $marcaRepository;
+        $this->middleware('permission:brands.create')->only(['create']);
+        $this->middleware('permission:brands.index')->only(['index','show']);
+        $this->middleware('permission:brands.destroy')->only(['destroy']);
+        $this->middleware('permission:brands.edit')->only(['edit']);
     }
 
     public function index()
@@ -53,9 +57,9 @@ class BrandController extends Controller
      * @param  \App\Models\Marca  $marca
      * @return \Illuminate\Http\Response
      */
-    public function show(Brand $marca)
+    public function show(Brand $brand)
     {
-        //
+        return response()->json($brand);
     }
 
 
@@ -64,15 +68,16 @@ class BrandController extends Controller
         return view('brands.edit', compact('categoria'));
     }
 
-    public function update(StoreBrandRequest $request, Brand $brand)
+    public function update(Request $request, Brand $brand)
     {
-       $brand->fill($request->post());
+        
+        $brand->fill($request->post());
 
         $brand->save();
 
         flash()->updated();
 
-        return redirect()->route('brands.index');
+        return redirect()->route('brands.index'); 
     }
 
     public function destroy(Brand $brand)

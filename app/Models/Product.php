@@ -8,6 +8,12 @@ class Product extends Model
 {
     use LogsActivity;
 
+    protected $casts = [
+        'gain' => 'float',
+        'cost' => 'float',
+        'price' => 'float',
+    ];
+
     public static function getProducto($id)
     {
         $data = DB::table('products')->select(['products.id','products.local_code', 'products.name', 'products.price',
@@ -59,6 +65,14 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class, 'category_id')
+            ->withDefault([
+                'name' => 'Sin categoria',
+            ]);
     }
+    public function BranchsProduct()
+    {
+        return $this->hasMany(Product::class);
+    }
+
 }

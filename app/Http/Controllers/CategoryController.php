@@ -9,6 +9,14 @@ use App\Http\Requests\categories\StoreCategoriesRequest;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:categorias.create')->only(['create']);
+        $this->middleware('permission:categorias.index')->only(['index','show']);
+        $this->middleware('permission:categorias.destroy')->only(['destroy']);
+        $this->middleware('permission:categorias.edit')->only(['edit']);
+    }
+
     public function index()
     {
 

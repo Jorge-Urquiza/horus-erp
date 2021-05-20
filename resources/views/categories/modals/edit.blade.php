@@ -24,12 +24,23 @@
 
 @push('scripts')
     <script>
+        var input = document.getElementById('name');
+        input.addEventListener('input', function(evt) {
+            this.setCustomValidity('');
+        });
+        input.addEventListener('invalid', function(evt) {
+            // Required
+            if (this.validity.valueMissing) {
+                this.setCustomValidity('Por favor complete el nombre!');
+            }
+        });
         function updateRoutes(id,valor) {
           
             for(var i=0 ; i< valor.length; i++ ){
                 let value = valor[i];
                 if(value.id == id){
                     $('#name').val(value.name);
+                    $('#description').val(value.description);
                 }
             }
             

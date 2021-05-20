@@ -19,14 +19,16 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('local_code');
+            $table->string('local_code')->unique();
             $table->string('name');
             $table->Text('description')->nullable();
             $table->Text('image')->nullable();
-            $table->integer('current_stock')->unsigned()->default(0);
-            $table->integer('minimum_stock')->unsigned()->default(0);
-            $table->integer('maximum_stock')->unsigned()->default(0);
+            $table->integer('total_current_stock')->unsigned()->default(0);
+            $table->integer('total_minimum_stock')->unsigned()->default(0);
+            $table->integer('total_maximum_stock')->unsigned()->default(0);
+            $table->float('gain',12,2)->default(0);
             $table->float('price',12,2)->default(0);
+            $table->float('cost',12,2)->default(0);
             $table->foreignIdFor(MeasurementsUnits::class)->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');

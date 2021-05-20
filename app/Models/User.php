@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+
 use App\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-
+use DateTimeInterface;
 
 class User extends Authenticatable
 {
@@ -28,6 +29,7 @@ class User extends Authenticatable
         'branch_office_id',
     ];
 
+    protected $appends = ['full_name'];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -47,6 +49,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('d-m-Y H:i:s');
+    }
+
+    public function getFullNameAttribute() // notice that the attribute name is in CamelCase.
+    {
+        return ucfirst($this->name) . ' ' . ucfirst($this->last_name);
+    }
+
     public function getFullName(): string
     {
         return $this->name . ' '. $this->last_name;
@@ -59,4 +71,5 @@ class User extends Authenticatable
             'name' => 'Sin sucursal',
         ]);
     }
+
 }

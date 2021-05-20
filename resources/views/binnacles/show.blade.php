@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="title">
-                <h4>Actividad</h4>
+                <h4>Bitacora</h4>
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
@@ -13,6 +13,11 @@
                     <li class="breadcrumb-item active" aria-current="page">Detalle</li>
                 </ol>
             </nav>
+        </div>
+        <div class="col text-right">
+            <a href="{{ route('binnacles.index') }}" class="btn btn-outline-primary btn-sm">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
+            </a>
         </div>
     </div>
 @endsection
@@ -52,24 +57,26 @@
 <div class="alert alert-warning" role="alert">
     <p> <strong>Acerca de actividad  <strong></p>
 
-    <ul>
-        @foreach ($activity->properties as $items)
-            @if ($loop->first)
-            <p>Atributos</p>
-            @else
-            <br>
-            <p>Old Value</p>
-            @endif
-            @foreach ($items as $key => $item)
-                <li>
-                    <strong>{{ $key }} : {{ $item }} </strong>
-                </li>
+    
+        <div class="row">
+            @foreach ($activity->properties as $items)
+                @if ($loop->first)
+                <div class="col-lg-6">
+                    <p>Atributos</p>
+                @else
+                <div class="col-lg-6">
+                    <p>Valor Nuevo</p>
+                @endif
+                @foreach ($items as $key => $item)
+                    <li>
+                        <strong>{{ $key }} : {{ $item }} </strong>
+                    </li>
+                @endforeach
+                </div>
             @endforeach
-        @endforeach
+        </div>
 
-    </ul>
-</div>
-        <a href="{{route('binnacles.index')}}" class="btn btn-primary">Volver</a>
-   </div>
+    
+
 
 @endsection
