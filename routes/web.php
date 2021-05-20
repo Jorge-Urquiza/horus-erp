@@ -30,7 +30,7 @@ Route::get('/', function () {
 
 Route::get('/testppp', function () {
     Notification::route('slack',
-    env('SLACK_NOTIFICATION_WEBHOOK'))
+    env('SLACK_VENTA_WEBHOOK'))
     ->notify(new StockNotification('noti'));
     return 'hola';
 });
@@ -42,9 +42,9 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('test', function(){
+Route::get('prueba', function(){
     Notification::route('slack',
-    'https://hooks.slack.com/services/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')
+    env('SLACK_STOCK_WEEBHOOK'))
     ->notify(new StockNotification('adasd'));
 
     return "send";
