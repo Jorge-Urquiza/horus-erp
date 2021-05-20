@@ -45,9 +45,9 @@
                     @foreach($output->outputDetails as $d)
                         <tr>
                             <td>{{ $d->product->name }}</td>
-                            <td>{{ $d->cost }}</td>
+                            <td>{{ number_format($d->cost, 2, '.', '') }}</td>
                             <td>{{ $d->quantity }}</td>
-                            <td>{{ $d->quantity * $d->cost * 1 }} </td>
+                            <td>{{ number_format($d->quantity * $d->cost * 1, 2, '.', '') }} </td>
                         </tr>
                     @endforeach
                 </tbody>

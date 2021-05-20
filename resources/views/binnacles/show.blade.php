@@ -57,22 +57,26 @@
 <div class="alert alert-warning" role="alert">
     <p> <strong>Acerca de actividad  <strong></p>
 
-    <ul>
-        @foreach ($activity->properties as $items)
-            @if ($loop->first)
-            <p>Atributos</p>
-            @else
-            <br>
-            <p>Old Value</p>
-            @endif
-            @foreach ($items as $key => $item)
-                <li>
-                    <strong>{{ $key }} : {{ $item }} </strong>
-                </li>
+    
+        <div class="row">
+            @foreach ($activity->properties as $items)
+                @if ($loop->first)
+                <div class="col-lg-6">
+                    <p>Atributos</p>
+                @else
+                <div class="col-lg-6">
+                    <p>Valor Nuevo</p>
+                @endif
+                @foreach ($items as $key => $item)
+                    <li>
+                        <strong>{{ $key }} : {{ $item }} </strong>
+                    </li>
+                @endforeach
+                </div>
             @endforeach
-        @endforeach
+        </div>
 
-    </ul>
+    
 
 
 @endsection

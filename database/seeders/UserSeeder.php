@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'email' => 'alex1@gmail.com',
             'password' => bcrypt(123456),
             'branch_office_id' => 1, //Casa matriz ID
-            'is_admin' => true,
+            'is_admin' => false,
         ])->assignRole('Admin');
 
         User::create([
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             'email' => 'jessica@gmail.com',
             'password' => bcrypt(123456),
             'branch_office_id' => 2, //Casa matriz ID
-            'is_admin' => true,
+            'is_admin' => false,
         ])->assignRole('Admin');
 
         User::create([
