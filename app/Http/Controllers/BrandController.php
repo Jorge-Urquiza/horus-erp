@@ -70,19 +70,19 @@ class BrandController extends Controller
 
     public function update(Request $request, Brand $brand)
     {
-        
+
         $brand->fill($request->post());
 
         $brand->save();
 
         flash()->updated();
 
-        return redirect()->route('brands.index'); 
+        return redirect()->route('brands.index');
     }
 
     public function destroy(Brand $brand)
     {
-        
+
         $this->marcaRepository->delete($brand);
 
         flash()->deleted();
