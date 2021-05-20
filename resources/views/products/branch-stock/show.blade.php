@@ -45,22 +45,22 @@
                 <strong>Unidad de Medida:</strong> {{ $product->measurementsUnit->name ?? 'No ingresada' }}
             </li>
             <li>
-                <strong>Costo:</strong> {{ $product->cost }} Bs.
+                <strong>Costo:</strong> {{ money($product->cost) }} Bs.
             </li>
             <li>
-                <strong>Precio:</strong> {{ $product->price }} Bs.
+                <strong>Precio:</strong> {{  money($product->price) }} Bs.
             </li>
             <li>
-                <strong>Ganancia:</strong> {{ $product->gain }} Bs.
+                <strong>Ganancia:</strong> {{ money($product->gain) }} Bs.
             </li>
             <li>
-                <strong>Total Stock Maximo:</strong> {{ $product->total_maximum_stock }}
+                <strong>Total Stock Maximo: </strong> {{ $product->total_maximum_stock }}
             </li>
             <li>
-                <strong>Total Stock Minimo:</strong> {{ $product->total_minimum_stock }}
+                <strong>Total Stock Minimo: </strong> {{ $product->total_minimum_stock }}
             </li>
             <li>
-                <strong>Total Stock Actual:</strong> {{ $product->total_current_stock }}
+                <strong>Total Stock Actual: </strong> {{ $product->total_current_stock }}
             </li>
         </ul>
         <p class="card-text"><small class="text-muted">Creado en: {{ $product->created_at }}</small></p>
@@ -82,13 +82,13 @@
                 <h5 class="card-title">Detalle:</h5>
                 <ul>
                     <li>
-                        <strong>Stock Actual:</strong>{{ $branchProduct->current_stock }} Bs.
+                        <strong>Stock Actual: </strong>{{ $branchProduct->current_stock }}
                     </li>
                     <li>
-                        <strong>Stock Máximo:</strong> {{ $branchProduct->maximum_stock }} Bs.
+                        <strong>Stock Máximo: </strong> {{ $branchProduct->maximum_stock }}
                     </li>
                     <li>
-                        <strong>Stock Mínimo:</strong> {{ $branchProduct->minimum_stock }} Bs.
+                        <strong>Stock Mínimo: </strong> {{ $branchProduct->minimum_stock }}
                     </li>
                 </ul>
                 <p class="card-text">

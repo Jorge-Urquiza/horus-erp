@@ -24,7 +24,7 @@
 
 @section('content')
 
-    {!! Form::open(['route' => ['roles.store'], 'method' => 'post']) !!}
+    {!! Form::model($user, ['route' => ['user.update', $user->id]]) !!}
         @csrf
         @include('roles.partials.form')
         {!!  Form::submit('Guardar', ['class' => 'btn btn-outline-primary btn-sm']) !!}

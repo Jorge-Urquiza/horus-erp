@@ -35,6 +35,14 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+Route::get('test', function(){
+    Notification::route('slack',
+    'https://hooks.slack.com/services/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')
+    ->notify(new StockNotification('adasd'));
+
+    return "send";
+});
+
 Route::middleware(['auth'])->group(function () {
 
     Route::post('assign-user-branch/{user}', AssignUserBranchController::class)
@@ -77,6 +85,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('product/stock',[ProductController::class, 'stock'])->name('products.stock');
     Route::get('products/list/stock',[ProductController::class, 'listStock'])->name('products.list.stock');
     Route::get('product/branches/{product}',[ProductController::class, 'productBranches'])->name('product.branch');
+
+    Route::get('users/rol/{rol}',[UserController::class, 'indexUserRol'])->name('users.rol.index');
+    Route::get('users/list',[UserController::class, 'list'])->name('users.list');
 
     Route::resource('users', UserController::class);
     Route::resource('roles', RolController::class);

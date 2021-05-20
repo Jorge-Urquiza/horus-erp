@@ -151,6 +151,7 @@ class ProductController extends Controller
     {
         $branchProducts = BranchsProduct::where('product_id', $product->id)
             ->with('branch_office')->get();
+
         return view('products.branch-stock.show', compact('branchProducts', 'product'));
     }
 }
