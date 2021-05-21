@@ -18,9 +18,11 @@ use App\Http\Controllers\OutputNoteController;
 use App\Http\Controllers\MeasurementsUnitsController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\TransferNoteController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Notifications\NewSaleNotification;
+use App\Notifications\pruebaNotification;
 use App\Notifications\StockNotification;
 use Illuminate\Support\Facades\Notification;
 
@@ -30,25 +32,19 @@ Route::get('/', function () {
 
 Route::get('/testppp', function () {
     Notification::route('slack',
-    env('SLACK_VENTA_WEBHOOK'))
+    "https://hooks.slack.com/services/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")
     ->notify(new StockNotification('noti'));
     return 'hola';
 });
 
+Route::get('/prueba', function(){
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
-
-Route::get('prueba', function(){
-    Notification::route('slack',
-    env('SLACK_STOCK_WEEBHOOK'))
-    ->notify(new StockNotification('adasd'));
-
-    return "send";
-});
 
 Route::middleware(['auth'])->group(function () {
 

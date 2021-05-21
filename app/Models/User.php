@@ -72,4 +72,11 @@ class User extends Authenticatable
         ]);
     }
 
+    public function routeNotificationFor($notification)
+    {
+        //return "https://hooks.slack.com/services/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"; //Jandira
+        //return "https://hooks.slack.com/services/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"; // Stock Jorge
+        return "https://hooks.slack.com/services/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"; //venta
+    }
+
 }

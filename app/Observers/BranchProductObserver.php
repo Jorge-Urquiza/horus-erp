@@ -3,6 +3,8 @@
 namespace App\Observers;
 
 use App\Models\BranchsProduct;
+use App\Models\User;
+use App\Notifications\pruebaNotification;
 use App\Notifications\StockNotification;
 use Illuminate\Support\Facades\Notification;
 
@@ -33,18 +35,20 @@ class BranchProductObserver
         {
             $mensaje= "El producto ".$branchsProduct->product->name." en la sucursal ".$branchsProduct->branch_office->name
                       ." supero su stock maximo";
-            Notification::route('slack',
+            /*Notification::route('slack',
             env('SLACK_STOCK_WEEBHOOK'))
-            ->notify(new StockNotification($mensaje));
+            ->notify(new StockNotification($mensaje));*/
+            User::first()->notify( new StockNotification($mensaje));
         }
 
         if($branchsProduct->current_stock < $branchsProduct->minimum_stock)
         {
             $mensaje= "El producto ".$branchsProduct->product->name." en la sucursal ".$branchsProduct->branch_office->name
                       ." es menor a su stock minimo";
-            Notification::route('slack',
+            /*Notification::route('slack',
             env('SLACK_STOCK_WEEBHOOK'))
-            ->notify(new StockNotification($mensaje));
+            ->notify(new StockNotification($mensaje));*/
+            User::first()->notify( new StockNotification($mensaje));
         }
     }
 
