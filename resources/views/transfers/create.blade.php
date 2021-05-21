@@ -49,7 +49,7 @@
             agregar();
         });
 
-        var input = document.getElementById('branch_office_destiny');
+       /* var input = document.getElementById('branch_office_destiny');
         input.addEventListener('select', function(evt) {
             this.setCustomValidity('');
         });
@@ -58,7 +58,7 @@
             if (this.validity.valueMissing) {
                 this.setCustomValidity('Por favor seleccione una sucursal!');
             }
-        });
+        });*/
 
         document.getElementById('pcantidad').addEventListener('keypress', e => {
             if(String.fromCharCode(e.which || e.keyCode) == '-'){
@@ -92,7 +92,7 @@
     
 
     function completarSucursalDestino(id){
-        var valor = $("#branch_office option:selected").val();
+        var valor = (user.is_admin)?$("#branch_office option:selected").val():$("#branch_office_s").val();
         if (valor == id){
             swal({
                 position: 'center',
