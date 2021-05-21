@@ -4,7 +4,6 @@ namespace App\DataTables;
 
 use App\Models\User;
 use Illuminate\Database\Query\Builder;
-use Spatie\Permission\Models\Role;
 use Session;
 
 class UsersRolTable extends DataTable
