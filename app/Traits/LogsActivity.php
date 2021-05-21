@@ -16,7 +16,7 @@ trait LogsActivity
         'Category' => 'Categoria',
         'Product' => 'Producto',
         'Supllier' => 'Proveedor',
-        'User' => 'Usuario',        
+        'User' => 'Usuario',
         'Brand' => 'Marca',
         'MeasurementsUnits' => 'Unidad Medida',
         'IncomeNote' => 'Nota Ingreso',
@@ -56,7 +56,7 @@ trait LogsActivity
         if($user){
             return $user->name;
         }
-        return "User unknown";
+        return "Sistema";
         //return auth()->user()->getFullName() . ' - ID:' .auth()->user()->id ;
     }
 
