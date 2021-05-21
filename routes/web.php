@@ -37,9 +37,6 @@ Route::get('/testppp', function () {
     return 'hola';
 });
 
-Route::get('/prueba', function(){
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
