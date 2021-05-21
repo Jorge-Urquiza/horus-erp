@@ -5,8 +5,13 @@ namespace App\DataTables;
 use App\Models\Sale;
 use Illuminate\Database\Eloquent\Builder;
 
-class ReportTable extends Datatable
+class ReportTable extends DataTable
 {
+    /**
+     * The query builder object
+     *
+     * @return Builder
+     */
     public function query()
     {
 
