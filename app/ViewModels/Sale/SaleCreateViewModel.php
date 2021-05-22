@@ -19,7 +19,14 @@ class SaleCreateViewModel extends ViewModel
 
     public function products()
     {
-        return Product::orderBy('id', 'DESC')->pluck('name','id');
+        $products = Product::with('BranchsProduct')
+        ->whereHas('BranchsProduct', function($query) {
+            $query->where('branch_office_id', '=', $this->seller->branch_office_id);
+        })
+        ->pluck('name','id');
+
+
+        return $products;
     }
 
     public function customers() : array

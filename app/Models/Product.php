@@ -72,7 +72,7 @@ class Product extends Model
     }
     public function BranchsProduct()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(BranchsProduct::class);
     }
 
 }

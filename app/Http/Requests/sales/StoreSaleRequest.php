@@ -24,14 +24,22 @@ class StoreSaleRequest extends FormRequest
     public function rules()
     {
         return [
+            //sale
             'date' => 'required',
             'customer_id' => 'required',
             'nit' => 'nullable',
-            'cantidad' => 'required',
             'customer_id' => 'required',
+
+            //detail
             'producto_id' => 'required|array|min:1',
             'pcompra' => 'required|array|min:1',
+            'cantidad' => 'required',
             'pdescuento' => 'required|array|min:1',
+
+            //calculated fields
+            'totales_input' => 'required',
+            'discount-neto_input' => 'required',
+            'total-neto_input' => 'required',
         ];
     }
 }

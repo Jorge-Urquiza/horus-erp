@@ -19,6 +19,9 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->float('total_amount', 12, 2)->default(0);
+            $table->float('total_amount', 12, 2)->default(0);
+            $table->float('total_amount', 12, 2)->default(0);
+
             $table->integer('nit')->default(0);
             $table->date('date');
 

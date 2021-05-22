@@ -30,9 +30,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/testppp', function () {
+Route::get('test', function () {
     Notification::route('slack',
-    "https://hooks.slack.com/services/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")
+    "https://hooks.slack.com/services/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")
     ->notify(new StockNotification('noti'));
     return 'hola';
 });

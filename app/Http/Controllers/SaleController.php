@@ -26,13 +26,13 @@ class SaleController extends Controller
         return view('sales.create', new SaleCreateViewModel);
     }
 
-    public function store(Request $request)
+    public function store(StoreSaleRequest $request)
     {
-        dd($request->all());
+        dd($request->validated());
 
-        //$action = new StoreSaleAction($request->validated());
+        $action = new StoreSaleAction($request->validated());
 
-        //$action->execute();
+        $action->execute();
 
         flash()->stored();
 
