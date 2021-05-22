@@ -71,7 +71,7 @@ class IncomeNoteController extends Controller
             $costo = $request->input('costo');
 
             for( $i=0; $i < count($productos) ;$i++){
-                
+
                 IncomeDetail::create([
                     'product_id' => $productos[$i],
                     'quantity' => $cantidad[$i],
@@ -107,7 +107,7 @@ class IncomeNoteController extends Controller
                     $costo_ponderado_numerador = ($product->total_current_stock * $product->cost * 1) + ($d->quantity * $d->cost * 1);
                     $costo_ponderado = round( $costo_ponderado_numerador / ($product->total_current_stock + $d->quantity *1) ,2);
                     $product->cost = $costo_ponderado;
-                    $product->price = round(( ($costo_ponderado * $product->gain * 1) / 100 ) + $costo_ponderado, 2);  
+                    $product->price = round(( ($costo_ponderado * $product->gain * 1) / 100 ) + $costo_ponderado, 2);
                     $product->total_current_stock = $product->total_current_stock + ($d->quantity * 1);
                     $product->update();
 
@@ -121,7 +121,7 @@ class IncomeNoteController extends Controller
                     $costo_ponderado_numerador = ($product->total_current_stock * $product->cost * 1) + ($d->quantity * $d->cost * 1);
                     $costo_ponderado = round( $costo_ponderado_numerador / ($product->total_current_stock + $d->quantity *1) ,2);
                     $product->cost = $costo_ponderado;
-                    $product->price = round(( ($costo_ponderado * $product->gain * 1) / 100 ) + $costo_ponderado, 2); 
+                    $product->price = round(( ($costo_ponderado * $product->gain * 1) / 100 ) + $costo_ponderado, 2);
                     $product->total_current_stock = $product->total_current_stock + ($d->quantity * 1);
                     $product->total_minimum_stock = ( $product->total_minimum_stock + 10 * 1);
                     $product->total_maximum_stock = ( $product->total_maximum_stock + 100 *1);
@@ -130,7 +130,7 @@ class IncomeNoteController extends Controller
             }
             $income->status = 'Ingresado';
             $income->update();
-            
+
             DB::commit();
             flash()->stored("Productos Ingresados Exitosamente");
             return redirect()->route('incomes.index')->with('advertencia', $mensaje_advertencia);

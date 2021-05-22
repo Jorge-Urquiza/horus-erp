@@ -122,14 +122,17 @@
                             <div class="text-left">
                                 <span class="font-weight-bold">Subtotal: </span>
                                 <span class="font-weight-light" id="totales"></span>
+                                <input id="totales_input" name="totales_input" type="hidden">
                             </div>
                             <div class="text-left">
                                 <span class="font-weight-bold">Descuento: </span>
                                 <span class="font-weight-light" id= "discount-neto"></span>
+                                <input id="discount-neto_input" name="discount-neto_input" type="hidden">
                             </div>
                             <div class="text-left">
                                  <span class="font-weight-bold">TOTAL NETO: </span>
                                  <span id="total-neto" class="font-weight-bold"></span>
+                                 <input id="total-neto_input" name="total-neto_input" type="hidden">
                             </div>
                         </th>
                     </tr>

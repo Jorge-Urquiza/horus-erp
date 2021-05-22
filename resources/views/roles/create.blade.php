@@ -24,10 +24,10 @@
 
 @section('content')
 
-    {!! Form::model($user, ['route' => ['user.update', $user->id]]) !!}
-        @csrf
-        @include('roles.partials.form')
-        {!!  Form::submit('Guardar', ['class' => 'btn btn-outline-primary btn-sm']) !!}
+    {!! Form::open(['route' => ['roles.store'], 'method' => 'post']) !!}
+    @csrf
+    @include('roles.partials.form')
     {!! Form::close() !!}
+
 
 @endsection

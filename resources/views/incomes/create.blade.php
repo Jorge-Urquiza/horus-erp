@@ -71,7 +71,7 @@
     var totalcantidad=0;
     var subtotal=[];
     var cantidad_array=[];
-    
+
     function existeProducto(producto_id){
         var bandera=false;
         var array_producto = document.getElementsByClassName("producto");
@@ -80,7 +80,7 @@
                 bandera = true;
             }
         })
-        return bandera;      
+        return bandera;
     }
 
     function agregar() {
@@ -148,7 +148,7 @@
                     showConfirmButton: false,
                     timer: 1500
                 })
-           
+
         }
     }
 
@@ -180,7 +180,7 @@
         evaluar();
     }
     function completarProducto(id) {
-        
+
         var url = "{{ route('api.product',':id') }}";
         url = url.replace(':id', id);
         $.ajax({

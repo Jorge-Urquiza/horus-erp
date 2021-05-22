@@ -14,7 +14,7 @@
         </nav>
     </div>
     <div class="col text-right">
-        <a href="{{ route('sales.index') }}" class="btn btn-outline-primary btn-sm">
+        <a href="{{ route('sales.index') }}" class="btn btn-outline-primary">
             <i class="fa fa-arrow-left" aria-hidden="true"></i> Salir
         </a>
     </div>
@@ -71,9 +71,14 @@
 
         total_neto_venta = Number(totales) - Number(discount_total_calculado);
 
+        //show details
         $('#discount-neto').html(discount_total.toFixed(2) + " %.");
-
         $('#total-neto').html(Number(total_neto_venta).toFixed(2) + " Bs.");
+
+        //setting on input
+
+        $('#discount-neto_input').val(discount_total.toFixed(2));
+        $('#total-neto_input').val(Number(total_neto_venta).toFixed(2));
     }
 
     function getDescuentoProducto()
@@ -95,6 +100,17 @@
         var descuento_parcial = (((compra * cantidad) * descuento) / 100 )
         var venta = ((compra* cantidad) - descuento_parcial) ;
         if(producto != "" && cantidad != "" && compra != ""){
+            if(existeProducto(product_id)){
+                swal({
+                    position: 'center',
+                    type: 'warning',
+                    title: 'El producto ya existe en el detalle',
+                    text: "",
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                return;
+            }
             resultado =  stock - cantidad;
             if(resultado < 0 ){
                 sweetAlert("Error", "Stock insuficiente", "error");
@@ -108,7 +124,7 @@
                     <td><button type="button" class="btn btn-danger" onClick="eliminar(${index})">
                         <i class="fa fa-arrows-alt" aria-hidden="true"></i> Quitar
                     </button></td>
-                    <td><input type="hidden" class="form-control" name="producto_id[]" value="${product_id}">${producto}</td>
+                    <td><input type="hidden" class="form-control producto" name="producto_id[]" value="${product_id}">${producto}</td>
                     <td>${unidad}</td>
                     <td><input type="number" class="form-control" readonly name="pcompra[]" value ="${compra}"></td>
                     <td><input type="number" class="form-control" readonly name="cantidad[]" value ="${cantidad}"></td>
@@ -118,6 +134,9 @@
                 </tr>`;
                 $("#detalle").append(fila);
                 $('#totales').html(totales.toFixed(2) + " Bs."); //subtotal de la venta
+
+                // set calculate input Sumatoria de los Subtotales
+                $('#totales_input').val(Number(totales).toFixed(2));
                 actualizarTotalNeto();
                 index++;
                 evaluar();
@@ -168,11 +187,13 @@
             url: url,
             type: "GET",
             success: function(data) {
-                $('#pcompra').val(data.price);
-                $('#pventa').val(data.price);
+
+                console.log("datos", data);
+                $('#pcompra').val(Number(data.product.price).toFixed(2));
+                $('#pventa').val(data.product.price);
                 $('#stock').val(data.current_stock);
-                $('#unidad').val(data.measurements_unit.name);
-                $('#marca').val(data.brand.name);
+                $('#unidad').val(data.product.measurements_unit.name);
+                $('#marca').val(data.product.brand.name);
             },
             error: function() {
                 alert("Seleccione un producto valido");
@@ -193,6 +214,17 @@
                 alert("Seleccione un cliente valido");
             }
         });
+    }
+
+    function existeProducto(producto_id){
+        var bandera=false;
+        var array_producto = document.getElementsByClassName("producto");
+        names = [].map.call( array_producto, function(data){
+            if(data.value == producto_id){
+                bandera = true;
+            }
+        })
+        return bandera;
     }
 </script>
 @endpush

@@ -44,7 +44,11 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        //
+        $roles = Role::all();
+
+        $branchOffices = BranchOffice::all()->pluck('name', 'id');
+
+        return view('users.show', compact('user', 'branchOffices', 'roles'));
     }
 
     public function edit(User $user)
@@ -60,7 +64,22 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        dd($request->all());
+        $data=  $request->only('name', 'email', 'last_name', 'ci', 'telephone', 'branch_office_id');
+
+        $password= $request->password;
+
+        if($password) $data['password'] = bcrypt($password);
+
+        $user->fill($data);
+
+        $user->assignRole($request->rol);
+
+        $user->save(); // para guardar los cambios despues de haber usado el "fill"
+
+        flash()->updated();
+
+        return redirect()->route('users.index');
+
     }
 
 

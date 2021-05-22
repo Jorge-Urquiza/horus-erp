@@ -14,7 +14,7 @@
                 </ol>
             </nav>
         </div>
-        
+
     </div>
 @endsection
 
@@ -75,7 +75,7 @@
                                 <a class="btn btn-outline-info btn-sm" href="{{ url('/binnacles/${row.id}/show') }}" data-toggle="tooltip" data-placement="top" title="Ver Detalle">
                                     <i class="fa fa-eye"></i>
                                 </a>
-                                
+
                             `;
                         }
                     }

@@ -23,8 +23,7 @@
 @endsection
 
 @section('content')
-
     {!! Form::open(['route'=> ['users.store'], 'method' => 'POST']) !!}
-        @include('users.partials.form')
+        @include('users.partials.form-create')
     {!! Form::close()!!}
 @endsection

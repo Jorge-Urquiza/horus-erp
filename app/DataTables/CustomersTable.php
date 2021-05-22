@@ -14,6 +14,6 @@ class CustomersTable extends DataTable
      */
     public function query()
     {
-        return Customer::query()->select(['id', 'name',]);
+        return Customer::query();
     }
 }

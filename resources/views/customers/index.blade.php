@@ -36,6 +36,9 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>CI</th>
+                <th>Telefono celular</th>
                 <th>Opciones</th>
             </tr>
         </thead>
@@ -60,11 +63,12 @@
         "columns": [
             { data: 'id' },
             { data: 'name' },
-            { data: 'name' },
-
+            { data: 'last_name' },
+            { data: 'ci' },
+            { data: 'telephone' },
         ],
         "columnDefs": [ {
-            "targets": 2,
+            "targets": 5,
             "sortable": false,
             "searchable": true,
             render: function (data, type, row) {
@@ -89,5 +93,4 @@
     });
 
 </script>
-
 @endpush
