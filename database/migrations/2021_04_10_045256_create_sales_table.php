@@ -18,13 +18,12 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->float('total_amount', 12, 2)->default(0);
-            $table->float('total_amount', 12, 2)->default(0);
-            $table->float('total_amount', 12, 2)->default(0);
-
-            $table->integer('nit')->default(0);
+            $table->integer('nit')->nullable()->default(0);
             $table->date('date');
-
+            $table->float('subtotal', 12, 2)->default(0);
+            $table->float('discount', 12, 2)->default(0);
+            $table->float('total_amount', 12, 2)->default(0);
+            $table->enum('status', ['Cerrada', 'Anulada'])->default('Cerrada');
             $table->foreignIdFor(BranchOffice::class)->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');

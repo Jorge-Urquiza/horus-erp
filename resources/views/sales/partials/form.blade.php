@@ -127,12 +127,13 @@
                             <div class="text-left">
                                 <span class="font-weight-bold">Descuento: </span>
                                 <span class="font-weight-light" id= "discount-neto"></span>
-                                <input id="discount-neto_input" name="discount-neto_input" type="hidden">
+                                <input id="discount-neto-input" name="discount-neto-input" type="hidden">
                             </div>
                             <div class="text-left">
                                  <span class="font-weight-bold">TOTAL NETO: </span>
                                  <span id="total-neto" class="font-weight-bold"></span>
-                                 <input id="total-neto_input" name="total-neto_input" type="hidden">
+                                 <input id="total-neto-input" name="total-neto-input" type="hidden">
+                                 <input id="branch_product_id" name="branch_product_id" type="hidden">
                             </div>
                         </th>
                     </tr>

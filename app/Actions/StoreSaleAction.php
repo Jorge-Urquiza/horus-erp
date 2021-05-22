@@ -2,25 +2,35 @@
 
 namespace App\Actions;
 
+use App\Models\BranchsProduct;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use App\Models\Sale;
 use App\Models\SaleDetail;
+use Illuminate\Support\Facades\Log;
 
 class StoreSaleAction
 {
     private $request;
 
-    private $quantities;
-
-    private $sale_prices;
+    private $branch_products;
 
     private $products;
 
-    private $discounts;
+    private $sale_prices;
+
+    private $quantities;
+
+    private $discounts; //& descuentos por productos
+
+    private $subtotals; // precio * cantidad (sin aplicar descuento)
+
+    private $totals; //precio * cantidad (aplicando descuento)
 
     private $length;
 
     private $sale;
+
 
     public  function __construct($request)
     {
@@ -32,9 +42,7 @@ class StoreSaleAction
 
     public function execute() :void
     {
-        DB::beginTransaction();
 
-        try {
 
             $this->sale = Sale::create($this->matchSaleData());
 
@@ -43,31 +51,40 @@ class StoreSaleAction
                 $detail = $this->matchDetailData($index);
 
                 SaleDetail::create($detail);
+
+                $this->updateStock($index);
             }
 
-            $this->sale->update(['total_amount' => $this->total]);
-
-            DB::commit();
-
-        }catch(\Exception $e){
-
-            DB::rollback();
-
-            flash()->error('Se ha producido un error, intente de nuevo, presione CTRL + F5 ');
-        }
     }
 
+
+    private function updateStock($index) :void
+    {
+        $product = Product::findOrFail($this->products[$index]);
+
+        $branchProduct = BranchsProduct::findOrFail($this->branch_products[$index]);
+
+        $quantity = $this->quantities[$index];
+
+        $product->decrement('total_current_stock', $quantity);
+
+        $branchProduct->decrement('current_stock', $quantity);
+    }
     private function matchSaleData() : array
     {
         $current_user = auth()->user();
 
         $data = [];
 
-        $data['total_amount'] = $this->total;
-
-        $data['nit'] = $this->request['nit'];
+        $data['nit'] = $this->request['nit']?? 0;
 
         $data['date'] = $this->request['date'];
+
+        $data['subtotal'] = $this->request['totales_input'];
+
+        $data['discount'] = $this->request['discount-neto-input'];
+
+        $data['total_amount'] = $this->request['total-neto-input'];
 
         $data['branch_office_id'] = $current_user->branch_office_id;
 
@@ -82,37 +99,40 @@ class StoreSaleAction
     {
         $data = [];
 
-        $data['quantity'] = $this->quantities[$index];
-
         $data['product_id'] = $this->products[$index];
+
+        $data['quantity'] = $this->quantities[$index];
 
         $data['sale_price'] = round($this->sale_prices[$index], 2);
 
+        $data['subtotal'] = $this->subtotals[$index];
+
+        $data['discount'] = $this->discounts[$index];
+
+        $data['total'] = $this->totals[$index];
+
         $data['sale_id'] = $this->sale->id;
-
-        $data['subtotal'] = round($data['quantity'] * $data['sale_price'], 2);
-
-        $data['discount'] = round($this->discounts[$index], 2);
-
-        $data['total'] = round($data['subtotal'] -  $data['discount'], 2);
-
-        $this->total += + round($data['total'], 2);
 
         return $data;
     }
 
     private function init() : void
     {
-        $this->quantities = $this->request['cantidad'];
+        // dailts
+        $this->branch_products = $this->request['branch_products_ids'];
 
         $this->products = $this->request['producto_id'];
 
+        $this->quantities = $this->request['cantidad'];
+
         $this->sale_prices = $this->request['pcompra'];
+
+        $this->length = count($this->products);
+
+        $this->subtotals = $this->request['subtotals'];
 
         $this->discounts = $this->request['pdescuento'];
 
-        $this->length = count($this->request['producto_id']);
-
-        $this->total = 0;
+        $this->totals = $this->request['ptotal'];
     }
 }

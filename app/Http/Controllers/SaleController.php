@@ -28,8 +28,6 @@ class SaleController extends Controller
 
     public function store(StoreSaleRequest $request)
     {
-        dd($request->validated());
-
         $action = new StoreSaleAction($request->validated());
 
         $action->execute();

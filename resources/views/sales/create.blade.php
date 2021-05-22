@@ -77,8 +77,8 @@
 
         //setting on input
 
-        $('#discount-neto_input').val(discount_total.toFixed(2));
-        $('#total-neto_input').val(Number(total_neto_venta).toFixed(2));
+        $('#discount-neto-input').val(discount_total.toFixed(2));
+        $('#total-neto-input').val(Number(total_neto_venta).toFixed(2));
     }
 
     function getDescuentoProducto()
@@ -89,7 +89,7 @@
     }
 
     function agregar() {
-
+        var branch_product_id = $("#branch_product_id").val();
         var product_id = $("#product option:selected").val();
         var producto = $("#product option:selected").text();
         var cantidad = $("#cantidad").val();
@@ -99,6 +99,7 @@
         var unidad = $("#unidad").val();
         var descuento_parcial = (((compra * cantidad) * descuento) / 100 )
         var venta = ((compra* cantidad) - descuento_parcial) ;
+
         if(producto != "" && cantidad != "" && compra != ""){
             if(existeProducto(product_id)){
                 swal({
@@ -115,7 +116,8 @@
             if(resultado < 0 ){
                 sweetAlert("Error", "Stock insuficiente", "error");
             }else{
-                subtotal[index] =  (cantidad*compra).toFixed(2);
+                let parcial_precio = (cantidad*compra).toFixed(2)
+                subtotal[index] =  parcial_precio;
                 total[index] =  Number(venta).toFixed(2);
 
                 totales = Number(totales) + Number(venta);
@@ -128,9 +130,10 @@
                     <td>${unidad}</td>
                     <td><input type="number" class="form-control" readonly name="pcompra[]" value ="${compra}"></td>
                     <td><input type="number" class="form-control" readonly name="cantidad[]" value ="${cantidad}"></td>
-                    <td>${subtotal[index]}</td>
+                    <td><input type="hidden" name="subtotals[]" value="${parcial_precio}">${parcial_precio}</td>
                     <td><input type="number" class="form-control" readonly name="pdescuento[]" value="${descuento}"></td>
                     <td><input type="number" class="form-control" readonly name="ptotal[]" value="${total[index]}"></td>
+                    <input type="hidden" name="branch_products_ids[]" value="${branch_product_id}">
                 </tr>`;
                 $("#detalle").append(fila);
                 $('#totales').html(totales.toFixed(2) + " Bs."); //subtotal de la venta
@@ -189,6 +192,7 @@
             success: function(data) {
 
                 console.log("datos", data);
+                $('#branch_product_id').val(data.id);
                 $('#pcompra').val(Number(data.product.price).toFixed(2));
                 $('#pventa').val(data.product.price);
                 $('#stock').val(data.current_stock);

@@ -32,7 +32,8 @@ Route::get('/', function () {
 
 Route::get('test', function () {
     Notification::route('slack',
-    "https://hooks.slack.com/services/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")
+    "https://hooks.slack.com/services/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
+    ")
     ->notify(new StockNotification('noti'));
     return 'hola';
 });
