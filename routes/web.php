@@ -32,7 +32,7 @@ Route::get('/', function () {
 
 Route::get('/testppp', function () {
     Notification::route('slack',
-    //"https://hooks.slack.com/services/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")
+    //"https://hooks.slack.com/services/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")
             "https://hooks.slack.com/services/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")
     ->notify(new StockNotification('jandi jojojo jeje'));
     return 'hola';

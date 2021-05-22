@@ -44,6 +44,7 @@ class StockNotification extends Notification implements ShouldQueue
     public function toSlack($notifiable)
     {
         return (new SlackMessage)
+        //->from('Laravel')
         ->success()
         ->content($this->mensaje);
     }
