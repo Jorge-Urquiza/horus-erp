@@ -26,7 +26,7 @@ class ProductSeeder extends Seeder
             [
                 'local_code' => '80D31L',
                 'name' => 'RETEN CIGUEÑAL',                
-                'brand_id' => 1,
+                'brand_id' => 4,
                 'measurements_units_id' => 2,
                 'supplier_id' => 1,
                 'category_id' => 2,
@@ -37,7 +37,7 @@ class ProductSeeder extends Seeder
             [
                 'local_code' => 'B15-83-PFI',
                 'name' => 'RODAMIENTOS PFI',
-                'brand_id' => 2,
+                'brand_id' => 5,
                 'measurements_units_id' => 1,
                 'supplier_id' => 2,
                 'category_id' => 3,
@@ -59,7 +59,7 @@ class ProductSeeder extends Seeder
             [
                 'local_code' => 'JPK-260N',
                 'name' => 'RETEN DE PIÑON Y CORONA',                
-                'brand_id' => 3,
+                'brand_id' => 4,
                 'measurements_units_id' => 1,
                 'supplier_id' => 1,
                 'category_id' => 2,
@@ -70,7 +70,7 @@ class ProductSeeder extends Seeder
             [
                 'local_code' => '54071-MLS',
                 'name' => 'EMPAQUETADURA CULATA',                
-                'brand_id' => 1,
+                'brand_id' => 7,
                 'measurements_units_id' => 2,
                 'category_id' => 4,
                 'supplier_id' => 2,
@@ -82,7 +82,7 @@ class ProductSeeder extends Seeder
             [
                 'local_code' => 'GUN-26',
                 'name' => 'CRUCETA DE DIRECCION',                
-                'brand_id' => 1,
+                'brand_id' => 6,
                 'measurements_units_id' => 2,
                 'category_id' => 5,
                 'supplier_id' => 2,
@@ -93,7 +93,7 @@ class ProductSeeder extends Seeder
             [
                 'local_code' => 'JPK-F144',
                 'name' => 'Reten de soporte de cardan',                
-                'brand_id' => 1,
+                'brand_id' => 4,
                 'measurements_units_id' => 2,
                 'category_id' => 2,
                 'supplier_id' => 2,
@@ -115,7 +115,7 @@ class ProductSeeder extends Seeder
             [
                 'local_code' => 'JPK-W560',
                 'name' => 'RETEN HIDRAULICO',                
-                'brand_id' => 1,
+                'brand_id' => 3,
                 'measurements_units_id' => 2,
                 'category_id' => 2,
                 'supplier_id' => 2,
@@ -126,7 +126,7 @@ class ProductSeeder extends Seeder
             [
                 'local_code' => 'JPK-W681',
                 'name' => 'Reten de cremallera',                
-                'brand_id' => 1,
+                'brand_id' => 4,
                 'measurements_units_id' => 2,
                 'category_id' => 2,
                 'supplier_id' => 2,

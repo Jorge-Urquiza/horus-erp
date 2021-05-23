@@ -24,9 +24,11 @@
             <h4 class="text-blue h4">Lista de los roles</h4>
         </div>
         <div class="pull-right mb-3">
+            @can('rols.create')
             <a href="{{ route('roles.create') }}" class="btn btn-outline-primary btn-sm">
                 <i class="fa fa-plus"></i> Registrar rol
-            </a>            
+            </a> 
+            @endcan           
         </div>
     </div>
     <div class="row">
@@ -74,12 +76,16 @@
                         <a class="btn btn-outline-info btn-sm" href="{{ url('/roles/${row.id}' ) }}" data-toggle="tooltip" data-placement="top" title="Ver">
                             <i class="dw dw-eye"></i>
                         </a>
+                        @can('rols.edit')
                         <a class="btn btn-outline-warning btn-sm" href="{{ url('/roles/${row.id}/edit') }}" data-toggle="tooltip" data-placement="top" title="Editar">
                             <i class="dw dw-edit2"></i>
                         </a>
+                        @endcan
+                        @can('rols.destroy')
                         <a class="btn btn-outline-danger btn-sm" href="#modal-confirm"" data-toggle="modal" onclick="updateRoute(${row.id});" data-tooltip="tooltip" data-placement="top" title="Eliminar">
                             <i class="dw dw-delete-3"></i>
                         </a>
+                        @endcan
                     `;
                 }
             }],

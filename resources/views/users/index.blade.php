@@ -24,8 +24,10 @@
             <h4 class="text-blue h4">Roles - usuarios</h4>
         </div>
         <div class="pull-right">
+            @can('users.create')
             <a href="{{ route('users.create') }}" class="btn btn-outline-primary"
             role="button"><i class="fa fa-plus"></i> Registrar usuario</a>
+            @endcan
         </div>
     </div>
 

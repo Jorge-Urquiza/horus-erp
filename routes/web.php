@@ -125,6 +125,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('api/customer/{user}', [ApiSaleController::class, 'getCustomer'])->name('api.customer');
 
     Route::get('api/branch-product/{id}', [ApiBranchProductController::class, 'getProductByBranch'])->name('api.branchproduct');
+    Route::get('api/branch-product/product/{product}', [ApiBranchProductController::class, 'getProductByProduct'])->name('api.branchproductbyproduct');
     Route::get('api/branch-product/product/{idproduct}/{idbranch}', [ApiBranchProductController::class, 'getProduct'])->name('api.branchproduct.product');
 
     //Change password user

@@ -17,15 +17,21 @@
                         <span class="mtext">Inicio</span>
                     </a>
                 </li>
-                @can('users.index')
+                @can('administracioon.index')
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle">
                             <span class="micon dw dw-user1"></span><span class="mtext">Administracion</span>
                         </a>
                         <ul class="submenu">
+                            @can('users.index')
                             <li><a href="{{ route('users.index') }}">Usuarios</a></li>
+                            @endcan
+                            @can('rols.index')
                             <li><a href="{{ route('roles.index') }}">Roles y permisos</a></li>
+                            @endcan
+                            @can('branch-offices.index')
                             <li><a href="{{ route('branch-offices.index') }}">Sucursales</a></li>
+                            @endcan
                         </ul>
                     </li>
                 @endcan
@@ -76,17 +82,12 @@
                         @can('customers.index')
                         <li><a href="{{ route('customers.index') }}">Clientes</a></li>
                         @endcan
-                        <li><a href="{{ route('products.stock') }}">Stock de Productos</a></li>
-                        <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle">
-                                <span class="micon fa fa-info"></span><span class="mtext">Reportes</span>
-                            </a>
-                            <ul class="submenu child">
-                                <li><a href="{{ route('report.sale.date') }}">Reporte de Ventas Completadas</a></li>
-                                <li><a href="{{ route('report.sale.date.cancel') }}">Reporte de Ventas Anuladas</a></li>
-                            </ul>
-                        </li>
-
+                        @can('stocks.index')
+                        <li><a href="{{ route('products.stock') }}">Stock de Productos por Sucursal</a></li>
+                        @endcan
+                        @can('reports.index')
+                        <li><a href="{{ route('report.sale.date') }}">Reporte venta</a></li>
+                        @endcan
                     </ul>
                 </li>
                 @endcan
@@ -96,9 +97,12 @@
                             <span class="micon dw dw-settings2"></span><span class="mtext">Seguridad</span>
                         </a>
                         <ul class="submenu">
+                            @can('log.index')
                             <li><a href="{{ url('/log-viewer') }}" target="_blank" >Log viewer</a></li>
+                            @endcan
+                            @can('bitacora.index')
                             <li><a href="{{ route('binnacles.index') }}">Bitacora</a></li>
-                            <li><a href="{{ route('backup') }}">Generar Copia de Seguridad</a></li>
+                            @endcan
                         </ul>
                     </li>
                 @endrole

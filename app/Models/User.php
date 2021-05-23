@@ -71,10 +71,5 @@ class User extends Authenticatable
             'name' => 'Sin sucursal',
         ]);
     }
-
-    public function routeNotificationForSlack($notification)
-    {
-        return "https://hooks.slack.com/services/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";
-    }
-
 }
+

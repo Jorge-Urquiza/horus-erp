@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Models\BranchsProduct;
-use App\Models\User;
 use App\Notifications\pruebaNotification;
 use App\Notifications\StockNotification;
 use Illuminate\Support\Facades\Notification;
@@ -38,7 +37,6 @@ class BranchProductObserver
             Notification::route('slack',
             config('app.slack_stock_weebhook'))
             ->notify(new StockNotification($mensaje));
-            //User::first()->notify( new StockNotification($mensaje));
         }
 
         if($branchsProduct->current_stock < $branchsProduct->minimum_stock)
@@ -48,7 +46,6 @@ class BranchProductObserver
             Notification::route('slack',
             config('app.slack_stock_weebhook'))
             ->notify(new StockNotification($mensaje));
-            //User::first()->notify( new StockNotification($mensaje));
         }
     }
 

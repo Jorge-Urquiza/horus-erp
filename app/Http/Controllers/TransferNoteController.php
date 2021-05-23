@@ -132,7 +132,7 @@ class TransferNoteController extends Controller
                         'branch_office_id' => $transfer->branch_office_destiny_id,
                         'current_stock' => $d->quantity,
                     ]);
-                    $mensaje_advertencia = "Actualizar los stock minimos y maximos de productos en Sucursal Producto, si se requiere";
+                    //$mensaje_advertencia = "Actualizar los stock minimos y maximos de productos en Sucursal Producto, si se requiere";
                     $product = Product::find($d->product_id);
                     $product->total_minimum_stock = ( $product->total_minimum_stock + 10 * 1);
                     $product->total_maximum_stock = ( $product->total_maximum_stock + 100 *1);
