@@ -5,7 +5,7 @@
                 @csrf
                 @method('DELETE')
                 <div class="modal-body text-center">
-                    <img class="img-fluid" src="{{ asset('img/confirm.gif') }}" alt="Confirmar eliminación">
+                    <img class="img-fluid" src="{{ asset('logos/warning.gif') }}" alt="Confirmar eliminación">
                     <p>{{ $slot }}</p>
                 </div>
 

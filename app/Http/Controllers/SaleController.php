@@ -17,6 +17,14 @@ use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:ventas.create')->only(['create']);
+        $this->middleware('permission:ventas.index')->only(['index','show']);
+        $this->middleware('permission:ventas.destroy')->only(['destroy']);
+        $this->middleware('permission:ventas.pdf')->only(['pdf', 'download']);
+    }
+
     public function index()
     {
         return view('sales.index');

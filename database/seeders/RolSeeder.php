@@ -186,7 +186,12 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'customers.create', 'description' => 'Crear clientes'])
         ->syncRoles([$admin, $vendedor]);
 
-        //---VENTA---//
+        Permission::create(['name' => 'reports.index', 'description' => 'Reporte Venta'])
+        ->syncRoles([$admin, $vendedor]);
+        Permission::create(['name' => 'stocks.index', 'description' => 'Stock Producto'])
+        ->syncRoles([$admin, $vendedor]);
+
+        //---CONFIGURACION---//
         Permission::create(['name' => 'configuracion.index', 'description' => 'Ver Modulo Configuracion'])
                 ->syncRoles([$admin]);
 
