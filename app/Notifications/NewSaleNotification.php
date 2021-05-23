@@ -4,10 +4,11 @@ namespace App\Notifications;
 
 use App\Models\Sale;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\SlackMessage;
 
-class NewSaleNotification extends Notification
+class NewSaleNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 

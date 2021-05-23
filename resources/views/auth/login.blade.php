@@ -49,8 +49,7 @@
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-md-6 col-lg-7">
-					<img src="{{ asset('templates/vendors/images/login-page-img.png') }} " alt="">
-					{{-- <img src="{{ asset('logos/recorte2.png') }} " alt=""> --}}
+					<img src="{{ asset('logos/login-img.png') }} " alt="">
 				</div>
 				<div class="col-md-6 col-lg-5">
 					<div class="login-box bg-white box-shadow border-radius-10">

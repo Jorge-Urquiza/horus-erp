@@ -91,15 +91,15 @@
                 <th>
                     <div class="text-left">
                         <span class="font-weight-bold">Subtotal: </span>
-                        <span class="font-weight-light">{{ $sale->subtotal }}</span>
+                        <span class="font-weight-light">{{ money($sale->subtotal) }} Bs.</span>
                     </div>
                     <div class="text-left">
                         <span class="font-weight-bold">Descuento: </span>
-                        <span class="font-weight-light">{{ $sale->discount }}</span>
+                        <span class="font-weight-light">{{ money($sale->discount) }} %</span>
                     </div>
                     <div class="text-left">
-                         <span class="font-weight-bold">TOTAL NETO: </span>
-                         <span class="font-weight-bold">{{ $sale->total_amount }}</span>
+                         <span class="font-weight-bold">TOTAL: </span>
+                         <span class="font-weight-bold">{{ money($sale->total_amount) }} Bs.</span>
                     </div>
                 </th>
             </tr>

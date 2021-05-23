@@ -20,6 +20,8 @@ class SalesTable extends DataTable
             return Sale::where()with('customer', 'seller', 'branchOffice')->get();
         }
         */
-        return Sale::with('customer', 'seller', 'branchOffice')->get();
+        $current_user = auth()->user();
+        return Sale::where('branch_office_id', $current_user->branch_office_id)->
+            with('customer', 'seller')->get();
     }
 }

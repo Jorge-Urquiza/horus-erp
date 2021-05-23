@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\CancelSaleAction;
 use App\Models\Sale;
 use App\Actions\StoreSaleAction;
+use App\DataTables\ReportCancelTable;
 use App\DataTables\ReportTable;
 use App\DataTables\SalesTable;
 use App\Enums\Message;
@@ -81,6 +82,20 @@ class SaleController extends Controller
     public function listReport()
     {
         return ReportTable::generate();
+    }
+
+    public function reportSaleCancel(Request $request)
+    {
+        $queryParams = $request->query()?? [];
+
+        $branchOffices = BranchOffice::all();
+
+        return view('sales.reports.sale-date-cancel', compact('queryParams', 'branchOffices'));
+    }
+
+    public function listReportCancel()
+    {
+        return ReportCancelTable::generate();
     }
 
 }

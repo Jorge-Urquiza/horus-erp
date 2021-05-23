@@ -5,7 +5,7 @@ namespace App\DataTables;
 use App\Models\Sale;
 use Illuminate\Database\Eloquent\Builder;
 
-class ReportTable extends DataTable
+class ReportCancelTable extends DataTable
 {
     /**
      * The query builder object
@@ -24,8 +24,7 @@ class ReportTable extends DataTable
         $endDate = request('end_date');
         $branchOffice = request('branch_office_id');
 
-        return Sale::query()
-        ->where('status', 'Cerrada')
+        return Sale::query()->where('status', 'Anulada')
         ->when($branchOffice, function (Builder $sales) use ($branchOffice) {
             $sales->where('branch_office_id', $branchOffice);
         })

@@ -76,19 +76,29 @@
                         @can('customers.index')
                         <li><a href="{{ route('customers.index') }}">Clientes</a></li>
                         @endcan
-                        <li><a href="{{ route('products.stock') }}">Stock de Productos por Sucursal</a></li>
-                        <li><a href="{{ route('report.sale.date') }}">Reporte venta</a></li>
+                        <li><a href="{{ route('products.stock') }}">Stock de Productos</a></li>
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle">
+                                <span class="micon fa fa-info"></span><span class="mtext">Reportes</span>
+                            </a>
+                            <ul class="submenu child">
+                                <li><a href="{{ route('report.sale.date') }}">Reporte de Ventas Completadas</a></li>
+                                <li><a href="{{ route('report.sale.date.cancel') }}">Reporte de Ventas Anuladas</a></li>
+                            </ul>
+                        </li>
+
                     </ul>
                 </li>
                 @endcan
                 @role('Admin')
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle">
-                            <span class="micon dw dw-settings2"></span><span class="mtext">Configuracion</span>
+                            <span class="micon dw dw-settings2"></span><span class="mtext">Seguridad</span>
                         </a>
                         <ul class="submenu">
                             <li><a href="{{ url('/log-viewer') }}" target="_blank" >Log viewer</a></li>
                             <li><a href="{{ route('binnacles.index') }}">Bitacora</a></li>
+                            <li><a href="{{ route('backup') }}">Generar Copia de Seguridad</a></li>
                         </ul>
                     </li>
                 @endrole

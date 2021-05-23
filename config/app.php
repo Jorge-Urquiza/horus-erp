@@ -127,7 +127,7 @@ return [
 
     'slack_stock_weebhook' => env('SLACK_STOCK_WEEBHOOK'),
     'slack_sale_weebhook' => env('SLACK_SALE_WEEBHOOK'),
-    'slack_backup_weebhook' => env('SLACK_BACKUP_WEEBHOOK'),
+    'slack_backup_weebhook' => env('SLACK_BACKUP_WEBHOOK'),
 
     /*
     |--------------------------------------------------------------------------

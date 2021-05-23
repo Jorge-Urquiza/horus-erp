@@ -28,6 +28,7 @@
         </div>
 
 	</div>
+    @include('layouts.modal-password')
 	<!-- js -->
 	<script src="{{ asset('templates/vendors/scripts/core.js') }}"></script>
 	<script src="{{ asset('templates/vendors/scripts/script.min.js') }}"></script>

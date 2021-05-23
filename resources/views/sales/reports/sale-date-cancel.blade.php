@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="title">
-                <h4>Reporte de venta - Completadas</h4>
+                <h4>Reporte de venta - Anuladas</h4>
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
@@ -72,7 +72,6 @@
 
 @include('layouts.datatable')
 
-
 <script src="{{ asset('templates/src/plugins/datatables/js/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('templates/src/plugins/datatables/js/buttons.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('templates/src/plugins/datatables/js/buttons.print.min.js') }}"></script>
@@ -94,7 +93,7 @@ $( document ).ready(function() {
             "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
         },
         "ajax": {
-            "url": "{{route('report.sale.list')}}",
+            "url": "{{route('report.sale.list.cancel')}}",
             "data" : @json($queryParams)
         },
         "columns": [

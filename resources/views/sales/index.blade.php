@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="title">
-                <h4>Venta</h4>
+                <h4>Ventas</h4>
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
@@ -19,7 +19,7 @@
 @section('content')
 <div class="clearfix">
     <div class="pull-left">
-        <h4 class="text-blue h4">Lista de ventas</h4>
+        <h4 class="text-blue h4">Lista de ventas - {{ auth()->user()->branchOffice->name }}</h4>
     </div>
     <div class="pull-right mb-3">
         <a href="{{ route('sales.create') }}" class="btn btn-outline-primary btn-sm"
@@ -33,8 +33,7 @@
             <th>Fecha</th>
             <th>Cliente</th>
             <th>Vendedor</th>
-            <th>Sucursal</th>
-            <th>Total</th>
+            <th>Total Bs.</th>
             <th>Estado</th>
             <th>Opciones</th>
         </tr>
@@ -68,7 +67,6 @@
                     return row.seller.full_name;
                 }
             },
-            { data: 'branch_office.name' },
             { data: null,
                 render: function ( data, type, row ) {
                     return '<strong>' + row.total_amount +'</strong>';
@@ -83,7 +81,7 @@
             },
         ],
         "columnDefs": [ {
-            "targets": 7,
+            "targets": 6,
             "sortable": false,
             "searchable": true,
             render: function (data, type, row) {

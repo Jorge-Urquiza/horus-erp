@@ -180,7 +180,6 @@
         evaluar();
     }
     function completarProducto(id) {
-
         var url = "{{ route('api.product',':id') }}";
         url = url.replace(':id', id);
         $.ajax({
@@ -188,6 +187,8 @@
             type: "GET",
             success: function(data) {
                 let cost = parseFloat(data.cost).toFixed(2);
+
+                console.log(data);
                 $('#pcompra').val(cost);
             },
             error: function() {

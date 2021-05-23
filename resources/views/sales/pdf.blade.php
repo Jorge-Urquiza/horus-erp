@@ -37,6 +37,7 @@
                 <div class="mb-0">Teléfonos: {{ $sale->branchOffice->telephone }}</div>
                 <div class="mb-0">{{ $sale->branchoffice->city }} - Bolivia</div>
                 <div class="mb-0">Vendedor: {{ $sale->seller->getFullName() }}</div>
+                <div class="mb-0">Estado: {{ $sale->status }}</div>
             </div>
 
             <div class="w-50 d-inline-block align-middle text-right">
@@ -61,8 +62,8 @@
     </header>
 <body class="invoice">
     <div id="app">
-        <div style="position: relative; left:0cm; right:0cm; top: 35%">
-            <table class="table table-bordered table-sm mb-0">
+        <div style="position: relative; left:0cm; top: 38%">
+            <table class="table table-bordered table-sm mb-0" style="font-size: 12px;">
                 <thead class="font-13">
                     <tr>
                         <th>Detalle</th>
@@ -91,16 +92,16 @@
                     <td colspan="5">Totales</td>
                     <td id="fila">
                         <div class="text-left">
-                            <span class="font-weight-bold">Subtotal: </span>
-                            <span class="font-weight-light"> {{ money($sale->subtotal) }} Bs.</span>
+                            <span class="font-weight-bold">Subtotal:</span>
+                            <span class="font-weight-light">{{ money($sale->subtotal) }} Bs.</span>
                         </div>
                         <div class="text-left">
                             <span class="font-weight-bold">Descuento:</span>
-                            <span class="font-weight-light"> {{ money($sale->discount) }} %</span>
+                            <span class="font-weight-light">{{ money($sale->discount) }} %</span>
                         </div>
                         <div class="text-left">
-                            <span class="font-weight-bold">Total Neto: </span>
-                            <span class="font-weight-bold"> {{ money($sale->total_amount) }} Bs.</span>
+                            <span class="font-weight-bold">Total:</span>
+                            <span class="font-weight-bold">{{ money($sale->total_amount) }} Bs.</span>
                         </div>
                     </td>
                 </tr>
