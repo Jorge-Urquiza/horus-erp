@@ -86,7 +86,10 @@
                         <li><a href="{{ route('products.stock') }}">Stock de Productos por Sucursal</a></li>
                         @endcan
                         @can('reports.index')
-                        <li><a href="{{ route('report.sale.date') }}">Reporte venta</a></li>
+                        <ul class="submenu child">
+                            <li><a href="{{ route('report.sale.date') }}">Reporte de Ventas Completadas</a></li>
+                            <li><a href="{{ route('report.sale.date.cancel') }}">Reporte de Ventas Anuladas</a></li>
+                        </ul>
                         @endcan
                     </ul>
                 </li>
@@ -101,6 +104,7 @@
                             <li><a href="{{ url('/log-viewer') }}" target="_blank" >Log viewer</a></li>
                             @endcan
                             @can('bitacora.index')
+                            <li><a href="{{ route('backup') }}">Generar Copia de Seguridad</a></li>
                             <li><a href="{{ route('binnacles.index') }}">Bitacora</a></li>
                             @endcan
                         </ul>
