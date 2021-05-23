@@ -33,7 +33,7 @@ Route::get('/', function () {
 Route::get('test', function () {
     Notification::route('slack',
     //"https://hooks.slack.com/services/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")
-            "https://hooks.slack.com/services/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")
+            "https://hooks.slack.com/services/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")
     ->notify(new StockNotification('jandi jojojo jeje'));
     return 'hola';
 });
@@ -116,6 +116,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('api/customer/{user}', [ApiSaleController::class, 'getCustomer'])->name('api.customer');
 
     Route::get('api/branch-product/{id}', [ApiBranchProductController::class, 'getProductByBranch'])->name('api.branchproduct');
+    Route::get('api/branch-product/product/{product}', [ApiBranchProductController::class, 'getProductByProduct'])->name('api.branchproductbyproduct');
     Route::get('api/branch-product/product/{idproduct}/{idbranch}', [ApiBranchProductController::class, 'getProduct'])->name('api.branchproduct.product');
 
 });

@@ -181,7 +181,7 @@
     }
     function completarProducto(id) {
 
-        var url = "{{ route('api.product',':id') }}";
+        var url = "{{ route('api.branchproductbyproduct',':id') }}";
         url = url.replace(':id', id);
         $.ajax({
             url: url,

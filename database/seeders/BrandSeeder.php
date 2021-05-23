@@ -26,40 +26,35 @@ class BrandSeeder extends Seeder
             [
                 'name' => 'VOLTA',
                 'abbreviation' => 'VOLT',
-            ],
+            ],//1
             [
                 'name' => 'TOYOSA',
                 'abbreviation' => 'TOYO',
-            ],
+            ],//2
             
             [
                 'name' => 'COIL SEAL',
                 'abbreviation' => 'JPK',
-            ],
+            ],//3
             [
                 'name' => 'ARCA RETENTORES',
                 'abbreviation' => 'ARCA',
-            ],
+            ],//4
             [
                 'name' => 'RODAMIENTOS MBA',
                 'abbreviation' => 'RD MBA',
                 
-            ],
-            [
-                'name' => 'RODAMIENTOS FK',
-                'abbreviation' => 'RD MBA',
-                
-            ],
+            ],//5
             [
                 'name' => 'PEVISA GASKETS',
                 'abbreviation' => 'PEV',
                 
-            ],
+            ],//6
             [
                 'name' => 'CORTECO',
                 'abbreviation' => 'COR',
                 
-            ],
+            ],//7
         ];
     }
 }

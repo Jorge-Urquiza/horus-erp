@@ -17,15 +17,21 @@
                         <span class="mtext">Inicio</span>
                     </a>
                 </li>
-                @can('users.index')
+                @can('administracioon.index')
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle">
                             <span class="micon dw dw-user1"></span><span class="mtext">Administracion</span>
                         </a>
                         <ul class="submenu">
+                            @can('users.index')
                             <li><a href="{{ route('users.index') }}">Usuarios</a></li>
+                            @endcan
+                            @can('rols.index')
                             <li><a href="{{ route('roles.index') }}">Roles y permisos</a></li>
+                            @endcan
+                            @can('branch-offices.index')
                             <li><a href="{{ route('branch-offices.index') }}">Sucursales</a></li>
+                            @endcan
                         </ul>
                     </li>
                 @endcan
@@ -87,8 +93,12 @@
                             <span class="micon dw dw-settings2"></span><span class="mtext">Configuracion</span>
                         </a>
                         <ul class="submenu">
+                            @can('log.index')
                             <li><a href="{{ url('/log-viewer') }}" target="_blank" >Log viewer</a></li>
+                            @endcan
+                            @can('bitacora.index')
                             <li><a href="{{ route('binnacles.index') }}">Bitacora</a></li>
+                            @endcan
                         </ul>
                     </li>
                 @endrole
