@@ -177,7 +177,7 @@ return [
         ],
 
         'slack' => [
-            'webhook_url' => 'https://hooks.slack.com/services/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',
+            'webhook_url' => config('app.slack_backup_weebhook'),
 
             /*
              * If this is set to null the default channel of the webhook will be used.

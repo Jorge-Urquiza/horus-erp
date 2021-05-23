@@ -3,6 +3,8 @@
 namespace App\Observers;
 
 use App\Models\Sale;
+use App\Notifications\NewSaleNotification;
+use Illuminate\Support\Facades\Notification;
 
 class SaleObserver
 {
@@ -14,7 +16,9 @@ class SaleObserver
      */
     public function created(Sale $sale)
     {
-        //
+        Notification::route('slack',
+        config('app.slack_venta_weebhook'))
+        ->notify(new NewSaleNotification($sale));
     }
 
     /**
