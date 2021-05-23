@@ -23,8 +23,8 @@ class ProductoObserver
         //auth()->user()->notify(new NewSaleNotification());
         //Notification::send(User::first(), new NewSaleNotification());
 
-        Notification::route('slack', env('SLACK_NOTIFICATION_WEBHOOK'))
-            ->notify(new NewSaleNotification);
+        //Notification::route('slack', env('SLACK_NOTIFICATION_WEBHOOK'))
+          //  ->notify(new NewSaleNotification);
     //   \Log::info('asdasdasdasdasd');
     }
 

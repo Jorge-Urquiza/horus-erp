@@ -23,6 +23,8 @@ class Sale extends Model
 
     protected $casts = [
         'total_amount' => 'float',
+        'subtotal' => 'float',
+        'discount' => 'float',
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -95,10 +97,4 @@ class Sale extends Model
 
         return $suffix . '/100';
     }
-
-    public function remove()
-    {
-        $this->update(['status' => 'Anulado']);
-    }
-
 }

@@ -50,9 +50,9 @@
 
                 <div class="mb-0">{{ $income->branch_office()->first()->city }} - Bolivia</div>
 
-            
+
             </div>
-            
+
             <div class="w-50 d-inline-block align-middle text-right">
                 <p class="mb-0"><span class="font-weight-bold">Fecha :</span>{{ Carbon\Carbon::now()->format('d/m/Y') }}</p>
                 <p class="mb-0"><span class="font-weight-bold">Hora :</span>{{ Carbon\Carbon::now()->format('H:i:s') }}</p>
@@ -65,7 +65,7 @@
             <p class="mb-0">
                 <span class="font-weight-bold">Lugar y fecha: </span>SCZ, @php $oldDate = strtotime($income->date);
                                                                             echo date("d / m / Y",$oldDate);
-                                                                            @endphp 
+                                                                            @endphp
             </p>
             <p class="mb-0">
                 <span class="font-weight-bold">Sucursal: </span>{{ $income->branch_office()->first()->name }}
@@ -73,12 +73,12 @@
             <p class="mb-2">
                 <span class="font-weight-bold">Realizado por: </span>{{ $income->user()->first()->name }} {{ $income->user()->first()->last_name }}
             </p>
-            
+
         </section>
     </header>
 <body class="invoice">
     <div id="app">
-       
+
         <div style="position: relative; left:0cm; right:0cm; top: 34%">
             <table class="table table-bordered table-sm mb-0">
                 <thead class="font-13">
@@ -134,7 +134,7 @@
                     <hr style="border: 1px black; width:60%">
                     <p class="mb-0"><span class="font-weight-bold">RECIBI CONFORME</span></p>
                 </div>
-                
+
                 <div class="w-50 d-inline-block align-middle text-center">
                     <hr style="border: 1px black; width:60%">
                     <p class="mb-0"><span class="font-weight-bold">ENTREGE CONFORME</span></p>

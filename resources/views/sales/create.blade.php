@@ -33,7 +33,7 @@
     $(document).ready(function(){
 
         $('#guardar').hide();
-        $('#fila').hide();
+
         $('#link_descuento').hide();
         //Eventos
         $('#product').on('change', function() {

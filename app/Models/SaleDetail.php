@@ -9,9 +9,10 @@ class SaleDetail extends Model
     use LogsActivity;
 
     protected $casts = [
+        'sale_price' => 'float',
+        'subtotal' => 'float',
         'discount' => 'float',
         'total' => 'float',
-
     ];
 
     public function product()

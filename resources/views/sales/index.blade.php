@@ -16,7 +16,6 @@
         </div>
     </div>
 @endsection
-
 @section('content')
 <div class="clearfix">
     <div class="pull-left">
@@ -36,20 +35,20 @@
             <th>Vendedor</th>
             <th>Sucursal</th>
             <th>Total</th>
+            <th>Estado</th>
             <th>Opciones</th>
         </tr>
     </thead>
 </table>
 
-@component('elements.modal', ['action' => route('sales.destroy', '*')])
-¿Está seguro que desea eliminar este producto?
+@component('sales.modals.cancel-component', ['action' => route('sales.destroy', '*')])
+¿Está seguro que desea anular esta venta?
 @endcomponent
 
 @endsection
 
 @push('scripts')
-
-@include('layouts.datatable')
+    @include('layouts.datatable')
 <script>
     $('#table').DataTable({
         "language": {
@@ -61,12 +60,12 @@
             { data: 'date' },
             { data: null,
                 render: function ( data, type, row ) {
-                    return row.customer.name + ' ' + row.customer.last_name;
+                    return row.customer.full_name;
                 }
             },
             { data: null,
                 render: function ( data, type, row ) {
-                    return row.seller.name + ' ' + row.seller.last_name;
+                    return row.seller.full_name;
                 }
             },
             { data: 'branch_office.name' },
@@ -75,9 +74,16 @@
                     return '<strong>' + row.total_amount +'</strong>';
                 }
             },
+            { data: null,
+                render: function ( data, type, row ) {
+                    return row.status == "Anulada" ?
+                    `<span class="badge badge-danger">${row.status}</span>` :
+                    `<span class="badge badge-success">${row.status}</span>`;
+                }
+            },
         ],
         "columnDefs": [ {
-            "targets": 6,
+            "targets": 7,
             "sortable": false,
             "searchable": true,
             render: function (data, type, row) {
@@ -98,8 +104,6 @@
             }
         }]
     });
-
 </script>
-
 @endpush
 

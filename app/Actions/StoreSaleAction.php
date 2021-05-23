@@ -39,11 +39,11 @@ class StoreSaleAction
         $this->init();
     }
 
-
     public function execute() :void
     {
+        DB::beginTransaction();
 
-
+        try {
             $this->sale = Sale::create($this->matchSaleData());
 
             for ($index = 0; $index < $this->length; $index++) {
@@ -55,8 +55,15 @@ class StoreSaleAction
                 $this->updateStock($index);
             }
 
-    }
+        DB::commit();
 
+        flash()->stored();
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            flash()->error('Ha ocurrido un error, presionar F5 y reintentar de nuevo. Gracias.');
+        }
+    }
 
     private function updateStock($index) :void
     {
@@ -70,6 +77,7 @@ class StoreSaleAction
 
         $branchProduct->decrement('current_stock', $quantity);
     }
+
     private function matchSaleData() : array
     {
         $current_user = auth()->user();
