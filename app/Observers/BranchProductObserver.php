@@ -29,7 +29,7 @@ class BranchProductObserver
     public function updated(BranchsProduct $branchsProduct)
     {
         $mensaje = "";
-       
+
         if($branchsProduct->current_stock > $branchsProduct->maximum_stock)
         {
             $mensaje= "El producto ".$branchsProduct->product->name." en la sucursal ".$branchsProduct->branch_office->name

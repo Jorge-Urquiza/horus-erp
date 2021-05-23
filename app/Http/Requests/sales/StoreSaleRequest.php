@@ -35,11 +35,16 @@ class StoreSaleRequest extends FormRequest
             'pcompra' => 'required|array|min:1',
             'cantidad' => 'required',
             'pdescuento' => 'required|array|min:1',
+            'branch_products_ids' => 'required|array|min:1',
 
-            //calculated fields
+            //calculate detail
+            'subtotals' => 'required|array|min:1',
+            'ptotal' => 'required|array|min:1',
+
+            //calculated fields sale
             'totales_input' => 'required',
-            'discount-neto_input' => 'required',
-            'total-neto_input' => 'required',
+            'discount-neto-input' => 'required',
+            'total-neto-input' => 'required',
         ];
     }
 }

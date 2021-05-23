@@ -21,7 +21,7 @@
 @section('content')
 <div class="clearfix mb-2">
         <div class="pull-left">
-            <h4 class="text-blue h4">Lista de Stock Productos</h4>
+            <h4 class="text-blue h4">Lista de Stock Productos General - Sucursales</h4>
         </div>
     </div>
     <div class="row">
@@ -69,17 +69,18 @@
                 "searchable": true,
                 render: function (data, type, row) {
                     return `
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="{{ url('/product/branches/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver Sucursal</a>
-                            </div>
-                        </div>
+                    <a class="btn btn-outline-info" href="{{ url('/product/branches/${row.id}' ) }}"
+                        data-toggle="tooltip" data-placement="top" title="Ver Sucursales">
+                        <i class="dw dw-eye"></i>
+                    </a>
                     `;
                 }
-            }]
+            }],
+            "order": [[ 0, 'desc' ]],
+            drawCallback: function (settings) {
+                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-tooltip="tooltip"]').tooltip();
+            }
         });
 
 

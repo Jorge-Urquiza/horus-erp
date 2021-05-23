@@ -103,45 +103,36 @@
                     <th style="color:#ffffff";>Opciones</th>
                     <th style="color:#FFFFFF";>Producto</th>
                     <th style="color:#FFFFFF";>Unidad de medida</th>
-                    <th style="color:#FFFFFF";>Precio Unitario</th>
+                    <th style="color:#FFFFFF";>Precio Unitario Bs.</th>
                     <th style="color:#FFFFFF";>Cantidad</th>
-                    <th style="color:#FFFFFF";>Subtotal</th>
+                    <th style="color:#FFFFFF";>Subtotal Bs.</th>
                     <th style="color:#FFFFFF";>Descuento %.</th>
-                    <th style="color:#FFFFFF";>Total</th>
+                    <th style="color:#FFFFFF";>Total Bs.</th>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>TOTALES</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th id="fila">
+                        <td colspan="7">TOTALES</td>
+
+                        <td id="fila">
                             <div class="text-left">
                                 <span class="font-weight-bold">Subtotal: </span>
-                                <span class="font-weight-light" id="totales"></span>
+                                <span class="font-weight-light" id="totales"> 0.00 Bs.</span>
                                 <input id="totales_input" name="totales_input" type="hidden">
                             </div>
                             <div class="text-left">
-                                <span class="font-weight-bold">Descuento: </span>
-                                <span class="font-weight-light" id= "discount-neto"></span>
-                                <input id="discount-neto_input" name="discount-neto_input" type="hidden">
+                                <span class="font-weight-bold">Descuento:</span>
+                                <span class="font-weight-light" id= "discount-neto"> 0.00 %</span>
+                                <input id="discount-neto-input" name="discount-neto-input" type="hidden">
                             </div>
                             <div class="text-left">
                                  <span class="font-weight-bold">TOTAL NETO: </span>
-                                 <span id="total-neto" class="font-weight-bold"></span>
-                                 <input id="total-neto_input" name="total-neto_input" type="hidden">
+                                 <span id="total-neto" class="font-weight-bold">0.00 Bs.</span>
+                                 <input id="total-neto-input" name="total-neto-input" type="hidden">
+                                 <input id="branch_product_id" name="branch_product_id" type="hidden">
                             </div>
-                        </th>
-                    </tr>
-                    <tr>
-
+                        </td>
                     </tr>
                 </tfoot>
-                <tbody>
-                </tbody>
             </table>
         </div>
         <div id="link_descuento">

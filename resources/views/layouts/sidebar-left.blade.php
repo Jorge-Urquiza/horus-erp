@@ -82,7 +82,7 @@
                         @can('customers.index')
                         <li><a href="{{ route('customers.index') }}">Clientes</a></li>
                         @endcan
-                        <li><a href="{{ route('products.stock') }}">Lista Stock de Productos</a></li>
+                        <li><a href="{{ route('products.stock') }}">Stock de Productos por Sucursal</a></li>
                         <li><a href="{{ route('report.sale.date') }}">Reporte venta</a></li>
                     </ul>
                 </li>

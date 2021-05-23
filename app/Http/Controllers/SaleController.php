@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CancelSaleAction;
 use App\Models\Sale;
 use App\Actions\StoreSaleAction;
 use App\DataTables\ReportTable;
@@ -28,13 +29,9 @@ class SaleController extends Controller
 
     public function store(StoreSaleRequest $request)
     {
-        dd($request->validated());
-
         $action = new StoreSaleAction($request->validated());
 
         $action->execute();
-
-        flash()->stored();
 
         return redirect()->route('sales.index');
     }
@@ -46,11 +43,11 @@ class SaleController extends Controller
 
     public function destroy(Sale $sale)
     {
-      $sale->delete();
+        $action = new CancelSaleAction($sale);
 
-      flash()->deleted();
+        $action->execute();
 
-      return redirect()->route('sales.index');
+        return redirect()->route('sales.index');
     }
 
     public function list()
