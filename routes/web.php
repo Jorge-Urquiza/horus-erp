@@ -18,37 +18,26 @@ use App\Http\Controllers\OutputNoteController;
 use App\Http\Controllers\MeasurementsUnitsController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\TransferNoteController;
+use App\Jobs\ProcessBackup;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Notifications\NewSaleNotification;
+use App\Notifications\pruebaNotification;
 use App\Notifications\StockNotification;
+
 use Illuminate\Support\Facades\Notification;
+use App\Models\Sale;
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/testppp', function () {
-    Notification::route('slack',
-    env('SLACK_VENTA_WEBHOOK'))
-    ->notify(new StockNotification('noti'));
-    return 'hola';
-});
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
-
-Route::get('prueba', function(){
-    Notification::route('slack',
-    env('SLACK_STOCK_WEEBHOOK'))
-    ->notify(new StockNotification('adasd'));
-
-    return "send";
-});
 
 Route::middleware(['auth'])->group(function () {
 
@@ -111,18 +100,41 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('transfers', TransferNoteController::class);
     Route::resource('branch-products', BranchProductController::class);
 
-    //report
+    //report - completado
     Route::get('report/sale/date',[SaleController::class, 'reportSale'])
     ->name('report.sale.date');
-
     Route::get('report/list',[SaleController::class, 'listReport'])
     ->name('report.sale.list');
+
+    //cancell
+    Route::get('report/sale/cancel/date',[SaleController::class, 'reportSaleCancel'])
+    ->name('report.sale.date.cancel');
+    Route::get('report/cancel/list',[SaleController::class, 'listReportCancel'])
+    ->name('report.sale.list.cancel');
     //api
     Route::get('api/product/{product}', [ApiSaleController::class, 'getProduct'])->name('api.product');
     Route::get('api/customer/{user}', [ApiSaleController::class, 'getCustomer'])->name('api.customer');
 
     Route::get('api/branch-product/{id}', [ApiBranchProductController::class, 'getProductByBranch'])->name('api.branchproduct');
+    Route::get('api/branch-product/product/{product}', [ApiBranchProductController::class, 'getProductByProduct'])->name('api.branchproductbyproduct');
     Route::get('api/branch-product/product/{idproduct}/{idbranch}', [ApiBranchProductController::class, 'getProduct'])->name('api.branchproduct.product');
 
+    //Change password user
+    Route::post('user/change/Password',[UserController::class, 'changePassword'])->name('user.change.password');
+    Route::get('user/profile',[UserController::class, 'profile'])->name('user.profile');
+    Route::patch('user/profile/update/{user}',[UserController::class, 'updateProfile'])->name('user.profile.update');
+    //Backup manual
+    Route::get('backup', function () {
+        try
+        {
+            $job = new ProcessBackup();
+            dispatch($job);
+            flash()->success();
+            return redirect()->back();
+        }catch(Exception $e){
+            flash()->error();
+            return redirect()->back();
+        }
+    })->name('backup');
 });
 

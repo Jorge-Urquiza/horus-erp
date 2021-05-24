@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="title">
-                <h4>Venta</h4>
+                <h4>Ventas</h4>
             </div>
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
@@ -16,11 +16,10 @@
         </div>
     </div>
 @endsection
-
 @section('content')
 <div class="clearfix">
     <div class="pull-left">
-        <h4 class="text-blue h4">Lista de ventas</h4>
+        <h4 class="text-blue h4">Lista de ventas - {{ auth()->user()->branchOffice->name }}</h4>
     </div>
     <div class="pull-right mb-3">
         <a href="{{ route('sales.create') }}" class="btn btn-outline-primary btn-sm"
@@ -34,22 +33,21 @@
             <th>Fecha</th>
             <th>Cliente</th>
             <th>Vendedor</th>
-            <th>Sucursal</th>
-            <th>Total</th>
+            <th>Total Bs.</th>
+            <th>Estado</th>
             <th>Opciones</th>
         </tr>
     </thead>
 </table>
 
-@component('elements.modal', ['action' => route('sales.destroy', '*')])
-¿Está seguro que desea eliminar este producto?
+@component('sales.modals.cancel-component', ['action' => route('sales.destroy', '*')])
+¿Está seguro que desea anular esta venta?
 @endcomponent
 
 @endsection
 
 @push('scripts')
-
-@include('layouts.datatable')
+    @include('layouts.datatable')
 <script>
     $('#table').DataTable({
         "language": {
@@ -61,18 +59,24 @@
             { data: 'date' },
             { data: null,
                 render: function ( data, type, row ) {
-                    return row.customer.name + ' ' + row.customer.last_name;
+                    return row.customer.full_name;
                 }
             },
             { data: null,
                 render: function ( data, type, row ) {
-                    return row.seller.name + ' ' + row.seller.last_name;
+                    return row.seller.full_name;
                 }
             },
-            { data: 'branch_office.name' },
             { data: null,
                 render: function ( data, type, row ) {
                     return '<strong>' + row.total_amount +'</strong>';
+                }
+            },
+            { data: null,
+                render: function ( data, type, row ) {
+                    return row.status == "Anulada" ?
+                    `<span class="badge badge-danger">${row.status}</span>` :
+                    `<span class="badge badge-success">${row.status}</span>`;
                 }
             },
         ],
@@ -88,7 +92,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                             <a class="dropdown-item" href="{{ url('/sales/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver</a>
-                            <a class="dropdown-item" href="{{ url('/pdf/${row.id}' ) }}"><i class="dw dw-books"></i> pdf</a>
+                            <a class="dropdown-item" target="_blank" href="{{ url('/pdf/${row.id}' ) }}"><i class="dw dw-books"></i> pdf</a>
                             <a class="dropdown-item" href="{{ url('/download/${row.id}' ) }}"><i class="dw dw-download"></i> descargar</a>
                             <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
                             <i class="dw dw-delete-3"></i> Anular</a>
@@ -98,8 +102,6 @@
             }
         }]
     });
-
 </script>
-
 @endpush
 

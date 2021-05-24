@@ -14,43 +14,40 @@
                 </ol>
             </nav>
         </div>
-        <div class="col text-right">
-            <a href="{{ route('roles.index') }}" class="btn btn-primary btn-sm">
-                <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
-            </a>
     </div>
 @endsection
 
 @section('content')
-<div class="row row-cols-1 row-cols-md-2">
-    <div class="col mb-4">
-        <div class="card border-info mb-3">
-            <div class="card-header">Permisos del rol {{ $role->description }}</div>
-            <div class="card-body text-info">
-                <h5 class="card-title">Permisos: </h5>
-                <ul>
-                    @foreach ($permisos as $index => $permiso)
-                    <li class="card-text">
-                        <strong>{{ $index+1 . '.- ' .$permiso->description }}</strong>
-                    </li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col mb-4">
-        <div class="card border-info mb-3">
-            <div class="card-header">Usuarios con el rol {{ $role->description }}</div>
-            <div class="card-body text-info">
-                <h5 class="card-title">Usuarios: </h5>
-                <ul>
-                    @foreach ($usuarios as $index => $usuario)
-                    <li class="card-text">
-                        <strong>{{  $index+1 . '.- ' . $usuario->getFullName()}}</strong>
-                    </li>
-                    @endforeach
-                </ul>
-            </div>
+<div class="col text-right">
+    <a href="{{ route('roles.index') }}" class="btn btn-outline-primary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
+    </a>
+</div>
+<div class="card border-dark my-3">
+    <div class="card-header">Rol: {{ ucfirst($role->description) }}</div>
+    <div class="card-body text-dark">
+      <h5 class="card-title">Lista de permisos</h5>
+        <div class="row">
+            @foreach ($permisos as $index => $permiso)
+
+                @if(count($permisos) / 2  === $index)
+                <div class="col-lg-6">
+                    <ul class="list-inline">
+                        <li class="card-text">
+                            <strong>{{ $index+1 . ': ' }}</strong> {{ $permiso->description }}
+                        </li>
+                    </ul>
+                </div>
+                @else
+                <div class="col-lg-6">
+                    <ul class="list-inline">
+                        <li class="card-text">
+                            <strong>{{ $index+1 . ':'}}</strong> {{ $permiso->description }}
+                        </li>
+                    </ul>
+                </div>
+                @endif
+            @endforeach
         </div>
     </div>
 </div>

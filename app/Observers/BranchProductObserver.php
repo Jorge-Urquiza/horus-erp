@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\BranchsProduct;
+use App\Notifications\pruebaNotification;
 use App\Notifications\StockNotification;
 use Illuminate\Support\Facades\Notification;
 
@@ -34,7 +35,7 @@ class BranchProductObserver
             $mensaje= "El producto ".$branchsProduct->product->name." en la sucursal ".$branchsProduct->branch_office->name
                       ." supero su stock maximo";
             Notification::route('slack',
-            env('SLACK_STOCK_WEEBHOOK'))
+            config('app.slack_stock_webhook'))
             ->notify(new StockNotification($mensaje));
         }
 
@@ -43,7 +44,7 @@ class BranchProductObserver
             $mensaje= "El producto ".$branchsProduct->product->name." en la sucursal ".$branchsProduct->branch_office->name
                       ." es menor a su stock minimo";
             Notification::route('slack',
-            env('SLACK_STOCK_WEEBHOOK'))
+            config('app.slack_stock_webhook'))
             ->notify(new StockNotification($mensaje));
         }
     }

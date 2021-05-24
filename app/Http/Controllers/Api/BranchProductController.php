@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\BranchsProduct;
+use App\Models\Product;
 
 class BranchProductController extends Controller
 {
@@ -19,6 +20,12 @@ class BranchProductController extends Controller
 
         $product = BranchsProduct::where([['product_id',$idproduct], ['branch_office_id', $idbranch]])
                     ->with('product')->first();
+
+        return response()->json($product);
+    }
+
+    public function getProductByProduct(Product $product)
+    {
 
         return response()->json($product);
     }

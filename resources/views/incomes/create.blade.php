@@ -71,7 +71,7 @@
     var totalcantidad=0;
     var subtotal=[];
     var cantidad_array=[];
-    
+
     function existeProducto(producto_id){
         var bandera=false;
         var array_producto = document.getElementsByClassName("producto");
@@ -80,7 +80,7 @@
                 bandera = true;
             }
         })
-        return bandera;      
+        return bandera;
     }
 
     function agregar() {
@@ -122,7 +122,7 @@
                         <td>${subtotal[index]}</td>
                     </tr>`;
                     $("#detalle").append(fila);
-                    $('#total').html(total+ " Bs.");
+                    $('#total').html((total).toFixed(2) + " Bs.");
                     $("#total_amount").val(total);
                     $("#total_quantity").val(totalcantidad);
                     index++;
@@ -148,7 +148,7 @@
                     showConfirmButton: false,
                     timer: 1500
                 })
-           
+
         }
     }
 
@@ -180,14 +180,16 @@
         evaluar();
     }
     function completarProducto(id) {
-        
-        var url = "{{ route('api.product',':id') }}";
+
+        var url = "{{ route('api.branchproductbyproduct',':id') }}";
         url = url.replace(':id', id);
         $.ajax({
             url: url,
             type: "GET",
             success: function(data) {
                 let cost = parseFloat(data.cost).toFixed(2);
+
+                console.log(data);
                 $('#pcompra').val(cost);
             },
             error: function() {

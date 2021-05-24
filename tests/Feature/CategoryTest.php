@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\BranchOffice;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -81,6 +82,8 @@ class CategoryTest extends TestCase
      /** @test */
     public function an_authenticated_user_can_create_categories()
     {
+        $branchOffice = BranchOffice::factory()->create();
+
         $user = User::factory()->create();
 
         $this->actingAs($user);
@@ -99,7 +102,7 @@ class CategoryTest extends TestCase
     public function an_authenticated_user_with_rol_admin_can_screen_categories(){
 
         $this->withoutExceptionHandling();
-
+        $branchOffice = BranchOffice::factory()->create();
         $user = User::factory()->create();
 
         $this->assignAdminPermisionCategory();
@@ -116,6 +119,7 @@ class CategoryTest extends TestCase
    /** @test */
     public function an_authenticated_user_with_rol_admin_can_delete_categories()
     {
+        $branchOffice = BranchOffice::factory()->create();
         $user = User::factory()->create();
 
         $this->assignAdminPermisionCategory();
@@ -134,6 +138,7 @@ class CategoryTest extends TestCase
     /** @test */
     public function a_category_requires_a_name()
     {
+        $branchOffice = BranchOffice::factory()->create();
         $user = User::factory()->create();
 
         $this->actingAs($user);

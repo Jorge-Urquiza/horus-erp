@@ -10,6 +10,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Usuarios</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('users.edit', $user->id) }}">{{ $user->full_name }}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Modificar</li>
                 </ol>
             </nav>
@@ -27,7 +28,7 @@
     {!! Form::model($user, ['route' => ['users.update', $user->id]]) !!}
     @csrf
     @method('PUT')
-        @include('users.partials.form')
+        @include('users.partials.form-edit')
     {!! Form::close() !!}
 
 @endsection

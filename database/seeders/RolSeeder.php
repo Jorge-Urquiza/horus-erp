@@ -35,7 +35,7 @@ class RolSeeder extends Seeder
          Permission::create(['name' => 'administracion.index', 'description' => 'Ver Modulo Administracion'])
         ->syncRoles([$admin]);
         //Users
-        
+
         Permission::create(['name' => 'users.index', 'description' => 'Ver lista de usuarios'])
                 ->syncRoles([$admin]);
         Permission::create(['name' => 'users.edit', 'description' => 'Editar usuarios'])
@@ -43,6 +43,17 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'users.destroy', 'description' => 'Eliminar usuarios'])
         ->syncRoles([$admin]);
         Permission::create(['name' => 'users.create', 'description' => 'Crear usuarios'])
+        ->syncRoles([$admin]);
+
+        // Rol
+
+        Permission::create(['name' => 'rols.index', 'description' => 'Ver lista de roles'])
+                ->syncRoles([$admin]);
+        Permission::create(['name' => 'rols.edit', 'description' => 'Editar roles'])
+        ->syncRoles([$admin]);
+        Permission::create(['name' => 'rols.destroy', 'description' => 'Eliminar roles'])
+        ->syncRoles([$admin]);
+        Permission::create(['name' => 'rols.create', 'description' => 'Crear roles'])
         ->syncRoles([$admin]);
 
         Permission::create(['name' => 'branch-offices.index', 'description' => 'Ver lista de sucursales'])
@@ -157,7 +168,7 @@ class RolSeeder extends Seeder
 
         Permission::create(['name' => 'ventas.index', 'description' => 'Ver lista de ventas'])
         ->syncRoles([$admin, $vendedor]);
-        Permission::create(['name' => 'ventas.edit', 'description' => 'Editar ventas'])
+        Permission::create(['name' => 'ventas.pdf', 'description' => 'Pdf ventas'])
         ->syncRoles([$admin, $vendedor]);
         Permission::create(['name' => 'ventas.destroy', 'description' => 'Anular ventas'])
         ->syncRoles([$admin, $vendedor]);
@@ -175,9 +186,21 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'customers.create', 'description' => 'Crear clientes'])
         ->syncRoles([$admin, $vendedor]);
 
-        //---VENTA---//
+        Permission::create(['name' => 'reports.index', 'description' => 'Reporte Venta'])
+        ->syncRoles([$admin, $vendedor]);
+        Permission::create(['name' => 'stocks.index', 'description' => 'Stock Producto'])
+        ->syncRoles([$admin, $vendedor]);
+
+        //---Seguridad---//
         Permission::create(['name' => 'configuracion.index', 'description' => 'Ver Modulo Configuracion'])
                 ->syncRoles([$admin]);
+
+        Permission::create(['name' => 'bitacora.index', 'description' => 'Ver lista de bitacora'])
+        ->syncRoles([$admin]);
+
+        Permission::create(['name' => 'log.index', 'description' => 'Ver log viewer'])
+                ->syncRoles([$admin]);
+
 
     }
 }

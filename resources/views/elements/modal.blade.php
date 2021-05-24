@@ -5,17 +5,21 @@
                 @csrf
                 @method('DELETE')
                 <div class="modal-body text-center">
-                    <!-- <img class="img-fluid" src="{{ asset('img/confirm.gif') }}" alt="Confirmar eliminación"> -->
+                    <img class="img-fluid" src="{{ asset('logos/warning.gif') }}" alt="Confirmar eliminación">
                     <p>{{ $slot }}</p>
                 </div>
 
                 <div class="modal-footer d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, cancelar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fa fa-undo"></i>
+                         No, Cancelar
+                    </button>
+                    </button>
                     <button type="submit" class="btn btn-danger">
                         @if (isset($delete) && $delete)
                             {{ $delete }}
                         @else
-                            Si, eliminar
+                        <i class="fa fa-trash" aria-hidden="true"></i> Si, eliminar
                         @endif
                     </button>
                 </div>

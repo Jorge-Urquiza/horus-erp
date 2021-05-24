@@ -23,11 +23,10 @@
 @endsection
 
 @section('content')
-   
+
     {!! Form::model($role, ['route' => ['roles.update', $role], 'method' => 'PUT']) !!}
         @csrf
         @include('roles.partials.form')
-        {!!  Form::submit('Guardar', ['class' => 'btn btn-outline-primary']) !!}
     {!! Form::close() !!}
 @endsection
 

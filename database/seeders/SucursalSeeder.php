@@ -17,19 +17,22 @@ class SucursalSeeder extends Seeder
         BranchOffice::create([
             'name' => 'Casa Matriz',
             'address' => '2do anillo Av. Trompillo',
+            'telephone' => '+591 3 3360000',
             'city' => 'Santa Cruz'
         ]);
 
         BranchOffice::create([
             'name' => 'Sucursal 1',
-            'address' => 'Calle buenos aires #256',
-            'city' => 'Santa Cruz'
+            'address' => 'Calle Buenos Aires #256',
+            'city' => 'Santa Cruz',
+            'telephone' => '+591 3 3360001',
         ]);
 
         BranchOffice::create([
             'name' => 'Sucursal 2',
             'address' => 'Calle uruguay #10',
-            'city' => 'Santa Cruz'
+            'city' => 'Santa Cruz',
+            'telephone' => '+591 3 3360002',
         ]);
     }
 }

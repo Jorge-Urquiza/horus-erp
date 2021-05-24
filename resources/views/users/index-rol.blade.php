@@ -76,10 +76,14 @@
                         <a class="btn btn-outline-info btn-sm" href="{{ url('/users/${row.id}' ) }}" data-toggle="tooltip" data-placement="top" title="Ver">
                             <i class="dw dw-eye"></i>
                         </a>
+                        @can('users.edit')
                         <a class="btn btn-outline-warning btn-sm" href="{{ url('/users/${row.id}/edit') }}" data-toggle="tooltip" data-placement="top" title="Editar">
                             <i class="dw dw-edit2"></i></a>
+                        @endcan
+                        @can('users.destroy')
                         <a class="btn btn-outline-danger btn-sm" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger" data-tooltip="tooltip" data-placement="top" title="Eliminar">
                             <i class="dw dw-delete-3"></i> </a>
+                        @endcan
                     `;
                 }
             }],

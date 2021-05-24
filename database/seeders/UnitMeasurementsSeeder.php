@@ -31,16 +31,8 @@ class UnitMeasurementsSeeder extends Seeder
                 'name' => 'Pieza',
                 'abbreviation' => 'Pza',
             ],
-            
-            [
-                'name' => 'Kilo',
-                'abbreviation' => 'Kg',
-            ],
-            [
-                'name' => 'Litro',
-                'abbreviation' => 'Lt',
-            ],
-           
+
+
         ];
     }
 }

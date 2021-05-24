@@ -1,4 +1,4 @@
-<div class="header" style="background-image: url('logos/slide.jpg')">
+<div class="header" style="background-image: url('{{ asset ('logos/slide.jpg') }}')">
     <div class="header-left">
         <div class="menu-icon dw dw-menu"></div>
         <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
@@ -43,18 +43,17 @@
                     <span class="user-name">{{ auth()->user()->name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                    <a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Perfil</a>
-                    {{-- <a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Configuracion</a>
-                    <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Ayuda</a> --}}
+                    <a class="dropdown-item" href="{{ route('user.profile') }}"><i class="dw dw-user1"></i> Perfil</a>
+                    <a  class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModa3">
+                        <i class="fa fa-lock mr-2"></i>Cambiar Contraseña
+                    </a>
                     <a class="dropdown-item" href="#" onclick="$('#form-logout').submit();"><i class="dw dw-logout"></i> Cerrar sesion</a>
                 </div>
             </div>
         </div>
 
     </div>
-
     <form id="form-logout" action="{{ route('logout') }}" method="post">
         @csrf
     </form>
-
 </div>

@@ -6397,22 +6397,22 @@
         },
         {
             "name": "laravel/breeze",
-            "version": "v1.1.8",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/breeze.git",
-                "reference": "13026f7b3afd408d227b4f0c029b65f4ae4ba01e"
+                "reference": "322d60b8dfe452c807f01524ce0f6a76a985f72d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/breeze/zipball/13026f7b3afd408d227b4f0c029b65f4ae4ba01e",
-                "reference": "13026f7b3afd408d227b4f0c029b65f4ae4ba01e",
+                "url": "https://api.github.com/repos/laravel/breeze/zipball/322d60b8dfe452c807f01524ce0f6a76a985f72d",
+                "reference": "322d60b8dfe452c807f01524ce0f6a76a985f72d",
                 "shasum": ""
             },
             "require": {
-                "illuminate/filesystem": "^8.40",
-                "illuminate/support": "^8.40",
-                "illuminate/validation": "^8.40",
+                "illuminate/filesystem": "^8.42",
+                "illuminate/support": "^8.42",
+                "illuminate/validation": "^8.42",
                 "php": "^7.3|^8.0"
             },
             "type": "library",
@@ -6446,7 +6446,7 @@
                 "auth",
                 "laravel"
             ],
-            "time": "2021-05-18T15:15:45+00:00"
+            "time": "2021-05-20T13:41:13+00:00"
         },
         {
             "name": "laravel/sail",

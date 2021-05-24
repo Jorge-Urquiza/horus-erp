@@ -71,5 +71,5 @@ class User extends Authenticatable
             'name' => 'Sin sucursal',
         ]);
     }
-
 }
+

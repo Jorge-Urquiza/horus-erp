@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CancelSaleAction;
 use App\Models\Sale;
 use App\Actions\StoreSaleAction;
+use App\DataTables\ReportCancelTable;
 use App\DataTables\ReportTable;
 use App\DataTables\SalesTable;
 use App\Enums\Message;
@@ -16,6 +18,14 @@ use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:ventas.create')->only(['create']);
+        $this->middleware('permission:ventas.index')->only(['index','show']);
+        $this->middleware('permission:ventas.destroy')->only(['destroy']);
+        $this->middleware('permission:ventas.pdf')->only(['pdf', 'download']);
+    }
+
     public function index()
     {
         return view('sales.index');
@@ -26,15 +36,11 @@ class SaleController extends Controller
         return view('sales.create', new SaleCreateViewModel);
     }
 
-    public function store(Request $request)
+    public function store(StoreSaleRequest $request)
     {
-        dd($request->all());
+        $action = new StoreSaleAction($request->validated());
 
-        //$action = new StoreSaleAction($request->validated());
-
-        //$action->execute();
-
-        flash()->stored();
+        $action->execute();
 
         return redirect()->route('sales.index');
     }
@@ -46,11 +52,11 @@ class SaleController extends Controller
 
     public function destroy(Sale $sale)
     {
-      $sale->delete();
+        $action = new CancelSaleAction($sale);
 
-      flash()->deleted();
+        $action->execute();
 
-      return redirect()->route('sales.index');
+        return redirect()->route('sales.index');
     }
 
     public function list()
@@ -84,6 +90,20 @@ class SaleController extends Controller
     public function listReport()
     {
         return ReportTable::generate();
+    }
+
+    public function reportSaleCancel(Request $request)
+    {
+        $queryParams = $request->query()?? [];
+
+        $branchOffices = BranchOffice::all();
+
+        return view('sales.reports.sale-date-cancel', compact('queryParams', 'branchOffices'));
+    }
+
+    public function listReportCancel()
+    {
+        return ReportCancelTable::generate();
     }
 
 }

@@ -10,6 +10,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('customers.index') }}">Sucursales</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('customers.edit', $branchOffice->id) }}"> {{ $branchOffice->name }}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Editar</li>
             </ol>
         </nav>

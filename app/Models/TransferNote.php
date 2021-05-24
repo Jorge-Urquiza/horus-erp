@@ -54,4 +54,24 @@ class TransferNote extends Model
 
        return NumberToLetter::convert($amount, $moneda = null, $centimos = null, $forzarCentimos = true);
     }
+
+    public function getSuffixAttribute()
+    {
+        $amount = ($this->total_amount);
+
+        $total = explode('.', $amount);
+
+        // Si existe un valor en la posicion [1]
+        $suffix = isset($total[1]) ? $total[1] : 0 ;
+
+        if ($suffix < 10 && substr($suffix, 0, 1) != 0) {
+            return $suffix . '0/100';
+        }
+
+        if ($suffix == 0) {
+            return '00/100';
+        }
+
+        return $suffix . '/100';
+    }
 }

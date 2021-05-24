@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\SlackMessage;
 
@@ -12,14 +11,15 @@ class NewSaleNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
+    protected $message;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($message)
     {
-        //
+        $this->message = $message;
     }
 
     /**
@@ -37,6 +37,6 @@ class NewSaleNotification extends Notification implements ShouldQueue
     {
         return (new SlackMessage)
         ->success()
-        ->content("New Venta");
+        ->content($this->message);
     }
 }

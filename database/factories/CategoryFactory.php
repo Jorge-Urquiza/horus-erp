@@ -22,7 +22,8 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'Llantas'
+            'name' => 'Llantas',
+            'description' => 'Pieza de automovil'
         ];
     }
 }

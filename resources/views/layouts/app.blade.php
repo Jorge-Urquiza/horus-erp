@@ -28,6 +28,7 @@
         </div>
 
 	</div>
+    @include('layouts.modal-password')
 	<!-- js -->
 	<script src="{{ asset('templates/vendors/scripts/core.js') }}"></script>
 	<script src="{{ asset('templates/vendors/scripts/script.min.js') }}"></script>
@@ -45,7 +46,7 @@
     <script src="{{ asset('templates/src/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
 	<script src="{{ asset('templates/src/plugins/sweetalert2/sweet-alert.init.js') }}"></script>
 
-
+    <script src="{{ asset('project/showInputPassword.js')}}"></script>
     @stack('scripts')
 </body>
 </html>
