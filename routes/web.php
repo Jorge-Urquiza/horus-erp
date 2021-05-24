@@ -33,12 +33,9 @@ Route::get('/', function () {
 });
 
 Route::get('test', function () {
- /*
 
-   dd(config('app.slack_stock_weebhook'));
-   Notification::route('slack',config('app.slack_backup_weebhook'))
+   Notification::route('slack',config('app.slack_sale_weebhook'))
     ->notify(new StockNotification('noti'));
- */
     return 'hola';
 });
 

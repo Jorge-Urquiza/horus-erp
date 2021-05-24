@@ -35,7 +35,7 @@
 		<div class="container-fluid d-flex justify-content-between align-items-center">
 			<div class="brand-logo">
 				<a href="login.html">
-					<img src="{{ asset('templates/vendors/images/logo.PNG') }}" alt="">
+					<img src="{{ asset('templates/vendors/images/logo.png') }}" alt="">
 				</a>
 			</div>
 			<div class="login-menu">

@@ -125,9 +125,9 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
-    'slack_stock_weebhook' => env('SLACK_STOCK_WEEBHOOK'),
-    'slack_sale_weebhook' => env('SLACK_SALE_WEEBHOOK'),
-    'slack_backup_weebhook' => env('SLACK_BACKUP_WEBHOOK'),
+    'slack_stock_webhook' => env('SLACK_STOCK_WEBHOOK'),
+    'slack_sale_webhook' => env('SLACK_SALE_WEBHOOK'),
+    'slack_backup_webhook' => env('SLACK_BACKUP_WEBHOOK'),
 
     /*
     |--------------------------------------------------------------------------

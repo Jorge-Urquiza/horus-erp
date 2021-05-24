@@ -177,7 +177,7 @@ return [
         ],
 
         'slack' => [
-            'webhook_url' => config('app.slack_backup_weebhook'),
+            'webhook_url' => config('app.slack_backup_webhook'),
 
             /*
              * If this is set to null the default channel of the webhook will be used.

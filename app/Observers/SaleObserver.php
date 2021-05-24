@@ -17,7 +17,7 @@ class SaleObserver
     public function created(Sale $sale)
     {
         Notification::route('slack',
-        config('app.slack_venta_weebhook'))
+        config('app.slack_sale_webhook'))
         ->notify(new NewSaleNotification($sale));
     }
 
