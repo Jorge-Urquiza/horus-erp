@@ -17,7 +17,7 @@
                         <span class="mtext">Inicio</span>
                     </a>
                 </li>
-                @can('administracioon.index')
+                @can('administracion.index')
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle">
                             <span class="micon dw dw-user1"></span><span class="mtext">Administracion</span>

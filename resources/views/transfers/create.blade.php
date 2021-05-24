@@ -259,8 +259,8 @@
                         <td>${subtotal_entrada[index]}</td>
                     </tr>`;
                     $("#detalle").append(fila);
-                    $('#total').html(total+ " Bs.");
-                    $('#total_entrada').html(total+ " Bs.");
+                    $('#total').html((total).toFixed(2) + " Bs.");
+                    $('#total_entrada').html((total).toFixed(2) + " Bs.");
                     $("#total_income_amount").val(total);
                     $("#total_output_amount").val(total);
                     $("#total_quantity").val(totalcantidad);
