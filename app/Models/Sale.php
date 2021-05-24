@@ -41,7 +41,7 @@ class Sale extends Model
     {
         return $this->belongsTo(Customer::class, 'customer_id')
         ->withDefault([
-            'name' => 'Empty'
+            'name' => 'Sin asignar'
         ]);;
     }
 
@@ -49,7 +49,7 @@ class Sale extends Model
     {
         return $this->belongsTo(User::class, 'user_id')
         ->withDefault([
-            'name' => 'Empty'
+            'name' => 'Sin asignar'
         ]);;;
     }
 
@@ -57,7 +57,7 @@ class Sale extends Model
     {
         return $this->belongsTo(BranchOffice::class, 'branch_office_id')
         ->withDefault([
-            'name' => 'Empty'
+            'name' => 'Sin asignar'
         ]);;;
     }
 

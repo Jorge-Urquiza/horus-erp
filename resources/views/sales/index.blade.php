@@ -92,7 +92,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                             <a class="dropdown-item" href="{{ url('/sales/${row.id}' ) }}"><i class="dw dw-eye"></i> Ver</a>
-                            <a class="dropdown-item" href="{{ url('/pdf/${row.id}' ) }}"><i class="dw dw-books"></i> pdf</a>
+                            <a class="dropdown-item" target="_blank" href="{{ url('/pdf/${row.id}' ) }}"><i class="dw dw-books"></i> pdf</a>
                             <a class="dropdown-item" href="{{ url('/download/${row.id}' ) }}"><i class="dw dw-download"></i> descargar</a>
                             <a class="dropdown-item" href="#modal-confirm" data-toggle="modal" onclick="updateRoute(${row.id});" class="btn btn-sm btn-danger">
                             <i class="dw dw-delete-3"></i> Anular</a>

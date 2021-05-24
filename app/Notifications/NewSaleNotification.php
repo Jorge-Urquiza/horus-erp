@@ -2,7 +2,6 @@
 
 namespace App\Notifications;
 
-use App\Models\Sale;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
@@ -12,15 +11,15 @@ class NewSaleNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    private $sale;
+    protected $message;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Sale $sale)
+    public function __construct($message)
     {
-        $this->sale = $sale->with('seller', 'customer' , 'branchOffice')->first();
+        $this->message = $message;
     }
 
     /**
@@ -38,13 +37,6 @@ class NewSaleNotification extends Notification implements ShouldQueue
     {
         return (new SlackMessage)
         ->success()
-        ->content(
-    'Nueva Venta realizada por: ' . $this->sale->seller->full_name .
-            ', en la sucursal: ' . $this->sale->branchOffice->name .
-            ', Cliente ' . $this->sale->customer->full_name .
-            ', Subtotal: ' . $this->sale->customer->subtotal . 'Bs. '.
-            ', Descuento : ' . $this->sale->customer->discount . '% '.
-            ', Total venta: ' . $this->sale->customer->total_amount . 'Bs. '
-        );
+        ->content($this->message);
     }
 }

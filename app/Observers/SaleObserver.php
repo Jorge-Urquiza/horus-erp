@@ -16,9 +16,16 @@ class SaleObserver
      */
     public function created(Sale $sale)
     {
-        Notification::route('slack',
+        $message = 'Nueva Venta realizada por: ' . $sale->seller->full_name .
+        ', en la sucursal: ' . $sale->branchOffice->name .
+        ', Cliente ' . $sale->customer->full_name .
+        ', Subtotal: ' . money($sale->subtotal) . ' Bs. '.
+        ', Descuento : ' . money($sale->discount) . ' % '.
+        ', Total venta: ' . money($sale->total_amount) . ' Bs. ';
+
+       Notification::route('slack',
         config('app.slack_sale_webhook'))
-        ->notify(new NewSaleNotification($sale));
+        ->notify(new NewSaleNotification($message));
     }
 
     /**

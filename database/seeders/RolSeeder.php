@@ -35,7 +35,7 @@ class RolSeeder extends Seeder
          Permission::create(['name' => 'administracion.index', 'description' => 'Ver Modulo Administracion'])
         ->syncRoles([$admin]);
         //Users
-        
+
         Permission::create(['name' => 'users.index', 'description' => 'Ver lista de usuarios'])
                 ->syncRoles([$admin]);
         Permission::create(['name' => 'users.edit', 'description' => 'Editar usuarios'])
@@ -191,7 +191,7 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'stocks.index', 'description' => 'Stock Producto'])
         ->syncRoles([$admin, $vendedor]);
 
-        //---CONFIGURACION---//
+        //---Seguridad---//
         Permission::create(['name' => 'configuracion.index', 'description' => 'Ver Modulo Configuracion'])
                 ->syncRoles([$admin]);
 

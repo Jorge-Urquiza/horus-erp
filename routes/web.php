@@ -27,16 +27,10 @@ use App\Notifications\pruebaNotification;
 use App\Notifications\StockNotification;
 
 use Illuminate\Support\Facades\Notification;
+use App\Models\Sale;
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('test', function () {
-
-   Notification::route('slack',config('app.slack_sale_weebhook'))
-    ->notify(new StockNotification('noti'));
-    return 'hola';
 });
 
 Route::get('/dashboard', function () {
