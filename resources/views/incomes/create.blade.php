@@ -122,7 +122,7 @@
                         <td>${subtotal[index]}</td>
                     </tr>`;
                     $("#detalle").append(fila);
-                    $('#total').html(total+ " Bs.");
+                    $('#total').html((total).toFixed(2) + " Bs.");
                     $("#total_amount").val(total);
                     $("#total_quantity").val(totalcantidad);
                     index++;

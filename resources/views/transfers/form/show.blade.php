@@ -54,11 +54,11 @@
                         @foreach($transfer->transferDetails as $d)
                             <tr>
                                 <td>{{ $d->product->name }}</td>
-                                <td>{{ $d->output_cost}}</td>
-                                <td>{{ $d->income_cost }}</td>
+                                <td>{{ money($d->output_cost)}}</td>
+                                <td>{{ money($d->income_cost) }}</td>
                                 <td>{{ $d->quantity }}</td>
-                                <td>{{ $d->quantity * $d->output_cost * 1 }} </td>
-                                <td>{{ $d->quantity * $d->income_cost * 1 }} </td>
+                                <td>{{ money($d->quantity * $d->output_cost * 1) }} </td>
+                                <td>{{ money($d->quantity * $d->income_cost * 1)}} </td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -78,7 +78,7 @@
                     <tr>
                         <th>Detalle</th>
                         <th>Cantidad</th>
-                        <th>P. Unitario Bs.</th>
+                        <th>C. Unitario Bs.</th>
                         <th>Subtotal Bs.</th>
                     </tr>
                 </thead>
@@ -88,8 +88,8 @@
                     <tr>
                         <td class="text-right">{{ $detail->product()->first()->name}}</td>
                         <td class="text-right">{{ $detail->quantity}}</td>
-                        <td class="text-right">{{ $detail->cost}}</td>
-                        <td class="text-right">{{ $detail->cost * $detail->quantity * 1}}</td>
+                        <td class="text-right">{{ money($detail->cost) }}</td>
+                        <td class="text-right">{{ money($detail->cost * $detail->quantity * 1) }}</td>
                     </tr>
                 @endforeach
                 </tbody>

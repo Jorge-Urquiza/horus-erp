@@ -93,10 +93,10 @@
                 <tr>
                     <td class="text-right">{{ $detail->product()->first()->name}}</td>
                     <td class="text-right">{{ $detail->quantity}}</td>
-                    <td class="text-right">{{ $detail->output_cost}}</td>
-                    <td class="text-right">{{ $detail->income_cost}}</td>
-                    <td class="text-right">{{ $detail->output_cost * $detail->quantity}}</td>
-                    <td class="text-right">{{ $detail->income_cost * $detail->quantity}}</td>
+                    <td class="text-right">{{ money($detail->output_cost) }}</td>
+                    <td class="text-right">{{ money($detail->income_cost) }}</td>
+                    <td class="text-right">{{ money($detail->output_cost * $detail->quantity * 1) }}</td>
+                    <td class="text-right">{{ money($detail->income_cost * $detail->quantity * 1) }}</td>
                 </tr>
             @endforeach
             </tbody>
