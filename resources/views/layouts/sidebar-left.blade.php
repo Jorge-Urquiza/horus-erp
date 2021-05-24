@@ -86,10 +86,15 @@
                         <li><a href="{{ route('products.stock') }}">Stock de Producto</a></li>
                         @endcan
                         @can('reports.index')
-                        <ul class="submenu child">
-                            <li><a href="{{ route('report.sale.date') }}">Reporte de Ventas Completadas</a></li>
-                            <li><a href="{{ route('report.sale.date.cancel') }}">Reporte de Ventas Anuladas</a></li>
-                        </ul>
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle">
+                                <span class="micon fa fa-info"></span><span class="mtext">Reportes</span>
+                            </a>
+                            <ul class="submenu child">
+                                <li><a href="{{ route('report.sale.date') }}">Reporte de Ventas Completadas</a></li>
+                                <li><a href="{{ route('report.sale.date.cancel') }}">Reporte de Ventas Anuladas</a></li>
+                            </ul>
+                        </li>
                         @endcan
                     </ul>
                 </li>
